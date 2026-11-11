@@ -42,6 +42,21 @@ export interface RegistroAnvisa {
   principioAtivo: string | null;
 }
 
+/** Campo de RegistroAnvisa que cada coluna do CSV alimenta. */
+export const CAMPO_DA_COLUNA: Record<Coluna, keyof RegistroAnvisa> = {
+  TIPO_PRODUTO: 'tipoProduto',
+  NOME_PRODUTO: 'nomeProduto',
+  DATA_FINALIZACAO_PROCESSO: 'dataFinalizacaoProcesso',
+  CATEGORIA_REGULATORIA: 'categoriaRegulatoria',
+  NUMERO_REGISTRO_PRODUTO: 'numeroRegistro',
+  DATA_VENCIMENTO_REGISTRO: 'vencimentoRegistro',
+  NUMERO_PROCESSO: 'numeroProcesso',
+  CLASSE_TERAPEUTICA: 'classeTerapeutica',
+  EMPRESA_DETENTORA_REGISTRO: 'empresa',
+  SITUACAO_REGISTRO: 'situacaoRegistro',
+  PRINCIPIO_ATIVO: 'principioAtivo',
+};
+
 const texto = z.string().trim();
 const obrigatorio = texto.min(1, 'campo obrigatório vazio');
 const opcional = texto.transform((v) => (v === '' ? null : v));
