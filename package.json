@@ -1,0 +1,23 @@
+{
+  "name": "doctorine",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "validate:reference": "pnpm --filter @doctorine/reference-set validate",
+    "validate:reference:strict": "pnpm --filter @doctorine/reference-set validate:strict",
+    "ci": "pnpm format:check && pnpm typecheck && pnpm test && pnpm validate:reference"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}
