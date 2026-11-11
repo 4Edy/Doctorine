@@ -1,0 +1,3 @@
+# Mantém LF em todos os sistemas (o Prettier e a CI esperam LF).
+* text=auto eol=lf
+*.patch -text
