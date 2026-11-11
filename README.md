@@ -11,18 +11,19 @@ profissional de uma farmacêutica.
 
 ## Estado
 
-Fase 0 (Fundação) em andamento. Ainda não há código de produto: o repositório tem a estrutura, a
-integração contínua, os registros de decisão e o esquema do conjunto de referência.
+Fase 0 (Fundação) em andamento, com a Fase 1 começando: o pipeline já baixa, lê e valida os dados
+abertos de medicamentos da ANVISA e gera um relatório de qualidade (`pnpm pipeline:anvisa`). Ainda
+não há código do motor nem do app.
 
 ## Estrutura
 
-| Pasta                    | Conteúdo                                                                   |
-| ------------------------ | -------------------------------------------------------------------------- |
-| `app/`                   | App mobile (Expo + TypeScript). Fase 5.                                    |
-| `pipeline/`              | Download, leitura e carga das fontes (ANVISA, DDInter). Fases 1 e 2.       |
-| `packages/reference-set` | Esquema e validador do conjunto de referência da farmacêutica.             |
-| `data/`                  | Dados versionados. Hoje, só `reference-set/pairs.json`.                    |
-| `docs/`                  | Aviso de uso, guia do conjunto de referência e [ADRs](docs/adr/README.md). |
+| Pasta                    | Conteúdo                                                                                                    |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `app/`                   | App mobile (Expo + TypeScript). Fase 5.                                                                     |
+| `pipeline/`              | Download, leitura e carga das fontes (ANVISA, DDInter). Fases 1 e 2.                                        |
+| `packages/reference-set` | Esquema e validador do conjunto de referência da farmacêutica.                                              |
+| `data/`                  | Dados versionados. Hoje, só `reference-set/pairs.json`.                                                     |
+| `docs/`                  | Aviso de uso, guia do conjunto de referência, [fontes](docs/fontes/anvisa.md) e [ADRs](docs/adr/README.md). |
 
 ## Começando
 

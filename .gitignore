@@ -6,3 +6,7 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Dados das fontes: brutos e gerados não são versionados (ver data/README.md e a ADR 0004)
+data/raw/
+data/processed/
