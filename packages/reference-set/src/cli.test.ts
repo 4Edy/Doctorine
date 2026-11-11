@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { executar } from './cli.js';
 import { arquivo, conjuntoEstritoValido, parMedicamento } from './fixtures.js';
@@ -35,8 +36,10 @@ describe('executar', () => {
   });
 
   it('o arquivo de dados versionado no repositório é válido no modo normal', () => {
-    const caminho = new URL('../../../data/reference-set/pairs.json', import.meta.url);
-    const saida = executar([caminho.pathname], (c) => readFileSync(c, 'utf8'));
+    const caminho = fileURLToPath(
+      new URL('../../../data/reference-set/pairs.json', import.meta.url),
+    );
+    const saida = executar([caminho], (c) => readFileSync(c, 'utf8'));
     expect(saida.linhas.join('\n')).toContain('OK');
     expect(saida.codigo).toBe(0);
   });
