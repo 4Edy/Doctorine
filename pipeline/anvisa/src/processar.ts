@@ -106,7 +106,7 @@ export interface RelatorioQualidade {
   /** Contagem de campos vazios entre os registros válidos. */
   nulosPorColuna: Record<Coluna, number>;
   /** Valores com "?" ou caractere de substituição: a origem pode ter perdido acentos. */
-  suspeitaPerdaDeCaractere: Record<string, number>;
+  suspeitaPerdaDeCaractere: Record<string, { registros: number; exemplos: string[] }>;
   /** Registros distintos que repetem o NUMERO_REGISTRO_PRODUTO (todos mantidos). */
   mesmoNumeroRegistro: {
     numerosRepetidos: number;
@@ -123,7 +123,13 @@ export interface RelatorioQualidade {
     limiteObservado: number;
     todos: { semPrincipioAtivo: number; possivelmenteTruncado: number };
     /** Só registros com SITUACAO_REGISTRO = "Ativo": são os que limitam a cobertura do app. */
-    ativos: { total: number; semPrincipioAtivo: number; possivelmenteTruncado: number };
+    ativos: {
+      total: number;
+      semPrincipioAtivo: number;
+      possivelmenteTruncado: number;
+      /** Por CATEGORIA_REGULATORIA: produtos de baixo risco, por exemplo, não costumam ter princípio ativo. */
+      porCategoria: Record<string, { ativos: number; semPrincipioAtivo: number }>;
+    };
   };
   distribuicoes: {
     tipoProduto: Record<string, number>;
@@ -142,6 +148,7 @@ export interface ResultadoProcessamento {
 const POR_CATEGORIA = 10;
 const AMOSTRA_AVISOS = 10;
 const EXEMPLOS = 10;
+const EXEMPLOS_SUSPEITOS = 5;
 const CAMPOS = COLUNAS.map((c) => CAMPO_DA_COLUNA[c]);
 const CAMPOS_DE_TEXTO: Coluna[] = [
   'NOME_PRODUTO',
@@ -254,6 +261,14 @@ export function processar(entrada: EntradaArquivo): ResultadoProcessamento {
   const truncado = (r: RegistroProcessado): boolean =>
     (r.principioAtivo?.length ?? 0) >= LIMITE_PRINCIPIO_ATIVO;
   const ativos = registros.filter((r) => r.situacaoRegistro === 'Ativo');
+  const porCategoriaAtivos = new Map<string, { ativos: number; semPrincipioAtivo: number }>();
+  for (const r of ativos) {
+    const chave = r.categoriaRegulatoria ?? '(vazio)';
+    const linha = porCategoriaAtivos.get(chave) ?? { ativos: 0, semPrincipioAtivo: 0 };
+    linha.ativos++;
+    if (r.principioAtivo === null) linha.semPrincipioAtivo++;
+    porCategoriaAtivos.set(chave, linha);
+  }
 
   const relatorio: RelatorioQualidade = {
     fonte: {
@@ -292,10 +307,18 @@ export function processar(entrada: EntradaArquivo): ResultadoProcessamento {
     },
     nulosPorColuna,
     suspeitaPerdaDeCaractere: Object.fromEntries(
-      CAMPOS_DE_TEXTO.map((c) => [
-        c,
-        registros.filter((r) => suspeito(r[CAMPO_DA_COLUNA[c]] as string | null)).length,
-      ]),
+      CAMPOS_DE_TEXTO.map((c) => {
+        const valores = registros
+          .map((r) => r[CAMPO_DA_COLUNA[c]] as string | null)
+          .filter((v): v is string => suspeito(v));
+        return [
+          c,
+          {
+            registros: valores.length,
+            exemplos: [...new Set(valores)].slice(0, EXEMPLOS_SUSPEITOS).map((v) => v.slice(0, 80)),
+          },
+        ];
+      }),
     ),
     mesmoNumeroRegistro: {
       numerosRepetidos: grupos.length,
@@ -317,6 +340,11 @@ export function processar(entrada: EntradaArquivo): ResultadoProcessamento {
         total: ativos.length,
         semPrincipioAtivo: ativos.filter((r) => r.principioAtivo === null).length,
         possivelmenteTruncado: ativos.filter(truncado).length,
+        porCategoria: Object.fromEntries(
+          [...porCategoriaAtivos.entries()].sort(
+            (a, b) => b[1].ativos - a[1].ativos || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0),
+          ),
+        ),
       },
     },
     distribuicoes: {

@@ -93,8 +93,15 @@ export function relatorioEmMarkdown(r: RelatorioQualidade): string {
       COLUNAS.map((c) => [c, r.nulosPorColuna[c], pct(r.nulosPorColuna[c], r.registrosValidos)]),
     ),
     '## Suspeita de perda de caractere',
-    'Valores com "?" ou "�": a origem pode ter perdido acentos antes de exportar. Não são corrigidos.',
-    distribuicao('Coluna', r.suspeitaPerdaDeCaractere),
+    'Valores com "?" ou "�": a origem pode ter perdido acentos antes de exportar, ou o "?" pode ser legítimo. Não são corrigidos.',
+    tabela(
+      ['Coluna', 'Registros', 'Exemplos'],
+      Object.entries(r.suspeitaPerdaDeCaractere).map(([coluna, v]) => [
+        coluna,
+        v.registros,
+        v.exemplos.map((e) => `\`${e}\``).join(', ') || '—',
+      ]),
+    ),
     '## Princípio ativo',
     tabela(
       ['Item', 'Todos os registros', 'Só ativos'],
@@ -108,7 +115,17 @@ export function relatorioEmMarkdown(r: RelatorioQualidade): string {
         ],
       ],
     ),
-    `Entre os ativos, ${pct(ativos.semPrincipioAtivo, ativos.total)} não têm princípio ativo e não podem ser analisados.`,
+    `Entre os ativos, ${pct(ativos.semPrincipioAtivo, ativos.total)} não têm princípio ativo e não podem ser analisados. A tabela abaixo mostra em que categorias isso ocorre: produtos de baixo risco, por exemplo, não costumam ter princípio ativo.`,
+    '### Ativos por categoria regulatória',
+    tabela(
+      ['Categoria', 'Ativos', 'Sem princípio ativo', '% sem'],
+      Object.entries(ativos.porCategoria).map(([cat, v]) => [
+        cat,
+        v.ativos,
+        v.semPrincipioAtivo,
+        pct(v.semPrincipioAtivo, v.ativos),
+      ]),
+    ),
     '## Repetição de número de registro',
     `${rep.numerosRepetidos} número(s) de registro aparecem em mais de um registro distinto (${rep.registrosEnvolvidos} registros no total). Todos foram mantidos.`,
     rep.numerosRepetidos === 0

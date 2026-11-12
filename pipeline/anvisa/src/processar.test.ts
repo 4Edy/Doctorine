@@ -62,6 +62,10 @@ describe('processar: arquivo válido', () => {
       total: 2,
       semPrincipioAtivo: 1,
       possivelmenteTruncado: 0,
+      porCategoria: {
+        'BAIXO RISCO': { ativos: 1, semPrincipioAtivo: 1 },
+        Biológico: { ativos: 1, semPrincipioAtivo: 0 },
+      },
     });
   });
 
@@ -198,12 +202,24 @@ describe('processar: suspeita de perda de caractere', () => {
       ),
     );
     expect(res.relatorio.suspeitaPerdaDeCaractere).toEqual({
-      NOME_PRODUTO: 0,
-      CATEGORIA_REGULATORIA: 1,
-      CLASSE_TERAPEUTICA: 0,
-      PRINCIPIO_ATIVO: 1,
+      NOME_PRODUTO: { registros: 0, exemplos: [] },
+      CATEGORIA_REGULATORIA: { registros: 1, exemplos: ['FITOTER?PICO'] },
+      CLASSE_TERAPEUTICA: { registros: 0, exemplos: [] },
+      PRINCIPIO_ATIVO: { registros: 1, exemplos: ['insulina deg?deca'] },
     });
     expect(res.registros[0]?.categoriaRegulatoria).toBe('FITOTER?PICO');
+  });
+
+  it('mostra no máximo 5 exemplos, sem repetir o mesmo valor', () => {
+    // o número de registro varia para que nenhuma linha seja cópia exata de outra
+    const linhas = ['A?', 'A?', 'B?', 'C?', 'D?', 'E?', 'F?', 'G?'].map((nome, i) =>
+      comColuna(comColuna(LINHAS_AMOSTRA[0] as string, 1, `"${nome}"`), 4, `${100 + i}`),
+    );
+    const res = processar(entrada(csvAmostra(linhas)));
+    expect(res.relatorio.suspeitaPerdaDeCaractere.NOME_PRODUTO).toEqual({
+      registros: 8,
+      exemplos: ['A?', 'B?', 'C?', 'D?', 'E?'],
+    });
   });
 
   it('reconhece o caractere de substituição U+FFFD em arquivo UTF-8', () => {
@@ -211,7 +227,10 @@ describe('processar: suspeita de perda de caractere', () => {
     const bytes = new TextEncoder().encode(csvAmostra([linha]));
     const res = processar({ ...entrada(''), bytes });
     expect(res.relatorio.codificacao).toBe('utf-8');
-    expect(res.relatorio.suspeitaPerdaDeCaractere.PRINCIPIO_ATIVO).toBe(1);
+    expect(res.relatorio.suspeitaPerdaDeCaractere.PRINCIPIO_ATIVO).toEqual({
+      registros: 1,
+      exemplos: ['atorvastatina c\uFFFDlcica'],
+    });
   });
 });
 
@@ -288,6 +307,11 @@ describe('relatório em Markdown de um arquivo com defeitos', () => {
   it('mostra os avisos, escapando "|" para não quebrar a tabela', () => {
     expect(md).toContain('`a\\|b`');
     expect(saida['avisos.jsonl']?.trimEnd().split('\n')).toHaveLength(1);
+  });
+
+  it('abre os ativos sem princípio ativo por categoria e mostra exemplos de valores suspeitos', () => {
+    expect(md).toContain('### Ativos por categoria regulatória');
+    expect(md).toMatch(/\| Biológico \| 1 \| 0 \| 0\.0% \|/);
   });
 
   it('o arquivo de rejeições não traz as cópias exatas', () => {

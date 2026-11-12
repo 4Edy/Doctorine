@@ -5,15 +5,15 @@ Decisão de usar a fonte: [ADR 0002](../adr/0002-fontes-de-dados.md).
 
 ## Arquivo usado
 
-|              |                                                                                     |
-| ------------ | ----------------------------------------------------------------------------------- |
-| Arquivo      | `DADOS_ABERTOS_MEDICAMENTOS.csv`                                                    |
-| Endereço     | https://dados.anvisa.gov.br/dados/DADOS_ABERTOS_MEDICAMENTOS.csv                    |
-| Tamanho      | cerca de 46 MB (46.062.137 bytes em 2026-11-11)                                     |
-| Atualização  | a listagem da ANVISA mostrava modificação em 2026-11-11 (frequência não confirmada) |
-| Codificação  | **Windows-1252** (não é UTF-8; sem BOM)                                             |
-| Separador    | `;`, texto entre aspas `"`, números de registro sem aspas                           |
-| Fim de linha | LF                                                                                  |
+|              |                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| Arquivo      | `DADOS_ABERTOS_MEDICAMENTOS.csv`                                                                           |
+| Endereço     | https://dados.anvisa.gov.br/dados/DADOS_ABERTOS_MEDICAMENTOS.csv                                           |
+| Tamanho      | cerca de 46 MB (46.062.137 bytes em 2026-11-11)                                                            |
+| Atualização  | pelo menos diária: o arquivo mudou entre 2026-11-11 e 2026-11-12 (versões `f512f01dbc7b` e `31d049cadc24`) |
+| Codificação  | **Windows-1252** (não é UTF-8; sem BOM)                                                                    |
+| Separador    | `;`, texto entre aspas `"`, números de registro sem aspas                                                  |
+| Fim de linha | LF                                                                                                         |
 
 A listagem em https://dados.anvisa.gov.br/dados/ tem muitos outros arquivos de medicamentos
 (preços, fila de análise, farmacovigilância, restrições, fabricantes de IFA). Nenhum entra na v1.
@@ -47,26 +47,35 @@ processamento inteiro.
 
 ## Particularidades observadas
 
-Do arquivo completo baixado em 2026-11-11 (229.540 linhas de dados):
+Do arquivo completo baixado em 2026-11-12 (versão `31d049cadc24`, 229.609 linhas de dados):
 
-- **81% das linhas são cópias exatas de outra.** Só 42.713 registros são distintos (28.200 inativos e
-  14.513 ativos). O arquivo provavelmente tem uma linha por apresentação ou por outro detalhe que
+- **81% das linhas são cópias exatas de outra.** Só 42.741 registros são distintos (28.218 inativos e
+  14.523 ativos). O arquivo provavelmente tem uma linha por apresentação ou por outro detalhe que
   não vem nas 11 colunas. As cópias são colapsadas e contadas.
-- **O mesmo número de registro aparece em 2 registros distintos em 2.404 casos** (sempre 2). O
-  relatório de qualidade mostra quais campos diferem entre eles; os dois registros são mantidos.
-- **Um em cada quatro registros não tem princípio ativo** (25,4%). Entre os ativos, o relatório traz o
-  número separado: é ele que limita a cobertura do app.
-- **`PRINCIPIO_ATIVO` é cortado em 380 caracteres** (81 registros terminam no meio de uma palavra).
-  Isso faz o último princípio ativo sumir da lista e gera falso negativo; a Fase 2 precisa marcar
-  esses registros como "composição incompleta", nunca em silêncio.
+- **O mesmo número de registro aparece em 2 registros distintos em 2.404 casos, e em todos eles a
+  única diferença é a situação: uma linha `Ativo` e outra `Inativo`.** Ou seja, `SITUACAO_REGISTRO`
+  não é uma propriedade do registro; a hipótese é que seja de cada apresentação ou etapa do registro
+  (a confirmar no dicionário de dados e com a farmacêutica). Consequência para a Fase 2 e para o
+  modelo de dados: não usar a linha como unidade; agrupar por número de registro e decidir a regra de
+  situação (proposta: ativo se alguma linha for `Ativo`). Os dois registros são mantidos no
+  resultado do P4.
+- **Um em cada quatro registros não tem princípio ativo** (25,4%; 10.860). Entre os ativos são 4.089
+  de 14.523 (28,2%), mas esse número engana sozinho: produtos de baixo risco não costumam ter
+  princípio ativo. O relatório abre os ativos por categoria regulatória; o número que importa é o das
+  categorias de medicamento (Similar, Genérico, Novo, Biológico...).
+- **`PRINCIPIO_ATIVO` é cortado em 380 caracteres** (81 registros, 20 deles ativos). Isso faz o último
+  princípio ativo sumir da lista e gera falso negativo; a Fase 2 precisa marcar esses registros como
+  "composição incompleta", nunca em silêncio.
+- **Os princípios ativos não perderam acentos:** nenhum valor de `PRINCIPIO_ATIVO` nem de
+  `CLASSE_TERAPEUTICA` tem `?`. A perda aparece só em `NOME_PRODUTO` (426 registros com `?`, que pode
+  ser acento perdido ou `?` legítimo; o relatório lista exemplos) e em `CATEGORIA_REGULATORIA` (47).
 - **`DATA_VENCIMENTO_REGISTRO` vem em mais de um formato:** `MMAAAA` (padrão), `MM/AAAA` (por exemplo
-  `12/2020`) e valores cortados ou truncados que não dá para interpretar (`05200`, `10200`, `1001`).
-  Os dois primeiros são lidos; os últimos viram aviso. Na primeira execução, 75 linhas foram
-  rejeitadas por isso, antes de a regra virar aviso.
+  `12/2020`) e valores que não dá para interpretar (`09200`, `10200`, `1001`, `000000`). Os dois
+  primeiros são lidos; os últimos viram aviso (10 registros na execução de 2026-11-12). Na primeira
+  execução (2026-11-11), 75 linhas foram rejeitadas por isso, antes de a regra virar aviso.
 - **`CATEGORIA_REGULATORIA` tem defeitos de origem:** valores cortados em 12 caracteres (`Gases Medici`,
   `Produto de T`), acento perdido (`FITOTER?PICO`, com `?` no arquivo) e a mesma categoria em caixas
-  diferentes (`DINAMIZADO` e `Dinamizado`). Não normalizamos agora; o relatório conta os campos com
-  `?` ou `�` em nome, categoria, classe e princípio ativo.
+  diferentes (`DINAMIZADO` e `Dinamizado`). Não normalizamos agora.
 - Os princípios ativos vêm em minúsculas, separados por vírgula, e alguns nomes contêm vírgula ou
   "+" no texto (por exemplo, "cloreto de sódio + associações"). Não dá para separar só por vírgula
   sem o mapeamento da Fase 2.
