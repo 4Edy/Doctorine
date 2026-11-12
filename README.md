@@ -12,7 +12,8 @@ profissional de uma farmacêutica.
 ## Estado
 
 Fase 0 (Fundação) em andamento, com a Fase 1 começando: o pipeline já baixa, lê e valida os dados
-abertos de medicamentos da ANVISA e gera um relatório de qualidade (`pnpm pipeline:anvisa`). Ainda
+abertos de medicamentos da ANVISA (`pnpm pipeline:anvisa`) e lê os arquivos de interações do DDInter
+(`pnpm pipeline:ddinter`), com relatório de qualidade para cada fonte. Ainda
 não há código do motor nem do app.
 
 ## Estrutura
@@ -44,5 +45,6 @@ regras e como preencher: [`docs/conjunto-de-referencia.md`](docs/conjunto-de-ref
 
 - O código ainda não tem licença (todos os direitos reservados); decisão adiada na ADR 0004.
 - Registro de medicamentos da ANVISA (dados abertos).
-- DDInter 2.0, licença CC BY-NC-SA 4.0: uso não comercial, com atribuição, e a base derivada segue a
-  mesma licença. Detalhes em [`docs/adr/0004-finalidade-e-licencas.md`](docs/adr/0004-finalidade-e-licencas.md).
+- DDInter, licença CC BY-NC-SA 4.0: uso não comercial, com atribuição, e a base derivada segue a
+  mesma licença. Detalhes em [`docs/fontes/ddinter.md`](docs/fontes/ddinter.md) e
+  [`docs/adr/0004-finalidade-e-licencas.md`](docs/adr/0004-finalidade-e-licencas.md).

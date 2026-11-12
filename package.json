@@ -15,6 +15,8 @@
     "validate:reference": "pnpm --filter @doctorine/reference-set validate",
     "validate:reference:strict": "pnpm --filter @doctorine/reference-set validate:strict",
     "pipeline:anvisa": "pnpm --filter @doctorine/pipeline-anvisa executar",
+    "pipeline:ddinter": "pnpm --filter @doctorine/pipeline-ddinter executar",
+    "pipeline:ddinter:importar": "pnpm --filter @doctorine/pipeline-ddinter importar",
     "ci": "pnpm format:check && pnpm typecheck && pnpm test && pnpm validate:reference"
   },
   "devDependencies": {
