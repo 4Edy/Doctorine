@@ -60,15 +60,20 @@ Do arquivo completo baixado em 2026-11-12 (versão `31d049cadc24`, 229.609 linha
   situação (proposta: ativo se alguma linha for `Ativo`). Os dois registros são mantidos no
   resultado do P4.
 - **Um em cada quatro registros não tem princípio ativo** (25,4%; 10.860). Entre os ativos são 4.089
-  de 14.523 (28,2%), mas esse número engana sozinho: produtos de baixo risco não costumam ter
-  princípio ativo. O relatório abre os ativos por categoria regulatória; o número que importa é o das
-  categorias de medicamento (Similar, Genérico, Novo, Biológico...).
+  de 14.523 (28,2%), mas quase tudo isso é esperado: 4.073 desses 4.089 são produtos de **baixo
+  risco** (3.722, todos sem princípio ativo), **dinamizados/homeopáticos** (324) e os 27 de
+  `FITOTER?PICO` (categoria com o acento perdido). Nas categorias de medicamento faltam só **16** de
+  cerca de 10.450 ativos (Similar 9, Radiofármaco 3, Genérico 2, Novo 1, Específico 1). Para o app,
+  isso significa que baixo risco e homeopáticos não são analisáveis por interação, e o resultado deles
+  precisa dizer "sem princípio ativo declarado", nunca "nenhuma interação encontrada".
 - **`PRINCIPIO_ATIVO` é cortado em 380 caracteres** (81 registros, 20 deles ativos). Isso faz o último
   princípio ativo sumir da lista e gera falso negativo; a Fase 2 precisa marcar esses registros como
   "composição incompleta", nunca em silêncio.
 - **Os princípios ativos não perderam acentos:** nenhum valor de `PRINCIPIO_ATIVO` nem de
-  `CLASSE_TERAPEUTICA` tem `?`. A perda aparece só em `NOME_PRODUTO` (426 registros com `?`, que pode
-  ser acento perdido ou `?` legítimo; o relatório lista exemplos) e em `CATEGORIA_REGULATORIA` (47).
+  `CLASSE_TERAPEUTICA` tem `?`. Em `NOME_PRODUTO`, os 426 registros com `?` têm um único valor
+  distinto, o marcador `N?O DECLARADO` ("NÃO DECLARADO" sem o acento), ou seja, não é perda de acento
+  em nome comercial real; mas esses registros não podem ser buscados pelo nome. Em
+  `CATEGORIA_REGULATORIA` são os 47 de `FITOTER?PICO`.
 - **`DATA_VENCIMENTO_REGISTRO` vem em mais de um formato:** `MMAAAA` (padrão), `MM/AAAA` (por exemplo
   `12/2020`) e valores que não dá para interpretar (`09200`, `10200`, `1001`, `000000`). Os dois
   primeiros são lidos; os últimos viram aviso (10 registros na execução de 2026-11-12). Na primeira
@@ -82,11 +87,32 @@ Do arquivo completo baixado em 2026-11-12 (versão `31d049cadc24`, 229.609 linha
 
 ## Licença e termos de uso
 
-**A confirmar.** Ainda não foi lido o texto oficial de termos de uso dos dados abertos da ANVISA
-(a página da listagem tem `Leia_me.txt`, `readme.txt` e o Plano de Dados Abertos 2023-2025). Até
-isso ser verificado e registrado aqui, os dados brutos e os gerados **não são versionados** no
-repositório (ver [`data/README.md`](../../data/README.md)). Pendência da Fase 1: colar aqui o termo
-e o endereço de onde ele foi lido.
+**Não há licença expressa localizada para este arquivo.** Estado em 2026-11-12:
+
+- O `Leia_me.txt` da pasta de dados abertos (datado de 23/06/2023, assinado pela equipe de dados da
+  ANVISA) descreve o processo de atualização dos arquivos de **preço** de medicamentos
+  (`TA_PRECO_MEDICAMENTO*`). Não trata de licença nem de termos de uso e não se aplica ao arquivo que
+  usamos.
+- O dicionário de dados de medicamentos e o Plano de Dados Abertos da Anvisa 2023-2025 (PDF) não
+  foram lidos; se tiverem termo de uso, falta registrá-lo aqui.
+- A política federal de dados abertos (Decreto nº 8.777/2016, art. 2º) define dados abertos como
+  "acessíveis ao público, [...] estruturados em formato aberto, processáveis por máquina, [...]
+  disponibilizados sob licença aberta que permita sua livre utilização, consumo ou cruzamento,
+  limitando-se a creditar a autoria ou a fonte" (texto conforme o
+  [Guia de Transparência Ativa](https://www.gov.br/acessoainformacao/pt-br/lai-para-sic/transparencia-ativa/copy_of_guia-de-transparencia-ativa/textos-complementares/formato-aberto)
+  do gov.br). Como o portal `dados.anvisa.gov.br` é o canal de dados abertos da ANVISA, a leitura
+  razoável é de uso livre com crédito da fonte. **Isso é inferência, não uma licença encontrada, e
+  não é aconselhamento jurídico.**
+
+Decisões adotadas:
+
+1. Creditar a fonte onde os dados aparecem: "Fonte: ANVISA, Portal de Dados Abertos
+   (dados.anvisa.gov.br), arquivo `DADOS_ABERTOS_MEDICAMENTOS.csv`, versão `<checksum>`", na tela de
+   créditos do app (Fase 6) e no README.
+2. Manter os dados brutos e os gerados fora do git por ora; a inclusão da base derivada segue em aberto
+   na [ADR 0004](../adr/0004-finalidade-e-licencas.md).
+3. Antes de publicar uma base derivada ou distribuir o app a terceiros, perguntar à ANVISA pelo
+   canal de contato do portal de dados abertos qual licença vale para o arquivo.
 
 ## Como reproduzir
 
