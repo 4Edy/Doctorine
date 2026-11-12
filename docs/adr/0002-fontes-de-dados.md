@@ -1,6 +1,6 @@
 # 0002 · Fontes de dados
 
-- **Status:** Proposta (2026-11-11)
+- **Status:** Aceita (2026-11-12)
 - **Decisor:** Edu
 
 ## Contexto

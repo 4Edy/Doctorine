@@ -14,8 +14,19 @@ describe('tokens', () => {
   });
 
   it('mantém a ordem obrigatória de gravidade', () => {
-    expect(severityOrder).toEqual(['grave', 'moderada', 'leve', 'indeterminada', 'nenhuma']);
+    expect(severityOrder).toEqual([
+      'contraindicada',
+      'grave',
+      'moderada',
+      'leve',
+      'indeterminada',
+      'nenhuma',
+    ]);
     expect(Object.keys(severity)).toEqual([...severityOrder]);
+  });
+
+  it('contraindicada e grave são distinguíveis por contraste entre si', () => {
+    expect(contraste(severity.contraindicada.bg, severity.grave.bg)).toBeGreaterThanOrEqual(5);
   });
 
   it('gravidade nunca usa as cores da marca (rosa nem verde)', () => {

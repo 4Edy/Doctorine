@@ -6,6 +6,8 @@ O protótipo em si **não entra no repositório**: é referência visual, e o ap
 
 ## Marca
 
+Marca aprovada pelo Edu em 2026-11-12.
+
 - **Logo em uso:** "D" serifado em ameixa com folha verde e nós moleculares. Lê bem em 24 a 48 px
   e carrega as duas ideias do produto (botânica e farmacologia). Recomendado como marca principal.
 - **Alternativa não usada:** hexágono molecular com broto. É mais genérico ("app de química") e
@@ -50,12 +52,15 @@ Relatório e Fontes foram revisadas pelo código, não em captura de tela.
    modo escuro fica fora da v1.
 5. Saudação "Dra. Farmacêutica" é texto fixo de demonstração.
 
-## Decisão pendente do Edu
+## Decisão: escala de gravidade (resolvida em 2026-11-12)
 
-**Escala de gravidade.** Em 2026-11-10 a escala aprovada tinha quatro níveis: contraindicada, grave,
-moderada, leve. O protótipo **junta "contraindicada" e "grave"** num único rótulo ("Grave ou
-contraindicada") e acrescenta "não determinada" e "nenhuma ocorrência". Os dois extras fazem
-sentido (a base pode não classificar um par; ausência de dado não é segurança). A fusão é que
-diverge: contraindicada ("não usar junto") é uma conduta diferente de grave ("usar com monitoramento").
-Os tokens ficaram como no protótipo (5 níveis, `grave` único) **até a decisão**; separar custa
-só uma entrada nova em `severity`.
+A escala tem **seis níveis**: contraindicada, grave, moderada, leve, não determinada e nenhuma
+ocorrência. O protótipo juntava contraindicada e grave ("Grave ou contraindicada"); o Edu decidiu
+separar, porque "não usar junto" é uma conduta diferente de "usar com monitoramento".
+
+- `contraindicada` é o único nível em **bloco sólido** (texto branco sobre vinho `#8C1C1F`), para
+  se destacar de `grave` mesmo sem depender do matiz. No app, usar ícone próprio (proibido) e o
+  rótulo "Contraindicada".
+- `grave` perde o "ou contraindicada" do rótulo e mantém o estilo claro com borda.
+- O esquema do conjunto de referência (`GRAVIDADES`) já tinha os quatro níveis clínicos; não muda.
+  "Não determinada" e "nenhuma ocorrência" são estados do app e do motor, não de dado clínico.

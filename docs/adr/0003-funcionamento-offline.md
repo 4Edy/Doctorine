@@ -1,6 +1,6 @@
 # 0003 · Funcionamento offline
 
-- **Status:** Proposta (2026-11-11)
+- **Status:** Aceita (2026-11-12)
 - **Decisor:** Edu
 
 ## Contexto

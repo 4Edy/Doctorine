@@ -26,7 +26,9 @@ export const colors = {
 
 /** Gravidade clínica: independente da paleta da marca. Nunca rosa nem verde. */
 export const severity = {
-  grave: { fg: '#9F1D20', bg: '#FDECEC', border: '#E8B4B4', label: 'Grave ou contraindicada' },
+  /** Bloco sólido (texto branco sobre vinho): destaca-se de "grave" sem depender só do matiz. */
+  contraindicada: { fg: '#FFFFFF', bg: '#8C1C1F', border: '#6B1214', label: 'Contraindicada' },
+  grave: { fg: '#9F1D20', bg: '#FDECEC', border: '#E8B4B4', label: 'Grave' },
   moderada: { fg: '#8A4B00', bg: '#FFF1DC', border: '#EFC98F', label: 'Moderada' },
   leve: { fg: '#1E4F8F', bg: '#E8F0FB', border: '#AFC6E9', label: 'Leve' },
   indeterminada: { fg: '#4A4F57', bg: '#EEF0F2', border: '#C5CAD1', label: 'Não determinada' },
@@ -42,6 +44,7 @@ export type SeverityLevel = keyof typeof severity;
 
 /** Ordem obrigatória de exibição, da mais para a menos grave. */
 export const severityOrder: readonly SeverityLevel[] = [
+  'contraindicada',
   'grave',
   'moderada',
   'leve',

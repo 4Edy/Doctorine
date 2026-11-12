@@ -1,7 +1,7 @@
 # 0001 · Stack
 
-- **Status:** Proposta (2026-11-11). A escolha da stack foi aprovada na discussão do P1; esta ADR
-  registra por escrito e aguarda a aprovação final.
+- **Status:** Aceita (2026-11-12). A escolha da stack foi aprovada na discussão do P1; esta ADR a
+  registra por escrito.
 - **Decisor:** Edu
 
 ## Contexto
