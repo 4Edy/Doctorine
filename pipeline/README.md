@@ -24,10 +24,14 @@ O que acontece:
 2. **Processamento** para `data/processed/anvisa/<versão>/`:
    - `registros.jsonl`: um registro válido por linha, com `proveniencia` (fonte, versão, data do
      download, linha de origem);
-   - `rejeicoes.jsonl`: linhas rejeitadas (formato, colunas, esquema ou duplicata exata), com o
-     motivo e os campos originais;
-   - `relatorio-qualidade.md` e `.json`: linhas lidas, rejeitadas por motivo e coluna, campos vazios,
-     duplicidade, princípios ativos ausentes ou cortados, distribuições.
+   - `rejeicoes.jsonl`: linhas que não viraram registro (formato do CSV, número de colunas ou
+     esquema), com o motivo e os campos originais;
+   - `avisos.jsonl`: registros mantidos com um campo informativo (as datas) vazio por formato
+     inesperado, com o valor original;
+   - `relatorio-qualidade.md` e `.json`: linhas lidas = registros distintos + duplicadas exatas +
+     rejeitadas; rejeições por motivo e coluna (com amostra de cada categoria); avisos; campos vazios;
+     suspeita de perda de caractere; princípio ativo ausente ou cortado (todos e só ativos); o que muda
+     entre registros de mesmo número; distribuições.
 
 O processamento depende só dos bytes do arquivo e da data do manifesto (nunca do relógio): rodar de
 novo, ou do zero em outra máquina, gera arquivos idênticos byte a byte. O checksum do manifesto é

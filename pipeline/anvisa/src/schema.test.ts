@@ -35,6 +35,7 @@ describe('validarLinha', () => {
         situacaoRegistro: 'Inativo',
         principioAtivo: 'atorvastatina cálcica',
       },
+      avisos: [],
     });
   });
 
@@ -74,10 +75,6 @@ describe('validarLinha', () => {
   });
 
   it.each([
-    ['DATA_FINALIZACAO_PROCESSO', '31/02/2020', 'não existe'],
-    ['DATA_FINALIZACAO_PROCESSO', '2020-02-01', 'DD/MM/AAAA'],
-    ['DATA_VENCIMENTO_REGISTRO', '132026', 'MMAAAA'],
-    ['DATA_VENCIMENTO_REGISTRO', '12-2026', 'MMAAAA'],
     ['NUMERO_REGISTRO_PRODUTO', '12A45', 'não é numérico'],
     ['NUMERO_PROCESSO', '2535.1/2015', 'não é numérico'],
     ['NOME_PRODUTO', '  ', 'obrigatório'],
@@ -90,6 +87,65 @@ describe('validarLinha', () => {
       expect(motivos).toContain(`${coluna}: `);
       expect(motivos).toContain(trecho);
     }
+  });
+
+  describe('campos tolerantes (datas informativas)', () => {
+    const linha = LINHAS_AMOSTRA[0] as string;
+
+    it.each([
+      ['122026', '2026-12'],
+      ['12/2020', '2020-12'],
+      ['07/2021', '2021-07'],
+    ])('aceita o vencimento "%s" como %s, sem aviso', (valor, esperado) => {
+      const r = validarLinha(sobrescrever(linha, 'DATA_VENCIMENTO_REGISTRO', valor));
+      expect(r).toMatchObject({ ok: true, registro: { vencimentoRegistro: esperado }, avisos: [] });
+    });
+
+    it.each(['05200', '10200', '1001', '132026', '13/2020', '12-2026'])(
+      'vencimento ilegível "%s" mantém o registro, com o campo vazio e um aviso',
+      (valor) => {
+        const r = validarLinha(sobrescrever(linha, 'DATA_VENCIMENTO_REGISTRO', valor));
+        expect(r).toMatchObject({
+          ok: true,
+          registro: {
+            nomeProduto: 'TORVILIP',
+            numeroRegistro: '126750245',
+            vencimentoRegistro: null,
+          },
+          avisos: [{ coluna: 'DATA_VENCIMENTO_REGISTRO', valor }],
+        });
+        expect(r.ok && r.avisos[0]?.motivo).toContain('MMAAAA');
+      },
+    );
+
+    it.each([
+      ['31/02/2020', 'não existe'],
+      ['2020-02-01', 'DD/MM/AAAA'],
+    ])('data de finalização "%s" ilegível vira aviso', (valor, trecho) => {
+      const r = validarLinha(sobrescrever(linha, 'DATA_FINALIZACAO_PROCESSO', valor));
+      expect(r).toMatchObject({
+        ok: true,
+        registro: { dataFinalizacaoProcesso: null },
+        avisos: [{ coluna: 'DATA_FINALIZACAO_PROCESSO', valor }],
+      });
+      expect(r.ok && r.avisos[0]?.motivo).toContain(trecho);
+    });
+
+    it('um campo vazio não gera aviso', () => {
+      const r = validarLinha(sobrescrever(linha, 'DATA_VENCIMENTO_REGISTRO', ''));
+      expect(r).toMatchObject({ ok: true, avisos: [] });
+    });
+
+    it('se houver também um erro em coluna obrigatória, a linha é rejeitada com todos os motivos', () => {
+      const c = sobrescrever(linha, 'DATA_VENCIMENTO_REGISTRO', '05200');
+      c[COLUNAS.indexOf('NOME_PRODUTO')] = '';
+      const r = validarLinha(c);
+      expect(r.ok).toBe(false);
+      expect(!r.ok && r.motivos.map((m) => m.split(':')[0])).toEqual([
+        'NOME_PRODUTO',
+        'DATA_VENCIMENTO_REGISTRO',
+      ]);
+    });
   });
 
   it('acumula todos os motivos de uma linha', () => {

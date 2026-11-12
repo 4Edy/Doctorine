@@ -64,7 +64,7 @@ export async function executar(argv: readonly string[], deps: Dependencias): Pro
       const r = processarDownload(alvo, processado);
       const { relatorio } = r.resultado;
       linhas.push(
-        `Processado a versão ${relatorio.fonte.versao}: ${relatorio.linhasLidas} linhas, ${relatorio.registrosValidos} válidas, ${relatorio.rejeitados.total} rejeitadas (${relatorio.duplicados.exatas} duplicadas exatas)`,
+        `Processado a versão ${relatorio.fonte.versao}: ${relatorio.linhasLidas} linhas = ${relatorio.registrosValidos} registros distintos + ${relatorio.duplicadasExatas.total} duplicadas exatas + ${relatorio.rejeitados.total} rejeitadas (${relatorio.avisos.total} registros com aviso)`,
         `  relatório: ${rel(join(r.diretorioSaida, 'relatorio-qualidade.md'))}`,
       );
     }

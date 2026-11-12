@@ -23,36 +23,53 @@ Válidos" citado no plano é de um formato antigo e a listagem não traz CSV cor
 
 ## Colunas
 
-| Coluna                       | Como o pipeline trata                                                               |
-| ---------------------------- | ----------------------------------------------------------------------------------- |
-| `TIPO_PRODUTO`               | obrigatória (só `MEDICAMENTO` na amostra)                                           |
-| `NOME_PRODUTO`               | obrigatória; nome comercial ou denominação                                          |
-| `DATA_FINALIZACAO_PROCESSO`  | `DD/MM/AAAA` → `AAAA-MM-DD`; vazia vira `null`                                      |
-| `CATEGORIA_REGULATORIA`      | texto livre (Similar, Genérico, Novo, Biológico, BAIXO RISCO...); vazia vira `null` |
-| `NUMERO_REGISTRO_PRODUTO`    | só dígitos, como texto; vazio nos produtos de baixo risco                           |
-| `DATA_VENCIMENTO_REGISTRO`   | `MMAAAA` → `AAAA-MM`                                                                |
-| `NUMERO_PROCESSO`            | só dígitos, como texto (tamanhos variam)                                            |
-| `CLASSE_TERAPEUTICA`         | texto livre; vazia vira `null`                                                      |
-| `EMPRESA_DETENTORA_REGISTRO` | `CNPJ - NOME` → `{ cnpj, nome }`; sem esse padrão, só o nome                        |
-| `SITUACAO_REGISTRO`          | obrigatória (`Ativo`, `Inativo`)                                                    |
-| `PRINCIPIO_ATIVO`            | texto original, **sem separar** (a separação é da Fase 2); vazio em muitos produtos |
+| Coluna                       | Como o pipeline trata                                                                    |
+| ---------------------------- | ---------------------------------------------------------------------------------------- |
+| `TIPO_PRODUTO`               | obrigatória (só `MEDICAMENTO` na amostra)                                                |
+| `NOME_PRODUTO`               | obrigatória; nome comercial ou denominação                                               |
+| `DATA_FINALIZACAO_PROCESSO`  | `DD/MM/AAAA` → `AAAA-MM-DD`; vazia vira `null`; formato inesperado vira `null` com aviso |
+| `CATEGORIA_REGULATORIA`      | texto livre (Similar, Genérico, Novo, Biológico, BAIXO RISCO...); vazia vira `null`      |
+| `NUMERO_REGISTRO_PRODUTO`    | só dígitos, como texto; vazio nos produtos de baixo risco                                |
+| `DATA_VENCIMENTO_REGISTRO`   | `MMAAAA` ou `MM/AAAA` → `AAAA-MM`; vazio vira `null`; ilegível vira `null` com aviso     |
+| `NUMERO_PROCESSO`            | só dígitos, como texto (tamanhos variam)                                                 |
+| `CLASSE_TERAPEUTICA`         | texto livre; vazia vira `null`                                                           |
+| `EMPRESA_DETENTORA_REGISTRO` | `CNPJ - NOME` → `{ cnpj, nome }`; sem esse padrão, só o nome                             |
+| `SITUACAO_REGISTRO`          | obrigatória (`Ativo`, `Inativo`)                                                         |
+| `PRINCIPIO_ATIVO`            | texto original, **sem separar** (a separação é da Fase 2); vazio em muitos produtos      |
 
 Só `TIPO_PRODUTO`, `NOME_PRODUTO` e `SITUACAO_REGISTRO` são obrigatórias; as demais podem vir
 vazias, e se vierem preenchidas precisam ter o formato acima. Linha fora disso é **rejeitada com
-motivo** (`rejeicoes.jsonl`), nunca corrigida em silêncio. Cabeçalho diferente do esperado derruba o
+motivo** (`rejeicoes.jsonl`), nunca corrigida em silêncio. As duas datas são informativas: com formato
+inesperado, o registro é **mantido** com o campo vazio e o valor original vai para `avisos.jsonl`
+(o motor não depende delas, e perder o medicamento por causa de uma data seria pior). Cópia exata de
+outra linha é colapsada e contada à parte, não é erro. Cabeçalho diferente do esperado derruba o
 processamento inteiro.
 
-## Particularidades observadas na amostra (2026-11-11)
+## Particularidades observadas
 
-- Cerca de 1 em cada 5 registros não tem princípio ativo (produtos de baixo risco, antigos,
-  homeopáticos). Isso limita a cobertura do motor e entra no relatório de cobertura da Fase 2.
-- `PRINCIPIO_ATIVO` parece cortado em 380 caracteres (um registro de polivitamínico termina no meio
-  de "iodet"). O relatório conta os valores desse tamanho; o texto não é alterado.
+Do arquivo completo baixado em 2026-11-11 (229.540 linhas de dados):
+
+- **81% das linhas são cópias exatas de outra.** Só 42.713 registros são distintos (28.200 inativos e
+  14.513 ativos). O arquivo provavelmente tem uma linha por apresentação ou por outro detalhe que
+  não vem nas 11 colunas. As cópias são colapsadas e contadas.
+- **O mesmo número de registro aparece em 2 registros distintos em 2.404 casos** (sempre 2). O
+  relatório de qualidade mostra quais campos diferem entre eles; os dois registros são mantidos.
+- **Um em cada quatro registros não tem princípio ativo** (25,4%). Entre os ativos, o relatório traz o
+  número separado: é ele que limita a cobertura do app.
+- **`PRINCIPIO_ATIVO` é cortado em 380 caracteres** (81 registros terminam no meio de uma palavra).
+  Isso faz o último princípio ativo sumir da lista e gera falso negativo; a Fase 2 precisa marcar
+  esses registros como "composição incompleta", nunca em silêncio.
+- **`DATA_VENCIMENTO_REGISTRO` vem em mais de um formato:** `MMAAAA` (padrão), `MM/AAAA` (por exemplo
+  `12/2020`) e valores cortados ou truncados que não dá para interpretar (`05200`, `10200`, `1001`).
+  Os dois primeiros são lidos; os últimos viram aviso. Na primeira execução, 75 linhas foram
+  rejeitadas por isso, antes de a regra virar aviso.
+- **`CATEGORIA_REGULATORIA` tem defeitos de origem:** valores cortados em 12 caracteres (`Gases Medici`,
+  `Produto de T`), acento perdido (`FITOTER?PICO`, com `?` no arquivo) e a mesma categoria em caixas
+  diferentes (`DINAMIZADO` e `Dinamizado`). Não normalizamos agora; o relatório conta os campos com
+  `?` ou `�` em nome, categoria, classe e princípio ativo.
 - Os princípios ativos vêm em minúsculas, separados por vírgula, e alguns nomes contêm vírgula ou
   "+" no texto (por exemplo, "cloreto de sódio + associações"). Não dá para separar só por vírgula
   sem o mapeamento da Fase 2.
-- O mesmo `NUMERO_REGISTRO_PRODUTO` pode aparecer mais de uma vez? Ainda não se sabe; o relatório
-  de qualidade conta e lista os casos, sem descartar nenhum.
 
 ## Licença e termos de uso
 

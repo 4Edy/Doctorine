@@ -80,9 +80,10 @@ const dataBr = opcional.transform((v, ctx) => {
 
 const mesAno = opcional.transform((v, ctx) => {
   if (v === null) return null;
-  const m = /^(\d{2})(\d{4})$/.exec(v);
+  // Os dois formatos aparecem no arquivo completo: "122026" (padrão) e "12/2026".
+  const m = /^(\d{2})\/?(\d{4})$/.exec(v);
   if (m === null || Number(m[1]) < 1 || Number(m[1]) > 12) {
-    return falhar(ctx, v, `vencimento "${v}" fora do formato MMAAAA`);
+    return falhar(ctx, v, `vencimento "${v}" fora do formato MMAAAA ou MM/AAAA`);
   }
   return `${m[2]}-${m[1]}`;
 });
@@ -131,8 +132,25 @@ export const linhaSchema = z
     principioAtivo: r.PRINCIPIO_ATIVO,
   }));
 
+/**
+ * Colunas só informativas: se o valor não tem o formato esperado, o registro é mantido com o campo
+ * vazio e o problema vira aviso. Os valores que viram aviso no arquivo completo (ex.: "05200",
+ * "1001") são ambíguos, e não adivinhamos o que significam.
+ */
+export const COLUNAS_TOLERANTES: readonly Coluna[] = [
+  'DATA_FINALIZACAO_PROCESSO',
+  'DATA_VENCIMENTO_REGISTRO',
+];
+
+export interface Aviso {
+  coluna: Coluna;
+  /** Valor original, como veio no arquivo. */
+  valor: string;
+  motivo: string;
+}
+
 export type ResultadoLinha =
-  { ok: true; registro: RegistroAnvisa } | { ok: false; motivos: string[] };
+  { ok: true; registro: RegistroAnvisa; avisos: Aviso[] } | { ok: false; motivos: string[] };
 
 /** Valida os campos de uma linha (na ordem de COLUNAS). Os motivos citam a coluna. */
 export function validarLinha(campos: readonly string[]): ResultadoLinha {
@@ -142,13 +160,30 @@ export function validarLinha(campos: readonly string[]): ResultadoLinha {
       motivos: [`número de colunas: esperado ${COLUNAS.length}, veio ${campos.length}`],
     };
   }
-  const bruto = Object.fromEntries(COLUNAS.map((coluna, i) => [coluna, campos[i] ?? '']));
+  const bruto: Record<string, string> = Object.fromEntries(
+    COLUNAS.map((coluna, i) => [coluna, campos[i] ?? '']),
+  );
   const r = linhaSchema.safeParse(bruto);
-  if (r.success) return { ok: true, registro: r.data };
-  return {
-    ok: false,
-    motivos: r.error.issues.map((p) => `${String(p.path[0] ?? '?')}: ${p.message}`),
-  };
+  if (r.success) return { ok: true, registro: r.data, avisos: [] };
+
+  const problemas = r.error.issues.map((p) => ({
+    coluna: String(p.path[0] ?? '?'),
+    mensagem: p.message,
+  }));
+  const tolerantes = new Set<string>(COLUNAS_TOLERANTES);
+  if (problemas.every((p) => tolerantes.has(p.coluna))) {
+    const avisos: Aviso[] = [];
+    const limpo = { ...bruto };
+    for (const p of problemas) {
+      const coluna = p.coluna as Coluna;
+      if (limpo[coluna] === '') continue;
+      avisos.push({ coluna, valor: bruto[coluna] ?? '', motivo: p.mensagem });
+      limpo[coluna] = '';
+    }
+    const r2 = linhaSchema.safeParse(limpo);
+    if (r2.success) return { ok: true, registro: r2.data, avisos };
+  }
+  return { ok: false, motivos: problemas.map((p) => `${p.coluna}: ${p.mensagem}`) };
 }
 
 /** O cabeçalho precisa ser exatamente COLUNAS; qualquer mudança é falha do arquivo inteiro. */

@@ -46,8 +46,11 @@ describe('executar', () => {
     });
     expect(r.codigo).toBe(0);
     expect(r.linhas.join('\n')).toContain('Baixado: DADOS_ABERTOS_MEDICAMENTOS.csv');
-    expect(r.linhas.join('\n')).toContain('8 linhas, 8 válidas, 0 rejeitadas');
-    expect(Object.keys(lerSaida(raiz))).toEqual([
+    expect(r.linhas.join('\n')).toContain(
+      '8 linhas = 8 registros distintos + 0 duplicadas exatas + 0 rejeitadas (0 registros com aviso)',
+    );
+    expect(Object.keys(lerSaida(raiz)).sort()).toEqual([
+      'avisos.jsonl',
       'registros.jsonl',
       'rejeicoes.jsonl',
       'relatorio-qualidade.json',
