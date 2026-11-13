@@ -425,6 +425,16 @@ describe('finalizar e processar', () => {
     expect(r.farmacos.find((x) => x.id === 'DDInter1')?.pares).toBe(2);
   });
 
+  it('aceita medicamento sem DrugBank (o site manda null) e conta no relatório', async () => {
+    const f = await montar({
+      9: [{ ...par(7, 1, 2), drugbankID_b: null } as unknown as ReturnType<typeof par>],
+    });
+    const r = processarPares(ler(f.diretorio));
+    expect(r.relatorio.rejeitados.total).toBe(0);
+    expect(r.pares.find((x) => x.idPar === 7)?.b.drugbank).toBeNull();
+    expect(r.relatorio.pares).toMatchObject({ semDrugbank: 1 });
+  });
+
   it('rejeita linha inválida com motivo e mede repetições', async () => {
     const f = await montar({
       10: [

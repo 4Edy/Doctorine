@@ -188,6 +188,10 @@ nível, mecanismos, os dois medicamentos com DDInter e DrugBank, proveniência),
 `rejeicoes.jsonl`, `avisos.jsonl` e o relatório. O relatório confere com o que já temos: nível do par
 contra o do texto, e os pares contra os 8 CSVs (em ambos, só na coleta, só nos CSVs, nível diferente).
 
+**Medicamento sem DrugBank:** o site manda `null` no DrugBank de alguns medicamentos (24.139 linhas da
+primeira coleta, 9%, foram rejeitadas por isso). Agora a linha é aceita com `drugbank: null` e o
+relatório conta os medicamentos sem DrugBank; a identificação do medicamento é o id do DDInter.
+
 **Ids da coleta completa:** sem `--de`/`--ate`, o coletor pede só os ids que existem nas exportações
 (`textos-interacao.jsonl`), porque ids sem texto no site dão HTTP 500 (ex.: id 0). A página usada para
 abrir a sessão que der erro é pulada; vale a próxima.

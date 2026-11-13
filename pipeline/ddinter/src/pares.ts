@@ -132,10 +132,10 @@ const idFarmaco = z.string().regex(/^DDInter\d+$/, 'identificador fora do format
 const flag = z.enum(['0', '1'], { error: 'esperado 0 ou 1' });
 const linhaSchema = z.object({
   level: z.coerce.string().pipe(z.enum(['1', '2', '3'], { error: 'nível fora de 1, 2 e 3' })),
-  drugbankID_a: z.string(),
+  drugbankID_a: z.string().nullable(),
   internalID_a: idFarmaco,
   drug_a_name: z.string().trim().min(1, 'vazio'),
-  drugbankID_b: z.string(),
+  drugbankID_b: z.string().nullable(),
   internalID_b: idFarmaco,
   drug_b_name: z.string().trim().min(1, 'vazio'),
   id: z.number().int().nonnegative(),
@@ -286,9 +286,9 @@ export function processarPares(
         });
         return;
       }
-      const lado = (id: string, dbk: string, nome: string) => ({
+      const lado = (id: string, dbk: string | null, nome: string) => ({
         id,
-        drugbank: dbk.trim() === '' ? null : dbk.trim(),
+        drugbank: dbk === null || dbk.trim() === '' ? null : dbk.trim(),
         nome,
       });
       let a = lado(d.internalID_a, d.drugbankID_a, d.drug_a_name);
