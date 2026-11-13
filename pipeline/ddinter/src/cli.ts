@@ -8,6 +8,8 @@ import {
   type ResultadoGuardar,
 } from './baixar.js';
 import { processarDownload } from './executar.js';
+import { importarSite, ultimoSite } from './site.js';
+import { processarSiteGuardado } from './saida-site.js';
 import { ErroArquivo } from './processar.js';
 
 export interface SaidaCli {
@@ -31,7 +33,13 @@ const USO = `Uso: pipeline-ddinter <baixar | importar <pasta> | processar | tudo
   importar    registra os 8 CSVs que você baixou à mão (nome ddinter_downloads_code_<letra>.csv) da <pasta>
   processar   lê o conjunto mais recente e gera interações, medicamentos, rejeições e relatório de
               qualidade em data/processed/ddinter/<versão>/
-  tudo        baixar (ou importar, com --pasta <pasta>) + processar`;
+  tudo        baixar (ou importar, com --pasta <pasta>) + processar
+
+Exportações do site (severity_*.csv, drug_food.csv, drug_disease.csv, therapeutic_duplication.csv):
+  importar-site <pasta>   registra as 6 exportações em data/raw/ddinter-site/<versão>/
+  processar-site          gera textos, alimentos, doenças, duplicidade e relatório em
+                          data/processed/ddinter-site/<versão>/
+  site <pasta>            importar-site + processar-site`;
 
 export async function executar(argv: readonly string[], deps: Dependencias): Promise<SaidaCli> {
   const [comando, ...argumentos] = argv;
@@ -51,6 +59,17 @@ export async function executar(argv: readonly string[], deps: Dependencias): Pro
   if (b === null || p === null) return { codigo: 2, linhas: [USO] };
   if (b !== undefined) baseUrl = b;
   if (p !== undefined) pasta = p;
+  if (comando === 'importar-site' || comando === 'site') {
+    const [posicional, ...sobra] = resto;
+    if (posicional === undefined || sobra.length > 0 || pasta !== undefined) {
+      return { codigo: 2, linhas: [USO] };
+    }
+    return executarSite(comando, posicional, deps);
+  }
+  if (comando === 'processar-site') {
+    if (resto.length > 0 || pasta !== undefined) return { codigo: 2, linhas: [USO] };
+    return executarSite(comando, undefined, deps);
+  }
   if (comando === 'importar') {
     const [posicional, ...sobra] = resto;
     if (posicional === undefined || sobra.length > 0 || pasta !== undefined) {
@@ -103,6 +122,50 @@ export async function executar(argv: readonly string[], deps: Dependencias): Pro
       const { relatorio } = r.resultado;
       linhas.push(
         `Processado o conjunto ${relatorio.fonte.versao}: ${relatorio.linhasLidas} linhas = ${relatorio.interacoesDistintas} interações distintas + ${relatorio.repetidas.total} repetidas + ${relatorio.rejeitados.total} rejeitadas (${relatorio.avisos.total} avisos; ${relatorio.farmacos.total} medicamentos)`,
+        `  relatório: ${rel(join(r.diretorioSaida, 'relatorio-qualidade.md'))}`,
+      );
+    }
+    return { codigo: 0, linhas };
+  } catch (erro) {
+    const motivo = erro instanceof Error ? erro.message : String(erro);
+    const tipo = erro instanceof ErroArquivo ? 'Erro' : 'Erro inesperado';
+    return { codigo: 1, linhas: [...linhas, `${tipo}: ${motivo}`] };
+  }
+}
+
+function executarSite(
+  comando: 'importar-site' | 'processar-site' | 'site',
+  pasta: string | undefined,
+  deps: Dependencias,
+): SaidaCli {
+  const bruto = join(deps.raiz, 'data', 'raw', 'ddinter-site');
+  const processado = join(deps.raiz, 'data', 'processed', 'ddinter-site');
+  const rel = (caminho: string): string => relative(deps.raiz, caminho).split('\\').join('/');
+  const linhas: string[] = [];
+  try {
+    let origem: string | undefined;
+    if (pasta !== undefined) {
+      const caminho = isAbsolute(pasta) ? pasta : resolve(deps.cwd ?? process.cwd(), pasta);
+      const r = importarSite({
+        destino: bruto,
+        pasta: caminho,
+        ...(deps.agora === undefined ? {} : { agora: deps.agora }),
+      });
+      const bytes = r.manifesto.arquivos.reduce((s, a) => s + a.bytes, 0);
+      linhas.push(
+        `${r.novo ? 'Importado' : 'Já guardado (mesmo checksum)'}: ${r.manifesto.arquivos.length} arquivos, ${bytes} bytes, versão ${r.manifesto.sha256.slice(0, 12)}, ${r.manifesto.baixadoEm}`,
+        `  em ${rel(r.diretorio)}`,
+      );
+      origem = r.diretorio;
+    }
+    if (comando !== 'importar-site') {
+      const alvo = origem ?? ultimoSite(bruto).diretorio;
+      const r = processarSiteGuardado(alvo, processado);
+      const rp = r.resultado.relatorio;
+      const lidas = rp.arquivos.reduce((s, a) => s + a.linhasLidas, 0);
+      linhas.push(
+        `Processado o conjunto ${rp.fonte.versao}: ${lidas} linhas lidas, ${rp.rejeitados.total} rejeitadas, ${rp.avisos.total} avisos`,
+        `  ${rp.textosInteracao.total} textos de interação, ${rp.alimentos.total} alimentos, ${rp.doencas.total} doenças, ${rp.duplicidade.total} duplicidades`,
         `  relatório: ${rel(join(r.diretorioSaida, 'relatorio-qualidade.md'))}`,
       );
     }

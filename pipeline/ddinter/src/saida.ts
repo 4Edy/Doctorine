@@ -3,23 +3,27 @@ import { join } from 'node:path';
 import { LETRAS_ESPERADAS } from './schema.js';
 import type { RelatorioQualidade, ResultadoProcessamento } from './processar.js';
 
-const jsonl = (itens: readonly unknown[]): string =>
+export const jsonl = (itens: readonly unknown[]): string =>
   itens.length === 0 ? '' : itens.map((i) => JSON.stringify(i)).join('\n') + '\n';
 
-const pct = (n: number, total: number): string =>
+export const pct = (n: number, total: number): string =>
   total === 0 ? '—' : `${((n / total) * 100).toFixed(1)}%`;
 
-const celula = (v: string | number): string =>
+export const celula = (v: string | number): string =>
   String(v).replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
 
-const tabela = (cabecalho: string[], linhas: Array<Array<string | number>>): string =>
+export const tabela = (cabecalho: string[], linhas: Array<Array<string | number>>): string =>
   [
     `| ${cabecalho.join(' | ')} |`,
     `| ${cabecalho.map(() => '---').join(' | ')} |`,
     ...linhas.map((l) => `| ${l.map(celula).join(' | ')} |`),
   ].join('\n');
 
-const distribuicao = (rotulo: string, d: Record<string, number>, coluna = 'Quantidade'): string =>
+export const distribuicao = (
+  rotulo: string,
+  d: Record<string, number>,
+  coluna = 'Quantidade',
+): string =>
   Object.keys(d).length === 0 ? 'Nenhum.' : tabela([rotulo, coluna], Object.entries(d));
 
 export function relatorioEmMarkdown(r: RelatorioQualidade): string {

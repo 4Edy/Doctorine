@@ -67,5 +67,18 @@ O que acontece:
 Como na ANVISA, o resultado depende só dos bytes e da data do manifesto: rodar de novo gera arquivos
 idênticos byte a byte. O checksum de cada arquivo e do conjunto é conferido antes da leitura.
 
+### Exportações do site
+
+```bash
+pnpm pipeline:ddinter:site <pasta>                     # registra as 6 exportações e processa
+pnpm --filter @doctorine/pipeline-ddinter processar-site
+```
+
+Guarda `severity_1/2/3.csv`, `drug_food.csv`, `drug_disease.csv` e `therapeutic_duplication.csv`
+(com manifesto e checksum, como acima) em `data/raw/ddinter-site/<versão>/` e gera em
+`data/processed/ddinter-site/<versão>/`: `textos-interacao.jsonl`, `alimentos.jsonl`, `doencas.jsonl`,
+`duplicidade.jsonl`, `rejeicoes.jsonl`, `avisos.jsonl` e o relatório de qualidade. Detalhes e limites
+em [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md).
+
 `csv.ts` é cópia do leitor da ANVISA (com separador `,`); se um terceiro leitor aparecer, vale
 extrair para um pacote comum.

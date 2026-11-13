@@ -13,7 +13,7 @@ profissional de uma farmacêutica.
 
 Fase 0 (Fundação) em andamento, com a Fase 1 começando: o pipeline já baixa, lê e valida os dados
 abertos de medicamentos da ANVISA (`pnpm pipeline:anvisa`) e lê os arquivos de interações do DDInter
-(`pnpm pipeline:ddinter`), com relatório de qualidade para cada fonte. Ainda
+(`pnpm pipeline:ddinter`, `pnpm pipeline:ddinter:site`), com relatório de qualidade para cada fonte. Ainda
 não há código do motor nem do app.
 
 ## Estrutura

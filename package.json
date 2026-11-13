@@ -17,6 +17,7 @@
     "pipeline:anvisa": "pnpm --filter @doctorine/pipeline-anvisa executar",
     "pipeline:ddinter": "pnpm --filter @doctorine/pipeline-ddinter executar",
     "pipeline:ddinter:importar": "pnpm --filter @doctorine/pipeline-ddinter importar",
+    "pipeline:ddinter:site": "pnpm --filter @doctorine/pipeline-ddinter site",
     "ci": "pnpm format:check && pnpm typecheck && pnpm test && pnpm validate:reference"
   },
   "devDependencies": {

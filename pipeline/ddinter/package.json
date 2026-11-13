@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "baixar": "tsx src/cli.ts baixar",
     "importar": "tsx src/cli.ts importar",
+    "site": "tsx src/cli.ts site",
     "processar": "tsx src/cli.ts processar",
     "executar": "tsx src/cli.ts tudo"
   },
