@@ -188,6 +188,10 @@ nível, mecanismos, os dois medicamentos com DDInter e DrugBank, proveniência),
 `rejeicoes.jsonl`, `avisos.jsonl` e o relatório. O relatório confere com o que já temos: nível do par
 contra o do texto, e os pares contra os 8 CSVs (em ambos, só na coleta, só nos CSVs, nível diferente).
 
+**Ids da coleta completa:** sem `--de`/`--ate`, o coletor pede só os ids que existem nas exportações
+(`textos-interacao.jsonl`), porque ids sem texto no site dão HTTP 500 (ex.: id 0). A página usada para
+abrir a sessão que der erro é pulada; vale a próxima.
+
 **Se o `--teste` falhar com "token CSRF":** o coletor tenta a página do texto, a da lista e a inicial,
 procurando o token em campo oculto, `meta` e variável de script, e também o cookie `csrftoken`. Se
 nenhuma servir, grava `data/raw/ddinter-pares/_coleta-teste/diagnostico-sessao.txt` (status,

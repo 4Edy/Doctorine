@@ -202,6 +202,26 @@ describe('coletar', () => {
     expect(feitos.get(10)?.linhas).toHaveLength(2);
   });
 
+  it('com lista de ids, pede só esses e finaliza sem os que faltam', async () => {
+    const s = comTextos();
+    await coletar(base(s, { ids: [9, 10] }));
+    expect([...lerFeitos(pasta).keys()].sort((a, b) => a - b)).toEqual([9, 10]);
+    expect(s.pedidos.filter((p) => p.url.includes('/inter-list/'))).toHaveLength(2);
+  });
+
+  it('se a página do primeiro id dá erro, abre a seguinte e segue', async () => {
+    const s = comTextos();
+    const buscar = s.buscar;
+    s.buscar = (async (url: string | URL | Request, init?: RequestInit) =>
+      String(url).includes('/inter-detail/')
+        ? new Response('erro', { status: 500 })
+        : String(url).endsWith('/server/interaction/')
+          ? new Response('<input type="hidden" name="csrfmiddlewaretoken" value="T2">')
+          : buscar(url, init)) as typeof fetch;
+    const r = await coletar(base(s, { de: 9, ate: 9 }));
+    expect(r.paradaPor).toBe('concluida');
+  });
+
   it('pagina quando o texto tem mais pares que a página', async () => {
     const s = servidor();
     s.textos.set(

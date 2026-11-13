@@ -25,6 +25,8 @@ export interface OpcoesColetar {
   pasta: string;
   de: number;
   ate: number;
+  /** Se informado, só estes ids (dentro de de..ate) são pedidos: os que existem nas exportações. */
+  ids?: readonly number[];
   baseUrl?: string;
   intervaloMs?: number;
   /** Máximo de ids pedidos nesta execução (para testar ou dividir em partes). */
@@ -166,7 +168,8 @@ class Sessao {
           html.slice(0, 30_000).replace(/([A-Za-z0-9_-]{32,})/g, '***'),
         ].join('\n'),
       );
-      if (i === 0 && !r.ok) throw new ErroArquivo(`não consegui abrir ${url}: HTTP ${r.status}`);
+      // página que não abre (ex.: id inexistente dá HTTP 500): segue para a próxima
+      if (!r.ok) continue;
       this.token = extrairToken(html) ?? this.cookies.get('csrftoken') ?? '';
       if (this.token !== '') return;
     }
@@ -279,6 +282,7 @@ export async function coletar(opcoes: OpcoesColetar): Promise<ResultadoColeta> {
         baseUrl: base,
         de: opcoes.de,
         ate: opcoes.ate,
+        ...(opcoes.ids === undefined ? {} : { ids: [...opcoes.ids] }),
         userAgent,
         intervaloMs: intervalo,
         tamanhoPagina: tamanho,
@@ -312,7 +316,9 @@ export async function coletar(opcoes: OpcoesColetar): Promise<ResultadoColeta> {
   const feitos = lerFeitos(opcoes.pasta);
   const fila: number[] = [];
   let jaFeitos = 0;
+  const permitidos = opcoes.ids === undefined ? undefined : new Set(opcoes.ids);
   for (let id = opcoes.de; id <= opcoes.ate; id++) {
+    if (permitidos !== undefined && !permitidos.has(id)) continue;
     if (feitos.has(id)) jaFeitos++;
     else fila.push(id);
   }

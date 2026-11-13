@@ -84,7 +84,7 @@ function lerContexto(raiz: string): ContextoPares {
 }
 
 /** Faixa de ids de texto, a partir das exportações já processadas. */
-function faixaPadrao(raiz: string): { de: number; ate: number } {
+function faixaPadrao(raiz: string): { de: number; ate: number; ids?: number[] } {
   try {
     const v = ultimoSite(join(raiz, 'data', 'raw', 'ddinter-site')).manifesto.sha256.slice(0, 12);
     const rel = JSON.parse(
@@ -95,7 +95,14 @@ function faixaPadrao(raiz: string): { de: number; ate: number } {
     ) as {
       textosInteracao: { idMinimo: number; idMaximo: number };
     };
-    return { de: rel.textosInteracao.idMinimo, ate: rel.textosInteracao.idMaximo };
+    const ids = readFileSync(
+      join(raiz, 'data', 'processed', 'ddinter-site', v, 'textos-interacao.jsonl'),
+      'utf8',
+    )
+      .split('\n')
+      .filter((l) => l.trim() !== '')
+      .map((l) => (JSON.parse(l) as { id: number }).id);
+    return { de: Math.min(...ids), ate: Math.max(...ids), ids: [...new Set(ids)] };
   } catch {
     throw new ErroArquivo(
       'não sei a faixa de ids: rode "site <pasta>" antes ou informe --de e --ate',
@@ -154,6 +161,7 @@ export async function executarPares(
         pasta,
         de: faixa.de,
         ate: faixa.ate,
+        ...('ids' in faixa && faixa.ids !== undefined ? { ids: faixa.ids } : {}),
         baseUrl: opcoes.get('--base-url') ?? URL_SITE_PADRAO,
         ...(opcoes.has('--intervalo')
           ? { intervaloMs: numeroOpcao(opcoes.get('--intervalo') as string, '--intervalo') }

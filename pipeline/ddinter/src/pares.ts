@@ -66,6 +66,7 @@ export function finalizarColeta(opcoes: {
     baseUrl: string;
     de: number;
     ate: number;
+    ids?: number[];
     userAgent: string;
     intervaloMs: number;
   };
@@ -74,7 +75,9 @@ export function finalizarColeta(opcoes: {
   const feitos = lerFeitos(opcoes.pasta);
   const faltam: number[] = [];
   const respostas: RespostaColetada[] = [];
+  const permitidos = config.ids === undefined ? undefined : new Set(config.ids);
   for (let id = de; id <= ate; id++) {
+    if (permitidos !== undefined && !permitidos.has(id)) continue;
     const r = feitos.get(id);
     if (r === undefined) faltam.push(id);
     else respostas.push(r);
