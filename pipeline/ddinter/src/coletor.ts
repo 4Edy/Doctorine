@@ -94,6 +94,23 @@ export function regrasRobots(texto: string): string[] {
 export const caminhoProibido = (caminho: string, proibidos: readonly string[]): boolean =>
   proibidos.some((p) => caminho.startsWith(p));
 
+/** Token CSRF do Django: campo oculto (qualquer ordem dos atributos), meta ou variável de script. */
+export function extrairToken(html: string): string | null {
+  const padroes = [
+    /name=["']csrfmiddlewaretoken["'][^>]*value=["']([^"']+)["']/,
+    /value=["']([^"']+)["'][^>]*name=["']csrfmiddlewaretoken["']/,
+    /<meta[^>]+name=["']csrf-?token["'][^>]*content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]*name=["']csrf-?token["']/i,
+    /csrfmiddlewaretoken["']?\s*[:=,]\s*["']([A-Za-z0-9]{20,})["']/,
+    /csrf[_-]?token["']?\s*[:=]\s*["']([A-Za-z0-9]{20,})["']/i,
+  ];
+  for (const p of padroes) {
+    const m = p.exec(html);
+    if (m?.[1] !== undefined) return m[1];
+  }
+  return null;
+}
+
 class Sessao {
   private cookies = new Map<string, string>();
   token = '';
@@ -107,29 +124,59 @@ class Sessao {
     return [...this.cookies].map(([k, v]) => `${k}=${v}`).join('; ');
   }
 
-  /** Abre a página do texto como o navegador: guarda o cookie e o token CSRF. */
-  async iniciar(idTexto: number): Promise<void> {
-    const url = `${this.base}/server/inter-detail/${idTexto}/`;
-    const r = await this.buscar(url, {
-      headers: { 'user-agent': this.userAgent, accept: 'text/html' },
-    });
-    if (!r.ok) throw new ErroArquivo(`não consegui abrir ${url}: HTTP ${r.status}`);
+  /**
+   * Abre a página do texto como o navegador: guarda os cookies e o token CSRF. Se a página do texto
+   * não trouxer o token, tenta a página da lista e a página inicial. Se nenhuma trouxer, grava um
+   * diagnóstico (o que o site respondeu) e para.
+   */
+  async iniciar(idTexto: number, diagnostico?: (texto: string) => string): Promise<void> {
+    const urls = [
+      `${this.base}/server/inter-detail/${idTexto}/`,
+      `${this.base}/server/interaction/`,
+      `${this.base}/`,
+    ];
     this.cookies.clear();
-    for (const linha of r.headers.getSetCookie()) {
-      const par = linha.split(';')[0] ?? '';
-      const i = par.indexOf('=');
-      if (i > 0) this.cookies.set(par.slice(0, i).trim(), par.slice(i + 1).trim());
-    }
-    const html = await r.text();
-    const m =
-      /name=["']csrfmiddlewaretoken["'][^>]*value=["']([^"']+)["']/.exec(html) ??
-      /value=["']([^"']+)["'][^>]*name=["']csrfmiddlewaretoken["']/.exec(html);
-    this.token = m?.[1] ?? this.cookies.get('csrftoken') ?? '';
-    if (this.token === '') {
-      throw new ErroArquivo(
-        `a página ${url} não trouxe token CSRF nem cookie csrftoken; o site mudou?`,
+    const vistas: string[] = [];
+    for (const [i, url] of urls.entries()) {
+      const r = await this.buscar(url, {
+        headers: {
+          'user-agent': this.userAgent,
+          accept: 'text/html',
+          cookie: this.cabecalhoCookie(),
+        },
+      });
+      for (const linha of r.headers.getSetCookie()) {
+        const par = linha.split(';')[0] ?? '';
+        const k = par.indexOf('=');
+        if (k > 0) this.cookies.set(par.slice(0, k).trim(), par.slice(k + 1).trim());
+      }
+      const html = await r.text();
+      vistas.push(
+        [
+          `=== ${url}`,
+          `status ${r.status}, content-type ${r.headers.get('content-type') ?? '(nenhum)'}, ${html.length} caracteres`,
+          `cabeçalhos: ${[...r.headers.keys()].join(', ')}`,
+          `cookies recebidos (só os nomes): ${
+            r.headers
+              .getSetCookie()
+              .map((c) => c.split('=')[0])
+              .join(', ') || '(nenhum)'
+          }`,
+          '--- início do corpo (valores longos mascarados) ---',
+          html.slice(0, 30_000).replace(/([A-Za-z0-9_-]{32,})/g, '***'),
+        ].join('\n'),
       );
+      if (i === 0 && !r.ok) throw new ErroArquivo(`não consegui abrir ${url}: HTTP ${r.status}`);
+      this.token = extrairToken(html) ?? this.cookies.get('csrftoken') ?? '';
+      if (this.token !== '') return;
     }
+    const onde = diagnostico?.(vistas.join('\n\n'));
+    throw new ErroArquivo(
+      `nenhuma página do site trouxe token CSRF nem cookie csrftoken; o site mudou ou pediu verificação` +
+        (onde === undefined
+          ? ''
+          : `. O que o site respondeu está em ${onde}; me mande esse arquivo`),
+    );
   }
 
   corpo(inicio: number, tamanho: number): string {
@@ -286,8 +333,13 @@ export async function coletar(opcoes: OpcoesColetar): Promise<ResultadoColeta> {
     appendFileSync(caminhoRespostas, '\n');
   }
 
+  const gravarDiagnostico = (texto: string): string => {
+    const caminho = join(opcoes.pasta, 'diagnostico-sessao.txt');
+    writeFileSync(caminho, texto + '\n', 'utf8');
+    return caminho;
+  };
   const sessao = new Sessao(base, buscar, userAgent);
-  await sessao.iniciar(alvo[0] as number);
+  await sessao.iniciar(alvo[0] as number, gravarDiagnostico);
   let feitosAgora = 0;
   let primeiro = true;
 
@@ -310,7 +362,7 @@ export async function coletar(opcoes: OpcoesColetar): Promise<ResultadoColeta> {
         if (r.status === 403 && !renovou) {
           renovou = true;
           await esperar(intervalo);
-          await sessao.iniciar(id);
+          await sessao.iniciar(id, gravarDiagnostico);
           continue;
         }
         if (r.status === 403) {

@@ -12,6 +12,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   caminhoProibido,
   coletar,
+  extrairToken,
   lerFeitos,
   regrasRobots,
   type OpcoesColetar,
@@ -297,14 +298,49 @@ describe('coletar', () => {
     await expect(coletar(base(s, { tamanhoPagina: 5000 }))).rejects.toThrow(/tamanho de página/);
   });
 
-  it('falha com mensagem clara se a página não trouxer token', async () => {
+  it('falha com mensagem clara e grava um diagnóstico se nenhuma página trouxer token', async () => {
+    const s = comTextos();
+    const original = s.buscar;
+    const aberta = (u: string | URL | Request): boolean =>
+      String(u).includes('/inter-detail/') ||
+      String(u) === `${BASE}/server/interaction/` ||
+      String(u) === `${BASE}/`;
+    s.buscar = (async (u: string | URL | Request, i?: RequestInit) =>
+      aberta(u)
+        ? new Response(
+            '<html><body>Verifique que voce e humano abcdefghijklmnopqrstuvwxyz0123456789</body></html>',
+          )
+        : original(u, i)) as typeof fetch;
+    await expect(coletar(base(s))).rejects.toThrow(/token CSRF.*diagnostico-sessao\.txt/);
+    const d = readFileSync(join(pasta, 'diagnostico-sessao.txt'), 'utf8');
+    expect(d).toContain('status 200');
+    expect(d).toContain('Verifique que voce e humano');
+    expect(d).not.toContain('abcdefghijklmnopqrstuvwxyz0123456789');
+  });
+
+  it('acha o token em variável de script, em meta, e tenta as outras páginas', async () => {
+    expect(
+      extrairToken(
+        "<script>data: {'csrfmiddlewaretoken': 'abcdefghijklmnopqrstuvwxyz012345'}</script>",
+      ),
+    ).toBe('abcdefghijklmnopqrstuvwxyz012345');
+    expect(extrairToken('<meta name="csrf-token" content="TOK12345">')).toBe('TOK12345');
+    expect(extrairToken('<input value="T1" type="hidden" name="csrfmiddlewaretoken">')).toBe('T1');
+    expect(extrairToken('<html></html>')).toBeNull();
     const s = comTextos();
     const original = s.buscar;
     s.buscar = (async (u: string | URL | Request, i?: RequestInit) =>
       String(u).includes('/inter-detail/')
         ? new Response('<html></html>')
-        : original(u, i)) as typeof fetch;
-    await expect(coletar(base(s))).rejects.toThrow(/token CSRF/);
+        : String(u) === `${BASE}/server/interaction/`
+          ? new Response("<script>var d={csrfmiddlewaretoken:'XYZXYZXYZXYZXYZXYZXYZ123'}</script>")
+          : original(u, i)) as typeof fetch;
+    const r = await coletar(base(s, { ate: 9 }));
+    expect(r.paradaPor).toBe('concluida');
+    const post = s.pedidos.find((p) => p.metodo === 'POST');
+    expect(new URLSearchParams(post?.corpo).get('csrfmiddlewaretoken')).toBe(
+      'XYZXYZXYZXYZXYZXYZXYZ123',
+    );
   });
 });
 

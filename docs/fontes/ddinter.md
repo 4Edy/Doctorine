@@ -188,6 +188,13 @@ nível, mecanismos, os dois medicamentos com DDInter e DrugBank, proveniência),
 `rejeicoes.jsonl`, `avisos.jsonl` e o relatório. O relatório confere com o que já temos: nível do par
 contra o do texto, e os pares contra os 8 CSVs (em ambos, só na coleta, só nos CSVs, nível diferente).
 
+**Se o `--teste` falhar com "token CSRF":** o coletor tenta a página do texto, a da lista e a inicial,
+procurando o token em campo oculto, `meta` e variável de script, e também o cookie `csrftoken`. Se
+nenhuma servir, grava `data/raw/ddinter-pares/_coleta-teste/diagnostico-sessao.txt` (status,
+cabeçalhos, nomes de cookies e o início do corpo, com valores longos mascarados). Esse arquivo diz se
+o site devolveu a página normal ou uma verificação. O coletor **não finge ser um navegador**: se o
+site bloquear clientes identificados, a saída é pedir o conjunto ao grupo, não contornar.
+
 **Limites:** o formato da resposta vem de **um** exemplo (texto 9, 1 par); campos que só aparecem em
 textos com muitos pares, o tamanho máximo de página que o site aceita e a política de bloqueio por
 volume são desconhecidos. Por isso o `--teste` vem antes, e o coletor para em vez de adivinhar. Se o
