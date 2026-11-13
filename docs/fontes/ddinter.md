@@ -136,13 +136,30 @@ Particularidades:
 
 ### Pendências
 
-- **Ligar texto ao par:** resolvido pelo coletor da próxima seção (ainda **não executado contra o
-  site real**; só testado contra um site simulado).
+- **Ligar texto ao par:** resolvido pelo coletor da próxima seção, executado contra o site real em
+  2026-11-13 (resultado em [Resultado da coleta](#resultado-da-coleta-2026-11-13)).
 - **Manejo dos pares:** a página de um par (`/server/interact/<id do par>/`, HTML no servidor) mostra
   manejo, alternativas por classe e referências. Isso não está em nenhuma exportação. Não se sabe se o
   manejo é por texto ou por par; se for por par, são centenas de milhares de páginas.
 - **Identificadores externos** (DrugBank, ChEMBL, PubChem) de cada medicamento: úteis ao P7; vêm da
   lista de pares acima (DrugBank) ou da página de cada medicamento.
+
+### Resultado da coleta (2026-11-13)
+
+Versão `d0aba9da769f`, 8.465 textos, nenhum sem pares, nenhum 404.
+
+| Item                            | Valor                                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------------- |
+| Linhas recebidas                | 260.100 (260.099 válidas, 1 rejeitada: medicamento interagindo consigo mesmo, texto 7257) |
+| Pares de medicamentos distintos | 252.768, em 2.247 medicamentos (206 sem DrugBank)                                         |
+| Pares com mais de um id de par  | 7.330 (decisão do P6)                                                                     |
+| Nível do par diferente do texto | 118 (sempre Major no par e Moderate no texto, nos casos vistos)                           |
+
+Conferência com os 8 CSVs (160.235 pares): 130.422 em ambos, com o mesmo nível em 130.408 e diferente em 14. **122.346 pares só na coleta** (48,4% dos coletados): os CSVs não têm quase metade dos pares do site.
+**29.813 pares só nos CSVs, todos de nível `Unknown`**: o site não os lista por texto, porque não têm
+texto. Para o motor: a base de pares é a **união** das duas fontes, com o nível e o texto do site quando
+existirem e `Unknown` (não determinada) quando só o CSV tem o par. Usar só os CSVs perderia 48% dos
+pares.
 
 ### Coleta da lista de pares (`coletar-pares`)
 

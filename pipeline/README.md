@@ -3,10 +3,10 @@
 Download versionado, leitura com validação, mapeamento de princípios ativos e geração da base SQLite.
 Entra nas Fases 1 e 2. Ver [ADR 0002](../docs/adr/0002-fontes-de-dados.md).
 
-| Pasta      | Estado                                                                                                                                      |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `anvisa/`  | Pronto (P4): download, leitura, relatório de qualidade. Ver [`docs/fontes/anvisa.md`](../docs/fontes/anvisa.md).                            |
-| `ddinter/` | Pronto (P5): importação ou download dos 8 CSVs, leitura, relatório de qualidade. Ver [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md). |
+| Pasta      | Estado                                                                                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `anvisa/`  | Pronto (P4): download, leitura, relatório de qualidade. Ver [`docs/fontes/anvisa.md`](../docs/fontes/anvisa.md).                                                                              |
+| `ddinter/` | Pronto (P5): 8 CSVs, 6 exportações do site e lista de pares coletada do site (união das fontes no P6), com relatório de qualidade. Ver [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md). |
 
 ## ANVISA
 
