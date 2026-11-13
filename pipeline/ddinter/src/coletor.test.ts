@@ -484,6 +484,8 @@ describe('finalizar e processar', () => {
       soNoCsv: 1,
       mesmoNivel: 1,
       nivelDiferente: 1,
+      soNoCsvPorNivel: { Major: 0, Moderate: 0, Minor: 0, Unknown: 1 },
+      soNoCsvAmostra: ['DDInter50 + DDInter51 (Unknown)'],
     });
   });
 

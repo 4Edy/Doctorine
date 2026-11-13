@@ -226,6 +226,9 @@ export interface RelatorioPares {
       nivelDiferente: number;
       /** Pares do CSV com nível Unknown, que o site classifica de outro jeito ou nem lista. */
       csvUnknownNaColeta: number;
+      /** Dos pares só nos CSVs: quantos por nível, e uma amostra (ids DDInter) para conferir à mão. */
+      soNoCsvPorNivel: Record<Nivel, number>;
+      soNoCsvAmostra: string[];
     };
   };
 }
@@ -396,9 +399,15 @@ export function processarPares(
     let mesmo = 0;
     let dif = 0;
     let unknownNaColeta = 0;
+    const soCsvNivel: Record<Nivel, number> = { Major: 0, Moderate: 0, Minor: 0, Unknown: 0 };
+    const soCsvAmostra: string[] = [];
     for (const [k, n] of contexto.paresCsv) {
       const c = coletados.get(k);
-      if (c === undefined) continue;
+      if (c === undefined) {
+        soCsvNivel[n]++;
+        if (soCsvAmostra.length < 10) soCsvAmostra.push(`${k.replace('|', ' + ')} (${n})`);
+        continue;
+      }
       emAmbos++;
       if (n === c) mesmo++;
       else dif++;
@@ -412,6 +421,8 @@ export function processarPares(
       mesmoNivel: mesmo,
       nivelDiferente: dif,
       csvUnknownNaColeta: unknownNaColeta,
+      soNoCsvPorNivel: soCsvNivel,
+      soNoCsvAmostra: soCsvAmostra,
     };
   }
 
@@ -521,6 +532,9 @@ export function relatorioParesEmMarkdown(r: RelatorioPares): string {
             ],
           ),
           `“Só na coleta” são pares que os 8 CSVs não têm (${pct(c.csv.soNaColeta, p.paresDeMedicamentos)} dos pares coletados). Dos pares dos CSVs com nível \`Unknown\`, ${c.csv.csvUnknownNaColeta} aparecem na coleta.`,
+          `Pares só nos CSVs, por nível: ${Object.entries(c.csv.soNoCsvPorNivel)
+            .map(([n, q]) => `${n} ${q}`)
+            .join(', ')}. Amostra: ${c.csv.soNoCsvAmostra.join('; ') || '(nenhum)'}.`,
         ].join('\n\n'),
     '## Rejeições',
     r.rejeitados.total === 0
