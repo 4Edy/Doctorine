@@ -136,20 +136,62 @@ Particularidades:
 
 ### Pendências
 
-- **Ligar texto ao par.** Nos 8 CSVs o par não tem id de texto; nas exportações o texto não tem
-  medicamentos. O site tem a ligação: a página de um texto (`/server/inter-detail/<id texto>/`) carrega
-  a lista de pares por `POST /server/inter-list/<id texto>/` (resposta DataTables com `id` do par,
-  identificadores DDInter e DrugBank dos dois medicamentos, nomes, nível e mecanismos). Para o texto 9
-  devolve 1 par: Moexipril (`DDInter1237`, `DB00691`) + Sacubitril (`DDInter1630`, `DB09292`), par `110952`.
-  Seriam cerca de 8,5 mil requisições (uma por texto, mais as páginas dos textos que valem para muitos
-  pares), e a lista traria **pares que os 8 CSVs não têm**. A requisição exige token CSRF e cookie de
-  sessão. **Não foi implementado nem executado**: depende de decisão do Edu (volume de requisições a um
-  site de terceiros) e de resposta do grupo do DDInter.
+- **Ligar texto ao par:** resolvido pelo coletor da próxima seção (ainda **não executado contra o
+  site real**; só testado contra um site simulado).
 - **Manejo dos pares:** a página de um par (`/server/interact/<id do par>/`, HTML no servidor) mostra
   manejo, alternativas por classe e referências. Isso não está em nenhuma exportação. Não se sabe se o
   manejo é por texto ou por par; se for por par, são centenas de milhares de páginas.
 - **Identificadores externos** (DrugBank, ChEMBL, PubChem) de cada medicamento: úteis ao P7; vêm da
   lista de pares acima (DrugBank) ou da página de cada medicamento.
+
+### Coleta da lista de pares (`coletar-pares`)
+
+A página de um texto (`/server/inter-detail/<id texto>/`) carrega seus pares por
+`POST /server/inter-list/<id texto>/`, resposta DataTables com o `id` do par, os identificadores
+DDInter e DrugBank dos dois medicamentos, nomes, nível e mecanismos. Para o texto 9 devolve 1 par:
+Moexipril (`DDInter1237`, `DB00691`) + Sacubitril (`DDInter1630`, `DB09292`), par `110952`. O coletor
+repete esse pedido para cada id de texto e traz, de quebra, **pares que os 8 CSVs não têm** e os
+identificadores DrugBank (úteis ao P7).
+
+Como ele evita incomodar o site (cada item tem teste):
+
+- **robots.txt:** lido antes de tudo; se proibir `/server/inter-list/` ou `/server/inter-detail/`,
+  a coleta não começa.
+- **Um pedido por vez**, com intervalo (padrão 1,5 s, mínimo aceito 0,5 s, mais até 25% de variação).
+  Os cerca de 8,6 mil ids levam por volta de 4 horas.
+- **Identificação:** o User-Agent diz que é um projeto de estudo, de uso não comercial, e traz o
+  contato que você informar com `--contato` (recomendado).
+- **Recuo:** em 429 e 5xx espera (respeitando `Retry-After`) e tenta de novo, em até 5 tentativas
+  (30 s, 60 s, 2 min, 4 min); depois disso **para**, com o progresso salvo.
+- **403:** renova a sessão uma vez; se continuar, para e não insiste (nada de contornar bloqueio).
+- **Para** também se a resposta não for JSON, vier fora do formato, incompleta ou com paginação
+  travada (por exemplo, uma página de verificação), em vez de gravar lixo.
+- **Retoma de onde parou:** cada id é gravado ao terminar (`data/raw/ddinter-pares/_coleta/respostas.jsonl`).
+  Pode interromper com Ctrl+C e rodar de novo; ids feitos não são pedidos outra vez.
+- **Sem credenciais nem dados pessoais:** usa só a sessão anônima que o próprio site entrega
+  (cookie e token CSRF da página pública). O token que você copiou do navegador não é usado nem guardado.
+
+Passo a passo (na sua máquina):
+
+```bash
+pnpm pipeline:ddinter:site <pasta com os 6 CSVs>          # uma vez; define a faixa de ids (0 a 8576)
+pnpm pipeline:ddinter:pares --teste                       # pede só o texto 9; confira: 1 par, Moexipril + Sacubitril
+pnpm pipeline:ddinter:pares --contato seu@email.com       # coleta completa (~4 h); pode interromper e retomar
+pnpm --filter @doctorine/pipeline-ddinter pares           # finaliza (exige todos os ids) e processa
+```
+
+Opções de `coletar-pares`: `--de N --ate M` (faixa), `--intervalo ms`, `--limite n` (máximo de ids
+nesta execução, para fazer em partes), `--tamanho-pagina n`, `--base-url`, `--contato`, `--teste`.
+
+Saída de `pares` em `data/processed/ddinter-pares/<versão>/`: `pares.jsonl` (id do par, id do texto,
+nível, mecanismos, os dois medicamentos com DDInter e DrugBank, proveniência), `farmacos.jsonl`,
+`rejeicoes.jsonl`, `avisos.jsonl` e o relatório. O relatório confere com o que já temos: nível do par
+contra o do texto, e os pares contra os 8 CSVs (em ambos, só na coleta, só nos CSVs, nível diferente).
+
+**Limites:** o formato da resposta vem de **um** exemplo (texto 9, 1 par); campos que só aparecem em
+textos com muitos pares, o tamanho máximo de página que o site aceita e a política de bloqueio por
+volume são desconhecidos. Por isso o `--teste` vem antes, e o coletor para em vez de adivinhar. Se o
+teste falhar, mande a saída do comando. Não coleta o **manejo** dos pares, que está na página do par.
 
 ## Licença e termos de uso
 

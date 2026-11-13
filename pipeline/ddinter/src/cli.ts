@@ -10,6 +10,7 @@ import {
 import { processarDownload } from './executar.js';
 import { importarSite, ultimoSite } from './site.js';
 import { processarSiteGuardado } from './saida-site.js';
+import { COMANDOS_PARES, executarPares, USO_PARES } from './cli-pares.js';
 import { ErroArquivo } from './processar.js';
 
 export interface SaidaCli {
@@ -25,6 +26,9 @@ export interface Dependencias {
   cwd?: string;
   buscar?: typeof fetch;
   agora?: () => Date;
+  dormir?: (ms: number) => Promise<void>;
+  aleatorio?: () => number;
+  progresso?: (linha: string) => void;
 }
 
 const USO = `Uso: pipeline-ddinter <baixar | importar <pasta> | processar | tudo> [--base-url <endereço>] [--pasta <pasta>]
@@ -39,10 +43,14 @@ Exportações do site (severity_*.csv, drug_food.csv, drug_disease.csv, therapeu
   importar-site <pasta>   registra as 6 exportações em data/raw/ddinter-site/<versão>/
   processar-site          gera textos, alimentos, doenças, duplicidade e relatório em
                           data/processed/ddinter-site/<versão>/
-  site <pasta>            importar-site + processar-site`;
+  site <pasta>            importar-site + processar-site
+
+${USO_PARES}`;
 
 export async function executar(argv: readonly string[], deps: Dependencias): Promise<SaidaCli> {
   const [comando, ...argumentos] = argv;
+  if ((COMANDOS_PARES as readonly string[]).includes(comando ?? ''))
+    return executarPares(argv, deps);
   let baseUrl = URL_BASE_PADRAO;
   let pasta: string | undefined;
   const resto = [...argumentos];

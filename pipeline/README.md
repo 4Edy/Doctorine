@@ -80,5 +80,17 @@ Guarda `severity_1/2/3.csv`, `drug_food.csv`, `drug_disease.csv` e `therapeutic_
 `duplicidade.jsonl`, `rejeicoes.jsonl`, `avisos.jsonl` e o relatório de qualidade. Detalhes e limites
 em [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md).
 
+### Lista de pares por texto
+
+```bash
+pnpm pipeline:ddinter:pares --teste                    # pede só o texto 9 e mostra a resposta
+pnpm pipeline:ddinter:pares --contato seu@email.com    # coleta (um pedido por vez, retomável)
+pnpm --filter @doctorine/pipeline-ddinter pares        # finaliza e processa
+```
+
+Coleta em `data/raw/ddinter-pares/_coleta/`, versão fechada em `data/raw/ddinter-pares/<versão>/` e
+saída em `data/processed/ddinter-pares/<versão>/`. Regras de boa conduta (robots.txt, intervalo,
+recuo, parada em 403) e limites em [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md).
+
 `csv.ts` é cópia do leitor da ANVISA (com separador `,`); se um terceiro leitor aparecer, vale
 extrair para um pacote comum.

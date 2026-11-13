@@ -6,3 +6,5 @@ export * from './baixar.js';
 export * from './executar.js';
 export * from './site.js';
 export * from './saida-site.js';
+export * from './coletor.js';
+export * from './pares.js';
