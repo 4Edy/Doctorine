@@ -8,3 +8,4 @@ export * from './site.js';
 export * from './saida-site.js';
 export * from './coletor.js';
 export * from './pares.js';
+export * from './manejo.js';
