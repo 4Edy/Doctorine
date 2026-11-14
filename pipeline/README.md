@@ -6,6 +6,7 @@ Entra nas Fases 1 e 2. Ver [ADR 0002](../docs/adr/0002-fontes-de-dados.md).
 | Pasta      | Estado                                                                                                                                                                                        |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `anvisa/`  | Pronto (P4): download, leitura, relatório de qualidade. Ver [`docs/fontes/anvisa.md`](../docs/fontes/anvisa.md).                                                                              |
+| `base/`    | Pronto (P6): carrega as saídas da ANVISA e do DDInter num arquivo SQLite versionado, com relatório de carga. Ver [`docs/modelo-de-dados.md`](../docs/modelo-de-dados.md).                     |
 | `ddinter/` | Pronto (P5): 8 CSVs, 6 exportações do site e lista de pares coletada do site (união das fontes no P6), com relatório de qualidade. Ver [`docs/fontes/ddinter.md`](../docs/fontes/ddinter.md). |
 
 ## ANVISA
@@ -94,3 +95,15 @@ recuo, parada em 403) e limites em [`docs/fontes/ddinter.md`](../docs/fontes/ddi
 
 `csv.ts` é cópia do leitor da ANVISA (com separador `,`); se um terceiro leitor aparecer, vale
 extrair para um pacote comum.
+
+## Base SQLite
+
+```bash
+pnpm pipeline:base                                     # lê a versão mais recente de cada saída e gera a base
+pnpm pipeline:base --manejo <versão> --pares <versão>  # ou versões escolhidas (também --anvisa, --ddinter, --site)
+```
+
+Lê `data/processed/{anvisa,ddinter,ddinter-site,ddinter-pares,ddinter-manejo}/` e escreve
+`data/processed/base/<versão>/doctorine.sqlite` com `relatorio-carga.md` e `.json`. A versão da base
+depende só das versões das fontes; a mesma entrada gera o mesmo arquivo, byte a byte. Esquema,
+regras e consultas de exemplo em [`docs/modelo-de-dados.md`](../docs/modelo-de-dados.md).

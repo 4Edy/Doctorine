@@ -152,7 +152,7 @@ Versão `d0aba9da769f`, 8.465 textos, nenhum sem pares, nenhum 404.
 | ------------------------------- | ----------------------------------------------------------------------------------------- |
 | Linhas recebidas                | 260.100 (260.099 válidas, 1 rejeitada: medicamento interagindo consigo mesmo, texto 7257) |
 | Pares de medicamentos distintos | 252.768, em 2.247 medicamentos (206 sem DrugBank)                                         |
-| Pares com mais de um id de par  | 7.330 (decisão do P6)                                                                     |
+| Pares com mais de um id de par  | 7.330 (P6: todas as linhas ficam; ver [ADR 0005](../adr/0005-modelo-de-dados.md))         |
 | Nível do par diferente do texto | 118 (sempre Major no par e Moderate no texto, nos casos vistos)                           |
 
 Conferência com os 8 CSVs (160.235 pares): 130.422 em ambos, com o mesmo nível em 130.408 e diferente em 14. **122.346 pares só na coleta** (48,4% dos coletados): os CSVs não têm quase metade dos pares do site.
