@@ -1,0 +1,21 @@
+{
+  "name": "@doctorine/database",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "gerar-migracao": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.4"
+  },
+  "devDependencies": {
+    "@doctorine/design-tokens": "workspace:*",
+    "@types/node": "^22.18.0",
+    "drizzle-kit": "^0.31.11",
+    "vitest": "^3.2.4"
+  }
+}
