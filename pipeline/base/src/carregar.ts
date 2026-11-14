@@ -254,6 +254,7 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
       fonte: number;
     }
     const farmacos = new Map<number, NomeFarmaco>();
+    const jaAvisados = new Set<string>();
     const verFarmaco = (
       id: string,
       nome: string,
@@ -267,9 +268,23 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
         farmacos.set(n, { nome, drugbank, prioridade, fonte });
         return;
       }
-      if (atual.nome !== nome)
-        avisar('nome-diferente-entre-fontes', `${id}: "${atual.nome}" e "${nome}"`);
-      if (atual.drugbank !== null && drugbank !== null && atual.drugbank !== drugbank) {
+      // Um aviso por medicamento e par de valores, não por linha que o cita (um medicamento
+      // aparece em milhares de pares). Diferença só de maiúsculas é registrada à parte.
+      if (atual.nome !== nome && !jaAvisados.has(`${n}|${atual.nome}|${nome}`)) {
+        jaAvisados.add(`${n}|${atual.nome}|${nome}`);
+        const soCaixa = atual.nome.toLowerCase() === nome.toLowerCase();
+        avisar(
+          soCaixa ? 'nome-so-difere-em-maiusculas' : 'nome-diferente-entre-fontes',
+          `${id}: "${atual.nome}" e "${nome}"`,
+        );
+      }
+      if (
+        atual.drugbank !== null &&
+        drugbank !== null &&
+        atual.drugbank !== drugbank &&
+        !jaAvisados.has(`${n}|${atual.drugbank}|${drugbank}`)
+      ) {
+        jaAvisados.add(`${n}|${atual.drugbank}|${drugbank}`);
         avisar('drugbank-diferente-entre-fontes', `${id}: ${atual.drugbank} e ${drugbank}`);
       }
       const drugbankFinal = atual.drugbank ?? drugbank;

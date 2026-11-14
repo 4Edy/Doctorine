@@ -329,6 +329,20 @@ describe('robustez', () => {
   });
 });
 
+describe('avisos de nome', () => {
+  it('dá um aviso por medicamento, não por linha que o cita, e separa diferença só de maiúsculas', () => {
+    prepararRaiz();
+    const e = lerEntradas(raiz);
+    // DDInter1 aparece em vários pares dos CSVs, sempre com a grafia em maiúsculas
+    for (const i of e.csv.interacoes) {
+      if (i.idA === 'DDInter1') i.nomeA = 'ABACAVIR';
+      if (i.idB === 'DDInter1') i.nomeB = 'ABACAVIR';
+    }
+    const { relatorio } = carregarBase(e, join(raiz, 'saida', 'doctorine.sqlite'));
+    expect(relatorio.avisos.porTipo).toEqual({ 'nome-so-difere-em-maiusculas': 1 });
+  });
+});
+
 describe('idempotência', () => {
   it('duas cargas das mesmas entradas geram o mesmo arquivo, byte a byte, e o mesmo relatório', () => {
     prepararRaiz();
