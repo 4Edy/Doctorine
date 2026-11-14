@@ -1,8 +1,19 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { basename, join, relative } from 'node:path';
 import { coletar, INTERVALO_PADRAO_MS, URL_SITE_PADRAO, type OpcoesColetar } from './coletor.js';
 import { finalizarColeta, processarParesGuardado, type ContextoPares } from './pares.js';
 import { ErroArquivo } from './processar.js';
+import {
+  AMOSTRA_PADRAO,
+  coletarManejo,
+  finalizarManejo,
+  lerPaginaPar,
+  montarFila,
+  processarManejoGuardado,
+  recortarPagina,
+  type ContextoManejo,
+  type ItemFila,
+} from './manejo.js';
 import { ultimoSite } from './site.js';
 import { ultimoDownload } from './baixar.js';
 import type { Nivel } from './schema.js';
@@ -12,6 +23,8 @@ export const COMANDOS_PARES = [
   'finalizar-pares',
   'processar-pares',
   'pares',
+  'coletar-manejo',
+  'manejo',
 ] as const;
 
 export interface DependenciasPares {
@@ -40,7 +53,18 @@ export const USO_PARES = `Lista de pares por texto (coleta no site do DDInter 2.
   finalizar-pares        exige todos os ids e grava data/raw/ddinter-pares/<versão>/
   processar-pares        lê o conjunto mais recente e gera pares, medicamentos e relatório em
                          data/processed/ddinter-pares/<versão>/
-  pares                  finalizar-pares + processar-pares`;
+  pares                  finalizar-pares + processar-pares
+
+Manejo, referências e alternativas (página /server/interact/<par>/; uma página por texto):
+
+  coletar-manejo [--intervalo ms] [--limite n] [--amostra n] [--contato texto] [--base-url endereço]
+                 [--teste]
+      pede ao site a página de um par de cada texto (o de menor id) e, em --amostra textos
+      (padrão ${AMOSTRA_PADRAO}), a de um segundo par, para conferir que o manejo é igual dentro do texto.
+      Mesmas regras de boa conduta da coleta de pares; retomável. Precisa do comando "pares" rodado
+      antes. --teste coleta só o par 110952 numa pasta à parte e mostra o que foi lido.
+  manejo                 exige todas as páginas, grava data/raw/ddinter-manejo/<versão>/ e gera
+                         textos-manejo, alternativas e relatório em data/processed/ddinter-manejo/<versão>/`;
 
 const numeroOpcao = (v: string, nome: string): number => {
   if (!/^\d+$/.test(v))
@@ -134,10 +158,12 @@ export async function executarPares(
   const permitidas =
     comando === 'coletar-pares'
       ? ['--de', '--ate', '--intervalo', '--limite', '--contato', '--base-url', '--tamanho-pagina']
-      : [];
+      : comando === 'coletar-manejo'
+        ? ['--intervalo', '--limite', '--amostra', '--contato', '--base-url']
+        : [];
   if (
     [...opcoes.keys()].some((k) => !permitidas.includes(k)) ||
-    (teste && comando !== 'coletar-pares')
+    (teste && comando !== 'coletar-pares' && comando !== 'coletar-manejo')
   ) {
     return { codigo: 2, linhas: [USO_PARES] };
   }
@@ -206,6 +232,10 @@ export async function executarPares(
       return { codigo: 0, linhas };
     }
 
+    if (comando === 'coletar-manejo' || comando === 'manejo') {
+      return await executarManejo(comando, opcoes, teste, deps, linhas);
+    }
+
     let diretorio: string | undefined;
     if (comando === 'finalizar-pares' || comando === 'pares') {
       const r = finalizarColeta({ pasta: join(bruto, '_coleta'), destino: bruto });
@@ -261,4 +291,131 @@ function ultimaFinalizada(bruto: string): string {
   if (melhor === undefined)
     throw new ErroArquivo(`nenhuma coleta finalizada em ${bruto}; rode "finalizar-pares" antes`);
   return melhor.dir;
+}
+
+function lerParesProcessados(raiz: string): Array<{
+  idPar: number;
+  idTexto: number;
+  a: { id: string };
+  b: { id: string };
+}> {
+  const bruto = join(raiz, 'data', 'raw', 'ddinter-pares');
+  let versao: string;
+  try {
+    versao = basename(ultimaFinalizada(bruto));
+  } catch {
+    throw new ErroArquivo('rode "pares" antes: preciso da lista de pares processada');
+  }
+  const f = join(raiz, 'data', 'processed', 'ddinter-pares', versao, 'pares.jsonl');
+  if (!existsSync(f)) throw new ErroArquivo(`não achei ${f}; rode "pares" antes`);
+  return readFileSync(f, 'utf8')
+    .split('\n')
+    .filter((l) => l.trim() !== '')
+    .map((l) => JSON.parse(l));
+}
+
+async function executarManejo(
+  comando: 'coletar-manejo' | 'manejo',
+  opcoes: ReadonlyMap<string, string>,
+  teste: boolean,
+  deps: DependenciasPares,
+  linhas: string[],
+): Promise<SaidaPares> {
+  const bruto = join(deps.raiz, 'data', 'raw', 'ddinter-manejo');
+  const processado = join(deps.raiz, 'data', 'processed', 'ddinter-manejo');
+  const rel = (c: string): string => relative(deps.raiz, c).split('\\').join('/');
+  const pares = teste ? [] : lerParesProcessados(deps.raiz);
+  const fila: ItemFila[] = teste
+    ? [{ idPar: 110952, idTexto: 9, papel: 'principal' }]
+    : montarFila(
+        pares,
+        opcoes.has('--amostra')
+          ? numeroOpcao(opcoes.get('--amostra') as string, '--amostra')
+          : AMOSTRA_PADRAO,
+      );
+  const pasta = join(bruto, teste ? '_coleta-teste' : '_coleta');
+  const baseUrl = opcoes.get('--base-url');
+
+  if (comando === 'coletar-manejo') {
+    const r = await coletarManejo({
+      pasta,
+      fila,
+      ...(baseUrl === undefined ? {} : { baseUrl }),
+      ...(opcoes.has('--intervalo')
+        ? { intervaloMs: numeroOpcao(opcoes.get('--intervalo') as string, '--intervalo') }
+        : {}),
+      ...(opcoes.has('--limite')
+        ? { limite: numeroOpcao(opcoes.get('--limite') as string, '--limite') }
+        : {}),
+      ...(opcoes.has('--contato') ? { contato: opcoes.get('--contato') as string } : {}),
+      ...(deps.buscar === undefined ? {} : { buscar: deps.buscar }),
+      ...(deps.agora === undefined ? {} : { agora: deps.agora }),
+      ...(deps.dormir === undefined ? {} : { dormir: deps.dormir }),
+      ...(deps.aleatorio === undefined ? {} : { aleatorio: deps.aleatorio }),
+      ...(deps.progresso === undefined ? {} : { progresso: deps.progresso }),
+    });
+    linhas.push(
+      `Coleta do manejo: ${r.feitos} páginas pedidas agora, ${r.jaFeitos} já estavam feitas, ${r.pendentes} pendentes (${r.paradaPor})`,
+      `  em ${rel(pasta)}`,
+    );
+    if (r.motivo !== undefined) {
+      linhas.push(`Erro: ${r.motivo}`);
+      return { codigo: 1, linhas };
+    }
+    if (teste) {
+      const primeira = readFileSync(join(pasta, 'respostas.jsonl'), 'utf8').split('\n')[0] ?? '';
+      const html = (JSON.parse(primeira) as { html: string }).html;
+      const p = lerPaginaPar(recortarPagina(html));
+      linhas.push(
+        `Lido do par 110952: ${p.nomes.join(' + ')}; manejo: ${(p.manejo ?? '(vazio)').slice(0, 160)}`,
+        `  ${p.referencias.length} referências (esperado: 22); alternativas: ${p.alternativas
+          .map((a) => `${a.nome} ${a.completo.length}`)
+          .join(', ')}`,
+      );
+    } else if (r.paradaPor === 'concluida') {
+      linhas.push(
+        'Coleta completa. Próximo passo: pnpm --filter @doctorine/pipeline-ddinter manejo',
+      );
+    }
+    return { codigo: 0, linhas };
+  }
+
+  const f = finalizarManejo({
+    pasta,
+    destino: bruto,
+    fila,
+    ...(baseUrl === undefined ? {} : { baseUrl }),
+  });
+  linhas.push(
+    `${f.novo ? 'Finalizado' : 'Já finalizado (mesmo checksum)'}: ${f.manifesto.paginas} páginas, versão ${f.manifesto.sha256.slice(0, 12)}`,
+    `  em ${rel(f.diretorio)}`,
+  );
+  const contexto: { -readonly [K in keyof ContextoManejo]: ContextoManejo[K] } = {
+    farmacosDoPar: new Map(pares.map((p) => [p.idPar, [p.a.id, p.b.id] as const])),
+  };
+  try {
+    const v = ultimoSite(join(deps.raiz, 'data', 'raw', 'ddinter-site')).manifesto.sha256.slice(
+      0,
+      12,
+    );
+    const t = join(deps.raiz, 'data', 'processed', 'ddinter-site', v, 'textos-interacao.jsonl');
+    if (existsSync(t)) {
+      const m = new Map<number, string | null>();
+      for (const l of readFileSync(t, 'utf8').split('\n')) {
+        if (l === '') continue;
+        const x = JSON.parse(l) as { id: number; texto: string | null };
+        m.set(x.id, x.texto);
+      }
+      contexto.textoDaExportacao = m;
+    }
+  } catch {
+    // sem as exportações do site, a conferência do texto é pulada
+  }
+  const r = processarManejoGuardado(f.diretorio, processado, contexto);
+  const rp = r.resultado.relatorio;
+  linhas.push(
+    `Processado o conjunto ${rp.fonte.versao}: ${rp.textos.total} textos (${rp.textos.comManejo} com manejo), ${rp.rejeitados.total} rejeitadas, ${rp.avisos.total} avisos; conferência de amostra: ${rp.verificacao.iguais} iguais e ${rp.verificacao.divergentes} diferentes; alternativas de ${rp.alternativas.farmacos} medicamentos`,
+    `  relatório: ${rel(join(r.diretorioSaida, 'relatorio-qualidade.md'))}`,
+  );
+  return { codigo: 0, linhas };
 }

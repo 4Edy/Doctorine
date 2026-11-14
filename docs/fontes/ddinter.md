@@ -138,9 +138,9 @@ Particularidades:
 
 - **Ligar texto ao par:** resolvido pelo coletor da próxima seção, executado contra o site real em
   2026-11-13 (resultado em [Resultado da coleta](#resultado-da-coleta-2026-11-13)).
-- **Manejo dos pares:** a página de um par (`/server/interact/<id do par>/`, HTML no servidor) mostra
-  manejo, alternativas por classe e referências. Isso não está em nenhuma exportação. Não se sabe se o
-  manejo é por texto ou por par; se for por par, são centenas de milhares de páginas.
+- **Manejo dos pares:** resolvido pela seção [Manejo, referências e alternativas](#manejo-referências-e-alternativas)
+  (coletor escrito, ainda **não executado contra o site real**; o leitor foi conferido com o HTML salvo
+  do par 110952).
 - **Identificadores externos** (DrugBank, ChEMBL, PubChem) de cada medicamento: úteis ao P7; vêm da
   lista de pares acima (DrugBank) ou da página de cada medicamento.
 
@@ -160,6 +160,41 @@ Conferência com os 8 CSVs (160.235 pares): 130.422 em ambos, com o mesmo nível
 texto. Para o motor: a base de pares é a **união** das duas fontes, com o nível e o texto do site quando
 existirem e `Unknown` (não determinada) quando só o CSV tem o par. Usar só os CSVs perderia 48% dos
 pares.
+
+### Manejo, referências e alternativas
+
+A página de um par (`/server/interact/<id do par>/`, HTML no servidor) traz: a descrição da interação
+(`Interaction`), o manejo (`Management`), as referências (`References`) e, para cada um dos dois
+medicamentos, alternativas por grupo ATC de 3º nível (`Alternative for <medicamento>`). A página do
+texto (`/server/inter-detail/<id>/`) não traz nada disso (a tabela vem vazia e é preenchida por script).
+
+- **Interaction, Management e References são do texto, não do par.** Conferido à mão em dois pares do
+  texto 2404 (idênticos) e conferido de novo pelo coletor numa amostra (ver abaixo). Por isso basta
+  **uma página por texto** (8.465, cerca de 3,5 h no ritmo de 1,5 s), e não uma por par (mais de 250 mil).
+- **As alternativas são por medicamento.** Cada página traz as dos dois medicamentos do par; o
+  processamento junta por medicamento e avisa se o mesmo medicamento aparece com alternativas diferentes.
+  Medicamentos que só aparecem em pares não amostrados ficam **sem alternativas** neste conjunto; decidir
+  no P6 se vale buscar a página de cada medicamento (`/server/drug-detail/<id>/`).
+- A tabela da página pode mostrar só parte da lista ("More"); o script da página guarda a lista
+  completa. O leitor guarda as duas e avisa quando diferem (`alternativas-incompletas-na-tabela`).
+- Referências como o site mostra, inclusive defeitos de origem (por exemplo, a referência 16 do par
+  110952 termina em "O 0"): não são corrigidas.
+
+Comandos (as mesmas regras de boa conduta da coleta de pares: robots.txt, um pedido por vez, intervalo,
+recuo, parada sem insistir, retomável):
+
+```
+pnpm pipeline:ddinter:manejo --teste     # só o par 110952, mostra o que foi lido
+pnpm pipeline:ddinter:manejo             # coleta (precisa do comando "pares" rodado antes)
+pnpm --filter @doctorine/pipeline-ddinter manejo   # fecha, grava o bruto e gera os arquivos
+```
+
+Entrada: o par de menor id de cada texto, mais `--amostra` (padrão 50) segundos pares de textos com
+vários pares, para conferir que o manejo é igual dentro do texto. Bruto: `data/raw/ddinter-manejo/<versão>/`
+(recorte `<main>` da página, com checksum e manifesto). Saída: `data/processed/ddinter-manejo/<versão>/`
+com `textos-manejo.jsonl`, `alternativas.jsonl`, rejeições, avisos e relatório. Conferências: a
+`Interaction` da página contra o texto da exportação do site, os medicamentos da página contra os da lista
+de pares, e a amostra contra o par principal.
 
 ### Coleta da lista de pares (`coletar-pares`)
 

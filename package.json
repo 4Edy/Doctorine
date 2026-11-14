@@ -19,6 +19,7 @@
     "pipeline:ddinter:importar": "pnpm --filter @doctorine/pipeline-ddinter importar",
     "pipeline:ddinter:site": "pnpm --filter @doctorine/pipeline-ddinter site",
     "pipeline:ddinter:pares": "pnpm --filter @doctorine/pipeline-ddinter coletar-pares",
+    "pipeline:ddinter:manejo": "pnpm --filter @doctorine/pipeline-ddinter coletar-manejo",
     "ci": "pnpm format:check && pnpm typecheck && pnpm test && pnpm validate:reference"
   },
   "devDependencies": {
