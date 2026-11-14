@@ -171,12 +171,16 @@ texto (`/server/inter-detail/<id>/`) não traz nada disso (a tabela vem vazia e 
 - **Interaction, Management e References são do texto, não do par.** Conferido à mão em dois pares do
   texto 2404 (idênticos) e conferido de novo pelo coletor numa amostra (ver abaixo). Por isso basta
   **uma página por texto** (8.465, cerca de 3,5 h no ritmo de 1,5 s), e não uma por par (mais de 250 mil).
-- **As alternativas são por medicamento.** Cada página traz as dos dois medicamentos do par; o
-  processamento junta por medicamento e avisa se o mesmo medicamento aparece com alternativas diferentes.
-  Medicamentos que só aparecem em pares não amostrados ficam **sem alternativas** neste conjunto; decidir
-  no P6 se vale buscar a página de cada medicamento (`/server/drug-detail/<id>/`).
-- A tabela da página pode mostrar só parte da lista ("More"); o script da página guarda a lista
-  completa. O leitor guarda as duas e avisa quando diferem (`alternativas-incompletas-na-tabela`).
+- **As alternativas dependem do par, não só do medicamento.** Na coleta real (8.465 páginas), o mesmo
+  medicamento apareceu com listas diferentes conforme o parceiro (por exemplo, DDInter1 com 34, 37, 41 e 55
+  alternativas em pares diferentes), o que combina com a nota da página: alternativas do mesmo grupo ATC de
+  3º nível. Por isso o processamento **não junta por medicamento**: `alternativas.jsonl` tem uma lista por
+  par lido e por medicamento (com o parceiro anotado), e só existe para o par lido de cada texto. As
+  alternativas dos demais pares (a maioria) não foram coletadas e custariam uma página por par.
+  Para o app, a alternativa é calcular: medicamentos do mesmo grupo ATC que não interagem com o parceiro
+  (decisão do P6/P10, depende de ter o ATC de cada medicamento).
+- A tabela da página mostra só as primeiras alternativas (11, com "More"); o script da página guarda a
+  lista completa, e é ela que vale (`completo`).
 - Referências como o site mostra, inclusive defeitos de origem (por exemplo, a referência 16 do par
   110952 termina em "O 0"): não são corrigidas.
 
@@ -192,9 +196,19 @@ pnpm --filter @doctorine/pipeline-ddinter manejo   # fecha, grava o bruto e gera
 Entrada: o par de menor id de cada texto, mais `--amostra` (padrão 50) segundos pares de textos com
 vários pares, para conferir que o manejo é igual dentro do texto. Bruto: `data/raw/ddinter-manejo/<versão>/`
 (recorte `<main>` da página, com checksum e manifesto). Saída: `data/processed/ddinter-manejo/<versão>/`
-com `textos-manejo.jsonl`, `alternativas.jsonl`, rejeições, avisos e relatório. Conferências: a
+com `textos-manejo.jsonl`, `alternativas.jsonl` (por par lido), rejeições, avisos e relatório. Conferências: a
 `Interaction` da página contra o texto da exportação do site, os medicamentos da página contra os da lista
 de pares, e a amostra contra o par principal.
+
+#### Resultado da coleta do manejo (2026-11-14)
+
+Versão `14644741c801`: 8.515 páginas (8.465 principais e 50 de conferência), nenhuma rejeitada.
+
+- **100% dos textos têm manejo e referências** (77.207 referências no total).
+- **Conferência: 50 de 50 segundos pares têm Interaction, Management e References idênticos** aos do par
+  principal do mesmo texto. Confirmado: manejo e referências são do texto.
+- 1 texto com a `Interaction` da página diferente do texto da exportação do site (ver o aviso no relatório).
+- Alternativas: dependem do par (ver acima), então ficam só para os pares lidos.
 
 ### Coleta da lista de pares (`coletar-pares`)
 

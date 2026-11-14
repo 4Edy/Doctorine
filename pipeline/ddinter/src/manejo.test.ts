@@ -227,7 +227,7 @@ describe('coleta, fechamento e processamento', () => {
     expect(b.manifesto.sha256).toBe(a.manifesto.sha256);
   });
 
-  it('gera textos, alternativas por medicamento e confere a amostra', async () => {
+  it('gera textos, alternativas por par e confere a amostra', async () => {
     const r = await fechar({ 10: pagina(), 20: pagina(), 11: pagina() });
     const rel = r.resultado.relatorio;
     expect(rel.textos).toMatchObject({ total: 2, comManejo: 2, referenciasTotal: 4 });
@@ -238,8 +238,19 @@ describe('coleta, fechamento e processamento', () => {
       idParLido: 10,
       proveniencia: { url: `${BASE}/server/interact/10/`, data: '2026-11-14' },
     });
-    expect(r.resultado.alternativas.map((a) => a.idFarmaco)).toEqual(['DDInter1', 'DDInter2']);
-    expect(r.resultado.alternativas[0]?.vistoEmPares).toEqual([10, 11, 20]);
+    // uma lista por par lido e por medicamento (3 páginas x 2 medicamentos), com o parceiro anotado
+    expect(r.resultado.alternativas).toHaveLength(6);
+    expect(r.resultado.alternativas[0]).toMatchObject({
+      idPar: 10,
+      idTexto: 1,
+      idFarmaco: 'DDInter1',
+      idParceiro: 'DDInter2',
+    });
+    expect(r.resultado.relatorio.alternativas).toEqual({
+      registros: 6,
+      semAlternativas: 0,
+      farmacos: 2,
+    });
     expect(readFileSync(join(r.diretorioSaida, 'relatorio-qualidade.md'), 'utf8')).toContain(
       '1 iguais, 0 diferentes',
     );
@@ -260,17 +271,21 @@ describe('coleta, fechamento e processamento', () => {
     expect(r.resultado.relatorio.verificacao.divergentes).toBe(1);
   });
 
-  it('avisa se as alternativas do mesmo medicamento mudam entre páginas, mantendo as primeiras', async () => {
+  it('não junta alternativas de pares diferentes: o mesmo medicamento pode ter listas diferentes', async () => {
     const r = await fechar({
       10: pagina(),
       11: pagina(),
       20: pagina({ altA: ['DDInter99'] }),
     });
-    expect(r.resultado.relatorio.avisos.porTipo['alternativas-divergentes']).toBe(1);
-    expect(r.resultado.alternativas[0]?.completo.map((f) => f.id)).toEqual([
-      'DDInter10',
-      'DDInter11',
-    ]);
+    expect(r.resultado.relatorio.avisos.total).toBe(0);
+    const doPar20 = r.resultado.alternativas.find(
+      (a) => a.idPar === 20 && a.idFarmaco === 'DDInter1',
+    );
+    const doPar10 = r.resultado.alternativas.find(
+      (a) => a.idPar === 10 && a.idFarmaco === 'DDInter1',
+    );
+    expect(doPar20?.completo.map((f) => f.id)).toEqual(['DDInter99']);
+    expect(doPar10?.completo.map((f) => f.id)).toEqual(['DDInter10', 'DDInter11']);
   });
 
   it('rejeita arquivo adulterado', async () => {

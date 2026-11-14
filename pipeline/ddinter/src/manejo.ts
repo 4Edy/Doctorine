@@ -17,7 +17,8 @@ import { jsonl, pct, tabela } from './saida.js';
  *
  * Interaction, Management e References valem para o **texto** (conferido à mão em dois pares do texto
  * 2404 e conferido de novo pelo próprio coletor numa amostra), então uma página por texto basta. As
- * alternativas são **por medicamento** (grupo ATC de 3º nível).
+ * alternativas dependem do **par** (conferido nos dados: o mesmo medicamento aparece com listas
+ * diferentes conforme o parceiro), então só valem para o par lido e não se juntam por medicamento.
  */
 export const FONTE_MANEJO_ID = 'ddinter-site-pagina-do-par';
 export const AMOSTRA_PADRAO = 50;
@@ -459,11 +460,15 @@ export interface TextoManejo {
   };
 }
 export interface AlternativasRegistro {
+  idPar: number;
+  idTexto: number;
   idFarmaco: string;
   nome: string;
+  /** O outro medicamento do par: as alternativas foram calculadas em relação a ele. */
+  idParceiro: string | null;
   grupos: GrupoAlternativas[];
+  /** Lista completa (do script da página); a tabela mostra só as primeiras. */
   completo: FarmacoAlternativo[];
-  vistoEmPares: number[];
 }
 export interface AvisoManejo {
   idTexto: number;
@@ -472,8 +477,6 @@ export interface AvisoManejo {
     | 'manejo-diverge-no-texto'
     | 'interacao-diferente-da-exportacao'
     | 'farmacos-diferentes-do-par'
-    | 'alternativas-divergentes'
-    | 'alternativas-incompletas-na-tabela'
     | 'pagina-nao-existe';
   detalhe: string;
 }
@@ -496,7 +499,7 @@ export interface RelatorioManejo {
     referenciasTotal: number;
   };
   verificacao: { comparadas: number; iguais: number; divergentes: number };
-  alternativas: { farmacos: number; semAlternativas: number; divergentes: number };
+  alternativas: { registros: number; semAlternativas: number; farmacos: number };
 }
 export interface ResultadoManejo {
   textos: TextoManejo[];
@@ -507,11 +510,14 @@ export interface ResultadoManejo {
 }
 
 const normalizar = (s: string | null): string => (s ?? '').replace(/\s+/g, ' ').trim();
-const chaveAlt = (r: { grupos: GrupoAlternativas[]; completo: FarmacoAlternativo[] }): string =>
-  JSON.stringify([
-    r.grupos.map((g) => [g.atc, g.farmacos.map((f) => f.id).sort()]).sort(),
-    r.completo.map((f) => f.id).sort(),
-  ]);
+function amostraPorTipo(avisos: AvisoManejo[], porTipo: number): AvisoManejo[] {
+  const vistos = new Map<string, number>();
+  return avisos.filter((a) => {
+    const n = vistos.get(a.tipo) ?? 0;
+    vistos.set(a.tipo, n + 1);
+    return n < porTipo;
+  });
+}
 
 export function processarManejo(
   entrada: { bytes: Buffer; manifesto: ManifestoManejo },
@@ -531,9 +537,8 @@ export function processarManejo(
   const textos: TextoManejo[] = [];
   const rejeicoes: RejeicaoManejo[] = [];
   const avisos: AvisoManejo[] = [];
-  const alternativas = new Map<string, AlternativasRegistro>();
+  const alternativas: AlternativasRegistro[] = [];
   const paginaDoPar = new Map<number, PaginaPar>();
-  let divergentesAlt = 0;
 
   for (const r of respostas) {
     if (r.status === 404) {
@@ -569,38 +574,17 @@ export function processarManejo(
         detalhe: `a página traz ${pagina.idsFarmacos.join(' e ')}, a lista de pares diz ${esperados.join(' e ')}`,
       });
     }
-    for (const alt of pagina.alternativas) {
+    for (const [k, alt] of pagina.alternativas.entries()) {
       if (alt.idFarmaco === null) continue;
-      const atuais = new Set(alt.grupos.flatMap((g) => g.farmacos.map((f) => f.id)));
-      if (alt.completo.some((f) => !atuais.has(f.id))) {
-        avisos.push({
-          idTexto: r.idTexto,
-          idPar: r.idPar,
-          tipo: 'alternativas-incompletas-na-tabela',
-          detalhe: `${alt.idFarmaco}: a tabela mostra ${atuais.size} e o script da página, ${alt.completo.length}; vale o script`,
-        });
-      }
-      const registro: AlternativasRegistro = {
+      alternativas.push({
+        idPar: r.idPar,
+        idTexto: r.idTexto,
         idFarmaco: alt.idFarmaco,
         nome: alt.nome,
+        idParceiro: pagina.idsFarmacos[1 - k] ?? null,
         grupos: alt.grupos,
         completo: alt.completo,
-        vistoEmPares: [r.idPar],
-      };
-      const anterior = alternativas.get(alt.idFarmaco);
-      if (anterior === undefined) alternativas.set(alt.idFarmaco, registro);
-      else {
-        anterior.vistoEmPares.push(r.idPar);
-        if (chaveAlt(anterior) !== chaveAlt(registro)) {
-          divergentesAlt++;
-          avisos.push({
-            idTexto: r.idTexto,
-            idPar: r.idPar,
-            tipo: 'alternativas-divergentes',
-            detalhe: `${alt.idFarmaco}: alternativas diferentes das lidas no par ${anterior.vistoEmPares[0]}; mantidas as primeiras`,
-          });
-        }
-      }
+      });
     }
   }
 
@@ -661,8 +645,8 @@ export function processarManejo(
 
   const porTipo: Record<string, number> = {};
   for (const a of avisos) porTipo[a.tipo] = (porTipo[a.tipo] ?? 0) + 1;
-  const listaAlt = [...alternativas.values()].sort((a, b) =>
-    a.idFarmaco.localeCompare(b.idFarmaco, 'en', { numeric: true }),
+  const listaAlt = alternativas.sort(
+    (a, b) => a.idPar - b.idPar || a.idFarmaco.localeCompare(b.idFarmaco, 'en', { numeric: true }),
   );
   const relatorio: RelatorioManejo = {
     fonte: {
@@ -678,7 +662,7 @@ export function processarManejo(
       amostras: respostas.filter((r) => r.papel === 'amostra').length,
     },
     rejeitados: { total: rejeicoes.length, amostra: rejeicoes.slice(0, 10) },
-    avisos: { total: avisos.length, porTipo, amostra: avisos.slice(0, 10) },
+    avisos: { total: avisos.length, porTipo, amostra: amostraPorTipo(avisos, 3) },
     textos: {
       total: textos.length,
       comManejo: textos.filter((t) => t.manejo !== null).length,
@@ -689,10 +673,9 @@ export function processarManejo(
     },
     verificacao: { comparadas, iguais, divergentes: comparadas - iguais },
     alternativas: {
-      farmacos: listaAlt.length,
-      semAlternativas: listaAlt.filter((a) => a.grupos.every((g) => g.farmacos.length === 0))
-        .length,
-      divergentes: divergentesAlt,
+      registros: listaAlt.length,
+      semAlternativas: listaAlt.filter((a) => a.completo.length === 0).length,
+      farmacos: new Set(listaAlt.map((a) => a.idFarmaco)).size,
     },
   };
   return { textos, alternativas: listaAlt, rejeicoes, avisos, relatorio };
@@ -733,11 +716,12 @@ export function relatorioManejoEmMarkdown(r: RelatorioManejo): string {
       v.comparadas === 0
         ? 'Sem amostras para comparar.'
         : `${v.comparadas} segundos pares de textos com vários pares foram comparados com o par principal: ${v.iguais} iguais, ${v.divergentes} diferentes (Interaction, Management e References).`,
-      '## Alternativas por medicamento',
+      '## Alternativas (por par lido)',
       tabela(
-        ['Medicamentos', 'Sem nenhuma alternativa', 'Alternativas divergentes entre páginas'],
-        [[r.alternativas.farmacos, r.alternativas.semAlternativas, r.alternativas.divergentes]],
+        ['Listas (par + medicamento)', 'Medicamentos distintos', 'Listas sem nenhuma alternativa'],
+        [[r.alternativas.registros, r.alternativas.farmacos, r.alternativas.semAlternativas]],
       ),
+      'As alternativas dependem do par: o mesmo medicamento tem listas diferentes conforme o parceiro. Aqui só há as dos pares lidos (um por texto), não as de todos os pares.',
       '## Rejeições',
       r.rejeitados.total === 0
         ? 'Nenhuma página rejeitada.'
