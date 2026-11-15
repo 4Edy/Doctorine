@@ -3,6 +3,7 @@ import { join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { carregarBase, escreverRelatorio, versaoDasEntradas } from './carregar.js';
 import { ErroCarga, lerEntradas, type Versoes } from './entrada.js';
+import { escreverArquivosDoMapeamento } from './arquivos-mapeamento.js';
 import { relatorioEmMarkdown } from './relatorio.js';
 
 const AJUDA = `Uso: pnpm pipeline:base [opções]
@@ -17,6 +18,10 @@ versão de download mais recente de cada fonte.
   --site <versão>     versão das exportações do site
   --pares <versão>    versão da lista de pares
   --manejo <versão>   versão do manejo e das alternativas
+  --decisoes <arquivo>  decisões do mapeamento (padrão: data/mapeamento/decisoes.json)
+  --referencia <arquivo>  conjunto de referência (padrão: data/reference-set/pairs.json)
+  --exigir-referencia   termina com erro se algum nome do conjunto de referência não estiver
+                        confirmado pela farmacêutica (critério de conclusão do P7)
 `;
 
 export function executar(argv: readonly string[]): number {
@@ -29,6 +34,9 @@ export function executar(argv: readonly string[]): number {
       site: { type: 'string' },
       pares: { type: 'string' },
       manejo: { type: 'string' },
+      decisoes: { type: 'string' },
+      referencia: { type: 'string' },
+      'exigir-referencia': { type: 'boolean' },
       ajuda: { type: 'boolean', short: 'h' },
     },
   });
@@ -44,17 +52,36 @@ export function executar(argv: readonly string[]): number {
     if (v !== undefined) versoes[k] = v;
   }
   try {
-    const entradas = lerEntradas(raiz, versoes);
+    const entradas = lerEntradas(raiz, versoes, {
+      ...(values.decisoes !== undefined ? { decisoes: resolve(values.decisoes) } : {}),
+      ...(values.referencia !== undefined ? { referencia: resolve(values.referencia) } : {}),
+    });
     const versao = versaoDasEntradas(entradas);
     const diretorio = join(raiz, 'data', 'processed', 'base', versao);
     mkdirSync(diretorio, { recursive: true });
-    const { relatorio } = carregarBase(entradas, join(diretorio, 'doctorine.sqlite'));
+    const { relatorio, mapeamento } = carregarBase(entradas, join(diretorio, 'doctorine.sqlite'));
     escreverRelatorio(diretorio, relatorio, relatorioEmMarkdown(relatorio));
+    escreverArquivosDoMapeamento(diretorio, mapeamento);
     console.log(`Base ${versao} gerada em ${diretorio}`);
     console.log(
       `  ${relatorio.tabelas['medicamento']} medicamentos, ${relatorio.tabelas['ddinter_interacao']} interações, ` +
         `${relatorio.descartes.total} descartes, ${relatorio.avisos.total} avisos`,
     );
+    const c = relatorio.mapeamento.cobertura;
+    console.log(
+      `  mapeamento: ${c.percentualCompletos}% dos medicamentos ativos com todos os princípios ativos mapeados; ` +
+        `${relatorio.mapeamento.filaDeRevisao} componentes na fila de revisão (mapeamento-fila.csv)`,
+    );
+    const faltam = relatorio.mapeamento.referencia.semConfirmacao;
+    if (faltam.length > 0) {
+      console.log(
+        `  conjunto de referência: ${faltam.length} nome(s) sem confirmação: ${faltam.map((f) => `${f.nome} (${f.situacao})`).join(', ')}`,
+      );
+      if (values['exigir-referencia']) {
+        console.error('Erro: o conjunto de referência tem nomes sem confirmação da farmacêutica.');
+        return 1;
+      }
+    }
     return 0;
   } catch (erro) {
     if (erro instanceof ErroCarga) {

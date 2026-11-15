@@ -1,6 +1,8 @@
+import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
+import { DECISOES_VAZIAS, validarDecisoes, type ArquivoDecisoes } from '@doctorine/mapeamento';
 
 /** Falha da carga inteira (entrada faltando, arquivo fora do formato, versão que não bate). */
 export class ErroCarga extends Error {
@@ -136,7 +138,14 @@ export const alternativasPar = z.object({
   completo: z.array(farmacoAlt),
 });
 
+/** Decisões humanas do mapeamento (P7) e nomes do conjunto de referência da farmacêutica. */
+export interface EntradaMapeamentoArquivos {
+  decisoes: ArquivoDecisoes;
+  referencia: Array<{ id: string; nome: string }>;
+}
+
 export interface Entradas {
+  mapeamento: EntradaMapeamentoArquivos;
   anvisa: { fonte: FonteRelatorio; registros: RegistroAnvisaEntrada[] };
   csv: {
     fonte: FonteRelatorio;
@@ -253,6 +262,86 @@ export function localizar(
   return { pasta: melhor.pasta, fonte: melhor.fonte };
 }
 
+export const CAMINHO_DECISOES = join('data', 'mapeamento', 'decisoes.json');
+export const CAMINHO_REFERENCIA = join('data', 'reference-set', 'pairs.json');
+
+const sha12 = (t: string): string => createHash('sha256').update(t).digest('hex').slice(0, 12);
+
+/**
+ * Proveniência das decisões, calculada sempre a partir do conteúdo: mudar uma decisão muda a
+ * versão da base (ela entra em `versaoDasEntradas` e em `fonte_versao`).
+ */
+export function fonteDasDecisoes(dados: ArquivoDecisoes): FonteRelatorio {
+  const texto = JSON.stringify(dados);
+  return {
+    id: 'mapeamento-decisoes',
+    sha256: createHash('sha256').update(texto).digest('hex'),
+    versao: sha12(texto),
+    baixadoEm: dados.atualizadoEm,
+    origem: 'manual',
+    url: null,
+  };
+}
+
+/** Lê o arquivo de decisões (ausente = nenhuma decisão); recusa um arquivo fora do formato. */
+export function lerDecisoes(caminho: string): ArquivoDecisoes {
+  const bruto = existsSync(caminho) ? readFileSync(caminho, 'utf8') : null;
+  let dados = DECISOES_VAZIAS;
+  if (bruto !== null) {
+    let json: unknown;
+    try {
+      json = JSON.parse(bruto);
+    } catch {
+      throw new ErroCarga(`${caminho}: JSON inválido`);
+    }
+    const r = validarDecisoes(json);
+    if (!r.ok) throw new ErroCarga(`${caminho}: ${r.problemas.slice(0, 5).join('; ')}`);
+    dados = r.dados;
+  }
+  return dados;
+}
+
+const parReferencia = z.object({
+  id: z.string(),
+  a: z.object({ tipo: z.string(), nome: z.string() }),
+  b: z.object({ tipo: z.string(), nome: z.string() }),
+});
+
+/** Nomes de princípios ativos do conjunto de referência (lados `a` e `b`), sem repetir. */
+export function lerNomesDaReferencia(caminho: string): Array<{ id: string; nome: string }> {
+  if (!existsSync(caminho)) return [];
+  let json: unknown;
+  try {
+    json = JSON.parse(readFileSync(caminho, 'utf8'));
+  } catch {
+    throw new ErroCarga(`${caminho}: JSON inválido`);
+  }
+  const r = z.object({ pares: z.array(parReferencia) }).safeParse(json);
+  if (!r.success) throw new ErroCarga(`${caminho}: fora do formato esperado`);
+  const vistos = new Set<string>();
+  const saida: Array<{ id: string; nome: string }> = [];
+  for (const p of r.data.pares) {
+    for (const [lado, item] of [
+      ['a', p.a],
+      ['b', p.b],
+    ] as const) {
+      if (item.tipo !== 'principio_ativo') continue;
+      const k = item.nome.trim().toLowerCase();
+      if (vistos.has(k)) continue;
+      vistos.add(k);
+      saida.push({ id: `${p.id}:${lado}`, nome: item.nome.trim() });
+    }
+  }
+  return saida;
+}
+
+export interface OpcoesEntrada {
+  /** Arquivo de decisões (padrão: data/mapeamento/decisoes.json). */
+  decisoes?: string;
+  /** Conjunto de referência (padrão: data/reference-set/pairs.json). */
+  referencia?: string;
+}
+
 export interface Versoes {
   anvisa?: string;
   ddinter?: string;
@@ -262,13 +351,22 @@ export interface Versoes {
 }
 
 /** Lê as cinco saídas processadas (ANVISA, DDInter CSVs, site, pares, manejo) de `<raiz>/data/processed`. */
-export function lerEntradas(raiz: string, versoes: Versoes = {}): Entradas {
+export function lerEntradas(
+  raiz: string,
+  versoes: Versoes = {},
+  opcoes: OpcoesEntrada = {},
+): Entradas {
   const an = localizar(raiz, 'anvisa', relatorioAnvisa, versoes.anvisa);
   const cs = localizar(raiz, 'ddinter', relatorioDdinter, versoes.ddinter);
   const st = localizar(raiz, 'ddinter-site', relatorioSite, versoes.site);
   const pr = localizar(raiz, 'ddinter-pares', relatorioPares, versoes.pares);
   const mj = localizar(raiz, 'ddinter-manejo', relatorioManejo, versoes.manejo);
+  const decisoes = lerDecisoes(opcoes.decisoes ?? join(raiz, CAMINHO_DECISOES));
   return {
+    mapeamento: {
+      decisoes,
+      referencia: lerNomesDaReferencia(opcoes.referencia ?? join(raiz, CAMINHO_REFERENCIA)),
+    },
     anvisa: {
       fonte: an.fonte,
       registros: lerJsonl(join(an.pasta, 'registros.jsonl'), registroAnvisa),

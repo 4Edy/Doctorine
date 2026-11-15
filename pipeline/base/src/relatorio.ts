@@ -18,6 +18,7 @@ export function relatorioEmMarkdown(r: RelatorioCarga): string {
           'integrity_check / foreign_key_check',
           `${r.verificacoes.integrityCheck} / ${r.verificacoes.foreignKeyCheck} problemas`,
         ],
+        ['Regras do mapeamento automático (versão)', r.mapeamento.versaoRegras],
       ],
     ),
     '## Fontes carregadas',
@@ -39,7 +40,55 @@ export function relatorioEmMarkdown(r: RelatorioCarga): string {
     'Em `anvisa.registros`, vários registros do mesmo número viram um medicamento. Em `csv.interacoes`, um par que também está no site conta uma vez, mesmo com várias linhas do site.',
     '## Linhas por tabela',
     distribuicao('Tabela', r.tabelas, 'Linhas'),
-    'As tabelas `principio_ativo`, `mapeamento` e `medicamento_principio` ficam vazias até o P7 (mapeamento de princípios ativos).',
+    'Em `mapeamento.componentes`, "descartados" são os componentes pendentes: ficam sem princípio ativo e o medicamento aparece como não verificado.',
+    '## Mapeamento de princípios ativos (P7)',
+    tabela(
+      ['Item', 'Valor'],
+      [
+        ['Medicamentos ativos', r.mapeamento.cobertura.medicamentos.ativos],
+        [
+          'Ativos sem texto de princípio ativo (não analisáveis)',
+          r.mapeamento.cobertura.medicamentos.ativosSemPrincipio,
+        ],
+        [
+          'Ativos com todos os princípios ativos mapeados',
+          `${r.mapeamento.cobertura.ativos.completos} de ${r.mapeamento.cobertura.medicamentos.ativosComTexto} (${r.mapeamento.cobertura.percentualCompletos}%)`,
+        ],
+        ['Ativos com alguns componentes pendentes', r.mapeamento.cobertura.ativos.parciais],
+        ['Ativos sem nenhum componente mapeado', r.mapeamento.cobertura.ativos.nenhumMapeado],
+        ['Ativos com texto cortado pela ANVISA', r.mapeamento.cobertura.ativos.comTextoCortado],
+        ['Componentes distintos', r.mapeamento.cobertura.componentes.distintos],
+        ['  automáticos', r.mapeamento.cobertura.componentes.automatico],
+        ['  confirmados por decisão', r.mapeamento.cobertura.componentes.confirmado],
+        ['  pendentes (fila de revisão)', r.mapeamento.cobertura.componentes.pendente],
+        ['Princípios ativos canônicos', r.mapeamento.principios],
+        [
+          'Medicamentos do DDInter ligados a um princípio ativo',
+          r.mapeamento.cobertura.farmacosLigados,
+        ],
+        ['Decisões lidas', r.mapeamento.decisoes],
+        ['Princípios com nome repetido (deve ser 0)', r.verificacoes.principiosComNomeRepetido],
+      ],
+    ),
+    'Cobertura = medicamentos ativos cujos componentes têm todos um princípio ativo, sobre os ativos que têm texto de princípio ativo. Um medicamento com componente pendente nunca vira "nenhuma ocorrência": o motor (P10) o mostra como não verificado.',
+    '### Quanto a fila resolve',
+    tabela(
+      ['Se os primeiros N da fila forem resolvidos', 'Ativos completos'],
+      r.mapeamento.cobertura.seResolvidos.map((x) => [x.primeiros, `${x.percentual}%`]),
+    ),
+    '### Sais e hidratos tirados no mapeamento automático',
+    distribuicao('Regra', r.mapeamento.regrasDeSalUsadas, 'Componentes'),
+    r.mapeamento.referencia.total === 0
+      ? '### Conjunto de referência\n\nSem nomes de princípios ativos ainda (a farmacêutica não enviou os pares).'
+      : [
+          '### Conjunto de referência',
+          distribuicao('Situação', r.mapeamento.referencia.porSituacao, 'Nomes'),
+          r.mapeamento.referencia.semConfirmacao.length === 0
+            ? 'Todos os nomes estão confirmados.'
+            : r.mapeamento.referencia.semConfirmacao
+                .map((x) => `- ${x.nome}: ${x.situacao}`)
+                .join('\n'),
+        ].join('\n\n'),
     '## Medicamentos (ANVISA)',
     tabela(
       ['Item', 'Valor'],

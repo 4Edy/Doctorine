@@ -11,7 +11,9 @@ import {
 import { DatabaseSync } from 'node:sqlite';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { LIMITE_TRUNCAMENTO } from '@doctorine/mapeamento';
+import { LIMITE_PRINCIPIO_ATIVO } from '@doctorine/pipeline-anvisa';
 import {
   conjuntoParaTeste,
   csvAmostra,
@@ -39,6 +41,7 @@ import {
   relatorioDdinter,
 } from './entrada.js';
 import { relatorioEmMarkdown } from './relatorio.js';
+import { ARQUIVOS_MAPEAMENTO, csv } from './arquivos-mapeamento.js';
 
 let raiz: string;
 beforeEach(() => {
@@ -118,7 +121,11 @@ describe('carga a partir das saídas reais dos pipelines (contrato)', () => {
     prepararRaiz();
     const entradas = lerEntradas(raiz);
     const { relatorio, arquivo } = carregarBase(entradas, join(raiz, 'saida', 'doctorine.sqlite'));
-    expect(relatorio.verificacoes).toEqual({ integrityCheck: 'ok', foreignKeyCheck: 0 });
+    expect(relatorio.verificacoes).toEqual({
+      integrityCheck: 'ok',
+      foreignKeyCheck: 0,
+      principiosComNomeRepetido: 0,
+    });
     // par 99 aponta para um texto que não existe: descartado, com motivo
     expect(relatorio.descartes.porMotivo).toEqual({
       'pares.site: texto inexistente nas exportações': 1,
@@ -135,6 +142,7 @@ describe('carga a partir das saídas reais dos pipelines (contrato)', () => {
       'ddinter-site-exportacoes',
       'ddinter-site-lista-de-pares',
       'ddinter-site-pagina-do-par',
+      'mapeamento-decisoes',
     ]);
   });
 
@@ -265,14 +273,15 @@ describe('carga a partir das saídas reais dos pipelines (contrato)', () => {
     expect(m.semNumeroDeRegistro).toBe(2);
   });
 
-  it('deixa as tabelas do mapeamento vazias (são do P7) e a busca por nome funcionando', () => {
+  it('sem correspondência no DDInter, nada vira princípio ativo (tudo pendente), e a busca por nome funciona', () => {
     prepararRaiz();
     const db = abrir(
       carregarBase(lerEntradas(raiz), join(raiz, 'saida', 'doctorine.sqlite')).arquivo,
     );
-    for (const t of ['principio_ativo', 'mapeamento', 'medicamento_principio']) {
+    for (const t of ['principio_ativo', 'medicamento_principio']) {
       expect(todos(db, `SELECT count(*) AS n FROM ${t}`)).toEqual([{ n: 0 }]);
     }
+    expect(todos(db, 'SELECT DISTINCT status FROM mapeamento')).toEqual([{ status: 'pendente' }]);
     const achar = (q: string) =>
       todos(
         db,
@@ -476,5 +485,295 @@ describe('CLI', () => {
     } finally {
       console.error = erro;
     }
+  });
+});
+
+// ---------------------------------------------------------------------------------------------
+// P7: mapeamento de princípios ativos
+
+const CAMINHO_SAIDA = (): string => join(raiz, 'saida', 'doctorine.sqlite');
+const decisao = (d: Record<string, unknown>) => ({
+  revisadoPor: 'Farmacêutica',
+  revisadoEm: '2026-11-20',
+  ...d,
+});
+const comDecisoes = (decisoes: Array<Record<string, unknown>>) => {
+  const e = lerEntradas(raiz);
+  e.mapeamento.decisoes = { versao: 1, atualizadoEm: '2026-11-20', decisoes } as never;
+  return e;
+};
+/** Acrescenta ao DDInter da amostra os medicamentos que as grafias da ANVISA da amostra casam. */
+const comAtorvastatina = (e: ReturnType<typeof lerEntradas>) => {
+  e.pares.farmacos.push({ id: 'DDInter9001', drugbank: null, nome: 'Atorvastatin' });
+  return e;
+};
+
+describe('mapeamento de princípios ativos (P7)', () => {
+  it('a mesma grafia vira princípio ativo automático e liga o medicamento, com o que sobrou pendente', () => {
+    prepararRaiz();
+    const { arquivo, relatorio } = carregarBase(
+      comAtorvastatina(lerEntradas(raiz)),
+      CAMINHO_SAIDA(),
+    );
+    const db = abrir(arquivo);
+    expect(todos(db, 'SELECT slug, nome_pt, nome_en FROM principio_ativo')).toEqual([
+      { slug: 'atorvastatina', nome_pt: 'atorvastatina', nome_en: 'Atorvastatin' },
+    ]);
+    expect(
+      todos(
+        db,
+        `SELECT m.nome_produto, mp.ordem, p.slug FROM medicamento_principio mp
+         JOIN medicamento m ON m.id = mp.medicamento_id
+         JOIN principio_ativo p ON p.id = mp.principio_ativo_id`,
+      ),
+    ).toEqual([{ nome_produto: 'TORVILIP', ordem: 1, slug: 'atorvastatina' }]);
+    // o medicamento diz que tem um componente a mais, sem princípio: o motor não pode dizer "sem interação"
+    expect(
+      todos(
+        db,
+        `SELECT componentes, componentes_pendentes, principio_truncado FROM medicamento WHERE nome_produto = 'TORVILIP'`,
+      ),
+    ).toEqual([{ componentes: 2, componentes_pendentes: 1, principio_truncado: 0 }]);
+    expect(
+      todos(
+        db,
+        `SELECT origem, chave_origem, status FROM mapeamento WHERE principio_ativo_id IS NOT NULL ORDER BY origem`,
+      ),
+    ).toEqual([
+      { origem: 'anvisa-componente', chave_origem: 'atorvastatina calcica', status: 'automatico' },
+      { origem: 'ddinter-farmaco', chave_origem: '9001', status: 'automatico' },
+    ]);
+    expect(
+      todos(db, 'SELECT idioma, nome, fonte FROM principio_ativo_nome ORDER BY idioma, nome'),
+    ).toEqual([
+      { idioma: 'en', nome: 'Atorvastatin', fonte: 'ddinter' },
+      { idioma: 'pt', nome: 'atorvastatina', fonte: 'anvisa' },
+    ]);
+    // pendente nunca tem princípio ativo
+    expect(
+      todos(
+        db,
+        `SELECT count(*) AS n FROM mapeamento WHERE status = 'pendente' AND principio_ativo_id IS NOT NULL`,
+      ),
+    ).toEqual([{ n: 0 }]);
+    // a conta de componentes fecha: 2 de TORVILIP + 1 de TRESIBA + 1 de ÁGUA
+    expect(relatorio.contas['mapeamento.componentes']).toEqual({
+      entrada: 4,
+      gravadas: 1,
+      descartados: 3,
+    });
+    expect(relatorio.mapeamento.cobertura.ativos.completos).toBe(0);
+  });
+
+  it('a busca por nome acha o princípio ativo em português e em inglês, sem acento', () => {
+    prepararRaiz();
+    const db = abrir(carregarBase(comAtorvastatina(lerEntradas(raiz)), CAMINHO_SAIDA()).arquivo);
+    const achar = (q: string) =>
+      todos(
+        db,
+        `SELECT DISTINCT p.slug FROM busca_principio_ativo_nome b
+         JOIN principio_ativo_nome n ON n.id = b.rowid
+         JOIN principio_ativo p ON p.id = n.principio_ativo_id
+         WHERE busca_principio_ativo_nome MATCH '${q}'`,
+      );
+    expect(achar('atorvast*')).toEqual([{ slug: 'atorvastatina' }]);
+    expect(achar('atorvastatin')).toEqual([{ slug: 'atorvastatina' }]);
+  });
+
+  it('decisões confirmam o que ficou pendente e completam o medicamento', () => {
+    prepararRaiz();
+    const e = comAtorvastatina(
+      comDecisoes([
+        decisao({ chave: 'ezetimiba', acao: 'sem-equivalente' }),
+        decisao({
+          chave: 'insulina degludeca',
+          acao: 'sem-equivalente',
+          nomePt: 'insulina degludeca',
+        }),
+        decisao({ chave: 'agua para injetaveis', acao: 'sem-equivalente' }),
+      ]),
+    );
+    const { arquivo, relatorio, mapeamento } = carregarBase(e, CAMINHO_SAIDA());
+    const db = abrir(arquivo);
+    expect(
+      todos(
+        db,
+        `SELECT nome_produto, componentes, componentes_pendentes FROM medicamento WHERE ativo = 1 AND componentes > 0 ORDER BY nome_produto`,
+      ),
+    ).toEqual([
+      { nome_produto: 'TORVILIP', componentes: 2, componentes_pendentes: 0 },
+      { nome_produto: 'TRESIBA', componentes: 1, componentes_pendentes: 0 },
+    ]);
+    expect(todos(db, `SELECT count(*) AS n FROM mapeamento WHERE status = 'confirmado'`)).toEqual([
+      { n: 3 },
+    ]);
+    expect(relatorio.mapeamento.cobertura.percentualCompletos).toBe(100);
+    expect(relatorio.mapeamento.filaDeRevisao).toBe(0);
+    expect(mapeamento.fila).toEqual([]);
+    // sem equivalente no DDInter: princípio só em português, sem nome em inglês
+    expect(
+      todos(db, `SELECT nome_pt, nome_en FROM principio_ativo WHERE slug = 'ezetimiba'`),
+    ).toEqual([{ nome_pt: 'ezetimiba', nome_en: null }]);
+  });
+
+  it('mudar uma decisão muda a versão da base; as regras do mapeamento também fazem parte dela', () => {
+    prepararRaiz();
+    const vazia = versaoDasEntradas(lerEntradas(raiz));
+    const com = versaoDasEntradas(
+      comDecisoes([decisao({ chave: 'ezetimiba', acao: 'sem-equivalente' })]),
+    );
+    expect(com).not.toBe(vazia);
+    expect(versaoDasEntradas(lerEntradas(raiz))).toBe(vazia);
+  });
+
+  it('com decisões, duas cargas geram o mesmo arquivo, byte a byte', () => {
+    prepararRaiz();
+    const decisoes = [decisao({ chave: 'ezetimiba', acao: 'sem-equivalente' })];
+    const a = carregarBase(comDecisoes(decisoes), join(raiz, 'a', 'doctorine.sqlite'));
+    const b = carregarBase(comDecisoes(decisoes), join(raiz, 'b', 'doctorine.sqlite'));
+    expect(readFileSync(a.arquivo).equals(readFileSync(b.arquivo))).toBe(true);
+  });
+
+  it('decisão que aponta para um medicamento do DDInter inexistente derruba a carga, sem deixar arquivo', () => {
+    prepararRaiz();
+    const e = comDecisoes([
+      decisao({ chave: 'ezetimiba', acao: 'equivale', ddinterIds: [424242] }),
+    ]);
+    expect(() => carregarBase(e, CAMINHO_SAIDA())).toThrow(ErroCarga);
+    expect(existsSync(CAMINHO_SAIDA())).toBe(false);
+  });
+
+  it('o texto de princípio ativo cortado pela ANVISA no mesmo tamanho do pipeline é reconhecido', () => {
+    expect(LIMITE_TRUNCAMENTO).toBe(LIMITE_PRINCIPIO_ATIVO);
+  });
+
+  it('lê o arquivo de decisões e recusa um fora do formato com o motivo', () => {
+    prepararRaiz();
+    mkdirSync(join(raiz, 'data', 'mapeamento'), { recursive: true });
+    const arquivo = join(raiz, 'data', 'mapeamento', 'decisoes.json');
+    writeFileSync(
+      arquivo,
+      JSON.stringify({
+        versao: 1,
+        atualizadoEm: '2026-11-20',
+        decisoes: [decisao({ chave: 'ezetimiba', acao: 'sem-equivalente' })],
+      }),
+    );
+    expect(lerEntradas(raiz).mapeamento.decisoes.decisoes).toHaveLength(1);
+    writeFileSync(
+      arquivo,
+      JSON.stringify({ versao: 1, atualizadoEm: '2026-11-20', decisoes: [{ chave: 'X' }] }),
+    );
+    expect(() => lerEntradas(raiz)).toThrow(/decisoes\.json/);
+    writeFileSync(arquivo, '{ não é json');
+    expect(() => lerEntradas(raiz)).toThrow(/JSON inválido/);
+  });
+
+  it('o conjunto de referência diz quais nomes ainda não estão confirmados', () => {
+    prepararRaiz();
+    mkdirSync(join(raiz, 'data', 'reference-set'), { recursive: true });
+    writeFileSync(
+      join(raiz, 'data', 'reference-set', 'pairs.json'),
+      JSON.stringify({
+        versao: 1,
+        pares: [
+          {
+            id: 'p1',
+            a: { tipo: 'principio_ativo', nome: 'Ezetimiba' },
+            b: { tipo: 'principio_ativo', nome: 'Atorvastatina' },
+          },
+          {
+            id: 'p2',
+            a: { tipo: 'principio_ativo', nome: 'ezetimiba' },
+            b: { tipo: 'alimento', nome: 'toranja' },
+          },
+        ],
+      }),
+    );
+    const e = comAtorvastatina(lerEntradas(raiz));
+    e.mapeamento.decisoes = {
+      versao: 1,
+      atualizadoEm: '2026-11-20',
+      decisoes: [decisao({ chave: 'ezetimiba', acao: 'sem-equivalente' })],
+    } as never;
+    expect(e.mapeamento.referencia.map((r) => r.nome)).toEqual(['Ezetimiba', 'Atorvastatina']);
+    const { relatorio } = carregarBase(e, CAMINHO_SAIDA());
+    expect(relatorio.mapeamento.referencia.porSituacao).toEqual({ automatico: 1, confirmado: 1 });
+    expect(relatorio.mapeamento.referencia.semConfirmacao).toEqual([
+      { nome: 'Atorvastatina', situacao: 'automatico' },
+    ]);
+  });
+
+  it('o relatório em Markdown traz a cobertura e a fila', () => {
+    prepararRaiz();
+    const { relatorio } = carregarBase(comAtorvastatina(lerEntradas(raiz)), CAMINHO_SAIDA());
+    const md = relatorioEmMarkdown(relatorio);
+    expect(md).toMatch(/## Mapeamento de princípios ativos \(P7\)/);
+    expect(md).toMatch(/Quanto a fila resolve/);
+    expect(md).toMatch(/Princípios com nome repetido \(deve ser 0\)/);
+  });
+});
+
+describe('arquivos de revisão do mapeamento', () => {
+  it('a CLI escreve a fila (ordenada por impacto), os automáticos e a referência ao lado da base', () => {
+    prepararRaiz();
+    const e = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    try {
+      expect(executar(['--raiz', raiz])).toBe(0);
+    } finally {
+      e.mockRestore();
+    }
+    const base = join(raiz, 'data', 'processed', 'base');
+    const [versao] = readdirSync(base);
+    const pasta = join(base, versao as string);
+    for (const nome of Object.values(ARQUIVOS_MAPEAMENTO))
+      expect(existsSync(join(pasta, nome))).toBe(true);
+    const fila = readFileSync(join(pasta, ARQUIVOS_MAPEAMENTO.fila), 'utf8');
+    expect(fila.charCodeAt(0)).toBe(0xfeff); // BOM, para o Excel
+    expect(fila.split('\r\n')[0]).toMatch(/^﻿posicao;chave;texto_na_anvisa;medicamentos_ativos/);
+    const itens = JSON.parse(
+      readFileSync(join(pasta, ARQUIVOS_MAPEAMENTO.filaJson), 'utf8'),
+    ) as Array<{
+      chave: string;
+    }>;
+    expect(itens.map((i) => i.chave).sort()).toEqual([
+      'agua para injetaveis',
+      'atorvastatina calcica',
+      'ezetimiba',
+      'insulina degludeca',
+    ]);
+  });
+
+  it('--exigir-referencia termina com erro enquanto houver nome sem confirmação', () => {
+    prepararRaiz();
+    mkdirSync(join(raiz, 'data', 'reference-set'), { recursive: true });
+    writeFileSync(
+      join(raiz, 'data', 'reference-set', 'pairs.json'),
+      JSON.stringify({
+        versao: 1,
+        pares: [
+          {
+            id: 'p1',
+            a: { tipo: 'principio_ativo', nome: 'Ezetimiba' },
+            b: { tipo: 'principio_ativo', nome: 'Varfarina' },
+          },
+        ],
+      }),
+    );
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const erro = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    try {
+      expect(executar(['--raiz', raiz])).toBe(0);
+      expect(executar(['--raiz', raiz, '--exigir-referencia'])).toBe(1);
+    } finally {
+      log.mockRestore();
+      erro.mockRestore();
+    }
+  });
+
+  it('escapa ponto e vírgula, aspas e quebra de linha no CSV', () => {
+    expect(csv(['a', 'b'], [['x;y', 'diz "oi"\nlinha']])).toBe(
+      '﻿a;b\r\n"x;y";"diz ""oi""\nlinha"\r\n',
+    );
   });
 });

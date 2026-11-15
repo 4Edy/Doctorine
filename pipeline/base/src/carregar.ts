@@ -12,7 +12,20 @@ import {
   type Gravidade,
   type NivelOriginal,
 } from '@doctorine/database';
-import type { Entradas, FonteRelatorio, RegistroAnvisaEntrada } from './entrada.js';
+import {
+  ErroMapeamento,
+  VERSAO_REGRAS,
+  mapear,
+  type Cobertura,
+  type SaidaMapeamento,
+} from '@doctorine/mapeamento';
+import {
+  ErroCarga,
+  fonteDasDecisoes,
+  type Entradas,
+  type FonteRelatorio,
+  type RegistroAnvisaEntrada,
+} from './entrada.js';
 
 const MAX_AMOSTRA = 5;
 
@@ -53,12 +66,34 @@ export interface RelatorioCarga {
     /** Pares de medicamentos com mais de uma linha (mais de um id de par no site). */
     paresComMaisDeUmaLinha: number;
   };
-  verificacoes: { integrityCheck: string; foreignKeyCheck: number };
+  mapeamento: {
+    versaoRegras: number;
+    decisoes: number;
+    principios: number;
+    /** Princípios que só em português (de uma decisão) foram unidos a um do DDInter de mesmo nome. */
+    principiosMesclados: number;
+    cobertura: Cobertura;
+    filaDeRevisao: number;
+    regrasDeSalUsadas: Record<string, number>;
+    referencia: {
+      total: number;
+      porSituacao: Record<string, number>;
+      semConfirmacao: Array<{ nome: string; situacao: string }>;
+    };
+  };
+  verificacoes: {
+    integrityCheck: string;
+    foreignKeyCheck: number;
+    /** Grupos de princípios ativos com o mesmo nome em português (duplicidade). Deve ser 0. */
+    principiosComNomeRepetido: number;
+  };
 }
 
 export interface ResultadoCarga {
   relatorio: RelatorioCarga;
   arquivo: string;
+  /** Saída completa do mapeamento (fila de revisão, automáticos, referência) para os arquivos. */
+  mapeamento: SaidaMapeamento;
 }
 
 const numero = (id: string): number => Number(id.slice('DDInter'.length));
@@ -92,11 +127,19 @@ function fontesDe(e: Entradas): Array<{ chave: string; fonte: FonteRelatorio }> 
     { chave: 'site', fonte: e.site.fonte },
     { chave: 'pares', fonte: e.pares.fonte },
     { chave: 'manejo', fonte: e.manejo.fonte },
+    { chave: 'decisoes', fonte: fonteDasDecisoes(e.mapeamento.decisoes) },
   ];
 }
 
+/**
+ * A versão da base depende das versões das fontes, das decisões humanas do mapeamento e das regras
+ * do mapeamento automático (`VERSAO_REGRAS`): mudar qualquer uma delas muda a base.
+ */
 export function versaoDasEntradas(e: Entradas): string {
-  return versaoDaBase(fontesDe(e).map((f) => ({ fonte: f.fonte.id, versao: f.fonte.versao })));
+  return versaoDaBase([
+    ...fontesDe(e).map((f) => ({ fonte: f.fonte.id, versao: f.fonte.versao })),
+    { fonte: 'regras-mapeamento', versao: String(VERSAO_REGRAS) },
+  ]);
 }
 
 type Inserir = (...valores: SQLInputValue[]) => number;
@@ -221,11 +264,17 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
     ]);
     let semPrincipio = 0;
     let comMaisDeUma = 0;
+    const paraMapear: Array<{
+      id: number;
+      nome: string;
+      ativo: boolean;
+      principioAtivoOriginal: string | null;
+    }> = [];
     for (const m of medicamentos) {
       const r = m.representante;
       if (r.principioAtivo === null) semPrincipio++;
       if (m.linhas > 1) comMaisDeUma++;
-      inserirMed(
+      const idMedicamento = inserirMed(
         r.numeroRegistro,
         r.nomeProduto,
         r.tipoProduto,
@@ -243,6 +292,12 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
         fvId('anvisa'),
         r.proveniencia.linha,
       );
+      paraMapear.push({
+        id: idMedicamento,
+        nome: r.nomeProduto,
+        ativo: m.ativo,
+        principioAtivoOriginal: r.principioAtivo,
+      });
       (contas['anvisa.registros'] as Contagem).gravadas += m.linhas;
     }
 
@@ -648,6 +703,73 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
       (contas['site.duplicidade'] as Contagem).gravadas++;
     }
 
+    // ---- P7: princípios ativos canônicos e mapeamento ----
+    let mapa: SaidaMapeamento;
+    try {
+      mapa = mapear({
+        medicamentos: paraMapear,
+        farmacos: [...farmacos.entries()].map(([id, f]) => ({ id, nomeEn: f.nome })),
+        decisoes: entradas.mapeamento.decisoes.decisoes,
+        referencia: entradas.mapeamento.referencia,
+      });
+    } catch (erro) {
+      if (erro instanceof ErroMapeamento) throw new ErroCarga(erro.message);
+      throw erro;
+    }
+    for (const a of mapa.avisos) avisar('mapeamento', a);
+    const inserirPrincipio = preparar(db, 'principio_ativo', ['slug', 'nome_pt', 'nome_en', 'atc']);
+    const idPrincipio = new Map<string, number>();
+    for (const p of mapa.principios) {
+      idPrincipio.set(p.slug, inserirPrincipio(p.slug, p.nomePt, p.nomeEn, null));
+    }
+    const principioDe = (slug: string): number => idPrincipio.get(slug) as number;
+    const inserirNome = preparar(db, 'principio_ativo_nome', [
+      'principio_ativo_id',
+      'idioma',
+      'nome',
+      'fonte',
+    ]);
+    for (const n of mapa.nomes) inserirNome(principioDe(n.slug), n.idioma, n.nome, n.fonte);
+    const inserirMapeamento = preparar(db, 'mapeamento', [
+      'origem',
+      'chave_origem',
+      'principio_ativo_id',
+      'status',
+      'motivo',
+    ]);
+    for (const m of mapa.mapeamentos) {
+      inserirMapeamento(
+        m.origem,
+        m.chaveOrigem,
+        m.slug === null ? null : principioDe(m.slug),
+        m.status,
+        m.motivo,
+      );
+    }
+    const inserirLigacao = preparar(db, 'medicamento_principio', [
+      'medicamento_id',
+      'ordem',
+      'principio_ativo_id',
+      'concentracao',
+    ]);
+    for (const l of mapa.ligacoes)
+      inserirLigacao(l.medicamentoId, l.ordem, principioDe(l.slug), null);
+    const atualizarMed = db.prepare(
+      'UPDATE medicamento SET componentes = ?, componentes_pendentes = ?, principio_truncado = ? WHERE id = ?',
+    );
+    for (const m of mapa.medicamentos) {
+      if (m.componentes > 0) {
+        atualizarMed.run(m.componentes, m.pendentes, m.truncado ? 1 : 0, m.medicamentoId);
+      }
+    }
+    // Cada componente do texto da ANVISA vira uma ligação ou fica pendente. Em
+    // `mapeamento.componentes`, "descartados" são os pendentes (sem princípio ativo).
+    const totalComponentes = mapa.medicamentos.reduce((n, m) => n + m.componentes, 0);
+    const pendentesTotal = mapa.medicamentos.reduce((n, m) => n + m.pendentes, 0);
+    abrir('mapeamento.componentes', totalComponentes);
+    (contas['mapeamento.componentes'] as Contagem).gravadas = mapa.ligacoes.length;
+    (contas['mapeamento.componentes'] as Contagem).descartados = pendentesTotal;
+
     // ---- meta ----
     const versaoBase = versaoDasEntradas(entradas);
     const geradaAPartirDe = fontes
@@ -689,6 +811,9 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
     const integrity = (db.prepare('PRAGMA integrity_check').get() as { integrity_check: string })
       .integrity_check;
     const fkProblemas = db.prepare('PRAGMA foreign_key_check').all().length;
+    const nomesRepetidos = db
+      .prepare('SELECT 1 FROM principio_ativo GROUP BY nome_pt HAVING count(*) > 1')
+      .all().length;
     if (integrity !== 'ok') throw new Error(`integrity_check falhou: ${integrity}`);
     if (fkProblemas > 0) throw new Error(`foreign_key_check encontrou ${fkProblemas} problema(s)`);
 
@@ -759,9 +884,34 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
         porGravidade: gravidades,
         paresComMaisDeUmaLinha: paresComVarias,
       },
-      verificacoes: { integrityCheck: integrity, foreignKeyCheck: fkProblemas },
+      mapeamento: {
+        versaoRegras: VERSAO_REGRAS,
+        decisoes: entradas.mapeamento.decisoes.decisoes.length,
+        principios: mapa.principios.length,
+        principiosMesclados: mapa.principiosMesclados,
+        cobertura: mapa.cobertura,
+        filaDeRevisao: mapa.fila.length,
+        regrasDeSalUsadas: mapa.regrasDeSalUsadas,
+        referencia: {
+          total: mapa.referencia.length,
+          porSituacao: ordenado(
+            mapa.referencia.reduce<Record<string, number>>((d, r) => {
+              conta(d, r.situacao);
+              return d;
+            }, {}),
+          ),
+          semConfirmacao: mapa.referencia
+            .filter((r) => r.situacao !== 'confirmado')
+            .map((r) => ({ nome: r.nome, situacao: r.situacao })),
+        },
+      },
+      verificacoes: {
+        integrityCheck: integrity,
+        foreignKeyCheck: fkProblemas,
+        principiosComNomeRepetido: nomesRepetidos,
+      },
     };
-    return { relatorio, arquivo: caminho };
+    return { relatorio, arquivo: caminho, mapeamento: mapa };
   } catch (erro) {
     try {
       db.close();
