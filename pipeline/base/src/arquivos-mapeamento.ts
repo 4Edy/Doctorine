@@ -31,7 +31,9 @@ export const ARQUIVOS_MAPEAMENTO = {
 export function escreverArquivosDoMapeamento(diretorio: string, m: SaidaMapeamento): void {
   const cand = (i: number, f: SaidaMapeamento['fila'][number]): string => {
     const c = f.candidatos[i];
-    return c === undefined ? '' : `${c.id} · ${c.nome} · ${c.similaridade}`;
+    return c === undefined
+      ? ''
+      : `${c.id} · ${c.nome} · ${c.similaridade}${c.origem === 'sinonimo' ? ' · sinônimo' : ''}`;
   };
   writeFileSync(
     join(diretorio, ARQUIVOS_MAPEAMENTO.fila),
@@ -47,6 +49,12 @@ export function escreverArquivosDoMapeamento(diretorio: string, m: SaidaMapeamen
         'candidato_2',
         'candidato_3',
         'exemplos_de_produtos',
+        // a farmacêutica preenche estas; `pnpm pipeline:decisoes` importa
+        'acao',
+        'ddinter_ids',
+        'como_chave',
+        'nome_pt',
+        'observacao',
       ],
       m.fila.map((f) => [
         f.posicao,
@@ -59,6 +67,11 @@ export function escreverArquivosDoMapeamento(diretorio: string, m: SaidaMapeamen
         cand(1, f),
         cand(2, f),
         f.exemplos.join(' | '),
+        '',
+        '',
+        '',
+        '',
+        '',
       ]),
     ),
     'utf8',

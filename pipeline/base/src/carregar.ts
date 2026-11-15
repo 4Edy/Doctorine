@@ -112,7 +112,7 @@ const conta = (d: Record<string, number>, k: string): void => {
 const ordenado = <T>(d: Record<string, T>): Record<string, T> =>
   Object.fromEntries(Object.entries(d).sort(([a], [b]) => a.localeCompare(b, 'en')));
 
-/** Versão da base: depende só das versões das fontes, na ordem fixa em que são carregadas. */
+/** Versão da base: hash das versões dadas, na ordem fixa em que são carregadas. */
 export function versaoDaBase(fontes: ReadonlyArray<{ fonte: string; versao: string }>): string {
   return createHash('sha256')
     .update(fontes.map((f) => `${f.fonte}:${f.versao}`).join('\n'))

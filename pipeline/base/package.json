@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "carregar": "tsx src/cli.ts"
+    "carregar": "tsx src/cli.ts",
+    "importar-decisoes": "tsx src/importar-decisoes.ts"
   },
   "dependencies": {
     "@doctorine/database": "workspace:*",

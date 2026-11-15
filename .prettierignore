@@ -3,3 +3,5 @@ node_modules
 dist
 coverage
 *.patch
+# gerado por `pnpm pipeline:decisoes`; a formatação do JSON não é conferida
+data/mapeamento/decisoes.json

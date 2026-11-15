@@ -24,7 +24,7 @@ vazia. O P7 a preenche, com revisão humana onde houver dúvida.
    Uma decisão sempre vence o automático. Pendente é o único status sem princípio ativo.
 3. **Automático só com correspondência exata e única.** O nome em português (sem sal, ver 4) passa
    por regras de grafia (atorvastatina → atorvastatin, hidroclorotiazida → hydrochlorothiazide,
-   ácido X-ico → X-ic acid...), e só vira automático se alguma variante for **idêntica** ao nome de
+   ácido X-ico → X-ic acid, cloreto de sódio → sodium chloride, sulfato de X → X sulfate...), e só vira automático se alguma variante for **idêntica** ao nome de
    **um único** medicamento do DDInter. Duas correspondências viram "ambíguo" e pendente. As regras
    só **geram candidatas**; quem aceita é a comparação exata. A similaridade de texto (Dice sobre
    bigramas) é usada **só para sugerir** candidatos na fila, nunca para mapear.
@@ -67,8 +67,19 @@ vazia. O P7 a preenche, com revisão humana onde houver dúvida.
     e classificado em confirmado, só automático, pendente ou não encontrado.
     `pnpm pipeline:base --exigir-referencia` falha enquanto algum não estiver **confirmado** (é o
     critério de conclusão da Fase 2).
-12. **Determinismo e versão.** A saída depende só da entrada, sem relógio e com ordem fixa. A versão
-    da base passa a incluir as decisões e `VERSAO_REGRAS` (sobe quando uma regra automática muda).
+12. **Sinônimos só sugerem.** Nomes diferentes para a mesma substância (paracetamol =
+    acetaminophen, dipirona = metamizole, adrenalina = epinephrine...) ficam numa tabela curta que
+    **só alimenta a sugestão**: o candidato aparece no topo da fila, marcado "sinônimo", e a
+    farmacêutica confirma. Nunca mapeia sozinho: é um dicionário nosso, que ninguém revisou, no ponto
+    mais crítico. Já a tradução regular de ânions e elementos (cloreto/chloride, sódio/sodium) entra
+    nas regras de grafia, porque a comparação final continua exata.
+13. **A fila volta como planilha.** `mapeamento-fila.csv` tem colunas em branco (`acao`,
+    `ddinter_ids`, `como_chave`, `nome_pt`, `observacao`) e `pnpm pipeline:decisoes <csv> --revisor
+"Nome"` as converte em decisões, tudo ou nada: com qualquer erro, nada é gravado. `c1`, `c2`
+    ou `c3` em `ddinter_ids` significa "o candidato 1, 2 ou 3 da linha".
+14. **Determinismo e versão.** A saída depende só da entrada, sem relógio e com ordem fixa. A versão
+    da base passa a incluir as decisões e `VERSAO_REGRAS` (sobe quando uma regra automática muda;
+    está em 2 desde a tradução de ânions).
 
 ## Alternativas consideradas
 

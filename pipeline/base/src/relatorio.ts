@@ -9,7 +9,7 @@ export function relatorioEmMarkdown(r: RelatorioCarga): string {
     tabela(
       ['Item', 'Valor'],
       [
-        ['Versão da base (depende só das versões das fontes)', `\`${r.base.versao}\``],
+        ['Versão da base (fontes, decisões e regras do mapeamento)', `\`${r.base.versao}\``],
         ['Gerada a partir de dados até', r.base.geradaAPartirDe],
         ['Esquema', r.base.esquema],
         ['Arquivo', `${r.arquivo.nome} (${r.arquivo.bytes} bytes)`],

@@ -28,7 +28,31 @@ Para cada componente do texto da ANVISA ("atorvastatina cálcica, ezetimiba" tem
 
 Os CSV usam `;` e UTF-8 com BOM: abrem direto no Excel em português.
 
-## Como decidir (`data/mapeamento/decisoes.json`)
+## Como decidir
+
+### Pela planilha (o caminho normal)
+
+1. Abra `mapeamento-fila.csv` no Excel (ou Planilhas). Cada linha é um componente pendente, do que
+   afeta mais medicamentos ativos ao que afeta menos; os três primeiros candidatos vêm sugeridos
+   (`1162 · Acetaminophen · 1 · sinônimo`: o id é o número antes do primeiro `·`).
+2. Preencha **só** estas colunas, nas linhas que decidir (as outras ficam em branco e são ignoradas):
+   - `acao`: `equivale`, `sem-equivalente` ou `mesmo-que`.
+   - `ddinter_ids` (equivale): o número do medicamento, ou `c1`, `c2`, `c3` para "o candidato 1, 2
+     ou 3 desta linha"; mais de um separado por `|`.
+   - `como_chave` (mesmo-que): a `chave` de um componente que já foi resolvido.
+   - `nome_pt` (opcional): o nome oficial em português. `observacao` (opcional): o motivo.
+3. Salve como **CSV UTF-8** e importe:
+
+```bash
+pnpm pipeline:decisoes caminho/da/fila-preenchida.csv --revisor "Nome da farmacêutica" --simular   # só confere
+pnpm pipeline:decisoes caminho/da/fila-preenchida.csv --revisor "Nome da farmacêutica"             # grava
+pnpm pipeline:base                                                                                 # nova cobertura
+```
+
+Se houver qualquer erro (ação desconhecida, id mal escrito, chave já decidida...), o comando lista
+as linhas com o problema e **não grava nada**. Dá para importar várias vezes: as decisões se acumulam.
+
+### Direto no JSON (`data/mapeamento/decisoes.json`)
 
 ```json
 {
@@ -80,6 +104,12 @@ pnpm pipeline:base --exigir-referencia
 ```
 
 Termina com erro enquanto algum nome do conjunto de referência não estiver `confirmado`.
+
+## Sugestões da fila
+
+Os candidatos vêm de grafia parecida e de uma tabela curta de sinônimos (paracetamol =
+acetaminophen, dipirona = metamizole...). Os de sinônimo aparecem marcados e **nunca** mapeiam
+sozinhos: a farmacêutica confirma.
 
 ## Limites que valem a pena saber
 
