@@ -82,6 +82,16 @@ export const medicamento = sqliteTable(
     /** Texto original da ANVISA, sem separar. Separar em princípios ativos é o P7. */
     principioAtivoOriginal: text('principio_ativo_original'),
     linhasOrigem: integer('linhas_origem').notNull(),
+    /** Quantos componentes o texto de princípio ativo tem (0 se vazio). Preenchido no P7. */
+    componentes: integer('componentes').notNull().default(0),
+    /**
+     * Componentes sem princípio ativo (pendentes, ou o último de um texto cortado pela ANVISA).
+     * Maior que 0 = o medicamento só pode ser analisado como "não verificado" nesses componentes:
+     * nunca como "nenhuma ocorrência".
+     */
+    componentesPendentes: integer('componentes_pendentes').notNull().default(0),
+    /** 1 se o texto de princípio ativo tem o tamanho em que a ANVISA corta (380 caracteres). */
+    principioTruncado: integer('principio_truncado').notNull().default(0),
     fonteVersaoId: integer('fonte_versao_id')
       .notNull()
       .references(() => fonteVersao.id),
@@ -93,6 +103,11 @@ export const medicamento = sqliteTable(
     index('medicamento_nome').on(t.nomeProduto),
     check('medicamento_ativo_booleano', sql`${t.ativo} in (0, 1)`),
     check('medicamento_linhas_origem_positivas', sql`${t.linhasOrigem} >= 1`),
+    check(
+      'medicamento_componentes_coerentes',
+      sql`${t.componentes} >= 0 and ${t.componentesPendentes} between 0 and ${t.componentes}`,
+    ),
+    check('medicamento_truncado_booleano', sql`${t.principioTruncado} in (0, 1)`),
   ],
 );
 

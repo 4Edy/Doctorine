@@ -15,6 +15,13 @@
       "when": 1794662746526,
       "tag": "0001_busca",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794704534831,
+      "tag": "0002_mapeamento",
+      "breakpoints": true
     }
   ]
 }

@@ -211,6 +211,34 @@ describe('restrições de integridade', () => {
     inserir(null);
     inserir(null);
   });
+  it('componentes pendentes nunca passam do total de componentes, e o truncado é 0 ou 1', () => {
+    const db = novoBanco();
+    const f = fonte(db);
+    const inserir = (componentes: number, pendentes: number, truncado: number) =>
+      db
+        .prepare(
+          `INSERT INTO medicamento (nome_produto, tipo_produto, situacao_registro, ativo, linhas_origem, componentes, componentes_pendentes, principio_truncado, fonte_versao_id, linha)
+           VALUES ('X', 'MEDICAMENTO', 'Ativo', 1, 1, ?, ?, ?, ?, 2)`,
+        )
+        .run(componentes, pendentes, truncado, f);
+    inserir(2, 1, 0);
+    inserir(0, 0, 0);
+    expect(() => inserir(1, 2, 0)).toThrow(/CHECK/);
+    expect(() => inserir(-1, 0, 0)).toThrow(/CHECK/);
+    expect(() => inserir(1, 0, 2)).toThrow(/CHECK/);
+    // sem informar, o medicamento não tem componentes (ainda não passou pelo mapeamento)
+    db.prepare(
+      `INSERT INTO medicamento (nome_produto, tipo_produto, situacao_registro, ativo, linhas_origem, fonte_versao_id, linha)
+       VALUES ('Y', 'MEDICAMENTO', 'Ativo', 1, 1, ?, 3)`,
+    ).run(f);
+    expect(
+      db
+        .prepare(
+          "SELECT componentes, componentes_pendentes, principio_truncado FROM medicamento WHERE nome_produto = 'Y'",
+        )
+        .get(),
+    ).toEqual({ componentes: 0, componentes_pendentes: 0, principio_truncado: 0 });
+  });
 });
 
 describe('busca por nome (FTS5)', () => {

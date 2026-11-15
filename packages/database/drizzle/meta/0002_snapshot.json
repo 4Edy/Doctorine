@@ -1,0 +1,1421 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "a9f70127-c7ad-4934-bf6c-c4c015853c81",
+  "prevId": "9c90b586-7799-423b-aa9a-b61b4f67acc8",
+  "tables": {
+    "ddinter_alimento": {
+      "name": "ddinter_alimento",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "farmaco_id": {
+          "name": "farmaco_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "alimento_en": {
+          "name": "alimento_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nivel_original": {
+          "name": "nivel_original",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "gravidade": {
+          "name": "gravidade",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mecanismo_en": {
+          "name": "mecanismo_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "interacao_en": {
+          "name": "interacao_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "manejo_en": {
+          "name": "manejo_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "referencias_json": {
+          "name": "referencias_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "arquivo": {
+          "name": "arquivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "linha": {
+          "name": "linha",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_alimento_farmaco": {
+          "name": "ddinter_alimento_farmaco",
+          "columns": ["farmaco_id"],
+          "isUnique": false
+        },
+        "ddinter_alimento_alimento": {
+          "name": "ddinter_alimento_alimento",
+          "columns": ["alimento_en"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "ddinter_alimento_farmaco_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_alimento_farmaco_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_alimento",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_alimento_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_alimento_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_alimento",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ddinter_alimento_nivel": {
+          "name": "ddinter_alimento_nivel",
+          "value": "\"ddinter_alimento\".\"nivel_original\" in ('Major', 'Moderate', 'Minor', 'Unknown')"
+        },
+        "ddinter_alimento_gravidade": {
+          "name": "ddinter_alimento_gravidade",
+          "value": "\"ddinter_alimento\".\"gravidade\" in ('contraindicada', 'grave', 'moderada', 'leve', 'indeterminada')"
+        }
+      }
+    },
+    "ddinter_alternativa": {
+      "name": "ddinter_alternativa",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "id_par_site": {
+          "name": "id_par_site",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id_texto": {
+          "name": "id_texto",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "farmaco_id": {
+          "name": "farmaco_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "parceiro_id": {
+          "name": "parceiro_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "grupos_json": {
+          "name": "grupos_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "completo_json": {
+          "name": "completo_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_alternativa_par": {
+          "name": "ddinter_alternativa_par",
+          "columns": ["id_par_site"],
+          "isUnique": false
+        },
+        "ddinter_alternativa_farmaco": {
+          "name": "ddinter_alternativa_farmaco",
+          "columns": ["farmaco_id"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "ddinter_alternativa_id_texto_ddinter_texto_id_fk": {
+          "name": "ddinter_alternativa_id_texto_ddinter_texto_id_fk",
+          "tableFrom": "ddinter_alternativa",
+          "tableTo": "ddinter_texto",
+          "columnsFrom": ["id_texto"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_alternativa_farmaco_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_alternativa_farmaco_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_alternativa",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_alternativa_parceiro_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_alternativa_parceiro_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_alternativa",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["parceiro_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_alternativa_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_alternativa_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_alternativa",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ddinter_doenca": {
+      "name": "ddinter_doenca",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "farmaco_id": {
+          "name": "farmaco_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "doenca_en": {
+          "name": "doenca_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nivel_original": {
+          "name": "nivel_original",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "gravidade": {
+          "name": "gravidade",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "texto_en": {
+          "name": "texto_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "referencias_json": {
+          "name": "referencias_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "arquivo": {
+          "name": "arquivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "linha": {
+          "name": "linha",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_doenca_farmaco": {
+          "name": "ddinter_doenca_farmaco",
+          "columns": ["farmaco_id"],
+          "isUnique": false
+        },
+        "ddinter_doenca_doenca": {
+          "name": "ddinter_doenca_doenca",
+          "columns": ["doenca_en"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "ddinter_doenca_farmaco_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_doenca_farmaco_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_doenca",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_doenca_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_doenca_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_doenca",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ddinter_doenca_nivel": {
+          "name": "ddinter_doenca_nivel",
+          "value": "\"ddinter_doenca\".\"nivel_original\" in ('Major', 'Moderate', 'Minor', 'Unknown')"
+        },
+        "ddinter_doenca_gravidade": {
+          "name": "ddinter_doenca_gravidade",
+          "value": "\"ddinter_doenca\".\"gravidade\" in ('contraindicada', 'grave', 'moderada', 'leve', 'indeterminada')"
+        }
+      }
+    },
+    "ddinter_duplicidade": {
+      "name": "ddinter_duplicidade",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "produto": {
+          "name": "produto",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "composicao": {
+          "name": "composicao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "classe": {
+          "name": "classe",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "farmaco_id": {
+          "name": "farmaco_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "aviso": {
+          "name": "aviso",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nota": {
+          "name": "nota",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "arquivo": {
+          "name": "arquivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "linha": {
+          "name": "linha",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_duplicidade_farmaco": {
+          "name": "ddinter_duplicidade_farmaco",
+          "columns": ["farmaco_id"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "ddinter_duplicidade_farmaco_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_duplicidade_farmaco_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_duplicidade",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_duplicidade_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_duplicidade_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_duplicidade",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ddinter_farmaco": {
+      "name": "ddinter_farmaco",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome_en": {
+          "name": "nome_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "drugbank": {
+          "name": "drugbank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_farmaco_nome": {
+          "name": "ddinter_farmaco_nome",
+          "columns": ["nome_en"],
+          "isUnique": false
+        },
+        "ddinter_farmaco_drugbank": {
+          "name": "ddinter_farmaco_drugbank",
+          "columns": ["drugbank"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "ddinter_farmaco_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_farmaco_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_farmaco",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ddinter_interacao": {
+      "name": "ddinter_interacao",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "farmaco_a_id": {
+          "name": "farmaco_a_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "farmaco_b_id": {
+          "name": "farmaco_b_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id_par_site": {
+          "name": "id_par_site",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id_texto": {
+          "name": "id_texto",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nivel_site": {
+          "name": "nivel_site",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nivel_csv": {
+          "name": "nivel_csv",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "csv_arquivos": {
+          "name": "csv_arquivos",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "gravidade": {
+          "name": "gravidade",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mecanismos_json": {
+          "name": "mecanismos_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
+        "fonte_par_versao_id": {
+          "name": "fonte_par_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "fonte_csv_versao_id": {
+          "name": "fonte_csv_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ddinter_interacao_par": {
+          "name": "ddinter_interacao_par",
+          "columns": ["farmaco_a_id", "farmaco_b_id"],
+          "isUnique": false
+        },
+        "ddinter_interacao_b": {
+          "name": "ddinter_interacao_b",
+          "columns": ["farmaco_b_id"],
+          "isUnique": false
+        },
+        "ddinter_interacao_texto": {
+          "name": "ddinter_interacao_texto",
+          "columns": ["id_texto"],
+          "isUnique": false
+        },
+        "ddinter_interacao_par_site": {
+          "name": "ddinter_interacao_par_site",
+          "columns": ["id_par_site"],
+          "isUnique": false
+        },
+        "ddinter_interacao_par_texto_unico": {
+          "name": "ddinter_interacao_par_texto_unico",
+          "columns": ["id_par_site", "id_texto"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "ddinter_interacao_farmaco_a_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_interacao_farmaco_a_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_interacao",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_a_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_interacao_farmaco_b_id_ddinter_farmaco_id_fk": {
+          "name": "ddinter_interacao_farmaco_b_id_ddinter_farmaco_id_fk",
+          "tableFrom": "ddinter_interacao",
+          "tableTo": "ddinter_farmaco",
+          "columnsFrom": ["farmaco_b_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_interacao_id_texto_ddinter_texto_id_fk": {
+          "name": "ddinter_interacao_id_texto_ddinter_texto_id_fk",
+          "tableFrom": "ddinter_interacao",
+          "tableTo": "ddinter_texto",
+          "columnsFrom": ["id_texto"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_interacao_fonte_par_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_interacao_fonte_par_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_interacao",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_par_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_interacao_fonte_csv_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_interacao_fonte_csv_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_interacao",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_csv_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ddinter_interacao_sem_direcao": {
+          "name": "ddinter_interacao_sem_direcao",
+          "value": "\"ddinter_interacao\".\"farmaco_a_id\" < \"ddinter_interacao\".\"farmaco_b_id\""
+        },
+        "ddinter_interacao_gravidade": {
+          "name": "ddinter_interacao_gravidade",
+          "value": "\"ddinter_interacao\".\"gravidade\" in ('contraindicada', 'grave', 'moderada', 'leve', 'indeterminada')"
+        },
+        "ddinter_interacao_nivel_site": {
+          "name": "ddinter_interacao_nivel_site",
+          "value": "\"ddinter_interacao\".\"nivel_site\" is null or \"ddinter_interacao\".\"nivel_site\" in ('Major', 'Moderate', 'Minor', 'Unknown')"
+        },
+        "ddinter_interacao_nivel_csv": {
+          "name": "ddinter_interacao_nivel_csv",
+          "value": "\"ddinter_interacao\".\"nivel_csv\" is null or \"ddinter_interacao\".\"nivel_csv\" in ('Major', 'Moderate', 'Minor', 'Unknown')"
+        },
+        "ddinter_interacao_tem_fonte": {
+          "name": "ddinter_interacao_tem_fonte",
+          "value": "\"ddinter_interacao\".\"nivel_site\" is not null or \"ddinter_interacao\".\"nivel_csv\" is not null"
+        },
+        "ddinter_interacao_site_com_texto": {
+          "name": "ddinter_interacao_site_com_texto",
+          "value": "(\"ddinter_interacao\".\"nivel_site\" is null) = (\"ddinter_interacao\".\"id_par_site\" is null) and (\"ddinter_interacao\".\"id_par_site\" is null) = (\"ddinter_interacao\".\"id_texto\" is null)"
+        }
+      }
+    },
+    "ddinter_texto": {
+      "name": "ddinter_texto",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nivel_original": {
+          "name": "nivel_original",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "descricao_en": {
+          "name": "descricao_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "manejo_en": {
+          "name": "manejo_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "mecanismos_json": {
+          "name": "mecanismos_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
+        "referencias_json": {
+          "name": "referencias_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
+        "id_par_manejo": {
+          "name": "id_par_manejo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "fonte_texto_versao_id": {
+          "name": "fonte_texto_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "arquivo_texto": {
+          "name": "arquivo_texto",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "linha_texto": {
+          "name": "linha_texto",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fonte_manejo_versao_id": {
+          "name": "fonte_manejo_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ddinter_texto_fonte_texto_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_texto_fonte_texto_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_texto",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_texto_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ddinter_texto_fonte_manejo_versao_id_fonte_versao_id_fk": {
+          "name": "ddinter_texto_fonte_manejo_versao_id_fonte_versao_id_fk",
+          "tableFrom": "ddinter_texto",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_manejo_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ddinter_texto_nivel": {
+          "name": "ddinter_texto_nivel",
+          "value": "\"ddinter_texto\".\"nivel_original\" in ('Major', 'Moderate', 'Minor', 'Unknown')"
+        }
+      }
+    },
+    "fonte_versao": {
+      "name": "fonte_versao",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "fonte": {
+          "name": "fonte",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "versao": {
+          "name": "versao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sha256": {
+          "name": "sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "baixado_em": {
+          "name": "baixado_em",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "origem": {
+          "name": "origem",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "fonte_versao_unica": {
+          "name": "fonte_versao_unica",
+          "columns": ["fonte", "versao"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "mapeamento": {
+      "name": "mapeamento",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "origem": {
+          "name": "origem",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "chave_origem": {
+          "name": "chave_origem",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "principio_ativo_id": {
+          "name": "principio_ativo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "motivo": {
+          "name": "motivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "mapeamento_principio": {
+          "name": "mapeamento_principio",
+          "columns": ["principio_ativo_id"],
+          "isUnique": false
+        },
+        "mapeamento_unico": {
+          "name": "mapeamento_unico",
+          "columns": ["origem", "chave_origem"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "mapeamento_principio_ativo_id_principio_ativo_id_fk": {
+          "name": "mapeamento_principio_ativo_id_principio_ativo_id_fk",
+          "tableFrom": "mapeamento",
+          "tableTo": "principio_ativo",
+          "columnsFrom": ["principio_ativo_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "mapeamento_origem": {
+          "name": "mapeamento_origem",
+          "value": "\"mapeamento\".\"origem\" in ('ddinter-farmaco', 'anvisa-componente')"
+        },
+        "mapeamento_status": {
+          "name": "mapeamento_status",
+          "value": "\"mapeamento\".\"status\" in ('automatico', 'confirmado', 'pendente')"
+        },
+        "mapeamento_pendente_sem_principio": {
+          "name": "mapeamento_pendente_sem_principio",
+          "value": "(\"mapeamento\".\"status\" = 'pendente') = (\"mapeamento\".\"principio_ativo_id\" is null)"
+        }
+      }
+    },
+    "medicamento": {
+      "name": "medicamento",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "numero_registro": {
+          "name": "numero_registro",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nome_produto": {
+          "name": "nome_produto",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tipo_produto": {
+          "name": "tipo_produto",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "categoria_regulatoria": {
+          "name": "categoria_regulatoria",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "classe_terapeutica": {
+          "name": "classe_terapeutica",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "empresa_cnpj": {
+          "name": "empresa_cnpj",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "empresa_nome": {
+          "name": "empresa_nome",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numero_processo": {
+          "name": "numero_processo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_finalizacao_processo": {
+          "name": "data_finalizacao_processo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "vencimento_registro": {
+          "name": "vencimento_registro",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "situacao_registro": {
+          "name": "situacao_registro",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ativo": {
+          "name": "ativo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "principio_ativo_original": {
+          "name": "principio_ativo_original",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "linhas_origem": {
+          "name": "linhas_origem",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "componentes": {
+          "name": "componentes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "componentes_pendentes": {
+          "name": "componentes_pendentes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "principio_truncado": {
+          "name": "principio_truncado",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "fonte_versao_id": {
+          "name": "fonte_versao_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "linha": {
+          "name": "linha",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "medicamento_numero_registro_unico": {
+          "name": "medicamento_numero_registro_unico",
+          "columns": ["numero_registro"],
+          "isUnique": true
+        },
+        "medicamento_nome": {
+          "name": "medicamento_nome",
+          "columns": ["nome_produto"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "medicamento_fonte_versao_id_fonte_versao_id_fk": {
+          "name": "medicamento_fonte_versao_id_fonte_versao_id_fk",
+          "tableFrom": "medicamento",
+          "tableTo": "fonte_versao",
+          "columnsFrom": ["fonte_versao_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "medicamento_ativo_booleano": {
+          "name": "medicamento_ativo_booleano",
+          "value": "\"medicamento\".\"ativo\" in (0, 1)"
+        },
+        "medicamento_linhas_origem_positivas": {
+          "name": "medicamento_linhas_origem_positivas",
+          "value": "\"medicamento\".\"linhas_origem\" >= 1"
+        },
+        "medicamento_componentes_coerentes": {
+          "name": "medicamento_componentes_coerentes",
+          "value": "\"medicamento\".\"componentes\" >= 0 and \"medicamento\".\"componentes_pendentes\" between 0 and \"medicamento\".\"componentes\""
+        },
+        "medicamento_truncado_booleano": {
+          "name": "medicamento_truncado_booleano",
+          "value": "\"medicamento\".\"principio_truncado\" in (0, 1)"
+        }
+      }
+    },
+    "medicamento_principio": {
+      "name": "medicamento_principio",
+      "columns": {
+        "medicamento_id": {
+          "name": "medicamento_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ordem": {
+          "name": "ordem",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "principio_ativo_id": {
+          "name": "principio_ativo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "concentracao": {
+          "name": "concentracao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "medicamento_principio_principio": {
+          "name": "medicamento_principio_principio",
+          "columns": ["principio_ativo_id"],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "medicamento_principio_medicamento_id_medicamento_id_fk": {
+          "name": "medicamento_principio_medicamento_id_medicamento_id_fk",
+          "tableFrom": "medicamento_principio",
+          "tableTo": "medicamento",
+          "columnsFrom": ["medicamento_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "medicamento_principio_principio_ativo_id_principio_ativo_id_fk": {
+          "name": "medicamento_principio_principio_ativo_id_principio_ativo_id_fk",
+          "tableFrom": "medicamento_principio",
+          "tableTo": "principio_ativo",
+          "columnsFrom": ["principio_ativo_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "medicamento_principio_medicamento_id_ordem_pk": {
+          "columns": ["medicamento_id", "ordem"],
+          "name": "medicamento_principio_medicamento_id_ordem_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "medicamento_principio_ordem": {
+          "name": "medicamento_principio_ordem",
+          "value": "\"medicamento_principio\".\"ordem\" >= 1"
+        }
+      }
+    },
+    "meta": {
+      "name": "meta",
+      "columns": {
+        "chave": {
+          "name": "chave",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valor": {
+          "name": "valor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "principio_ativo": {
+      "name": "principio_ativo",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome_pt": {
+          "name": "nome_pt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome_en": {
+          "name": "nome_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "atc": {
+          "name": "atc",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "principio_ativo_slug_unico": {
+          "name": "principio_ativo_slug_unico",
+          "columns": ["slug"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "principio_ativo_slug_formato": {
+          "name": "principio_ativo_slug_formato",
+          "value": "\"principio_ativo\".\"slug\" glob '[a-z0-9]*' and \"principio_ativo\".\"slug\" not glob '*[^a-z0-9-]*'"
+        }
+      }
+    },
+    "principio_ativo_nome": {
+      "name": "principio_ativo_nome",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "principio_ativo_id": {
+          "name": "principio_ativo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "idioma": {
+          "name": "idioma",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fonte": {
+          "name": "fonte",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "principio_ativo_nome_busca": {
+          "name": "principio_ativo_nome_busca",
+          "columns": ["nome"],
+          "isUnique": false
+        },
+        "principio_ativo_nome_unico": {
+          "name": "principio_ativo_nome_unico",
+          "columns": ["principio_ativo_id", "idioma", "nome"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "principio_ativo_nome_principio_ativo_id_principio_ativo_id_fk": {
+          "name": "principio_ativo_nome_principio_ativo_id_principio_ativo_id_fk",
+          "tableFrom": "principio_ativo_nome",
+          "tableTo": "principio_ativo",
+          "columnsFrom": ["principio_ativo_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "principio_ativo_nome_idioma": {
+          "name": "principio_ativo_nome_idioma",
+          "value": "\"principio_ativo_nome\".\"idioma\" in ('pt', 'en')"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

@@ -298,7 +298,7 @@ describe('carga a partir das saídas reais dos pipelines (contrato)', () => {
     );
     expect(meta['licenca_dados']).toMatch(/CC BY-NC-SA 4\.0/);
     expect(meta['atribuicao_ddinter']).toMatch(/DDInter 2\.0.*CC BY-NC-SA 4\.0/);
-    expect(meta['esquema']).toBe('0001_busca');
+    expect(meta['esquema']).toBe('0002_mapeamento');
     expect(meta['gerada_a_partir_de']).toBe('2026-11-14');
   });
 });
