@@ -21,18 +21,18 @@ Não é versionado no git (ADR 0004). A mesma entrada gera o mesmo arquivo, byte
 
 ## Tabelas
 
-| Camada       | Tabela                                                                           | O que guarda                                                                           |
-| ------------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Proveniência | `fonte_versao`                                                                   | Cada conjunto carregado: fonte, versão, checksum, data                                 |
-|              | `meta`                                                                           | Versão da base, esquema, fontes, licença e atribuição                                  |
-| ANVISA       | `medicamento`                                                                    | Um por número de registro, com o princípio ativo no texto original da ANVISA           |
-| DDInter      | `ddinter_farmaco`                                                                | Medicamento em inglês, com DrugBank quando há                                          |
-|              | `ddinter_texto`                                                                  | Descrição, manejo, mecanismos e referências de uma interação (valem para vários pares) |
-|              | `ddinter_interacao`                                                              | Par de medicamentos: união do site e dos CSVs, gravidade e níveis originais            |
-|              | `ddinter_alternativa`                                                            | Alternativas por par lido                                                              |
-|              | `ddinter_alimento`, `ddinter_doenca`, `ddinter_duplicidade`                      | Medicamento × alimento, × doença; duplicidade terapêutica                              |
-| Canônica     | `principio_ativo`, `principio_ativo_nome`, `mapeamento`, `medicamento_principio` | **Vazias até o P7**: princípio ativo único, nomes, status do mapeamento, ligações      |
-| Busca        | `busca_medicamento`, `busca_ddinter_farmaco`, `busca_principio_ativo_nome`       | FTS5 sem acento e sem diferença de maiúsculas                                          |
+| Camada       | Tabela                                                                           | O que guarda                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Proveniência | `fonte_versao`                                                                   | Cada conjunto carregado: fonte, versão, checksum, data                                                                                |
+|              | `meta`                                                                           | Versão da base, esquema, fontes, licença e atribuição                                                                                 |
+| ANVISA       | `medicamento`                                                                    | Um por número de registro; texto original do princípio ativo e quantos componentes ficaram sem mapear                                 |
+| DDInter      | `ddinter_farmaco`                                                                | Medicamento em inglês, com DrugBank quando há                                                                                         |
+|              | `ddinter_texto`                                                                  | Descrição, manejo, mecanismos e referências de uma interação (valem para vários pares)                                                |
+|              | `ddinter_interacao`                                                              | Par de medicamentos: união do site e dos CSVs, gravidade e níveis originais                                                           |
+|              | `ddinter_alternativa`                                                            | Alternativas por par lido                                                                                                             |
+|              | `ddinter_alimento`, `ddinter_doenca`, `ddinter_duplicidade`                      | Medicamento × alimento, × doença; duplicidade terapêutica                                                                             |
+| Canônica     | `principio_ativo`, `principio_ativo_nome`, `mapeamento`, `medicamento_principio` | Princípio ativo único, nomes por idioma, status do mapeamento, ligações (P7, [ADR 0006](adr/0006-mapeamento-de-principios-ativos.md)) |
+| Busca        | `busca_medicamento`, `busca_ddinter_farmaco`, `busca_principio_ativo_nome`       | FTS5 sem acento e sem diferença de maiúsculas                                                                                         |
 
 ## Regras que valem a pena saber
 
@@ -44,8 +44,14 @@ Não é versionado no git (ADR 0004). A mesma entrada gera o mesmo arquivo, byte
   `Unknown`). Os dois níveis originais ficam em `nivel_site` e `nivel_csv`; `gravidade` é a mais grave.
 - **Mais de uma linha por par de medicamentos** é normal (o site dá mais de um id a 7.330 pares).
 - **Textos em inglês** (`*_en`). A tradução e o status de revisão entram no P8, em tabela própria.
-- **Mapeamento pendente** (P7) nunca tem princípio ativo, por restrição: o item aparece como não
-  verificado, nunca como "sem interação".
+- **Mapeamento pendente** nunca tem princípio ativo, por restrição: o item aparece como não
+  verificado, nunca como "sem interação". Como o pendente não tem linha em `medicamento_principio`,
+  o medicamento guarda `componentes` e `componentes_pendentes`: `componentes_pendentes > 0` quer
+  dizer que há componente sem princípio ativo (o motor só pode dizer "não verificado" para ele).
+  `principio_truncado = 1`: o texto da ANVISA tem o tamanho do corte e o último componente não é ligado.
+- **Princípio ativo:** um por medicamento do DDInter ligado (com sal e sem sal, duas grafias, etc.),
+  mais os "sem equivalente no DDInter" confirmados por decisão. `nome_pt` nunca vem de tradução.
+  Ver [`docs/mapeamento.md`](mapeamento.md).
 - **Referências** são listas JSON na ordem da fonte, com os defeitos de origem (acentos perdidos).
 
 ## Exemplo de consulta

@@ -18,14 +18,15 @@ não há código do motor nem do app.
 
 ## Estrutura
 
-| Pasta                    | Conteúdo                                                                                                    |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `app/`                   | App mobile (Expo + TypeScript). Fase 5.                                                                     |
-| `pipeline/`              | Download, leitura e carga das fontes (ANVISA, DDInter) e geração da base SQLite. Fases 1 e 2.               |
-| `packages/database`      | Esquema SQLite (Drizzle), migrações e gravidade padronizada. [Modelo de dados](docs/modelo-de-dados.md).    |
-| `packages/reference-set` | Esquema e validador do conjunto de referência da farmacêutica.                                              |
-| `data/`                  | Dados versionados. Hoje, só `reference-set/pairs.json`.                                                     |
-| `docs/`                  | Aviso de uso, guia do conjunto de referência, [fontes](docs/fontes/anvisa.md) e [ADRs](docs/adr/README.md). |
+| Pasta                    | Conteúdo                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `app/`                   | App mobile (Expo + TypeScript). Fase 5.                                                                      |
+| `pipeline/`              | Download, leitura e carga das fontes (ANVISA, DDInter) e geração da base SQLite. Fases 1 e 2.                |
+| `packages/database`      | Esquema SQLite (Drizzle), migrações e gravidade padronizada. [Modelo de dados](docs/modelo-de-dados.md).     |
+| `packages/mapeamento`    | Separação do texto da ANVISA, sais, grafias e mapeamento para princípios ativos. [Guia](docs/mapeamento.md). |
+| `packages/reference-set` | Esquema e validador do conjunto de referência da farmacêutica.                                               |
+| `data/`                  | Dados versionados. Hoje, só `reference-set/pairs.json`.                                                      |
+| `docs/`                  | Aviso de uso, guia do conjunto de referência, [fontes](docs/fontes/anvisa.md) e [ADRs](docs/adr/README.md).  |
 
 ## Começando
 
