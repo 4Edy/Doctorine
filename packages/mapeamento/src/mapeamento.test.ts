@@ -98,6 +98,17 @@ describe('grafias em inglês', () => {
     ['cetoconazol', 'ketoconazole'],
     ['insulina', 'insulin'],
     ['acido acetilsalicilico', 'acetylsalicylic acid'],
+    ['cloreto de sodio', 'sodium chloride'],
+    ['cloreto de potassio', 'potassium chloride'],
+    ['sulfato de magnesio', 'magnesium sulfate'],
+    ['sulfato ferroso', 'ferrous sulfate'],
+    ['oxido de zinco', 'zinc oxide'],
+    ['hidroxido de aluminio', 'aluminum hydroxide'],
+    ['hidroxido de aluminio', 'aluminium hydroxide'],
+    ['sulfato de salbutamol', 'salbutamol sulfate'],
+    ['vancomicina', 'vancomycin'],
+    ['eritromicina', 'erythromycin'],
+    ['cefalexina', 'cephalexin'],
   ];
   it.each(pares)('%s → %s', (pt, en) => {
     expect(variantesEmIngles(pt)).toContain(en);
@@ -253,6 +264,61 @@ describe('mapear', () => {
       mapear(entrada({ medicamentos: [...MEDS].reverse(), farmacos: [...FARMACOS].reverse() })),
     );
     expect(b).toBe(a);
+  });
+});
+
+describe('mapear: tradução de sais e sinônimos', () => {
+  const um = (texto: string, farmacos: Array<{ id: number; nomeEn: string }>) =>
+    mapear({
+      medicamentos: [{ id: 1, nome: 'X', ativo: true, principioAtivoOriginal: texto }],
+      farmacos,
+      decisoes: [],
+    });
+
+  it('cloreto de sódio casa por regra regular com "Sodium chloride" (automático)', () => {
+    const s = um('cloreto de sódio', [{ id: 7, nomeEn: 'Sodium chloride' }]);
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'automatico' });
+    expect(s.principios[0]).toMatchObject({
+      nomePt: 'cloreto de sódio',
+      nomeEn: 'Sodium chloride',
+    });
+  });
+
+  it('sulfato de magnésio só casa com "Magnesium sulfate", nunca com "Magnesium"', () => {
+    const ok = um('sulfato de magnésio', [{ id: 1, nomeEn: 'Magnesium sulfate' }]);
+    expect(ok.mapeamentos[0]).toMatchObject({ status: 'automatico' });
+    const errado = um('sulfato de magnésio', [{ id: 1, nomeEn: 'Magnesium' }]);
+    expect(errado.mapeamentos[0]).toMatchObject({ status: 'pendente', slug: null });
+  });
+
+  it('sinônimo (paracetamol = acetaminophen) vai para o topo da sugestão, mas NUNCA mapeia sozinho', () => {
+    const s = um('paracetamol', [
+      { id: 3, nomeEn: 'Metaraminol' },
+      { id: 4, nomeEn: 'Acetaminophen' },
+    ]);
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'pendente', slug: null });
+    expect(s.fila[0]?.candidatos[0]).toMatchObject({
+      id: 4,
+      nome: 'Acetaminophen',
+      origem: 'sinonimo',
+    });
+  });
+
+  it('dipirona monoidratada sugere metamizole (o hidrato não atrapalha a sugestão)', () => {
+    const s = um('dipirona monoidratada', [{ id: 9, nomeEn: 'Metamizole' }]);
+    expect(s.mapeamentos[0]?.status).toBe('pendente');
+    expect(s.fila[0]?.candidatos[0]).toMatchObject({ id: 9, origem: 'sinonimo' });
+  });
+
+  it('sulfato de salbutamol sugere Albuterol (sinônimo) além de Salbutamol (grafia)', () => {
+    const s = um('sulfato de salbutamol', [
+      { id: 1, nomeEn: 'Salbutamol' },
+      { id: 2, nomeEn: 'Albuterol' },
+    ]);
+    const ids = s.fila[0]?.candidatos.map((c) => c.id);
+    expect(ids).toContain(1);
+    expect(ids).toContain(2);
+    expect(s.fila[0]?.candidatos[0]).toMatchObject({ id: 2, origem: 'sinonimo' });
   });
 });
 

@@ -1,11 +1,11 @@
 import type { Decisao } from './decisoes.js';
-import { IndiceDeNomes, variantesEmIngles, type Candidato } from './cognatos.js';
+import { IndiceDeNomes, sinonimosEmIngles, variantesEmIngles, type Candidato } from './cognatos.js';
 import { chaveDe } from './normalizar.js';
 import { nomeSemSal, removerSal, removerSalComoSugestao } from './sal.js';
 import { LIMITE_TRUNCAMENTO, separarComponentes } from './separar.js';
 
 /** Sobe quando uma regra do mapeamento automático muda: entra na versão da base. */
-export const VERSAO_REGRAS = 1;
+export const VERSAO_REGRAS = 2;
 
 export class ErroMapeamento extends Error {
   override name = 'ErroMapeamento';
@@ -233,7 +233,21 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
   function sugerir(chave: string): Candidato[] {
     const a = variantesEmIngles(removerSal(chave).chave);
     const b = variantesEmIngles(removerSalComoSugestao(chave).chave);
-    return indice.parecidos([...new Set([...a, ...b])], 3, 0.5);
+    const sin = [
+      ...sinonimosEmIngles(removerSal(chave).chave),
+      ...sinonimosEmIngles(removerSalComoSugestao(chave).chave),
+    ].map(chaveDe);
+    const deSinonimo: Candidato[] = indice.exatos(sin).map((id) => ({
+      id,
+      nome: farmacoPorId.get(id)?.nomeEn ?? '',
+      similaridade: 1,
+      origem: 'sinonimo' as const,
+    }));
+    const vistos = new Set(deSinonimo.map((c) => c.id));
+    const porGrafia = indice
+      .parecidos([...new Set([...a, ...b])], 3 + deSinonimo.length, 0.5)
+      .filter((c) => !vistos.has(c.id));
+    return [...deSinonimo, ...porGrafia].slice(0, 3);
   }
 
   function resolver(chave: string): Resolucao {

@@ -12,6 +12,10 @@ const REGRAS: ReadonlyArray<readonly [RegExp, readonly string[]]> = [
   [/ona$/, ['one', 'on']],
   [/ida$/, ['ide']],
   [/ido$/, ['ide']],
+  [/eto$/, ['ide']],
+  [/micina$/, ['mycin', 'micin']],
+  [/^cefal/, ['cephal']],
+  [/eritr/, ['erythr']],
   [/ol$/, ['ole']],
   [/ato$/, ['ate']],
   [/ico$/, ['ic']],
@@ -44,11 +48,51 @@ const REGRAS: ReadonlyArray<readonly [RegExp, readonly string[]]> = [
   [/ft/, ['pht']],
 ];
 
+/** Palavras que não seguem as regras de grafia (elementos e adjetivos de sal). */
+const IRREGULARES: Readonly<Record<string, readonly string[]>> = {
+  zinco: ['zinc'],
+  ferro: ['iron'],
+  ferroso: ['ferrous'],
+  ferrico: ['ferric'],
+  cobre: ['copper'],
+  prata: ['silver'],
+  enxofre: ['sulfur', 'sulphur'],
+  aluminio: ['aluminum', 'aluminium'],
+};
+
+/** "X de Y" (cloreto de sódio) vira "Y X" (sodium chloride) quando X é um destes ânions. */
+const ANIONS: ReadonlySet<string> = new Set([
+  'cloreto',
+  'sulfato',
+  'fosfato',
+  'acetato',
+  'citrato',
+  'nitrato',
+  'carbonato',
+  'bicarbonato',
+  'oxido',
+  'hidroxido',
+  'lactato',
+  'gluconato',
+  'iodeto',
+  'brometo',
+  'cloridrato',
+  'bromidrato',
+  'maleato',
+  'fumarato',
+  'succinato',
+  'tartarato',
+  'besilato',
+  'mesilato',
+  'valerato',
+  'propionato',
+]);
+
 const MAX_POR_PALAVRA = 48;
 const MAX_TOTAL = 256;
 
 export function variantesDaPalavra(palavra: string): string[] {
-  let conjunto = new Set([palavra]);
+  let conjunto = new Set([palavra, ...(IRREGULARES[palavra] ?? [])]);
   for (const [padrao, trocas] of REGRAS) {
     const novo = new Set(conjunto);
     for (const s of conjunto) {
@@ -68,6 +112,28 @@ export function variantesDaPalavra(palavra: string): string[] {
  * também vira "X-ic acid". O resultado é ordenado, então a mesma entrada dá a mesma saída.
  */
 export function variantesEmIngles(chave: string): string[] {
+  const reordenadas = variantesComAnion(chave);
+  const todas = new Set([...variantesDasPalavras(chave), ...reordenadas]);
+  return [...todas].sort();
+}
+
+/** "cloreto de sodio" → "sodium chloride"; "sulfato ferroso" → "ferrous sulfate". */
+function variantesComAnion(chave: string): string[] {
+  const de = /^(\S+) de (.+)$/.exec(chave);
+  if (de !== null && ANIONS.has(de[1] as string)) {
+    const ions = variantesDaPalavra(de[1] as string);
+    return variantesEmIngles(de[2] as string).flatMap((y) => ions.map((a) => `${y} ${a}`));
+  }
+  const adj = /^(\S+) (ferroso|ferrico)$/.exec(chave);
+  if (adj !== null && ANIONS.has(adj[1] as string)) {
+    return variantesDaPalavra(adj[2] as string).flatMap((j) =>
+      variantesDaPalavra(adj[1] as string).map((a) => `${j} ${a}`),
+    );
+  }
+  return [];
+}
+
+function variantesDasPalavras(chave: string): string[] {
   const palavras = chave.split(' ');
   let combinacoes: string[][] = [[]];
   for (const p of palavras) {
@@ -80,8 +146,36 @@ export function variantesEmIngles(chave: string): string[] {
   if (palavras[0] === 'acido' && palavras.length > 1) {
     for (const c of combinacoes) saida.add(`${c.slice(1).join(' ')} acid`);
   }
-  return [...saida].sort();
+  return [...saida];
 }
+
+// ---------------------------------------------------------------------------------------------
+// Sinônimos: nomes diferentes para a mesma substância. SÓ SUGESTÃO (ADR 0006): nunca mapeia
+// sozinho, porque seria um dicionário que ninguém revisou decidindo no ponto mais crítico.
+
+const SINONIMOS: Readonly<Record<string, readonly string[]>> = {
+  paracetamol: ['acetaminophen'],
+  dipirona: ['metamizole', 'dipyrone', 'metamizole sodium'],
+  adrenalina: ['epinephrine'],
+  noradrenalina: ['norepinephrine'],
+  salbutamol: ['albuterol'],
+  glibenclamida: ['glyburide'],
+  petidina: ['meperidine', 'pethidine'],
+  varfarina: ['warfarin'],
+  fenitoina: ['phenytoin'],
+  levotiroxina: ['levothyroxine'],
+  colecalciferol: ['cholecalciferol', 'vitamin d3'],
+  cianocobalamina: ['cyanocobalamin', 'vitamin b12'],
+  tiamina: ['thiamine'],
+  piridoxina: ['pyridoxine'],
+  retinol: ['vitamin a', 'retinol'],
+  nicotinamida: ['niacinamide', 'nicotinamide'],
+  'acido acetilsalicilico': ['aspirin', 'acetylsalicylic acid'],
+  'acido ascorbico': ['ascorbic acid', 'vitamin c'],
+};
+
+/** Nomes em inglês que costumam designar o mesmo que `chave` (já normalizada e sem sal). */
+export const sinonimosEmIngles = (chave: string): string[] => [...(SINONIMOS[chave] ?? [])];
 
 // ---------------------------------------------------------------------------------------------
 // Similaridade (só para sugerir candidatos à revisão; nunca decide um mapeamento)
@@ -100,6 +194,8 @@ export interface NomeIngles {
 export interface Candidato {
   id: number;
   nome: string;
+  /** `sinonimo`: veio da tabela de sinônimos (só sugestão), não da grafia. */
+  origem?: 'sinonimo';
   /** Coeficiente de Dice sobre bigramas, de 0 a 1. */
   similaridade: number;
 }
