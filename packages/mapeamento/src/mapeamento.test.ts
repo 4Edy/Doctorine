@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   IndiceDeNomes,
@@ -642,5 +643,26 @@ describe('mapear: hidratos, "de sódio" e classes da DCB', () => {
       classesDcb: [{ chave: 'arnica montana', classe: 'HOM' as const }],
     };
     expect(JSON.stringify(mapear(e))).toBe(JSON.stringify(mapear(e)));
+  });
+});
+
+describe('data/mapeamento/decisoes.json (o arquivo do repositório)', () => {
+  const caminho = new URL('../../../data/mapeamento/decisoes.json', import.meta.url);
+  const r = validarDecisoes(JSON.parse(readFileSync(caminho, 'utf8')));
+
+  it('está no formato, sem chave repetida e com chave já normalizada', () => {
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    const chaves = r.dados.decisoes.map((d) => d.chave);
+    expect(new Set(chaves).size).toBe(chaves.length);
+    for (const c of chaves) expect(c).toBe(chaveDe(c));
+  });
+
+  it('todo "mesmo-que" aponta para uma chave que também tem decisão', () => {
+    if (!r.ok) throw new Error('arquivo inválido');
+    const chaves = new Set(r.dados.decisoes.map((d) => d.chave));
+    for (const d of r.dados.decisoes) {
+      if (d.acao === 'mesmo-que') expect(chaves.has(d.comoChave)).toBe(true);
+    }
   });
 });

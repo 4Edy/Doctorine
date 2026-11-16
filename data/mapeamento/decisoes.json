@@ -1,5 +1,2158 @@
 {
   "versao": 1,
-  "atualizadoEm": "2026-11-14",
-  "decisoes": []
+  "atualizadoEm": "2026-11-16",
+  "decisoes": [
+    {
+      "acao": "sem-equivalente",
+      "chave": "acebrofilina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "aceclofenaco",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetato de abiraterona",
+      "ddinterIds": [
+        8
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "acetato de ciproterona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "acetato de clormadinona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetato de dexametasona",
+      "ddinterIds": [
+        513
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "acetato de lisina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetato de noretisterona",
+      "ddinterIds": [
+        1312
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetato de prednisolona",
+      "ddinterIds": [
+        1513
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetato de racealfatocoferol",
+      "ddinterIds": [
+        1943
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acetilcisteina",
+      "ddinterIds": [
+        19
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "aciclovir",
+      "ddinterIds": [
+        25
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "aciclovir sodico",
+      "ddinterIds": [
+        25
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "acido aspartico",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "acido ursodesoxicolico",
+      "ddinterIds": [
+        1906
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "adalimumabe",
+      "ddinterIds": [
+        27
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "agua para injetaveis",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "alanina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "alendronato de sodio",
+      "ddinterIds": [
+        42
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "alendronato de sodio tri-hidratado",
+      "ddinterIds": [
+        42
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "algestona acetofenida",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "aminofilina",
+      "ddinterIds": [
+        74
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "amoxicilina trihidratada",
+      "ddinterIds": [
+        83
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "anfotericina b",
+      "ddinterIds": [
+        85
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "axetilcefuroxima",
+      "ddinterIds": [
+        335
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "azitromicina",
+      "ddinterIds": [
+        157
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "azitromicina di-hidratada",
+      "ddinterIds": [
+        157
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bacitracina zincica",
+      "ddinterIds": [
+        161
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "benzoato de alogliptina",
+      "ddinterIds": [
+        51
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "benzoato de sodio",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "benzocaina",
+      "ddinterIds": [
+        184
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "benzoilmetronidazol",
+      "ddinterIds": [
+        1202
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "besilato de anlodipino",
+      "ddinterIds": [
+        79
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "besilato de levanlodipino",
+      "ddinterIds": [
+        1045
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "betaina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bevacizumabe",
+      "ddinterIds": [
+        201
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "bilastina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bimatoprosta",
+      "ddinterIds": [
+        207,
+        208
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "biotina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bisacodil",
+      "ddinterIds": [
+        212
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bissulfato de clopidogrel",
+      "ddinterIds": [
+        413
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "bortezomibe",
+      "ddinterIds": [
+        222
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "bromazepam",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "brometo de ipratropio",
+      "ddinterIds": [
+        970
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "brometo de rocuronio",
+      "ddinterIds": [
+        1612
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "bromoprida",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "butilbrometo de escopolamina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "candesartana cilexetila",
+      "ddinterIds": [
+        2025
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "canfora",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "carbocisteina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "carbonato de litio",
+      "ddinterIds": [
+        1081
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "carfilzomibe",
+      "ddinterIds": [
+        299
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cefadroxila",
+      "ddinterIds": [
+        310
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "ceftriaxona dissodica hemieptaidratada",
+      "ddinterIds": [
+        334
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "celecoxibe",
+      "ddinterIds": [
+        336
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "ciclopirox olamina",
+      "ddinterIds": [
+        377
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cilastatina sodica",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "ciprofibrato",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "citrato de fentanila",
+      "ddinterIds": [
+        722
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "citrato de orfenadrina",
+      "ddinterIds": [
+        1349
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "citrato de sildenafila",
+      "ddinterIds": [
+        1666
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "citrato de tamoxifeno",
+      "ddinterIds": [
+        1744
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "claritromicina",
+      "ddinterIds": [
+        393
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "clavulanato de potassio",
+      "ddinterIds": [
+        394
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "clioquinol",
+      "ddinterIds": [
+        400
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "clonixinato de lisina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloreto de benzalconio",
+      "ddinterIds": [
+        180
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloreto de calcio 2h2o",
+      "ddinterIds": [
+        272
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloreto de cetilpiridinio",
+      "ddinterIds": [
+        345
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de ambroxol",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de benserazida",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de benzidamina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de bromexina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de ciproeptadina",
+      "ddinterIds": [
+        459
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de donepezila",
+      "ddinterIds": [
+        583
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de dorzolamida",
+      "ddinterIds": [
+        588
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de doxorrubicina",
+      "ddinterIds": [
+        596
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de erlotinibe",
+      "ddinterIds": [
+        667
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de escetamina",
+      "ddinterIds": [
+        673
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de fenilefrina",
+      "ddinterIds": [
+        1453
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de fingolimode",
+      "ddinterIds": [
+        737
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de gencitabina",
+      "ddinterIds": [
+        811
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de lisina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de metilfenidato",
+      "ddinterIds": [
+        1189
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de nafazolina",
+      "ddinterIds": [
+        1264,
+        1265
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de oxomemazina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de piridoxina",
+      "ddinterIds": [
+        1549
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de pseudoefedrina",
+      "ddinterIds": [
+        1545
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de tansulosina",
+      "ddinterIds": [
+        1745
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "cloridrato de tetraciclina",
+      "ddinterIds": [
+        1783
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "cloridrato de tiamina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "clortalidona",
+      "ddinterIds": [
+        365
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "colecalciferol",
+      "ddinterIds": [
+        367
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dapagliflozina propanodiol monoidratado",
+      "ddinterIds": [
+        474
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dasatinibe monoidratado",
+      "ddinterIds": [
+        484
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "denosumabe",
+      "ddinterIds": [
+        500
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "desonida",
+      "ddinterIds": [
+        509
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dexpantenol",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "diclofenaco dietilamonio",
+      "ddinterIds": [
+        537,
+        539
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "diclofenaco resinato",
+      "ddinterIds": [
+        537
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dicloridrato de betaistina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dicloridrato de flunarizina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dicloridrato de trimetazidina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dienogeste",
+      "ddinterIds": [
+        546
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dimenidrinato",
+      "ddinterIds": [
+        562
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dimesilato de lisdexanfetamina",
+      "ddinterIds": [
+        1078
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dioxido de carbono",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dipirona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dipirona monoidratada",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "dipropionato de beclometasona",
+      "ddinterIds": [
+        168
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "divalproato de sodio",
+      "ddinterIds": [
+        1913
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "domperidona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "dropropizina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "enantato de estradiol",
+      "ddinterIds": [
+        679
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "entricitabina",
+      "ddinterIds": [
+        637
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "epinefrina",
+      "ddinterIds": [
+        652
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "etoricoxibe",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "everolimo",
+      "ddinterIds": [
+        704
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "fenilalanina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fenitoina",
+      "ddinterIds": [
+        1460
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "ferripolimaltose",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fludesoxiglicose 18f",
+      "ddinterIds": [
+        746
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosaprepitanto dimeglumina",
+      "ddinterIds": [
+        778
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de clindamicina",
+      "ddinterIds": [
+        398
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de codeina",
+      "ddinterIds": [
+        429
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de codeina hemi-hidratado",
+      "ddinterIds": [
+        429
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de oseltamivir",
+      "ddinterIds": [
+        1350
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de sitagliptina",
+      "ddinterIds": [
+        1679
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato de sitagliptina monoidratado",
+      "ddinterIds": [
+        1679
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato dissodico de betametasona",
+      "ddinterIds": [
+        195
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato dissodico de dexametasona",
+      "ddinterIds": [
+        513
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfato sodico de prednisolona",
+      "ddinterIds": [
+        1513
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "mesmo-que",
+      "chave": "fosfato sodico de riboflavina",
+      "comoChave": "riboflavina",
+      "motivo": "sal que não se tira sozinho; mesmo princípio da chave indicada",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fosfomicina trometamol",
+      "ddinterIds": [
+        780
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fulvestranto",
+      "ddinterIds": [
+        789
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "fumarato de tenofovir desoproxila",
+      "ddinterIds": [
+        2087
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "furoato de mometasona",
+      "ddinterIds": [
+        2058,
+        2105
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "furoato de mometasona monoidratado",
+      "ddinterIds": [
+        2058,
+        2105
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "gefitinibe",
+      "ddinterIds": [
+        810
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "gestodeno",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "glibenclamida",
+      "ddinterIds": [
+        831
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "glicerol",
+      "ddinterIds": [
+        832
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "glicina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "gliclazida",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "glicose",
+      "ddinterIds": [
+        529
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "glicose anidra",
+      "ddinterIds": [
+        529
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "glicose monoidratada",
+      "ddinterIds": [
+        529
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "guaifenesina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "hemitartarato de epinefrina",
+      "ddinterIds": [
+        652
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "hesperidina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "hialuronato de sodio",
+      "ddinterIds": [
+        880
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "hiclato de doxiciclina",
+      "ddinterIds": [
+        598
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "hidroquinona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "hidroxiureia",
+      "ddinterIds": [
+        894
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "histidina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "ibandronato de sodio monoidratado",
+      "ddinterIds": [
+        897
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "infliximabe",
+      "ddinterIds": [
+        923
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "isoleucina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "lactato de sodio",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "latanoprosta",
+      "ddinterIds": [
+        1028,
+        1029
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "leucina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "mesmo-que",
+      "chave": "levomentol",
+      "comoChave": "mentol",
+      "motivo": "sal que não se tira sozinho; mesmo princípio da chave indicada",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "levometionina",
+      "ddinterIds": [
+        1171
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "levovalina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16",
+      "nomePt": "valina"
+    },
+    {
+      "acao": "equivale",
+      "chave": "linezolida",
+      "ddinterIds": [
+        1073
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "malato de sunitinibe",
+      "ddinterIds": [
+        1731
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "maleato de bronfeniramina",
+      "ddinterIds": [
+        245
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "maleato de clorfenamina",
+      "ddinterIds": [
+        362
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "maleato de clorfeniramina",
+      "ddinterIds": [
+        362
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "maleato de dexclorfeniramina",
+      "ddinterIds": [
+        1996
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "maleato de trimebutina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "manitol",
+      "ddinterIds": [
+        1123
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "mentol",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "mesilato de imatinibe",
+      "ddinterIds": [
+        909
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "micofenolato de mofetila",
+      "ddinterIds": [
+        1251
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "mononitrato de isossorbida",
+      "ddinterIds": [
+        990
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "montelucaste de sodio",
+      "ddinterIds": [
+        1242
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "mucato de isometepteno",
+      "ddinterIds": [
+        985
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "nimesulida",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "nistatina",
+      "ddinterIds": [
+        1318
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "nitrato de isoconazol",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "nitrato de miconazol",
+      "ddinterIds": [
+        1209
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "mesmo-que",
+      "chave": "nitrato de tiamina",
+      "comoChave": "cloridrato de tiamina",
+      "motivo": "sal que não se tira sozinho; mesmo princípio da chave indicada",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "nitrogenio",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "olmesartana medoxomila",
+      "ddinterIds": [
+        1330
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "orlistate",
+      "ddinterIds": [
+        1348
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "oxalato de escitalopram",
+      "ddinterIds": [
+        672
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "oxido de zinco",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "oxigenio",
+      "ddinterIds": [
+        1367
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "palmitato de retinol",
+      "ddinterIds": [
+        1941
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "pantotenato de calcio",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "paracetamol",
+      "ddinterIds": [
+        14
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "parecoxibe sodico",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "pemetrexede dissodico",
+      "ddinterIds": [
+        1414
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "pemetrexede dissodico hemipentaidratado",
+      "ddinterIds": [
+        1414
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "permetrina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "prolina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "racemetionina",
+      "ddinterIds": [
+        1171
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "riboflavina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "risedronato sodico",
+      "ddinterIds": [
+        1604
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sacarato de hidroxido ferrico",
+      "ddinterIds": [
+        978
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "salicilato de metila",
+      "ddinterIds": [
+        1183
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "serina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "somatropina",
+      "ddinterIds": [
+        1699
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sugamadex sodico",
+      "ddinterIds": [
+        1719
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfadiazina de prata",
+      "ddinterIds": [
+        1672
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de gentamicina",
+      "ddinterIds": [
+        815
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de glicosamina",
+      "ddinterIds": [
+        829
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de hidroxicloroquina",
+      "ddinterIds": [
+        893
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de neomicina",
+      "ddinterIds": [
+        1277
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de polimixina b",
+      "ddinterIds": [
+        1489
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de pseudoefedrina",
+      "ddinterIds": [
+        1545
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de salbutamol",
+      "ddinterIds": [
+        1632
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "sulfato de zinco heptaidratado",
+      "ddinterIds": [
+        1966
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "tacrolimo monoidratado",
+      "ddinterIds": [
+        1735
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "tadalafila",
+      "ddinterIds": [
+        1736
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "taurina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "teicoplanina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "tenoxicam",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "tibolona",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "tigeciclina",
+      "ddinterIds": [
+        1805
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "tirosina",
+      "ddinterIds": [
+        2250
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "tolnaftato",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "toxina botulinica a",
+      "ddinterIds": [
+        225
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "trastuzumabe",
+      "ddinterIds": [
+        1846
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "travoprosta",
+      "ddinterIds": [
+        1849,
+        1850
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "treonina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "triancinolona acetonida",
+      "ddinterIds": [
+        1855
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "trimetoprima",
+      "ddinterIds": [
+        1874
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "triptofano",
+      "ddinterIds": [
+        1888
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "trometamol cetorolaco",
+      "ddinterIds": [
+        1010
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "undecilato de testosterona",
+      "ddinterIds": [
+        1775
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "ustequinumabe",
+      "ddinterIds": [
+        1907
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "valerato de estradiol micronizado",
+      "ddinterIds": [
+        679
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "equivale",
+      "chave": "valproato de sodio",
+      "ddinterIds": [
+        1913
+      ],
+      "motivo": "mesma substância (sal, éster ou hidrato) conferida por nome com o DDInter",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    },
+    {
+      "acao": "sem-equivalente",
+      "chave": "vildagliptina",
+      "motivo": "o DDInter não tem entrada para esta substância (busca por nome em 2026-11-16)",
+      "revisadoPor": "Edu",
+      "revisadoEm": "2026-11-16"
+    }
+  ]
 }
