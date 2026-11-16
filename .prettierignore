@@ -5,3 +5,5 @@ coverage
 *.patch
 # gerado por `pnpm pipeline:decisoes`; a formatação do JSON não é conferida
 data/mapeamento/decisoes.json
+# gerado por data/mapeamento/gerar-classes-dcb.py
+data/mapeamento/classes-dcb.json

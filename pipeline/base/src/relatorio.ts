@@ -78,6 +78,9 @@ export function relatorioEmMarkdown(r: RelatorioCarga): string {
     ),
     '### Sais e hidratos tirados no mapeamento automático',
     distribuicao('Regra', r.mapeamento.regrasDeSalUsadas, 'Componentes'),
+    '### Componentes resolvidos pela classe da DCB',
+    'Nomes que a DCB classifica só como excipiente (EXA), homeopático (HOM), planta medicinal (PM) ou radiofármaco (RAD) e que o DDInter não tem. Viram princípio ativo sem fármaco DDInter: a ausência de interação é um fato da fonte, não uma verificação.',
+    distribuicao('Classe', r.mapeamento.porClasseDcb, 'Componentes'),
     r.mapeamento.referencia.total === 0
       ? '### Conjunto de referência\n\nSem nomes de princípios ativos ainda (a farmacêutica não enviou os pares).'
       : [

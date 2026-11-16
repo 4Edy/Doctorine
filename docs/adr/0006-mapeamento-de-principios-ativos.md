@@ -80,6 +80,24 @@ vazia. O P7 a preenche, com revisão humana onde houver dúvida.
 14. **Determinismo e versão.** A saída depende só da entrada, sem relógio e com ordem fixa. A versão
     da base passa a incluir as decisões e `VERSAO_REGRAS` (sobe quando uma regra automática muda;
     está em 2 desde a tradução de ânions).
+15. **Emenda de 2026-11-16: a farmacêutica não confirma mapeamentos aqui.** O que ela precisar
+    confirmar vai para a ferramenta de revisão do P9; o mapeamento da carga fica sem passo manual
+    dela. Duas regras novas, ambas determinísticas e sem revisão (`VERSAO_REGRAS` 3):
+    - **Classes da DCB.** O componente que não tem nome igual no DDInter, não tem suspeita e consta
+      na DCB (ANVISA, out/2026) **só** como excipiente (EXA), homeopático (HOM), planta medicinal
+      (PM) ou radiofármaco (RAD) vira princípio ativo **sem fármaco DDInter**, status `automatico`.
+      Nome que a DCB também lista como IFA, INF ou BIO fica de fora. O nome igual no DDInter e a
+      decisão humana valem mais. A lista fica em `data/mapeamento/classes-dcb.json` (gerada por
+      `gerar-classes-dcb.py`) e entra na versão da base. **Aviso para o P10:** princípio sem fármaco
+      DDInter quer dizer "sem dados na fonte", não "verificado e sem interação"; o motor deve
+      mostrar isso, sobretudo para plantas, que têm interações reais que o DDInter não cobre.
+    - **Grafia.** Hidratos na forma feminina e raros (hemiidratado, sesqui, penta, hexa),
+      "X de sódio" e "X de potássio" quando X não parece um ânion (termina em -ato, -eto, -ito ou
+      -ido: "cloreto de sódio", "valproato de sódio" não perdem o "de sódio"), e cafeína e glicose
+      como grafias irregulares. A comparação final continua exata.
+      A similaridade de grafia, mesmo alta, **não** aceita candidato: nomes parecidos podem ser
+      substâncias diferentes. A segunda fonte por CAS/DrugBank segue sem decisão (o arquivo do PubChem
+      enviado não tem CAS).
 
 ## Alternativas consideradas
 

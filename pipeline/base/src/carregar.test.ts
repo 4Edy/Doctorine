@@ -143,6 +143,7 @@ describe('carga a partir das saídas reais dos pipelines (contrato)', () => {
       'ddinter-site-lista-de-pares',
       'ddinter-site-pagina-do-par',
       'mapeamento-decisoes',
+      'mapeamento-classes-dcb',
     ]);
   });
 
@@ -665,6 +666,29 @@ describe('mapeamento de princípios ativos (P7)', () => {
       JSON.stringify({ versao: 1, atualizadoEm: '2026-11-20', decisoes: [{ chave: 'X' }] }),
     );
     expect(() => lerEntradas(raiz)).toThrow(/decisoes\.json/);
+    writeFileSync(arquivo, '{ não é json');
+    expect(() => lerEntradas(raiz)).toThrow(/JSON inválido/);
+  });
+
+  it('lê as classes da DCB, recusa arquivo ruim, e mudar o arquivo muda a versão da base', () => {
+    prepararRaiz();
+    mkdirSync(join(raiz, 'data', 'mapeamento'), { recursive: true });
+    const arquivo = join(raiz, 'data', 'mapeamento', 'classes-dcb.json');
+    const sem = versaoDasEntradas(lerEntradas(raiz));
+    expect(lerEntradas(raiz).mapeamento.classesDcb.classes).toEqual([]);
+    const grava = (classes: unknown): void =>
+      writeFileSync(arquivo, JSON.stringify({ versao: 1, fonte: 'teste', classes }));
+    grava([{ chave: 'arnica montana', classe: 'HOM' }]);
+    const com = versaoDasEntradas(lerEntradas(raiz));
+    expect(lerEntradas(raiz).mapeamento.classesDcb.classes).toHaveLength(1);
+    expect(com).not.toBe(sem);
+    grava([{ chave: 'arnica montana', classe: 'IFA' }]);
+    expect(() => lerEntradas(raiz)).toThrow(/classes-dcb\.json/);
+    grava([
+      { chave: 'a', classe: 'PM' },
+      { chave: 'a', classe: 'EXA' },
+    ]);
+    expect(() => lerEntradas(raiz)).toThrow(/repetido/);
     writeFileSync(arquivo, '{ não é json');
     expect(() => lerEntradas(raiz)).toThrow(/JSON inválido/);
   });

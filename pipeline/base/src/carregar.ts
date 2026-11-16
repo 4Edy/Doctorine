@@ -21,6 +21,7 @@ import {
 } from '@doctorine/mapeamento';
 import {
   ErroCarga,
+  fonteDasClassesDcb,
   fonteDasDecisoes,
   type Entradas,
   type FonteRelatorio,
@@ -75,6 +76,8 @@ export interface RelatorioCarga {
     cobertura: Cobertura;
     filaDeRevisao: number;
     regrasDeSalUsadas: Record<string, number>;
+    /** Componentes resolvidos pela classe da DCB (excipiente, homeopático, planta, radiofármaco). */
+    porClasseDcb: Record<string, number>;
     referencia: {
       total: number;
       porSituacao: Record<string, number>;
@@ -128,6 +131,7 @@ function fontesDe(e: Entradas): Array<{ chave: string; fonte: FonteRelatorio }> 
     { chave: 'pares', fonte: e.pares.fonte },
     { chave: 'manejo', fonte: e.manejo.fonte },
     { chave: 'decisoes', fonte: fonteDasDecisoes(e.mapeamento.decisoes) },
+    { chave: 'classes-dcb', fonte: fonteDasClassesDcb(e.mapeamento.classesDcb) },
   ];
 }
 
@@ -710,6 +714,7 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
         medicamentos: paraMapear,
         farmacos: [...farmacos.entries()].map(([id, f]) => ({ id, nomeEn: f.nome })),
         decisoes: entradas.mapeamento.decisoes.decisoes,
+        classesDcb: entradas.mapeamento.classesDcb.classes,
         referencia: entradas.mapeamento.referencia,
       });
     } catch (erro) {
@@ -892,6 +897,7 @@ export function carregarBase(entradas: Entradas, caminho: string): ResultadoCarg
         cobertura: mapa.cobertura,
         filaDeRevisao: mapa.fila.length,
         regrasDeSalUsadas: mapa.regrasDeSalUsadas,
+        porClasseDcb: mapa.porClasseDcb,
         referencia: {
           total: mapa.referencia.length,
           porSituacao: ordenado(

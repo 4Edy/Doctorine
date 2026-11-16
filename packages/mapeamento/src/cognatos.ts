@@ -58,6 +58,8 @@ const IRREGULARES: Readonly<Record<string, readonly string[]>> = {
   prata: ['silver'],
   enxofre: ['sulfur', 'sulphur'],
   aluminio: ['aluminum', 'aluminium'],
+  cafeina: ['caffeine'],
+  glicose: ['glucose'],
 };
 
 /** "X de Y" (cloreto de sódio) vira "Y X" (sodium chloride) quando X é um destes ânions. */

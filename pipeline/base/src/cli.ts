@@ -20,6 +20,7 @@ versão de download mais recente de cada fonte.
   --manejo <versão>   versão do manejo e das alternativas
   --decisoes <arquivo>  decisões do mapeamento (padrão: data/mapeamento/decisoes.json)
   --referencia <arquivo>  conjunto de referência (padrão: data/reference-set/pairs.json)
+  --classes-dcb <arquivo>  classes da DCB (padrão: data/mapeamento/classes-dcb.json)
   --exigir-referencia   termina com erro se algum nome do conjunto de referência não estiver
                         confirmado pela farmacêutica (critério de conclusão do P7)
 `;
@@ -36,6 +37,7 @@ export function executar(argv: readonly string[]): number {
       manejo: { type: 'string' },
       decisoes: { type: 'string' },
       referencia: { type: 'string' },
+      'classes-dcb': { type: 'string' },
       'exigir-referencia': { type: 'boolean' },
       ajuda: { type: 'boolean', short: 'h' },
     },
@@ -55,6 +57,9 @@ export function executar(argv: readonly string[]): number {
     const entradas = lerEntradas(raiz, versoes, {
       ...(values.decisoes !== undefined ? { decisoes: resolve(values.decisoes) } : {}),
       ...(values.referencia !== undefined ? { referencia: resolve(values.referencia) } : {}),
+      ...(values['classes-dcb'] !== undefined
+        ? { classesDcb: resolve(values['classes-dcb']) }
+        : {}),
     });
     const versao = versaoDasEntradas(entradas);
     const diretorio = join(raiz, 'data', 'processed', 'base', versao);

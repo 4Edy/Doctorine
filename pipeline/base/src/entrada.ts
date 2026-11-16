@@ -2,7 +2,12 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
-import { DECISOES_VAZIAS, validarDecisoes, type ArquivoDecisoes } from '@doctorine/mapeamento';
+import {
+  DECISOES_VAZIAS,
+  validarDecisoes,
+  type ArquivoDecisoes,
+  type ClasseDcbEntrada,
+} from '@doctorine/mapeamento';
 
 /** Falha da carga inteira (entrada faltando, arquivo fora do formato, versão que não bate). */
 export class ErroCarga extends Error {
@@ -142,6 +147,8 @@ export const alternativasPar = z.object({
 export interface EntradaMapeamentoArquivos {
   decisoes: ArquivoDecisoes;
   referencia: Array<{ id: string; nome: string }>;
+  /** Nomes que a DCB classifica como excipiente, homeopático, planta ou radiofármaco. */
+  classesDcb: ArquivoClassesDcb;
 }
 
 export interface Entradas {
@@ -264,6 +271,59 @@ export function localizar(
 
 export const CAMINHO_DECISOES = join('data', 'mapeamento', 'decisoes.json');
 export const CAMINHO_REFERENCIA = join('data', 'reference-set', 'pairs.json');
+export const CAMINHO_CLASSES_DCB = join('data', 'mapeamento', 'classes-dcb.json');
+
+const arquivoClassesDcb = z.strictObject({
+  versao: z.literal(1),
+  fonte: z.string().min(1),
+  classes: z.array(
+    z.strictObject({
+      chave: z.string().min(1),
+      classe: z.enum(['EXA', 'HOM', 'PM', 'RAD']),
+    }),
+  ),
+});
+export type ArquivoClassesDcb = z.infer<typeof arquivoClassesDcb>;
+const CLASSES_DCB_VAZIAS: ArquivoClassesDcb = { versao: 1, fonte: 'nenhuma', classes: [] };
+
+/** Lê as classes da DCB (ausente = nenhuma); recusa arquivo fora do formato ou com nome repetido. */
+export function lerClassesDcb(caminho: string): ArquivoClassesDcb {
+  if (!existsSync(caminho)) return CLASSES_DCB_VAZIAS;
+  let json: unknown;
+  try {
+    json = JSON.parse(readFileSync(caminho, 'utf8'));
+  } catch {
+    throw new ErroCarga(`${caminho}: JSON inválido`);
+  }
+  const r = arquivoClassesDcb.safeParse(json);
+  if (!r.success) {
+    const p = r.error.issues[0];
+    throw new ErroCarga(
+      `${caminho}: ${p?.path.join('.') ?? ''} ${p?.message ?? 'fora do formato'}`,
+    );
+  }
+  const vistos = new Set<string>();
+  for (const c of r.data.classes) {
+    if (vistos.has(c.chave)) throw new ErroCarga(`${caminho}: nome repetido "${c.chave}"`);
+    vistos.add(c.chave);
+  }
+  return r.data;
+}
+
+/** Proveniência das classes da DCB, calculada do conteúdo (mudar o arquivo muda a base). */
+export function fonteDasClassesDcb(dados: ArquivoClassesDcb): FonteRelatorio {
+  const texto = JSON.stringify(dados);
+  return {
+    id: 'mapeamento-classes-dcb',
+    sha256: createHash('sha256').update(texto).digest('hex'),
+    versao: sha12(texto),
+    baixadoEm: '2026-10-31',
+    origem: dados.fonte,
+    url: null,
+  };
+}
+
+export const classesParaMapear = (d: ArquivoClassesDcb): ClasseDcbEntrada[] => d.classes;
 
 const sha12 = (t: string): string => createHash('sha256').update(t).digest('hex').slice(0, 12);
 
@@ -340,6 +400,8 @@ export interface OpcoesEntrada {
   decisoes?: string;
   /** Conjunto de referência (padrão: data/reference-set/pairs.json). */
   referencia?: string;
+  /** Classes da DCB (padrão: data/mapeamento/classes-dcb.json). */
+  classesDcb?: string;
 }
 
 export interface Versoes {
@@ -366,6 +428,7 @@ export function lerEntradas(
     mapeamento: {
       decisoes,
       referencia: lerNomesDaReferencia(opcoes.referencia ?? join(raiz, CAMINHO_REFERENCIA)),
+      classesDcb: lerClassesDcb(opcoes.classesDcb ?? join(raiz, CAMINHO_CLASSES_DCB)),
     },
     anvisa: {
       fonte: an.fonte,

@@ -540,3 +540,107 @@ describe('normalização', () => {
     expect(chaveDe('  Atorvastatina   CÁLCICA ')).toBe('atorvastatina calcica');
   });
 });
+
+describe('mapear: hidratos, "de sódio" e classes da DCB', () => {
+  const um = (
+    texto: string,
+    farmacos: Array<{ id: number; nomeEn: string }>,
+    extra: Partial<EntradaMapeamento> = {},
+  ) =>
+    mapear({
+      medicamentos: [{ id: 1, nome: 'X', ativo: true, principioAtivoOriginal: texto }],
+      farmacos,
+      decisoes: [],
+      ...extra,
+    });
+
+  it('tira hidratos na forma feminina e em "hemiidratado", e diz o que tirou', () => {
+    expect(removerSal('cafeina anidra').chave).toBe('cafeina');
+    expect(removerSal('amoxicilina trihidratada').chave).toBe('amoxicilina trihidratada');
+    expect(removerSal('amoxicilina tri-hidratada').chave).toBe('amoxicilina');
+    expect(removerSal('levofloxacino hemiidratado').chave).toBe('levofloxacino');
+    expect(removerSal('levofloxacino hemiidratado').regras).toEqual(['sufixo "hemiidratado"']);
+  });
+
+  it('"X de sódio" vira X só quando X não parece um ânion', () => {
+    expect(removerSal('diclofenaco de sodio')).toMatchObject({
+      chave: 'diclofenaco',
+      regras: ['sufixo "de sodio"'],
+    });
+    expect(removerSal('naproxeno de potassio').chave).toBe('naproxeno');
+    // o medicamento É o sal, ou o ânion não é o princípio ativo
+    expect(removerSal('cloreto de sodio').chave).toBe('cloreto de sodio');
+    expect(removerSal('bicarbonato de sodio').chave).toBe('bicarbonato de sodio');
+    expect(removerSal('divalproato de sodio').chave).toBe('divalproato de sodio');
+    expect(removerSal('alendronato de sodio').chave).toBe('alendronato de sodio');
+    // mais de uma palavra: não adivinha
+    expect(removerSal('acido folico de sodio').chave).toBe('acido folico de sodio');
+  });
+
+  it('diclofenaco de sódio casa com "Diclofenac" (automático) e mostra a regra usada', () => {
+    const s = um('diclofenaco de sódio', [{ id: 3, nomeEn: 'Diclofenac' }]);
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'automatico' });
+    expect(s.regrasDeSalUsadas['sufixo "de sodio"']).toBe(1);
+    expect(s.principios[0]?.nomePt).toBe('diclofenaco');
+  });
+
+  it('cafeína anidra casa com "Caffeine" (grafia irregular e hidrato)', () => {
+    const s = um('cafeína anidra', [{ id: 3, nomeEn: 'Caffeine' }]);
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'automatico' });
+    expect(s.principios[0]).toMatchObject({ nomePt: 'cafeína', ddinterIds: [3] });
+  });
+
+  it('classe da DCB (planta) sem nome igual no DDInter vira princípio sem fármaco, automático', () => {
+    const s = um('passiflora incarnata l.', [{ id: 3, nomeEn: 'Diclofenac' }], {
+      classesDcb: [{ chave: 'passiflora incarnata l.', classe: 'PM' }],
+    });
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'automatico' });
+    expect(s.mapeamentos[0]?.motivo).toContain('planta medicinal');
+    expect(s.principios[0]).toMatchObject({ ddinterIds: [], nomeEn: null });
+    expect(s.ligacoes).toHaveLength(1);
+    expect(s.fila).toHaveLength(0);
+    expect(s.porClasseDcb).toEqual({ PM: 1 });
+    expect(s.automaticos[0]).toMatchObject({ ddinterIds: [], nomesEn: [] });
+    expect(s.cobertura.percentualCompletos).toBe(100);
+  });
+
+  it('o nome igual no DDInter vale mais que a classe da DCB', () => {
+    const s = um('metformina', [{ id: 3, nomeEn: 'Metformin' }], {
+      classesDcb: [{ chave: 'metformina', classe: 'EXA' }],
+    });
+    expect(s.principios[0]).toMatchObject({ ddinterIds: [3] });
+    expect(s.porClasseDcb).toEqual({});
+  });
+
+  it('a classe da DCB não vale com suspeita (parênteses, texto cortado) nem contra decisão humana', () => {
+    const duvida = um('arnica (montana)', [], {
+      classesDcb: [{ chave: 'arnica (montana)', classe: 'HOM' }],
+    });
+    expect(duvida.mapeamentos[0]).toMatchObject({ status: 'pendente', slug: null });
+    const decisao: Decisao = {
+      acao: 'equivale',
+      chave: 'x',
+      ddinterIds: [3],
+      revisadoPor: 'Edu',
+      revisadoEm: '2026-11-16',
+    };
+    const s = um('x', [{ id: 3, nomeEn: 'Diclofenac' }], {
+      classesDcb: [{ chave: 'x', classe: 'EXA' }],
+      decisoes: [decisao],
+    });
+    expect(s.mapeamentos[0]).toMatchObject({ status: 'confirmado' });
+    expect(s.porClasseDcb).toEqual({});
+  });
+
+  it('a mesma entrada com as classes dá a mesma saída', () => {
+    const e = {
+      medicamentos: [
+        { id: 1, nome: 'A', ativo: true, principioAtivoOriginal: 'arnica montana, glicose' },
+      ],
+      farmacos: [{ id: 3, nomeEn: 'Glucose' }],
+      decisoes: [],
+      classesDcb: [{ chave: 'arnica montana', classe: 'HOM' as const }],
+    };
+    expect(JSON.stringify(mapear(e))).toBe(JSON.stringify(mapear(e)));
+  });
+});

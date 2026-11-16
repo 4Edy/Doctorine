@@ -17,6 +17,18 @@ Para cada componente do texto da ANVISA ("atorvastatina cálcica, ezetimiba" tem
 | `automatico` | O nome, sem sal seguro, tem uma grafia em inglês **idêntica** ao nome de **um** medicamento do DDInter.              |
 | `pendente`   | Qualquer outro caso. Não vira princípio ativo: o medicamento aparece como **não verificado**, nunca "sem interação". |
 
+## O que a carga resolve sozinha, sem ninguém confirmar
+
+- Nome igual no DDInter depois das regras de grafia, tirando só sais e hidratos seguros.
+- Nome que a DCB (ANVISA) classifica só como excipiente, homeopático, planta medicinal ou
+  radiofármaco e que o DDInter não tem. Esses viram princípio ativo **sem fármaco DDInter**: no
+  motor, "sem dados na fonte". A lista está em `data/mapeamento/classes-dcb.json`; para refazê-la com
+  uma DCB nova: `python3 -I data/mapeamento/gerar-classes-dcb.py <planilha.xlsx>` (precisa do
+  openpyxl). O relatório de carga mostra quantos componentes entraram por classe.
+
+Similaridade de grafia nunca aceita nada sozinha. O que sobra continua na fila e é decidido na
+ferramenta de revisão (P9), não pela farmacêutica na carga.
+
 ## Arquivos de revisão (em `data/processed/base/<versão>/`)
 
 | Arquivo                         | Para quê                                                                                         |

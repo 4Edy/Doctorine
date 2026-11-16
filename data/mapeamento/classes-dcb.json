@@ -1,0 +1,8122 @@
+{
+"versao":1,
+"fonte":"DCB consolidada (ANVISA), out/2026",
+"classes":[
+{
+"chave":"abelmoschus",
+"classe":"HOM"
+},
+{
+"chave":"abies canadensis",
+"classe":"HOM"
+},
+{
+"chave":"abies nigra",
+"classe":"HOM"
+},
+{
+"chave":"acalypha indica",
+"classe":"HOM"
+},
+{
+"chave":"acessulfamo potassico",
+"classe":"EXA"
+},
+{
+"chave":"acetaldeido",
+"classe":"EXA"
+},
+{
+"chave":"acetanilidum",
+"classe":"HOM"
+},
+{
+"chave":"acetato cuprico (64 cu)",
+"classe":"RAD"
+},
+{
+"chave":"acetato de celulose",
+"classe":"EXA"
+},
+{
+"chave":"acetato de cetila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de estearila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de isoamila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de mentila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de merisoprol (197 hg)",
+"classe":"RAD"
+},
+{
+"chave":"acetato de merisoprol (203 hg)",
+"classe":"RAD"
+},
+{
+"chave":"acetato de oleila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de polivinila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de sodio (11 c)",
+"classe":"RAD"
+},
+{
+"chave":"acetato de trans-2-hexenila",
+"classe":"EXA"
+},
+{
+"chave":"acetato de vinila",
+"classe":"EXA"
+},
+{
+"chave":"acetato e succinato de hipromelose",
+"classe":"EXA"
+},
+{
+"chave":"acetilacetona",
+"classe":"EXA"
+},
+{
+"chave":"acetilacetonato de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"acetilcitrato de tributila",
+"classe":"EXA"
+},
+{
+"chave":"acetoacetato de etila",
+"classe":"EXA"
+},
+{
+"chave":"achillea millefolium",
+"classe":"HOM"
+},
+{
+"chave":"achillea millefolium l.",
+"classe":"PM"
+},
+{
+"chave":"achyranthes calea",
+"classe":"HOM"
+},
+{
+"chave":"achyrocline satureioides (lam.) dc.",
+"classe":"PM"
+},
+{
+"chave":"acido acrilico",
+"classe":"EXA"
+},
+{
+"chave":"acido adipico",
+"classe":"EXA"
+},
+{
+"chave":"acido benzenossulfonico",
+"classe":"EXA"
+},
+{
+"chave":"acido butedronico (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"acido butirico",
+"classe":"EXA"
+},
+{
+"chave":"acido caprico",
+"classe":"EXA"
+},
+{
+"chave":"acido caproico",
+"classe":"EXA"
+},
+{
+"chave":"acido cinamico",
+"classe":"EXA"
+},
+{
+"chave":"acido dioipurico (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido dioipurico (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido etilenodiamino diacetico",
+"classe":"EXA"
+},
+{
+"chave":"acido fumarico",
+"classe":"EXA"
+},
+{
+"chave":"acido galactosilgliconico",
+"classe":"EXA"
+},
+{
+"chave":"acido hidroxetilpiperazinaetanossulfonico",
+"classe":"EXA"
+},
+{
+"chave":"acido iocanlidico (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido iodocetilico (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido iodofiltico (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido laurico",
+"classe":"EXA"
+},
+{
+"chave":"acido levolactico",
+"classe":"EXA"
+},
+{
+"chave":"acido levulinico",
+"classe":"EXA"
+},
+{
+"chave":"acido maleico",
+"classe":"EXA"
+},
+{
+"chave":"acido morfolinoetanossulfonico monoidratado",
+"classe":"EXA"
+},
+{
+"chave":"acido oleico (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido oleico (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"acido palmitico",
+"classe":"EXA"
+},
+{
+"chave":"acido succinico",
+"classe":"EXA"
+},
+{
+"chave":"acido trifluoracetico",
+"classe":"EXA"
+},
+{
+"chave":"acidum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum acetylsalicylicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum alpha-ketoglutaricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum alpha-lipoicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum benzoicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum boricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum butyricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum camphoricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum carbolicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum chromicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum citricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum desoxyribonucleicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum fluoricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum formicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum fumaricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum gallicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum hidrocyanicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum lacticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum nitromuriaticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum oroticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum oxalicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum picricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum ribonucleicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum salicylicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum sarcolacticum",
+"classe":"HOM"
+},
+{
+"chave":"acidum succinicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum sulphurosum",
+"classe":"HOM"
+},
+{
+"chave":"acidum tannicum",
+"classe":"HOM"
+},
+{
+"chave":"acidum tartaricum",
+"classe":"HOM"
+},
+{
+"chave":"acidum uricum",
+"classe":"HOM"
+},
+{
+"chave":"acmella oleracea (l.) r.k.jansen",
+"classe":"PM"
+},
+{
+"chave":"aconitinum",
+"classe":"HOM"
+},
+{
+"chave":"aconitum ferox",
+"classe":"HOM"
+},
+{
+"chave":"aconitum lycoctonum",
+"classe":"HOM"
+},
+{
+"chave":"aconitum napellus",
+"classe":"HOM"
+},
+{
+"chave":"aconitum napellus l.",
+"classe":"PM"
+},
+{
+"chave":"acrilato de butila",
+"classe":"EXA"
+},
+{
+"chave":"acrilato de etil-hexila",
+"classe":"EXA"
+},
+{
+"chave":"acrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"actaea racemosa l.",
+"classe":"PM"
+},
+{
+"chave":"actaea spicata",
+"classe":"HOM"
+},
+{
+"chave":"adipato de dibutila",
+"classe":"EXA"
+},
+{
+"chave":"adonis vernalis",
+"classe":"HOM"
+},
+{
+"chave":"adrenalinum",
+"classe":"HOM"
+},
+{
+"chave":"adrenocorticotrophin",
+"classe":"HOM"
+},
+{
+"chave":"advantamo",
+"classe":"EXA"
+},
+{
+"chave":"advantamo monoidratado",
+"classe":"EXA"
+},
+{
+"chave":"aesculinum",
+"classe":"HOM"
+},
+{
+"chave":"aesculus glabra",
+"classe":"HOM"
+},
+{
+"chave":"aesculus hippocastanum",
+"classe":"HOM"
+},
+{
+"chave":"aesculus hippocastanum l.",
+"classe":"PM"
+},
+{
+"chave":"aethiops antimonialis",
+"classe":"HOM"
+},
+{
+"chave":"aethiops mercurialis-mineralis",
+"classe":"HOM"
+},
+{
+"chave":"aethusa cynapium",
+"classe":"HOM"
+},
+{
+"chave":"agaricinum",
+"classe":"HOM"
+},
+{
+"chave":"agaricus campanulatus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus campestris",
+"classe":"HOM"
+},
+{
+"chave":"agaricus citrinus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus emeticus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus muscarius",
+"classe":"HOM"
+},
+{
+"chave":"agaricus pantherinus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus phalloides",
+"classe":"HOM"
+},
+{
+"chave":"agaricus procerus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus semiglobatus",
+"classe":"HOM"
+},
+{
+"chave":"agaricus stercorarius",
+"classe":"HOM"
+},
+{
+"chave":"agave americana",
+"classe":"HOM"
+},
+{
+"chave":"agave tequilana",
+"classe":"HOM"
+},
+{
+"chave":"agnus castus",
+"classe":"HOM"
+},
+{
+"chave":"agraphis nutans",
+"classe":"HOM"
+},
+{
+"chave":"agregado de albumina humana serica iodada (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"agrimonia eupatoria",
+"classe":"HOM"
+},
+{
+"chave":"agrostemma githago",
+"classe":"HOM"
+},
+{
+"chave":"agua (15 o)",
+"classe":"RAD"
+},
+{
+"chave":"ailanthus glandulosus",
+"classe":"HOM"
+},
+{
+"chave":"albumina humana serica (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"albumina humana serica coloidal (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"albumina humana serica cromada (51 cr)",
+"classe":"RAD"
+},
+{
+"chave":"albumina humana serica iodada (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"albumina humana serica iodada (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"alcool butilico",
+"classe":"EXA"
+},
+{
+"chave":"alcool cinamilico",
+"classe":"EXA"
+},
+{
+"chave":"alcool de lanolina",
+"classe":"EXA"
+},
+{
+"chave":"alcool de lanolina acetilada",
+"classe":"EXA"
+},
+{
+"chave":"alcool diclorobenzilico",
+"classe":"EXA"
+},
+{
+"chave":"alcool metilico",
+"classe":"EXA"
+},
+{
+"chave":"alcool terc-butilico",
+"classe":"EXA"
+},
+{
+"chave":"aletris farinosa",
+"classe":"HOM"
+},
+{
+"chave":"alfabera-hialuronidase",
+"classe":"EXA"
+},
+{
+"chave":"alfalactose monoidratada",
+"classe":"EXA"
+},
+{
+"chave":"alfaterpinoleno",
+"classe":"EXA"
+},
+{
+"chave":"alisma plantago",
+"classe":"HOM"
+},
+{
+"chave":"allium cepa",
+"classe":"HOM"
+},
+{
+"chave":"allium cepa l.",
+"classe":"PM"
+},
+{
+"chave":"allium sativum",
+"classe":"HOM"
+},
+{
+"chave":"allium sativum l.",
+"classe":"PM"
+},
+{
+"chave":"alloxanum",
+"classe":"HOM"
+},
+{
+"chave":"alnus serrulata",
+"classe":"HOM"
+},
+{
+"chave":"aloe africana mill.",
+"classe":"PM"
+},
+{
+"chave":"aloe ferox mill.",
+"classe":"PM"
+},
+{
+"chave":"aloe socotrina",
+"classe":"HOM"
+},
+{
+"chave":"aloe spicata l. f.",
+"classe":"PM"
+},
+{
+"chave":"aloe vera (l.) burm. f.",
+"classe":"PM"
+},
+{
+"chave":"aloysia polystachya (griseb.) moldenke",
+"classe":"PM"
+},
+{
+"chave":"alpinia zerumbet (pers.) b.l. burtt & r.m. sm.",
+"classe":"PM"
+},
+{
+"chave":"alstonia constricta",
+"classe":"HOM"
+},
+{
+"chave":"alstonia scholaris",
+"classe":"HOM"
+},
+{
+"chave":"althaea officinalis",
+"classe":"HOM"
+},
+{
+"chave":"althaea officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"alumen",
+"classe":"HOM"
+},
+{
+"chave":"alumina",
+"classe":"HOM"
+},
+{
+"chave":"alumina silicata",
+"classe":"HOM"
+},
+{
+"chave":"aluminium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"aluminium muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"amarelo crepusculo",
+"classe":"EXA"
+},
+{
+"chave":"amarelo crepusculo laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"amarelo curcumina 100",
+"classe":"EXA"
+},
+{
+"chave":"amarelo de fluoresceina",
+"classe":"EXA"
+},
+{
+"chave":"amarelo de quinolina laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"amarelo de tartrazina",
+"classe":"EXA"
+},
+{
+"chave":"amarelo de tartrazina laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"ambra grisea",
+"classe":"HOM"
+},
+{
+"chave":"ambrosia artemisifolia",
+"classe":"HOM"
+},
+{
+"chave":"amespro fluornicotinamida (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"amidoctenilsuccinato de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"amidoctenilsuccinato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"aminometilpropanol",
+"classe":"EXA"
+},
+{
+"chave":"ammi visnaga",
+"classe":"HOM"
+},
+{
+"chave":"ammoniacum gummi",
+"classe":"HOM"
+},
+{
+"chave":"ammonium aceticum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium benzoicum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium bromatum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium causticum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium iodatum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium nitricum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium picricum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium tartaricum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium valerianicum",
+"classe":"HOM"
+},
+{
+"chave":"ammonium vanadatum",
+"classe":"HOM"
+},
+{
+"chave":"amonia (13 n)",
+"classe":"RAD"
+},
+{
+"chave":"amorphophallus rivieri",
+"classe":"HOM"
+},
+{
+"chave":"amygdalae amarae",
+"classe":"HOM"
+},
+{
+"chave":"amygdalus persica",
+"classe":"HOM"
+},
+{
+"chave":"amyl nitrosum",
+"classe":"HOM"
+},
+{
+"chave":"anacardium occidentale",
+"classe":"HOM"
+},
+{
+"chave":"anacardium orientale",
+"classe":"HOM"
+},
+{
+"chave":"anadenanthera colubrina (vell.) brenan",
+"classe":"PM"
+},
+{
+"chave":"anagallis arvensis",
+"classe":"HOM"
+},
+{
+"chave":"ananas comosus (l.) merr.",
+"classe":"PM"
+},
+{
+"chave":"anas barbariae hepatis et cordis extractum",
+"classe":"HOM"
+},
+{
+"chave":"anatherum muricatum",
+"classe":"HOM"
+},
+{
+"chave":"anemone nemorosa",
+"classe":"HOM"
+},
+{
+"chave":"anemopsis californica",
+"classe":"HOM"
+},
+{
+"chave":"anethum graveolens",
+"classe":"HOM"
+},
+{
+"chave":"anethum graveolens l.",
+"classe":"PM"
+},
+{
+"chave":"angelica archangelica",
+"classe":"HOM"
+},
+{
+"chave":"angelica atropurpurea",
+"classe":"HOM"
+},
+{
+"chave":"angophora lanceolata",
+"classe":"HOM"
+},
+{
+"chave":"angustura vera",
+"classe":"HOM"
+},
+{
+"chave":"anilinum",
+"classe":"HOM"
+},
+{
+"chave":"anilinum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"anisaldeido",
+"classe":"EXA"
+},
+{
+"chave":"anisum",
+"classe":"HOM"
+},
+{
+"chave":"anthemis nobilis",
+"classe":"HOM"
+},
+{
+"chave":"anthoxanthum odoratum",
+"classe":"HOM"
+},
+{
+"chave":"anthracinum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium arsenicicum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium crudum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium iodatum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium oxydatum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium sulphuratum auratum",
+"classe":"HOM"
+},
+{
+"chave":"antimonium tartaricum",
+"classe":"HOM"
+},
+{
+"chave":"antipyrinum",
+"classe":"HOM"
+},
+{
+"chave":"antranilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"apcitida (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"apiolum",
+"classe":"HOM"
+},
+{
+"chave":"apis mellifica",
+"classe":"HOM"
+},
+{
+"chave":"apisinum",
+"classe":"HOM"
+},
+{
+"chave":"apium gaveolens",
+"classe":"HOM"
+},
+{
+"chave":"apocynum androsaemifolium",
+"classe":"HOM"
+},
+{
+"chave":"apocynum cannabinum",
+"classe":"HOM"
+},
+{
+"chave":"aqua marina",
+"classe":"HOM"
+},
+{
+"chave":"aquilegia vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"aralia hispida",
+"classe":"HOM"
+},
+{
+"chave":"aralia quinquefolia",
+"classe":"HOM"
+},
+{
+"chave":"aralia racemosa",
+"classe":"HOM"
+},
+{
+"chave":"aranea diadema",
+"classe":"HOM"
+},
+{
+"chave":"arbutinum",
+"classe":"HOM"
+},
+{
+"chave":"arbutus andrachne",
+"classe":"HOM"
+},
+{
+"chave":"arcitumomabe (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"arctium lappa l.",
+"classe":"PM"
+},
+{
+"chave":"arctostaphylos uva-ursi (l.) spreng.",
+"classe":"PM"
+},
+{
+"chave":"areca catechu",
+"classe":"HOM"
+},
+{
+"chave":"argemone mexicana",
+"classe":"HOM"
+},
+{
+"chave":"argentum cyanatum",
+"classe":"HOM"
+},
+{
+"chave":"argentum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"argentum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"argentum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"argentum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"argentum oxydatum",
+"classe":"HOM"
+},
+{
+"chave":"argentum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"aristolochia clematitis",
+"classe":"HOM"
+},
+{
+"chave":"aristolochia milhomens",
+"classe":"HOM"
+},
+{
+"chave":"aristolochia serpentaria",
+"classe":"HOM"
+},
+{
+"chave":"arnica montana",
+"classe":"HOM"
+},
+{
+"chave":"arnica montana l.",
+"classe":"PM"
+},
+{
+"chave":"arsenato de sodio (74 as)",
+"classe":"RAD"
+},
+{
+"chave":"arsenicum album",
+"classe":"HOM"
+},
+{
+"chave":"arsenicum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"arsenicum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"arsenicum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"arsenicum sulphuratum flavum",
+"classe":"HOM"
+},
+{
+"chave":"arsenicum sulphuratum rubrum",
+"classe":"HOM"
+},
+{
+"chave":"artemisia abrotanum",
+"classe":"HOM"
+},
+{
+"chave":"artemisia absinthium",
+"classe":"HOM"
+},
+{
+"chave":"artemisia absinthium l.",
+"classe":"PM"
+},
+{
+"chave":"artemisia argyi h.lev. & vaniot",
+"classe":"PM"
+},
+{
+"chave":"artemisia vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"arum dracontium",
+"classe":"HOM"
+},
+{
+"chave":"arum italicum",
+"classe":"HOM"
+},
+{
+"chave":"arum maculatum",
+"classe":"HOM"
+},
+{
+"chave":"arum triphyllum",
+"classe":"HOM"
+},
+{
+"chave":"arundo mauritanica",
+"classe":"HOM"
+},
+{
+"chave":"asafoetida",
+"classe":"HOM"
+},
+{
+"chave":"asarum canadense",
+"classe":"HOM"
+},
+{
+"chave":"asarum europaeum",
+"classe":"HOM"
+},
+{
+"chave":"asclepias curassavica",
+"classe":"HOM"
+},
+{
+"chave":"asclepias incarnata",
+"classe":"HOM"
+},
+{
+"chave":"asclepias syriaca",
+"classe":"HOM"
+},
+{
+"chave":"asclepias tuberosa",
+"classe":"HOM"
+},
+{
+"chave":"asclepias vincetoxicum",
+"classe":"HOM"
+},
+{
+"chave":"asimina triloba",
+"classe":"HOM"
+},
+{
+"chave":"asparagus officinalis",
+"classe":"HOM"
+},
+{
+"chave":"asperula odorata",
+"classe":"HOM"
+},
+{
+"chave":"aspidosperma",
+"classe":"HOM"
+},
+{
+"chave":"astacus fluviatilis",
+"classe":"HOM"
+},
+{
+"chave":"asterias rubens",
+"classe":"HOM"
+},
+{
+"chave":"astragalus menziesii",
+"classe":"HOM"
+},
+{
+"chave":"atropa belladonna",
+"classe":"HOM"
+},
+{
+"chave":"atropa belladonna l.",
+"classe":"PM"
+},
+{
+"chave":"atropinum",
+"classe":"HOM"
+},
+{
+"chave":"atropinum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"aurum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"aurum chloratum",
+"classe":"HOM"
+},
+{
+"chave":"aurum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"aurum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"aurum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"aurum muriaticum kalinatum",
+"classe":"HOM"
+},
+{
+"chave":"aurum muriaticum natronatum",
+"classe":"HOM"
+},
+{
+"chave":"aurum sulphuratum",
+"classe":"HOM"
+},
+{
+"chave":"avena sativa",
+"classe":"HOM"
+},
+{
+"chave":"azadirachta indica",
+"classe":"HOM"
+},
+{
+"chave":"azul brilhante",
+"classe":"EXA"
+},
+{
+"chave":"azul brilhante 133 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"azul da prussia",
+"classe":"EXA"
+},
+{
+"chave":"azul de indigotina",
+"classe":"EXA"
+},
+{
+"chave":"azul de indigotina 132 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"azul merantina 131",
+"classe":"EXA"
+},
+{
+"chave":"azul patente",
+"classe":"EXA"
+},
+{
+"chave":"azul sulfano",
+"classe":"EXA"
+},
+{
+"chave":"baccharis trimera (less.) dc.",
+"classe":"PM"
+},
+{
+"chave":"bacopa monnieri (l.) wettst.",
+"classe":"PM"
+},
+{
+"chave":"badiaga",
+"classe":"HOM"
+},
+{
+"chave":"baja",
+"classe":"HOM"
+},
+{
+"chave":"balsamum peruvianum",
+"classe":"HOM"
+},
+{
+"chave":"baptisia tinctoria",
+"classe":"HOM"
+},
+{
+"chave":"barium oxacsuccinicum",
+"classe":"HOM"
+},
+{
+"chave":"barosma",
+"classe":"HOM"
+},
+{
+"chave":"baryta acetica",
+"classe":"HOM"
+},
+{
+"chave":"baryta carbonica",
+"classe":"HOM"
+},
+{
+"chave":"baryta iodata",
+"classe":"HOM"
+},
+{
+"chave":"baryta muriatica",
+"classe":"HOM"
+},
+{
+"chave":"bauhinia forficata link",
+"classe":"PM"
+},
+{
+"chave":"beenato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"bellis perennis",
+"classe":"HOM"
+},
+{
+"chave":"benzinum",
+"classe":"HOM"
+},
+{
+"chave":"benzoato de etila",
+"classe":"EXA"
+},
+{
+"chave":"benzoato de potassio",
+"classe":"EXA"
+},
+{
+"chave":"benzoin odoriferum",
+"classe":"HOM"
+},
+{
+"chave":"benzoinum",
+"classe":"HOM"
+},
+{
+"chave":"berberinum",
+"classe":"HOM"
+},
+{
+"chave":"berberis aquifolium",
+"classe":"HOM"
+},
+{
+"chave":"berberis laurina thunb.",
+"classe":"PM"
+},
+{
+"chave":"berberis vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"beryllium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"beta vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"betainum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"betaionona",
+"classe":"EXA"
+},
+{
+"chave":"betamirceno",
+"classe":"EXA"
+},
+{
+"chave":"betaocimeno",
+"classe":"EXA"
+},
+{
+"chave":"betula alba",
+"classe":"HOM"
+},
+{
+"chave":"betula pendula roth",
+"classe":"PM"
+},
+{
+"chave":"betula pubescens ehrh.",
+"classe":"PM"
+},
+{
+"chave":"bicisato (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"bisbutilaminofumaril dicetopiperazina",
+"classe":"EXA"
+},
+{
+"chave":"bismuthum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"bismuthum oxydatum",
+"classe":"HOM"
+},
+{
+"chave":"bismuthum subnitricum",
+"classe":"HOM"
+},
+{
+"chave":"bissulfito de sodio",
+"classe":"EXA"
+},
+{
+"chave":"bixa orellana",
+"classe":"HOM"
+},
+{
+"chave":"bixa orellana l.",
+"classe":"PM"
+},
+{
+"chave":"blatta americana",
+"classe":"HOM"
+},
+{
+"chave":"blatta orientalis",
+"classe":"HOM"
+},
+{
+"chave":"boletus luridus",
+"classe":"HOM"
+},
+{
+"chave":"boletus satanas",
+"classe":"HOM"
+},
+{
+"chave":"bombyx processionea",
+"classe":"HOM"
+},
+{
+"chave":"borago officinalis",
+"classe":"HOM"
+},
+{
+"chave":"borago officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"borax",
+"classe":"HOM"
+},
+{
+"chave":"boswellia serrata roxb. ex colebr.",
+"classe":"PM"
+},
+{
+"chave":"bothrops lanceolatus",
+"classe":"HOM"
+},
+{
+"chave":"bovista",
+"classe":"HOM"
+},
+{
+"chave":"brassica napus",
+"classe":"HOM"
+},
+{
+"chave":"bromum",
+"classe":"HOM"
+},
+{
+"chave":"brucela melitensis",
+"classe":"HOM"
+},
+{
+"chave":"brucinum",
+"classe":"HOM"
+},
+{
+"chave":"bryonia alba",
+"classe":"HOM"
+},
+{
+"chave":"bryophyllum calycinum",
+"classe":"HOM"
+},
+{
+"chave":"bufo rana",
+"classe":"HOM"
+},
+{
+"chave":"bunias orientalis",
+"classe":"HOM"
+},
+{
+"chave":"butano",
+"classe":"EXA"
+},
+{
+"chave":"buthus australis",
+"classe":"HOM"
+},
+{
+"chave":"butirato de amila",
+"classe":"EXA"
+},
+{
+"chave":"butirato de hexila",
+"classe":"EXA"
+},
+{
+"chave":"butirato de isoamila",
+"classe":"EXA"
+},
+{
+"chave":"buxus sempervirens",
+"classe":"HOM"
+},
+{
+"chave":"cacao",
+"classe":"HOM"
+},
+{
+"chave":"cactus grandiflorus",
+"classe":"HOM"
+},
+{
+"chave":"cadmium bromatum",
+"classe":"HOM"
+},
+{
+"chave":"cadmium iodatum",
+"classe":"HOM"
+},
+{
+"chave":"cadmium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"cadmium muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"cadmium sulphuratum",
+"classe":"HOM"
+},
+{
+"chave":"cadmium sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"caffeinum",
+"classe":"HOM"
+},
+{
+"chave":"cahinca",
+"classe":"HOM"
+},
+{
+"chave":"cajuputum",
+"classe":"HOM"
+},
+{
+"chave":"caladium seguinum",
+"classe":"HOM"
+},
+{
+"chave":"calcarea acetica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea arsenicica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea bromata",
+"classe":"HOM"
+},
+{
+"chave":"calcarea carbonica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea caustica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea fluorica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea hypophosphorosa",
+"classe":"HOM"
+},
+{
+"chave":"calcarea iodata",
+"classe":"HOM"
+},
+{
+"chave":"calcarea lactica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea muriatica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea oxalica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea phosphorica",
+"classe":"HOM"
+},
+{
+"chave":"calcarea picrata",
+"classe":"HOM"
+},
+{
+"chave":"calcarea silicata",
+"classe":"HOM"
+},
+{
+"chave":"calcarea sulphurica",
+"classe":"HOM"
+},
+{
+"chave":"calendula officinalis",
+"classe":"HOM"
+},
+{
+"chave":"calendula officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"calotropis gigantea",
+"classe":"HOM"
+},
+{
+"chave":"caltha palustris",
+"classe":"HOM"
+},
+{
+"chave":"camellia sinensis (l.) kuntze",
+"classe":"PM"
+},
+{
+"chave":"camphora",
+"classe":"HOM"
+},
+{
+"chave":"camphora monobromata",
+"classe":"HOM"
+},
+{
+"chave":"canchalagua",
+"classe":"HOM"
+},
+{
+"chave":"candida albicans",
+"classe":"HOM"
+},
+{
+"chave":"cannabis sativa",
+"classe":"HOM"
+},
+{
+"chave":"cannabis sativa l.",
+"classe":"PM"
+},
+{
+"chave":"cantharidinum",
+"classe":"HOM"
+},
+{
+"chave":"cantharis vesicatoria",
+"classe":"HOM"
+},
+{
+"chave":"caprato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"caprato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"caprilato de alila",
+"classe":"EXA"
+},
+{
+"chave":"caprilato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"caprilocaprato de polioxilglicerideos",
+"classe":"EXA"
+},
+{
+"chave":"caproato de isoamila",
+"classe":"EXA"
+},
+{
+"chave":"capromabe pendetida (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"capsicum annuum",
+"classe":"HOM"
+},
+{
+"chave":"capsicum annuum l.",
+"classe":"PM"
+},
+{
+"chave":"carapa guianensis aubl.",
+"classe":"PM"
+},
+{
+"chave":"carbo animalis",
+"classe":"HOM"
+},
+{
+"chave":"carbo vegetabilis",
+"classe":"HOM"
+},
+{
+"chave":"carbonato de propileno",
+"classe":"EXA"
+},
+{
+"chave":"carbonato de sodio hidratado",
+"classe":"EXA"
+},
+{
+"chave":"carbonato de sodio monoidratado",
+"classe":"EXA"
+},
+{
+"chave":"carboneum",
+"classe":"HOM"
+},
+{
+"chave":"carboneum chloratum",
+"classe":"HOM"
+},
+{
+"chave":"carboneum hydrogenisatum",
+"classe":"HOM"
+},
+{
+"chave":"carboneum oxygenisatum",
+"classe":"HOM"
+},
+{
+"chave":"carboneum sulfuratum",
+"classe":"HOM"
+},
+{
+"chave":"cardiospermum",
+"classe":"HOM"
+},
+{
+"chave":"carduus benedictus",
+"classe":"HOM"
+},
+{
+"chave":"carduus marianus",
+"classe":"HOM"
+},
+{
+"chave":"carica papaya l.",
+"classe":"PM"
+},
+{
+"chave":"carmelose",
+"classe":"EXA"
+},
+{
+"chave":"carmelose sodica",
+"classe":"EXA"
+},
+{
+"chave":"cartilago suis",
+"classe":"HOM"
+},
+{
+"chave":"carum carvi",
+"classe":"HOM"
+},
+{
+"chave":"carum carvi l.",
+"classe":"PM"
+},
+{
+"chave":"caryocar brasiliense cambess.",
+"classe":"PM"
+},
+{
+"chave":"cascarilla",
+"classe":"HOM"
+},
+{
+"chave":"casearia sylvestris sw.",
+"classe":"PM"
+},
+{
+"chave":"cassada",
+"classe":"HOM"
+},
+{
+"chave":"cassia fistula l.",
+"classe":"PM"
+},
+{
+"chave":"castor equi",
+"classe":"HOM"
+},
+{
+"chave":"castoreum",
+"classe":"HOM"
+},
+{
+"chave":"catalpa bignonioides",
+"classe":"HOM"
+},
+{
+"chave":"caulophyllum thalictroides",
+"classe":"HOM"
+},
+{
+"chave":"causticum",
+"classe":"HOM"
+},
+{
+"chave":"ceanothus americanus",
+"classe":"HOM"
+},
+{
+"chave":"cedron",
+"classe":"HOM"
+},
+{
+"chave":"celtis occidentalis",
+"classe":"HOM"
+},
+{
+"chave":"celulose microcristalina silicificada",
+"classe":"EXA"
+},
+{
+"chave":"cenchris contortrix",
+"classe":"HOM"
+},
+{
+"chave":"centaurea tagana",
+"classe":"HOM"
+},
+{
+"chave":"centaurium erythraea rafn",
+"classe":"PM"
+},
+{
+"chave":"centella asiatica (l.) urb.",
+"classe":"PM"
+},
+{
+"chave":"cephaelis ipecacuanha (brot.) a. rich",
+"classe":"PM"
+},
+{
+"chave":"cephalanthus occidentalis",
+"classe":"HOM"
+},
+{
+"chave":"cera de candelila",
+"classe":"EXA"
+},
+{
+"chave":"cera microcristalina",
+"classe":"EXA"
+},
+{
+"chave":"cerasus virginiana",
+"classe":"HOM"
+},
+{
+"chave":"cerebrum suis",
+"classe":"HOM"
+},
+{
+"chave":"cereus bomplandii",
+"classe":"HOM"
+},
+{
+"chave":"cereus jamacaru dc.",
+"classe":"PM"
+},
+{
+"chave":"cereus peruvianus (l.) mill.",
+"classe":"PM"
+},
+{
+"chave":"cereus serpentinus",
+"classe":"HOM"
+},
+{
+"chave":"cerium oxalicum",
+"classe":"HOM"
+},
+{
+"chave":"cetraria islandica",
+"classe":"HOM"
+},
+{
+"chave":"chamaemelum nobile (l.) all.",
+"classe":"PM"
+},
+{
+"chave":"cheiranthus cheiri",
+"classe":"HOM"
+},
+{
+"chave":"chelidonium majus",
+"classe":"HOM"
+},
+{
+"chave":"chelone glabra",
+"classe":"HOM"
+},
+{
+"chave":"chenopodii glauci aphis",
+"classe":"HOM"
+},
+{
+"chave":"chenopodium anthelminthicum",
+"classe":"HOM"
+},
+{
+"chave":"chenopodium vulvaria",
+"classe":"HOM"
+},
+{
+"chave":"chimaphila maculata",
+"classe":"HOM"
+},
+{
+"chave":"chimaphila umbellata",
+"classe":"HOM"
+},
+{
+"chave":"china officinallis",
+"classe":"HOM"
+},
+{
+"chave":"chininum arsenicicum",
+"classe":"HOM"
+},
+{
+"chave":"chininum arsenicosum",
+"classe":"HOM"
+},
+{
+"chave":"chininum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"chininum purum",
+"classe":"HOM"
+},
+{
+"chave":"chininum salicylicum",
+"classe":"HOM"
+},
+{
+"chave":"chininum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"chionanthus virginica",
+"classe":"HOM"
+},
+{
+"chave":"chloramphenicolum",
+"classe":"HOM"
+},
+{
+"chave":"chloroformum",
+"classe":"HOM"
+},
+{
+"chave":"chlorpromazinum",
+"classe":"HOM"
+},
+{
+"chave":"chlorum",
+"classe":"HOM"
+},
+{
+"chave":"cholesterinum",
+"classe":"HOM"
+},
+{
+"chave":"cholinum",
+"classe":"HOM"
+},
+{
+"chave":"chromium kalium sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"chromium oxydatum",
+"classe":"HOM"
+},
+{
+"chave":"chromium sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"chrysanthemum leucanthemum",
+"classe":"HOM"
+},
+{
+"chave":"chrysarobinum",
+"classe":"HOM"
+},
+{
+"chave":"cianocobalamina (57 co)",
+"classe":"RAD"
+},
+{
+"chave":"cianocobalamina (58 co)",
+"classe":"RAD"
+},
+{
+"chave":"cianocobalamina (60 co)",
+"classe":"RAD"
+},
+{
+"chave":"cicer arietinum",
+"classe":"HOM"
+},
+{
+"chave":"cichorium intybus",
+"classe":"HOM"
+},
+{
+"chave":"cicuta maculata",
+"classe":"HOM"
+},
+{
+"chave":"cicuta virosa",
+"classe":"HOM"
+},
+{
+"chave":"cimex lectularius",
+"classe":"HOM"
+},
+{
+"chave":"cimicifuga racemosa",
+"classe":"HOM"
+},
+{
+"chave":"cina",
+"classe":"HOM"
+},
+{
+"chave":"cinamaldeido",
+"classe":"EXA"
+},
+{
+"chave":"cinchona calisaya wedd.",
+"classe":"PM"
+},
+{
+"chave":"cinchona pubescens",
+"classe":"HOM"
+},
+{
+"chave":"cinchoninum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"cineraria maritima",
+"classe":"HOM"
+},
+{
+"chave":"cinnamomum camphora (l.) j.presl",
+"classe":"PM"
+},
+{
+"chave":"cinnamomum cassia (l.) j. presl",
+"classe":"PM"
+},
+{
+"chave":"cinnamomum verum j. presl",
+"classe":"PM"
+},
+{
+"chave":"cinnamomum zeylanicum",
+"classe":"HOM"
+},
+{
+"chave":"cis-3-hexenol",
+"classe":"EXA"
+},
+{
+"chave":"cissus quadrangularis l.",
+"classe":"PM"
+},
+{
+"chave":"cistus canadensis",
+"classe":"HOM"
+},
+{
+"chave":"citral",
+"classe":"EXA"
+},
+{
+"chave":"citrato de galio (67 ga)",
+"classe":"RAD"
+},
+{
+"chave":"citrato de itrio coloidal (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"citrato dissodico sesqui-hidratado",
+"classe":"EXA"
+},
+{
+"chave":"citrato ferrico (59 fe)",
+"classe":"RAD"
+},
+{
+"chave":"citrato ferroso (59 fe)",
+"classe":"RAD"
+},
+{
+"chave":"citronelol",
+"classe":"EXA"
+},
+{
+"chave":"citrus aurantium l.",
+"classe":"PM"
+},
+{
+"chave":"citrus aurantium l. subsp. aurantium",
+"classe":"PM"
+},
+{
+"chave":"citrus decumana",
+"classe":"HOM"
+},
+{
+"chave":"citrus limonum",
+"classe":"HOM"
+},
+{
+"chave":"citrus medica l.",
+"classe":"PM"
+},
+{
+"chave":"citrus sinensis (l.) osbeck",
+"classe":"PM"
+},
+{
+"chave":"citrus vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"citrus x limon (l.) osbeck",
+"classe":"PM"
+},
+{
+"chave":"clatrato de criptonio (85 kr)",
+"classe":"RAD"
+},
+{
+"chave":"clematis erecta",
+"classe":"HOM"
+},
+{
+"chave":"clematis virginiana",
+"classe":"HOM"
+},
+{
+"chave":"clematis vitalba",
+"classe":"HOM"
+},
+{
+"chave":"cloreto cobaltoso (57 co)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto cobaltoso (60 co)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto cobaltoso hexaidratado",
+"classe":"EXA"
+},
+{
+"chave":"cloreto cromico (51 cr)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de calcio (45 ca)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de calcio (47 ca)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de cesio (131 cs)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de estroncio (85 sr)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de estroncio (89 sr)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de furifosmina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de indio (113m in)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de radio (223 ra)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de sodio (22 na)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de talio (201 tl)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de trofolastate (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto de zinco (65 zn)",
+"classe":"RAD"
+},
+{
+"chave":"cloreto ferrico (59 fe)",
+"classe":"RAD"
+},
+{
+"chave":"cloridrato de iofetamina (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"clormerodrina (197 hg)",
+"classe":"RAD"
+},
+{
+"chave":"clormerodrina (203 hg)",
+"classe":"RAD"
+},
+{
+"chave":"cobaltum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"cobaltum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"coccinella septempunctata",
+"classe":"HOM"
+},
+{
+"chave":"cocculus indicus",
+"classe":"HOM"
+},
+{
+"chave":"coccus cacti",
+"classe":"HOM"
+},
+{
+"chave":"cochlearia armoracia",
+"classe":"HOM"
+},
+{
+"chave":"cochlearia officinalis",
+"classe":"HOM"
+},
+{
+"chave":"cococaprilocaprato",
+"classe":"EXA"
+},
+{
+"chave":"coenzyme a",
+"classe":"HOM"
+},
+{
+"chave":"coffea canephora pierre ex a. froehner",
+"classe":"PM"
+},
+{
+"chave":"coffea cruda",
+"classe":"HOM"
+},
+{
+"chave":"coffea tosta",
+"classe":"HOM"
+},
+{
+"chave":"coix lacryma-jobi l.",
+"classe":"PM"
+},
+{
+"chave":"cola nitida (vent.) schott & endl.",
+"classe":"PM"
+},
+{
+"chave":"colamidopropil-lactobionamidopropil-colamida",
+"classe":"EXA"
+},
+{
+"chave":"colchicinum",
+"classe":"HOM"
+},
+{
+"chave":"colchicum autumnale",
+"classe":"HOM"
+},
+{
+"chave":"collinsonia canadensis",
+"classe":"HOM"
+},
+{
+"chave":"colocynthinum",
+"classe":"HOM"
+},
+{
+"chave":"colocynthis",
+"classe":"HOM"
+},
+{
+"chave":"colostrum",
+"classe":"HOM"
+},
+{
+"chave":"commiphora myrrha (nees) engl.",
+"classe":"PM"
+},
+{
+"chave":"comocladia dentata",
+"classe":"HOM"
+},
+{
+"chave":"conchiolinum",
+"classe":"HOM"
+},
+{
+"chave":"condurango",
+"classe":"HOM"
+},
+{
+"chave":"coniinum",
+"classe":"HOM"
+},
+{
+"chave":"coniinum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"conium maculatum",
+"classe":"HOM"
+},
+{
+"chave":"convallaria majalis",
+"classe":"HOM"
+},
+{
+"chave":"copaifera langsdorffii desf.",
+"classe":"PM"
+},
+{
+"chave":"copaifera multijuga (hayne) kuntze",
+"classe":"PM"
+},
+{
+"chave":"copaifera paupera (herzog) dwyer",
+"classe":"PM"
+},
+{
+"chave":"copaifera reticulata ducke",
+"classe":"PM"
+},
+{
+"chave":"copaiva officinalis",
+"classe":"HOM"
+},
+{
+"chave":"copernicia prunifera (mill.) h. e. moore",
+"classe":"PM"
+},
+{
+"chave":"copolimero de acetato de vinila e etileno",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acetato e ftalato de vinila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acido acrilico e divinilbenzeno",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acido acrilico, acrilato de 2-etilexila, acrilato de metila e metacrilato de glicidila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acido metacrilico e acrilato de etila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acido metacrilico e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acido metacrilico e metacrilato de metila (1:2)",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acrilamida e acriloildimetiltaurato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acrilato de butila e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acrilato de etila e metacrilato de metila (2:1)",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acrilato de etila, metacrilato de cloreto de trimetilamonio de etila e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acriloildimetiltaurato de amonio e vinilpirrolidona",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de acriloildimetiltaurato de sodio e acrilato de hidroxietila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de alcool polivinilico e macrogol",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de dimetacrilato de etilenoglicol e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de glicolida e lactida",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de maleato de monobutila e metoxieteno",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de maleato de monoetila e metoxieteno",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de metacrilato de butila e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de metacrilato de butila, metacrilato de dimetilaminoetila e metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"copolimero de polietilenoglicol, acetato de polivinila e polivinilcaprolactama",
+"classe":"EXA"
+},
+{
+"chave":"copolimero dos acidos glicolico e lactico",
+"classe":"EXA"
+},
+{
+"chave":"copolimero em bloco de estireno, isopreno e estireno",
+"classe":"EXA"
+},
+{
+"chave":"copolimero em bloco de etilenoglicol e lactida",
+"classe":"EXA"
+},
+{
+"chave":"copolimero em bloco de lactida, etilenoglicol e lactida",
+"classe":"EXA"
+},
+{
+"chave":"corallium rubrum",
+"classe":"HOM"
+},
+{
+"chave":"corallorhiza odontorhiza",
+"classe":"HOM"
+},
+{
+"chave":"cordia verbenacea dc.",
+"classe":"PM"
+},
+{
+"chave":"coriandrum sativum l.",
+"classe":"PM"
+},
+{
+"chave":"coriaria ruscifolia",
+"classe":"HOM"
+},
+{
+"chave":"cornus alternifolia",
+"classe":"HOM"
+},
+{
+"chave":"cornus circinata",
+"classe":"HOM"
+},
+{
+"chave":"cornus florida",
+"classe":"HOM"
+},
+{
+"chave":"cortisone aceticum",
+"classe":"HOM"
+},
+{
+"chave":"corydalis canadensis",
+"classe":"HOM"
+},
+{
+"chave":"corymbia citriodora (hook.) k.d.hill & l.a.s.johnson",
+"classe":"PM"
+},
+{
+"chave":"cotyledon umbilicus",
+"classe":"HOM"
+},
+{
+"chave":"crataegus azarolus l.",
+"classe":"PM"
+},
+{
+"chave":"crataegus laevigata (poir.) dc.",
+"classe":"PM"
+},
+{
+"chave":"crataegus monogyna jacq.",
+"classe":"PM"
+},
+{
+"chave":"crataegus nigra waldst. et kit.",
+"classe":"PM"
+},
+{
+"chave":"crataegus oxyacantha",
+"classe":"HOM"
+},
+{
+"chave":"crataegus pentagyna waldst. & kit. ex willd.",
+"classe":"PM"
+},
+{
+"chave":"crataegus rhipidophylla gand.",
+"classe":"PM"
+},
+{
+"chave":"crateva magna (lour.) dc.",
+"classe":"PM"
+},
+{
+"chave":"cresolum",
+"classe":"HOM"
+},
+{
+"chave":"crocus sativus",
+"classe":"HOM"
+},
+{
+"chave":"cromato de sodio (51 cr)",
+"classe":"RAD"
+},
+{
+"chave":"croscarmelose sodica",
+"classe":"EXA"
+},
+{
+"chave":"crospolimero de dimeticona",
+"classe":"EXA"
+},
+{
+"chave":"crospovidona",
+"classe":"EXA"
+},
+{
+"chave":"crotalus cascavella",
+"classe":"HOM"
+},
+{
+"chave":"crotalus horridus",
+"classe":"HOM"
+},
+{
+"chave":"croton echioideus baill.",
+"classe":"PM"
+},
+{
+"chave":"croton heliotropiifolius kunth",
+"classe":"PM"
+},
+{
+"chave":"croton tiglium",
+"classe":"HOM"
+},
+{
+"chave":"cubeba officinalis",
+"classe":"HOM"
+},
+{
+"chave":"cucurbita citrullus",
+"classe":"HOM"
+},
+{
+"chave":"cucurbita pepo",
+"classe":"HOM"
+},
+{
+"chave":"culex musca",
+"classe":"HOM"
+},
+{
+"chave":"cuphea petiolata",
+"classe":"HOM"
+},
+{
+"chave":"cupressus australis",
+"classe":"HOM"
+},
+{
+"chave":"cupressus lawsoniana",
+"classe":"HOM"
+},
+{
+"chave":"cuprum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum ammoniae sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum arsenicosum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum oxydatum nigrum",
+"classe":"HOM"
+},
+{
+"chave":"cuprum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"curare",
+"classe":"HOM"
+},
+{
+"chave":"curcuma longa l.",
+"classe":"PM"
+},
+{
+"chave":"cyclamen europaeum",
+"classe":"HOM"
+},
+{
+"chave":"cydonia vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"cymbopogon citratus (dc.) stapf",
+"classe":"PM"
+},
+{
+"chave":"cymbopogon martini (roxb.) w. watson",
+"classe":"PM"
+},
+{
+"chave":"cynara cardunculus l. subsp. flavescens wiklund",
+"classe":"PM"
+},
+{
+"chave":"cynara scolymus",
+"classe":"HOM"
+},
+{
+"chave":"cynara scolymus l.",
+"classe":"PM"
+},
+{
+"chave":"cynodon dactylon",
+"classe":"HOM"
+},
+{
+"chave":"cyperus rotundus l.",
+"classe":"PM"
+},
+{
+"chave":"cypripedium pubescens",
+"classe":"HOM"
+},
+{
+"chave":"cyrtopodium punctatum",
+"classe":"HOM"
+},
+{
+"chave":"cysteinum",
+"classe":"HOM"
+},
+{
+"chave":"cytisus scoparius",
+"classe":"HOM"
+},
+{
+"chave":"damiana",
+"classe":"HOM"
+},
+{
+"chave":"daphne indica",
+"classe":"HOM"
+},
+{
+"chave":"datura arborea",
+"classe":"HOM"
+},
+{
+"chave":"datura metel",
+"classe":"HOM"
+},
+{
+"chave":"datura stramonium l.",
+"classe":"PM"
+},
+{
+"chave":"decametilciclopentasiloxano",
+"classe":"EXA"
+},
+{
+"chave":"delphininum",
+"classe":"HOM"
+},
+{
+"chave":"depreotida (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"derris pinnata",
+"classe":"HOM"
+},
+{
+"chave":"desacilmonofosforil lipidio a de salmonella minnesota",
+"classe":"EXA"
+},
+{
+"chave":"dextrana 500 (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"dextrana 70 (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"dextratos",
+"classe":"EXA"
+},
+{
+"chave":"dextrolimoneno",
+"classe":"EXA"
+},
+{
+"chave":"dextromanose",
+"classe":"EXA"
+},
+{
+"chave":"di-hexildecanoato de di-hexilaminobutanol",
+"classe":"EXA"
+},
+{
+"chave":"di-hidrochalcona neoesperidina",
+"classe":"EXA"
+},
+{
+"chave":"diatrizoato de sodio (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"diatrizoato de sodio (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"dibeenato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"dicaprato de propilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"dicaprilato de propilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"dicaprilocaprato de propilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"dichapetalum",
+"classe":"HOM"
+},
+{
+"chave":"dicksonia sellowiana hook.",
+"classe":"PM"
+},
+{
+"chave":"diclorodimetilsilicio",
+"classe":"EXA"
+},
+{
+"chave":"dictamnus albus",
+"classe":"HOM"
+},
+{
+"chave":"dierucato de fosfatidilcolina",
+"classe":"EXA"
+},
+{
+"chave":"diestearato de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"diestearato de fosfatidiletanolamina carbonilmetoxipolietilenoglicol sodico",
+"classe":"EXA"
+},
+{
+"chave":"diestearato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"diestearato de polipropilenoglicol 20 metilglicopiranosideo",
+"classe":"EXA"
+},
+{
+"chave":"dietilamina",
+"classe":"EXA"
+},
+{
+"chave":"dietildi-hexilamina",
+"classe":"EXA"
+},
+{
+"chave":"dietiloxalacetato de sodio",
+"classe":"HOM"
+},
+{
+"chave":"digitalinum",
+"classe":"HOM"
+},
+{
+"chave":"digitalis purpurea",
+"classe":"HOM"
+},
+{
+"chave":"digitoxinum",
+"classe":"HOM"
+},
+{
+"chave":"dilaurato de sacarose",
+"classe":"EXA"
+},
+{
+"chave":"dimetil-hexanamina",
+"classe":"EXA"
+},
+{
+"chave":"dimetilacetamida",
+"classe":"EXA"
+},
+{
+"chave":"dimetilaminobutanoato de heptatriacontatetraenila",
+"classe":"EXA"
+},
+{
+"chave":"dimetilidantoina",
+"classe":"EXA"
+},
+{
+"chave":"dimetilsulfona",
+"classe":"EXA"
+},
+{
+"chave":"dimiristil fosfatidilcolina",
+"classe":"EXA"
+},
+{
+"chave":"dimiristil fosfatidilglicerol de amonio",
+"classe":"EXA"
+},
+{
+"chave":"dimiristil fosfatidilglicerol sodico",
+"classe":"EXA"
+},
+{
+"chave":"dimiristil fosfatidilraceglicerol sodico",
+"classe":"EXA"
+},
+{
+"chave":"dioleato de fosfatidilcolina",
+"classe":"EXA"
+},
+{
+"chave":"dioleoato de fosfatidilserina",
+"classe":"EXA"
+},
+{
+"chave":"dioscorea petrea",
+"classe":"HOM"
+},
+{
+"chave":"dioscorea villosa",
+"classe":"HOM"
+},
+{
+"chave":"diotirosina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"diotirosina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"dioxano",
+"classe":"EXA"
+},
+{
+"chave":"dioxido de enxofre",
+"classe":"EXA"
+},
+{
+"chave":"dipalmitoil fosfatidilglicerol sodico",
+"classe":"EXA"
+},
+{
+"chave":"dipalmitoil fosfatidilraceglicerol sodico",
+"classe":"EXA"
+},
+{
+"chave":"dirca palustres",
+"classe":"HOM"
+},
+{
+"chave":"discus intervertebrales suis",
+"classe":"HOM"
+},
+{
+"chave":"disofenina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"dissulfeto ferroso",
+"classe":"HOM"
+},
+{
+"chave":"distearoil fosfatidilglicerol sodico",
+"classe":"EXA"
+},
+{
+"chave":"ditetradecilmetoxipolietilenoglicolacetamida",
+"classe":"EXA"
+},
+{
+"chave":"dolichos pruriens",
+"classe":"HOM"
+},
+{
+"chave":"dorstenia arifolia lam.",
+"classe":"PM"
+},
+{
+"chave":"doryphora decemlineata",
+"classe":"HOM"
+},
+{
+"chave":"drosera rotundifolia",
+"classe":"HOM"
+},
+{
+"chave":"duboisia myoporoides",
+"classe":"HOM"
+},
+{
+"chave":"dulcamara",
+"classe":"HOM"
+},
+{
+"chave":"echinacea angustifolia",
+"classe":"HOM"
+},
+{
+"chave":"echinacea angustifolia dc.",
+"classe":"PM"
+},
+{
+"chave":"echinacea purpurea",
+"classe":"HOM"
+},
+{
+"chave":"echinacea purpurea (l.) moench",
+"classe":"PM"
+},
+{
+"chave":"echinodorus grandiflorus (cham. & schltdl.) micheli",
+"classe":"PM"
+},
+{
+"chave":"echinodorus macrophyllus (kunth) micheli",
+"classe":"PM"
+},
+{
+"chave":"ectoina",
+"classe":"EXA"
+},
+{
+"chave":"edetato cromico (51 cr)",
+"classe":"RAD"
+},
+{
+"chave":"edetato de calcio dissodico",
+"classe":"EXA"
+},
+{
+"chave":"edotreotida (177 lu)",
+"classe":"RAD"
+},
+{
+"chave":"edotreotida (68 ga)",
+"classe":"RAD"
+},
+{
+"chave":"edotreotida (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"elaeis guineensis",
+"classe":"HOM"
+},
+{
+"chave":"elaps corallinum",
+"classe":"HOM"
+},
+{
+"chave":"elaterium",
+"classe":"HOM"
+},
+{
+"chave":"elettaria cardamomum (l.) maton",
+"classe":"PM"
+},
+{
+"chave":"embryo suis",
+"classe":"HOM"
+},
+{
+"chave":"emetinum",
+"classe":"HOM"
+},
+{
+"chave":"enxofre coloidal (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"ephedra vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"epilobium palustre",
+"classe":"HOM"
+},
+{
+"chave":"epiphegus virginiana",
+"classe":"HOM"
+},
+{
+"chave":"epratuzumabe (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"epratuzumabe tetraxetana (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"equisetum arvense",
+"classe":"HOM"
+},
+{
+"chave":"equisetum arvense l.",
+"classe":"PM"
+},
+{
+"chave":"equisetum hyemale",
+"classe":"HOM"
+},
+{
+"chave":"eranthis hyemalis",
+"classe":"HOM"
+},
+{
+"chave":"erechtites hieracifolia",
+"classe":"HOM"
+},
+{
+"chave":"erigeron canadensis",
+"classe":"HOM"
+},
+{
+"chave":"eriodictyon californicum",
+"classe":"HOM"
+},
+{
+"chave":"eritritol",
+"classe":"EXA"
+},
+{
+"chave":"erodium",
+"classe":"HOM"
+},
+{
+"chave":"eryngium aquaticum",
+"classe":"HOM"
+},
+{
+"chave":"eryngium maritimum",
+"classe":"HOM"
+},
+{
+"chave":"erythraea centaurium",
+"classe":"HOM"
+},
+{
+"chave":"erythrina velutina willd.",
+"classe":"PM"
+},
+{
+"chave":"erythrina verna vell.",
+"classe":"PM"
+},
+{
+"chave":"eschscholtzia californica",
+"classe":"HOM"
+},
+{
+"chave":"eserinum",
+"classe":"HOM"
+},
+{
+"chave":"estanho coloidal (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"estearato de macrogol 100",
+"classe":"EXA"
+},
+{
+"chave":"estearato de macrogol 30",
+"classe":"EXA"
+},
+{
+"chave":"estearato de polioxilglicerideos",
+"classe":"EXA"
+},
+{
+"chave":"estearato de sacarose",
+"classe":"EXA"
+},
+{
+"chave":"estearato e palmitato de mono e diglicerideos",
+"classe":"EXA"
+},
+{
+"chave":"estearato palmitato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"esteres de acidos graxos de cera montan",
+"classe":"EXA"
+},
+{
+"chave":"esteres etilicos dos acidos graxos do oleo de papoula iodados",
+"classe":"EXA"
+},
+{
+"chave":"esteres glicerilicos de rosina hidrogenados",
+"classe":"EXA"
+},
+{
+"chave":"eter de macrogol monoestearilico",
+"classe":"EXA"
+},
+{
+"chave":"eter de macrogol monoestearilico 10",
+"classe":"EXA"
+},
+{
+"chave":"eter de macrogol monoestearilico 7",
+"classe":"EXA"
+},
+{
+"chave":"eter dimetilico",
+"classe":"EXA"
+},
+{
+"chave":"eter heptaetilenoglicol monolaurilico",
+"classe":"EXA"
+},
+{
+"chave":"eter polipropilenoglicol monobutilico",
+"classe":"EXA"
+},
+{
+"chave":"eter polipropilenoglicol monoestearilico",
+"classe":"EXA"
+},
+{
+"chave":"eter sulfobutilico sodico betaciclodextrina",
+"classe":"EXA"
+},
+{
+"chave":"etherum",
+"classe":"HOM"
+},
+{
+"chave":"ethylicum",
+"classe":"HOM"
+},
+{
+"chave":"ethylum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"etidronato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"etil maltol",
+"classe":"EXA"
+},
+{
+"chave":"etil-hexanoato estanoso",
+"classe":"EXA"
+},
+{
+"chave":"etilcarmelose",
+"classe":"EXA"
+},
+{
+"chave":"etilenodicisteina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"etilenodicisteina desoxiglicose (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"etilparabeno sodico",
+"classe":"EXA"
+},
+{
+"chave":"etilvanilina",
+"classe":"EXA"
+},
+{
+"chave":"eucalyptol",
+"classe":"HOM"
+},
+{
+"chave":"eucalyptus citriodora hook.",
+"classe":"PM"
+},
+{
+"chave":"eucalyptus globulus",
+"classe":"HOM"
+},
+{
+"chave":"eucalyptus globulus labill.",
+"classe":"PM"
+},
+{
+"chave":"eugenia caryophyllata",
+"classe":"HOM"
+},
+{
+"chave":"eugenia jambosa",
+"classe":"HOM"
+},
+{
+"chave":"eugenia uniflora l.",
+"classe":"PM"
+},
+{
+"chave":"euonymus atropurpureus",
+"classe":"HOM"
+},
+{
+"chave":"euonymus europaeus",
+"classe":"HOM"
+},
+{
+"chave":"eupatorium aromaticum",
+"classe":"HOM"
+},
+{
+"chave":"eupatorium cannabinum",
+"classe":"HOM"
+},
+{
+"chave":"eupatorium perfoliatum",
+"classe":"HOM"
+},
+{
+"chave":"eupatorium purpureum",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia amygdaloides",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia corollata",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia cyparissias",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia hypericifolia",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia lathyris",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia pilulifera",
+"classe":"HOM"
+},
+{
+"chave":"euphorbia resinifera",
+"classe":"HOM"
+},
+{
+"chave":"euphorbium officinarum",
+"classe":"HOM"
+},
+{
+"chave":"euphrasia officinalis",
+"classe":"HOM"
+},
+{
+"chave":"eupion",
+"classe":"HOM"
+},
+{
+"chave":"exametazima (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"fagopyrum esculentum",
+"classe":"HOM"
+},
+{
+"chave":"fagus sylvatica",
+"classe":"HOM"
+},
+{
+"chave":"fanolesomabe (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"fel tauri",
+"classe":"HOM"
+},
+{
+"chave":"fenilmetilglicidato de etila",
+"classe":"EXA"
+},
+{
+"chave":"ferpentetato (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"ferrum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum arsenicicum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum citricum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum cyanatum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum lacticum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum pernitricum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum picricum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum sidereum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"ferrum tartaricum",
+"classe":"HOM"
+},
+{
+"chave":"ferula glauca",
+"classe":"HOM"
+},
+{
+"chave":"fibrinogenio (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"ficus religiosa",
+"classe":"HOM"
+},
+{
+"chave":"filix mas",
+"classe":"HOM"
+},
+{
+"chave":"fitato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"florbetabeno (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"flortanidazol (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"flotegatida (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"flotufolastato (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fludesoxiglicose (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluor (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluorbutinilmetiltroparil (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluordopa (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluorestradiol (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluoreto de sodio (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluorfenidina (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluoris acidum",
+"classe":"HOM"
+},
+{
+"chave":"fluorocolina (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"fluortimidina (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"flutemetamol (18f)",
+"classe":"RAD"
+},
+{
+"chave":"flutriciclamida (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"foeniculum vulgare",
+"classe":"HOM"
+},
+{
+"chave":"foeniculum vulgare mill.",
+"classe":"PM"
+},
+{
+"chave":"foeniculum vulgare mill. ssp. vulgare var. dulce (mill.) thelung",
+"classe":"PM"
+},
+{
+"chave":"foeniculum vulgare mill. ssp. vulgare var. vulgare",
+"classe":"PM"
+},
+{
+"chave":"folliculinum",
+"classe":"HOM"
+},
+{
+"chave":"formalinum",
+"classe":"HOM"
+},
+{
+"chave":"formato de etila",
+"classe":"EXA"
+},
+{
+"chave":"formica rufa",
+"classe":"HOM"
+},
+{
+"chave":"fosfatidilcolina de soja",
+"classe":"EXA"
+},
+{
+"chave":"fosfatidilcolina hidrogenada de soja",
+"classe":"EXA"
+},
+{
+"chave":"fosfato cromico (32 p)",
+"classe":"RAD"
+},
+{
+"chave":"fosfato cromico (51 cr)",
+"classe":"RAD"
+},
+{
+"chave":"fosfato de acetildiamido",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de aluminio terc-hidratado",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de cetete",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de dicelita",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de hidroxipropilamilopectina",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de hidroxipropildiamido",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de sodio (32 p)",
+"classe":"RAD"
+},
+{
+"chave":"fosfato de sodio dibasico monoidratado",
+"classe":"EXA"
+},
+{
+"chave":"fosfato de sodio monobasico (32 p)",
+"classe":"RAD"
+},
+{
+"chave":"fosfato trissodico dodecaidratado",
+"classe":"EXA"
+},
+{
+"chave":"fracao insaponificavel do oleo de abacate",
+"classe":"EXA"
+},
+{
+"chave":"fracao insaponificavel do oleo de soja",
+"classe":"EXA"
+},
+{
+"chave":"fragaria vesca",
+"classe":"HOM"
+},
+{
+"chave":"fragaria vesca l.",
+"classe":"PM"
+},
+{
+"chave":"franciscea uniflora",
+"classe":"HOM"
+},
+{
+"chave":"frangula purshiana (dc.) a. gray",
+"classe":"PM"
+},
+{
+"chave":"fraxinus americana",
+"classe":"HOM"
+},
+{
+"chave":"fraxinus excelsior",
+"classe":"HOM"
+},
+{
+"chave":"fuchsinum",
+"classe":"HOM"
+},
+{
+"chave":"fucus vesiculosus",
+"classe":"HOM"
+},
+{
+"chave":"fucus vesiculosus l.",
+"classe":"PM"
+},
+{
+"chave":"fumaria officinalis",
+"classe":"HOM"
+},
+{
+"chave":"funiculus umbilicalis suis",
+"classe":"HOM"
+},
+{
+"chave":"furaneol",
+"classe":"EXA"
+},
+{
+"chave":"galanthus nivalis",
+"classe":"HOM"
+},
+{
+"chave":"galato de propila",
+"classe":"EXA"
+},
+{
+"chave":"galega officinalis",
+"classe":"HOM"
+},
+{
+"chave":"galio (68 ga)",
+"classe":"RAD"
+},
+{
+"chave":"galium aparine",
+"classe":"HOM"
+},
+{
+"chave":"galphimia glauca",
+"classe":"HOM"
+},
+{
+"chave":"gambogia",
+"classe":"HOM"
+},
+{
+"chave":"garcinia cambogia desr.",
+"classe":"PM"
+},
+{
+"chave":"garcinia indica (thouars) choisy",
+"classe":"PM"
+},
+{
+"chave":"gaultheria fragrantissima wall.",
+"classe":"PM"
+},
+{
+"chave":"gaultheria procumbens",
+"classe":"HOM"
+},
+{
+"chave":"gelsemium sempervirens",
+"classe":"HOM"
+},
+{
+"chave":"genista tinctoria",
+"classe":"HOM"
+},
+{
+"chave":"gentiana cruciata",
+"classe":"HOM"
+},
+{
+"chave":"gentiana lutea",
+"classe":"HOM"
+},
+{
+"chave":"gentiana lutea l.",
+"classe":"PM"
+},
+{
+"chave":"gentiana quinqueflora",
+"classe":"HOM"
+},
+{
+"chave":"geranium maculatum",
+"classe":"HOM"
+},
+{
+"chave":"geranium robertianum",
+"classe":"HOM"
+},
+{
+"chave":"geum rivale",
+"classe":"HOM"
+},
+{
+"chave":"geum urbanum",
+"classe":"HOM"
+},
+{
+"chave":"ginkgo biloba",
+"classe":"HOM"
+},
+{
+"chave":"ginkgo biloba l.",
+"classe":"PM"
+},
+{
+"chave":"glandula suprarenalis suis",
+"classe":"HOM"
+},
+{
+"chave":"glechoma hederacea",
+"classe":"HOM"
+},
+{
+"chave":"glicerideos de acidos graxos saturados",
+"classe":"EXA"
+},
+{
+"chave":"glicerideos de oleo de milho",
+"classe":"EXA"
+},
+{
+"chave":"glicerol formal",
+"classe":"EXA"
+},
+{
+"chave":"glicirrizinato de amonio",
+"classe":"EXA"
+},
+{
+"chave":"glicoeptonato de calcio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"glicoeptonato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"glicoeptonato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"glicofurol",
+"classe":"EXA"
+},
+{
+"chave":"gliconolactona",
+"classe":"EXA"
+},
+{
+"chave":"glicopiranosideo cetoestearilico",
+"classe":"EXA"
+},
+{
+"chave":"glinus oppositifolius (l.) aug. dc.",
+"classe":"PM"
+},
+{
+"chave":"glonoinum",
+"classe":"HOM"
+},
+{
+"chave":"glycerinum",
+"classe":"HOM"
+},
+{
+"chave":"glycine max (l.) merr.",
+"classe":"PM"
+},
+{
+"chave":"glycyrrhiza glabra",
+"classe":"HOM"
+},
+{
+"chave":"glycyrrhiza glabra l.",
+"classe":"PM"
+},
+{
+"chave":"glycyrrhiza inflata batalin",
+"classe":"PM"
+},
+{
+"chave":"glycyrrhiza uralensis fisch.",
+"classe":"PM"
+},
+{
+"chave":"gnaphalium polycephalum",
+"classe":"HOM"
+},
+{
+"chave":"gnaphalium uliginosum",
+"classe":"HOM"
+},
+{
+"chave":"goma adragante",
+"classe":"EXA"
+},
+{
+"chave":"goma gelana",
+"classe":"EXA"
+},
+{
+"chave":"goma guar",
+"classe":"EXA"
+},
+{
+"chave":"goma guar hidroxipropil",
+"classe":"EXA"
+},
+{
+"chave":"gossypium herbaceum",
+"classe":"HOM"
+},
+{
+"chave":"gossypium herbaceum l.",
+"classe":"PM"
+},
+{
+"chave":"gossypium hirsutum l.",
+"classe":"PM"
+},
+{
+"chave":"gozetotida (68 ga)",
+"classe":"RAD"
+},
+{
+"chave":"granatum",
+"classe":"HOM"
+},
+{
+"chave":"graphites",
+"classe":"HOM"
+},
+{
+"chave":"gratiola officinalis",
+"classe":"HOM"
+},
+{
+"chave":"grindelia robusta",
+"classe":"HOM"
+},
+{
+"chave":"guaco",
+"classe":"HOM"
+},
+{
+"chave":"guaiacum officinale",
+"classe":"HOM"
+},
+{
+"chave":"guarea trichilioides",
+"classe":"HOM"
+},
+{
+"chave":"guatteria gaumeri",
+"classe":"HOM"
+},
+{
+"chave":"gun powder",
+"classe":"HOM"
+},
+{
+"chave":"gymnema sylvestre (retz.) r.br. ex sm.",
+"classe":"PM"
+},
+{
+"chave":"gymnocladus canadenses",
+"classe":"HOM"
+},
+{
+"chave":"haematoxylon campechianum",
+"classe":"HOM"
+},
+{
+"chave":"hamamelis virginiana",
+"classe":"HOM"
+},
+{
+"chave":"hamamelis virginiana l.",
+"classe":"PM"
+},
+{
+"chave":"handroanthus impetiginosus (mart. ex dc.) mattos",
+"classe":"PM"
+},
+{
+"chave":"haronga madagascariensis",
+"classe":"HOM"
+},
+{
+"chave":"harpagophytum procumbens dc. ex meissn.",
+"classe":"PM"
+},
+{
+"chave":"harpagophytum zeyheri decne",
+"classe":"PM"
+},
+{
+"chave":"hebanthe erianthos (poir.) pedersen",
+"classe":"PM"
+},
+{
+"chave":"hedeoma pulegioides",
+"classe":"HOM"
+},
+{
+"chave":"hedera helix",
+"classe":"HOM"
+},
+{
+"chave":"hedera helix l.",
+"classe":"PM"
+},
+{
+"chave":"hekla lava",
+"classe":"HOM"
+},
+{
+"chave":"helianthus annuus",
+"classe":"HOM"
+},
+{
+"chave":"helianthus annuus l.",
+"classe":"PM"
+},
+{
+"chave":"heliotropium peruvianum",
+"classe":"HOM"
+},
+{
+"chave":"helix tosta",
+"classe":"HOM"
+},
+{
+"chave":"helleborus foetidus",
+"classe":"HOM"
+},
+{
+"chave":"helleborus niger",
+"classe":"HOM"
+},
+{
+"chave":"helleborus viridis",
+"classe":"HOM"
+},
+{
+"chave":"heloderma",
+"classe":"HOM"
+},
+{
+"chave":"helonias dioica",
+"classe":"HOM"
+},
+{
+"chave":"hemisuccinato de racealfatocoferol",
+"classe":"EXA"
+},
+{
+"chave":"hepar suis",
+"classe":"HOM"
+},
+{
+"chave":"hepar sulfuris kalinum",
+"classe":"HOM"
+},
+{
+"chave":"hepar sulphur",
+"classe":"HOM"
+},
+{
+"chave":"hepatica triloba",
+"classe":"HOM"
+},
+{
+"chave":"heptano",
+"classe":"EXA"
+},
+{
+"chave":"heptanoato de etila",
+"classe":"EXA"
+},
+{
+"chave":"heptilbutirolactona",
+"classe":"EXA"
+},
+{
+"chave":"heracleum sphondylium",
+"classe":"HOM"
+},
+{
+"chave":"hexanal",
+"classe":"EXA"
+},
+{
+"chave":"hexilbutirolactona",
+"classe":"EXA"
+},
+{
+"chave":"hialuronidase humana recombinante",
+"classe":"EXA"
+},
+{
+"chave":"hidroxiapatita (153 sm)",
+"classe":"RAD"
+},
+{
+"chave":"hidroxiapatita (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"hidroxiestearato de macrogol 15",
+"classe":"EXA"
+},
+{
+"chave":"hidroxietil oxoundeciloxiexilamina octanoato de heptadecan-9-ila",
+"classe":"EXA"
+},
+{
+"chave":"hidroximetilfurfural",
+"classe":"EXA"
+},
+{
+"chave":"hidroximetilssulfonato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"hidroxipropilamido",
+"classe":"EXA"
+},
+{
+"chave":"hidroxipropilbetaciclodextrina",
+"classe":"EXA"
+},
+{
+"chave":"himatanthus lancifolius (mull.arg.) woodson",
+"classe":"PM"
+},
+{
+"chave":"hippomane mancinella",
+"classe":"HOM"
+},
+{
+"chave":"hiprolose de baixa substituicao",
+"classe":"EXA"
+},
+{
+"chave":"histaminum",
+"classe":"HOM"
+},
+{
+"chave":"hoitzia coccinea",
+"classe":"HOM"
+},
+{
+"chave":"holarrhena antidysenterica",
+"classe":"HOM"
+},
+{
+"chave":"homarus",
+"classe":"HOM"
+},
+{
+"chave":"humulus lupulus",
+"classe":"HOM"
+},
+{
+"chave":"humulus lupulus l.",
+"classe":"PM"
+},
+{
+"chave":"hura brasiliensis",
+"classe":"HOM"
+},
+{
+"chave":"hura crepitans",
+"classe":"HOM"
+},
+{
+"chave":"hydrangea arborescens",
+"classe":"HOM"
+},
+{
+"chave":"hydrastinum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"hydrastis canadensis",
+"classe":"HOM"
+},
+{
+"chave":"hydrastis canadensis l.",
+"classe":"PM"
+},
+{
+"chave":"hydrocotyle asiatica",
+"classe":"HOM"
+},
+{
+"chave":"hydrophis cyanocinctus",
+"classe":"HOM"
+},
+{
+"chave":"hydrophyllum virginianum",
+"classe":"HOM"
+},
+{
+"chave":"hyoscyaminum",
+"classe":"HOM"
+},
+{
+"chave":"hyoscyaminum hydrobromatum",
+"classe":"HOM"
+},
+{
+"chave":"hyoscyamus niger",
+"classe":"HOM"
+},
+{
+"chave":"hyoscyamus niger l.",
+"classe":"PM"
+},
+{
+"chave":"hypericum perforatum",
+"classe":"HOM"
+},
+{
+"chave":"hypericum perforatum l.",
+"classe":"PM"
+},
+{
+"chave":"hypothalamus",
+"classe":"HOM"
+},
+{
+"chave":"iberis amara",
+"classe":"HOM"
+},
+{
+"chave":"ibritumomabe tiuxetana (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"ibritumomabe tiuxetana (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"ichthyolum",
+"classe":"HOM"
+},
+{
+"chave":"ignatia amara",
+"classe":"HOM"
+},
+{
+"chave":"ilex aquifolium",
+"classe":"HOM"
+},
+{
+"chave":"ilex paraguayensis",
+"classe":"HOM"
+},
+{
+"chave":"illicium anisatum",
+"classe":"HOM"
+},
+{
+"chave":"illicium verum hook. f.",
+"classe":"PM"
+},
+{
+"chave":"imperatoria ostruthium",
+"classe":"HOM"
+},
+{
+"chave":"indigo",
+"classe":"HOM"
+},
+{
+"chave":"indigotina",
+"classe":"EXA"
+},
+{
+"chave":"indium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"indolum",
+"classe":"HOM"
+},
+{
+"chave":"influenzinum",
+"classe":"HOM"
+},
+{
+"chave":"insulina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"insulina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"inula helenium",
+"classe":"HOM"
+},
+{
+"chave":"iobenguano (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iobenguano (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodeto de sodio (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodeto de sodio (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodeto de sodio (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodipamida sodica (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodocolesterol (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodofenazona (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodoformum",
+"classe":"HOM"
+},
+{
+"chave":"iodoipurato de sodio (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodoipurato de sodio (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodoipurato de sodio (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodopiracete (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodopiracete (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iodum",
+"classe":"HOM"
+},
+{
+"chave":"iofetamina (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"ioflupano (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"ioloprida (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iomazenil (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iometina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"iometina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iometopano (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"iotalamato de sodio (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"iotalamato de sodio (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"iotirosina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"ipecacuanha",
+"classe":"HOM"
+},
+{
+"chave":"ipomoea stans",
+"classe":"HOM"
+},
+{
+"chave":"iridium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"iris florentina",
+"classe":"HOM"
+},
+{
+"chave":"iris foetidissima",
+"classe":"HOM"
+},
+{
+"chave":"iris germanica",
+"classe":"HOM"
+},
+{
+"chave":"iris tenax",
+"classe":"HOM"
+},
+{
+"chave":"iris versicolor",
+"classe":"HOM"
+},
+{
+"chave":"iso-hexadecano",
+"classe":"EXA"
+},
+{
+"chave":"isobutilparabeno",
+"classe":"EXA"
+},
+{
+"chave":"isocetano",
+"classe":"EXA"
+},
+{
+"chave":"isoestearato de sorbitana",
+"classe":"EXA"
+},
+{
+"chave":"isoeugenol",
+"classe":"EXA"
+},
+{
+"chave":"isomalte",
+"classe":"EXA"
+},
+{
+"chave":"isovalerato de amila",
+"classe":"EXA"
+},
+{
+"chave":"jacaranda caroba",
+"classe":"HOM"
+},
+{
+"chave":"jacaranda caroba (vell.) dc.",
+"classe":"PM"
+},
+{
+"chave":"jalapa",
+"classe":"HOM"
+},
+{
+"chave":"jasminum officinale",
+"classe":"HOM"
+},
+{
+"chave":"jateorhiza palmata (lam.) miers",
+"classe":"PM"
+},
+{
+"chave":"jatropha curcas",
+"classe":"HOM"
+},
+{
+"chave":"jatropha urens",
+"classe":"HOM"
+},
+{
+"chave":"jequirity",
+"classe":"HOM"
+},
+{
+"chave":"jonesia asoca",
+"classe":"HOM"
+},
+{
+"chave":"juglans cinerea",
+"classe":"HOM"
+},
+{
+"chave":"juglans regia",
+"classe":"HOM"
+},
+{
+"chave":"juncus effusus",
+"classe":"HOM"
+},
+{
+"chave":"juniperus communis",
+"classe":"HOM"
+},
+{
+"chave":"juniperus sabina l.",
+"classe":"PM"
+},
+{
+"chave":"juniperus virginiana",
+"classe":"HOM"
+},
+{
+"chave":"justicia adhatoda",
+"classe":"HOM"
+},
+{
+"chave":"justicia pectoralis jacq.",
+"classe":"PM"
+},
+{
+"chave":"kali aceticum",
+"classe":"HOM"
+},
+{
+"chave":"kali arsenicosum",
+"classe":"HOM"
+},
+{
+"chave":"kali bichromicum",
+"classe":"HOM"
+},
+{
+"chave":"kali bromatum",
+"classe":"HOM"
+},
+{
+"chave":"kali carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"kali causticum",
+"classe":"HOM"
+},
+{
+"chave":"kali chloratum",
+"classe":"HOM"
+},
+{
+"chave":"kali chloricum",
+"classe":"HOM"
+},
+{
+"chave":"kali chromicum",
+"classe":"HOM"
+},
+{
+"chave":"kali cyanatum",
+"classe":"HOM"
+},
+{
+"chave":"kali ferrocyanatum",
+"classe":"HOM"
+},
+{
+"chave":"kali iodatum",
+"classe":"HOM"
+},
+{
+"chave":"kali muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"kali nitricum",
+"classe":"HOM"
+},
+{
+"chave":"kali oxalicum",
+"classe":"HOM"
+},
+{
+"chave":"kali permanganicum",
+"classe":"HOM"
+},
+{
+"chave":"kali phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"kali picricum",
+"classe":"HOM"
+},
+{
+"chave":"kali silicatum",
+"classe":"HOM"
+},
+{
+"chave":"kali sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"kali tartaricum",
+"classe":"HOM"
+},
+{
+"chave":"kali telluricum",
+"classe":"HOM"
+},
+{
+"chave":"kalmia latifolia",
+"classe":"HOM"
+},
+{
+"chave":"kamala",
+"classe":"HOM"
+},
+{
+"chave":"karaka",
+"classe":"HOM"
+},
+{
+"chave":"karwinskia humboldtiana",
+"classe":"HOM"
+},
+{
+"chave":"kino australiensis",
+"classe":"HOM"
+},
+{
+"chave":"kousso",
+"classe":"HOM"
+},
+{
+"chave":"krameria lappacea (dombey) burdet & b.b. simpson",
+"classe":"PM"
+},
+{
+"chave":"kreosotum",
+"classe":"HOM"
+},
+{
+"chave":"labetuzumabe (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"labetuzumabe tetraxetana (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"laburnum anagyroides",
+"classe":"HOM"
+},
+{
+"chave":"lac caninum",
+"classe":"HOM"
+},
+{
+"chave":"lac defloratum",
+"classe":"HOM"
+},
+{
+"chave":"lac felinum",
+"classe":"HOM"
+},
+{
+"chave":"lac vaccinum",
+"classe":"HOM"
+},
+{
+"chave":"lacerta agilis",
+"classe":"HOM"
+},
+{
+"chave":"lachesis mutus",
+"classe":"HOM"
+},
+{
+"chave":"lachnanthes tinctoria",
+"classe":"HOM"
+},
+{
+"chave":"lactuca virosa",
+"classe":"HOM"
+},
+{
+"chave":"lamium album",
+"classe":"HOM"
+},
+{
+"chave":"lapis albus",
+"classe":"HOM"
+},
+{
+"chave":"lappa major",
+"classe":"HOM"
+},
+{
+"chave":"laranja de apocarotenal 160e",
+"classe":"EXA"
+},
+{
+"chave":"laranja urucum 160b",
+"classe":"EXA"
+},
+{
+"chave":"lathyrus cicera",
+"classe":"HOM"
+},
+{
+"chave":"latrodectus katipo",
+"classe":"HOM"
+},
+{
+"chave":"latrodectus mactans",
+"classe":"HOM"
+},
+{
+"chave":"latyrus sativus",
+"classe":"HOM"
+},
+{
+"chave":"lauramidopropilbetaina",
+"classe":"EXA"
+},
+{
+"chave":"laurato de polioxilglicerideos",
+"classe":"EXA"
+},
+{
+"chave":"laurato de sacarose",
+"classe":"EXA"
+},
+{
+"chave":"laurilsulfato de trietanolamina",
+"classe":"EXA"
+},
+{
+"chave":"laurocerasus",
+"classe":"HOM"
+},
+{
+"chave":"lavandula angustifolia mill.",
+"classe":"PM"
+},
+{
+"chave":"lecitina",
+"classe":"EXA"
+},
+{
+"chave":"lecitina de ovo",
+"classe":"EXA"
+},
+{
+"chave":"ledum palustre",
+"classe":"HOM"
+},
+{
+"chave":"lemna minor",
+"classe":"HOM"
+},
+{
+"chave":"leonurus cardiaca",
+"classe":"HOM"
+},
+{
+"chave":"leonurus cardiaca l.",
+"classe":"PM"
+},
+{
+"chave":"lepidium bonariense",
+"classe":"HOM"
+},
+{
+"chave":"leptandra virginica",
+"classe":"HOM"
+},
+{
+"chave":"lespedeza capitata",
+"classe":"HOM"
+},
+{
+"chave":"levico",
+"classe":"HOM"
+},
+{
+"chave":"levisticum officinale",
+"classe":"HOM"
+},
+{
+"chave":"levisticum officinale w.d.j.koch",
+"classe":"PM"
+},
+{
+"chave":"levoalfafosfatidilcolina distearoila",
+"classe":"EXA"
+},
+{
+"chave":"levolactato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"levomepromazinum",
+"classe":"HOM"
+},
+{
+"chave":"levothyroxinum",
+"classe":"HOM"
+},
+{
+"chave":"lexidronam (153 sm)",
+"classe":"RAD"
+},
+{
+"chave":"lexidronam pentassodico (153 sm)",
+"classe":"RAD"
+},
+{
+"chave":"liatris spicata",
+"classe":"HOM"
+},
+{
+"chave":"libidibia ferrea (mart. ex tul.) l.p.queiroz",
+"classe":"PM"
+},
+{
+"chave":"lidofenina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"lilium tigrinum",
+"classe":"HOM"
+},
+{
+"chave":"limulus",
+"classe":"HOM"
+},
+{
+"chave":"linalol",
+"classe":"EXA"
+},
+{
+"chave":"linaria vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"linum catharticum",
+"classe":"HOM"
+},
+{
+"chave":"linum usitatissimum",
+"classe":"HOM"
+},
+{
+"chave":"liotironina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"liotironina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"lippia alba (mill.) n.e. br. ex britton & p. wilson",
+"classe":"PM"
+},
+{
+"chave":"lippia sidoides cham.",
+"classe":"PM"
+},
+{
+"chave":"lithium benzoicum",
+"classe":"HOM"
+},
+{
+"chave":"lithium bromatum",
+"classe":"HOM"
+},
+{
+"chave":"lithium carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"lithium muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"lobelia cardinalis",
+"classe":"HOM"
+},
+{
+"chave":"lobelia erinus",
+"classe":"HOM"
+},
+{
+"chave":"lobelia inflata",
+"classe":"HOM"
+},
+{
+"chave":"lobelia purpurescens",
+"classe":"HOM"
+},
+{
+"chave":"lobelia syphilitica",
+"classe":"HOM"
+},
+{
+"chave":"lobelinum",
+"classe":"HOM"
+},
+{
+"chave":"lolium temulentum",
+"classe":"HOM"
+},
+{
+"chave":"lonicera periclymenum",
+"classe":"HOM"
+},
+{
+"chave":"lonicera xylosteum",
+"classe":"HOM"
+},
+{
+"chave":"lophophytum leandri",
+"classe":"HOM"
+},
+{
+"chave":"luffa operculata",
+"classe":"HOM"
+},
+{
+"chave":"lupulinum",
+"classe":"HOM"
+},
+{
+"chave":"lycopersicum esculentum",
+"classe":"HOM"
+},
+{
+"chave":"lycopodium clavatum",
+"classe":"HOM"
+},
+{
+"chave":"lycopus virginicus",
+"classe":"HOM"
+},
+{
+"chave":"lysimachia numularia",
+"classe":"HOM"
+},
+{
+"chave":"macrosalbe (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"macrosalbe (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"macrotinum",
+"classe":"HOM"
+},
+{
+"chave":"magnesia carbonica",
+"classe":"HOM"
+},
+{
+"chave":"magnesia muriatica",
+"classe":"HOM"
+},
+{
+"chave":"magnesia oxydata",
+"classe":"HOM"
+},
+{
+"chave":"magnesia phosphorica",
+"classe":"HOM"
+},
+{
+"chave":"magnesia sulphurica",
+"classe":"HOM"
+},
+{
+"chave":"magnesium oroticum",
+"classe":"HOM"
+},
+{
+"chave":"magnolia glauca",
+"classe":"HOM"
+},
+{
+"chave":"magnolia grandiflora",
+"classe":"HOM"
+},
+{
+"chave":"maltitol",
+"classe":"EXA"
+},
+{
+"chave":"maltitol liquido",
+"classe":"EXA"
+},
+{
+"chave":"maltodextrina",
+"classe":"EXA"
+},
+{
+"chave":"maltose monoidratada",
+"classe":"EXA"
+},
+{
+"chave":"malva sylvestris l.",
+"classe":"PM"
+},
+{
+"chave":"mandragora officinarum",
+"classe":"HOM"
+},
+{
+"chave":"manganum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"manganum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"manganum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"manganum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"manganum oxydatum nativum",
+"classe":"HOM"
+},
+{
+"chave":"manganum oxydatum nigrum",
+"classe":"HOM"
+},
+{
+"chave":"manganum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"manganum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"mangifera indica",
+"classe":"HOM"
+},
+{
+"chave":"marrom caramelo 150a",
+"classe":"EXA"
+},
+{
+"chave":"marrubium vulgare",
+"classe":"HOM"
+},
+{
+"chave":"marsdenia cundurango rchb. f.",
+"classe":"PM"
+},
+{
+"chave":"matico",
+"classe":"HOM"
+},
+{
+"chave":"matricaria chamomilla",
+"classe":"HOM"
+},
+{
+"chave":"matricaria chamomilla l.",
+"classe":"PM"
+},
+{
+"chave":"matricaria recutita l.",
+"classe":"PM"
+},
+{
+"chave":"matthiola graeca",
+"classe":"HOM"
+},
+{
+"chave":"maytenus aquifolia mart.",
+"classe":"PM"
+},
+{
+"chave":"mebrofenina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"medicago sativa",
+"classe":"HOM"
+},
+{
+"chave":"medronato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"medulla ossis suis",
+"classe":"HOM"
+},
+{
+"chave":"medusa",
+"classe":"HOM"
+},
+{
+"chave":"melaleuca alternifolia (maiden & betche) cheel",
+"classe":"PM"
+},
+{
+"chave":"melastoma ackermani",
+"classe":"HOM"
+},
+{
+"chave":"melilotus alba",
+"classe":"HOM"
+},
+{
+"chave":"melilotus officinalis",
+"classe":"HOM"
+},
+{
+"chave":"melilotus officinalis (l.) pall.",
+"classe":"PM"
+},
+{
+"chave":"melissa officinalis",
+"classe":"HOM"
+},
+{
+"chave":"melissa officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"melonal",
+"classe":"EXA"
+},
+{
+"chave":"menispermum canadense",
+"classe":"HOM"
+},
+{
+"chave":"mentha arvensis l.",
+"classe":"PM"
+},
+{
+"chave":"mentha crispa l.",
+"classe":"PM"
+},
+{
+"chave":"mentha piperita",
+"classe":"HOM"
+},
+{
+"chave":"mentha pulegium",
+"classe":"HOM"
+},
+{
+"chave":"mentha viridis",
+"classe":"HOM"
+},
+{
+"chave":"mentha x piperita l.",
+"classe":"PM"
+},
+{
+"chave":"mentholum",
+"classe":"HOM"
+},
+{
+"chave":"mentona",
+"classe":"EXA"
+},
+{
+"chave":"menyanthes trifoliata",
+"classe":"HOM"
+},
+{
+"chave":"mephitis mephitica",
+"classe":"HOM"
+},
+{
+"chave":"mercaptomentona",
+"classe":"EXA"
+},
+{
+"chave":"mercurialis perennis",
+"classe":"HOM"
+},
+{
+"chave":"mercurius aceticus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius auratus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius bromatus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius corrosivus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius cum kali-iodatus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius cyanatus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius dulcis",
+"classe":"HOM"
+},
+{
+"chave":"mercurius iodatus flavus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius iodatus ruber",
+"classe":"HOM"
+},
+{
+"chave":"mercurius methylenus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius nitricus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius praecipitatus albus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius praecipitatus ruber",
+"classe":"HOM"
+},
+{
+"chave":"mercurius solubilis",
+"classe":"HOM"
+},
+{
+"chave":"mercurius sulfocyanatus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius sulfuricus",
+"classe":"HOM"
+},
+{
+"chave":"mercurius sulphuratus ruber",
+"classe":"HOM"
+},
+{
+"chave":"mercurius vivus",
+"classe":"HOM"
+},
+{
+"chave":"merisoprol (197 hg)",
+"classe":"RAD"
+},
+{
+"chave":"mertiatida (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"mespiperona (11 c)",
+"classe":"RAD"
+},
+{
+"chave":"metabissulfito de potassio",
+"classe":"EXA"
+},
+{
+"chave":"metacrilato de butila",
+"classe":"EXA"
+},
+{
+"chave":"metacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"methylene blue",
+"classe":"HOM"
+},
+{
+"chave":"metilpirrolidona",
+"classe":"EXA"
+},
+{
+"chave":"metionina (11 c)",
+"classe":"RAD"
+},
+{
+"chave":"metoxipolietilenoglicol de dimeristato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"metoxipolietilenopropilcarbamato de dimiristilglicerila",
+"classe":"EXA"
+},
+{
+"chave":"mezereum",
+"classe":"HOM"
+},
+{
+"chave":"mica",
+"classe":"HOM"
+},
+{
+"chave":"microagregado de albumina humana serica (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"mikania glomerata spreng.",
+"classe":"PM"
+},
+{
+"chave":"mikania hirsutissima dc.",
+"classe":"PM"
+},
+{
+"chave":"mikania laevigata sch.bip. ex baker.",
+"classe":"PM"
+},
+{
+"chave":"mimosa pudica",
+"classe":"HOM"
+},
+{
+"chave":"mitchella repens",
+"classe":"HOM"
+},
+{
+"chave":"momordica balsamina",
+"classe":"HOM"
+},
+{
+"chave":"momordica charantia l.",
+"classe":"PM"
+},
+{
+"chave":"mono e dicaprilocaprato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"monoacrilato de etilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"monocaprilato de propilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"monocaprilocaprato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"monoetanolamina",
+"classe":"EXA"
+},
+{
+"chave":"monoisoestearato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"monoleato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"monolinoleato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"monteverdia ilicifolia (mart. ex reissek) biral",
+"classe":"PM"
+},
+{
+"chave":"morbilinum",
+"classe":"HOM"
+},
+{
+"chave":"moschus",
+"classe":"HOM"
+},
+{
+"chave":"mucosa nasalis suis",
+"classe":"HOM"
+},
+{
+"chave":"murex purpurea",
+"classe":"HOM"
+},
+{
+"chave":"musa sapienticum",
+"classe":"HOM"
+},
+{
+"chave":"mygale lasiodora",
+"classe":"HOM"
+},
+{
+"chave":"myosotis arvensis",
+"classe":"HOM"
+},
+{
+"chave":"myrica cerifera",
+"classe":"HOM"
+},
+{
+"chave":"myristica fragrans houtt.",
+"classe":"PM"
+},
+{
+"chave":"myristica sebifera",
+"classe":"HOM"
+},
+{
+"chave":"myroxylon balsamum (l.) harms",
+"classe":"PM"
+},
+{
+"chave":"myroxylon balsamum (l.) harms var. pereirae (royle) harms",
+"classe":"PM"
+},
+{
+"chave":"myrrha",
+"classe":"HOM"
+},
+{
+"chave":"myrtus communis",
+"classe":"HOM"
+},
+{
+"chave":"nabalus serpentarius",
+"classe":"HOM"
+},
+{
+"chave":"nadidum",
+"classe":"HOM"
+},
+{
+"chave":"naja tripudians",
+"classe":"HOM"
+},
+{
+"chave":"naphthalinum",
+"classe":"HOM"
+},
+{
+"chave":"narcissus pseudonarcissus",
+"classe":"HOM"
+},
+{
+"chave":"nasturtium aquaticum",
+"classe":"HOM"
+},
+{
+"chave":"nasturtium officinale r.br.",
+"classe":"PM"
+},
+{
+"chave":"natrum arsenicum",
+"classe":"HOM"
+},
+{
+"chave":"natrum bicarbonicum",
+"classe":"HOM"
+},
+{
+"chave":"natrum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"natrum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"natrum fluoratum",
+"classe":"HOM"
+},
+{
+"chave":"natrum hypochlorosum",
+"classe":"HOM"
+},
+{
+"chave":"natrum lacticum",
+"classe":"HOM"
+},
+{
+"chave":"natrum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"natrum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"natrum nitrosum",
+"classe":"HOM"
+},
+{
+"chave":"natrum oxalaceticum",
+"classe":"HOM"
+},
+{
+"chave":"natrum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"natrum pyruvicum",
+"classe":"HOM"
+},
+{
+"chave":"natrum salicylicum",
+"classe":"HOM"
+},
+{
+"chave":"natrum silicofluoricum",
+"classe":"HOM"
+},
+{
+"chave":"natrum sulfuratum",
+"classe":"HOM"
+},
+{
+"chave":"natrum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"natrum sulfurosum",
+"classe":"HOM"
+},
+{
+"chave":"negundo",
+"classe":"HOM"
+},
+{
+"chave":"neoesperidina",
+"classe":"EXA"
+},
+{
+"chave":"neotamo",
+"classe":"EXA"
+},
+{
+"chave":"nepenthes",
+"classe":"HOM"
+},
+{
+"chave":"nepeta cataria",
+"classe":"HOM"
+},
+{
+"chave":"niccolum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"niccolum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"niccolum sulphuricum",
+"classe":"HOM"
+},
+{
+"chave":"nicotinamidum",
+"classe":"HOM"
+},
+{
+"chave":"nicotinum",
+"classe":"HOM"
+},
+{
+"chave":"nigella sativa l.",
+"classe":"PM"
+},
+{
+"chave":"nitrato cuprico tri-hidratado",
+"classe":"EXA"
+},
+{
+"chave":"nitrato de estroncio (85 sr)",
+"classe":"RAD"
+},
+{
+"chave":"nitri spiritus dulcis",
+"classe":"HOM"
+},
+{
+"chave":"nitridocade (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"nitrogenum oxygenatum",
+"classe":"HOM"
+},
+{
+"chave":"nofetumomabe merpentana (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"nuphar luteum",
+"classe":"HOM"
+},
+{
+"chave":"nux moschata",
+"classe":"HOM"
+},
+{
+"chave":"nux vomica",
+"classe":"HOM"
+},
+{
+"chave":"nymphaea odorata",
+"classe":"HOM"
+},
+{
+"chave":"ocimum basilicum",
+"classe":"HOM"
+},
+{
+"chave":"ocimum canum",
+"classe":"HOM"
+},
+{
+"chave":"ocimum sanctum",
+"classe":"HOM"
+},
+{
+"chave":"octanoato cetoarilico",
+"classe":"EXA"
+},
+{
+"chave":"octildodecanol",
+"classe":"EXA"
+},
+{
+"chave":"octreotato tetraxetana (177 lu)",
+"classe":"RAD"
+},
+{
+"chave":"octreotato tetraxetana (68 ga)",
+"classe":"RAD"
+},
+{
+"chave":"octreotida nota aluminio (18 f)",
+"classe":"RAD"
+},
+{
+"chave":"oenanthe crocata",
+"classe":"HOM"
+},
+{
+"chave":"oenothera biennis",
+"classe":"HOM"
+},
+{
+"chave":"oenothera biennis l.",
+"classe":"PM"
+},
+{
+"chave":"olea europaea l.",
+"classe":"PM"
+},
+{
+"chave":"oleander",
+"classe":"HOM"
+},
+{
+"chave":"oleato de oleila",
+"classe":"EXA"
+},
+{
+"chave":"oleato de poliglicerila",
+"classe":"EXA"
+},
+{
+"chave":"oleo de algodao hidrogenado",
+"classe":"EXA"
+},
+{
+"chave":"oleo de amendoas",
+"classe":"EXA"
+},
+{
+"chave":"oleo de amendoim",
+"classe":"EXA"
+},
+{
+"chave":"oleo de coco",
+"classe":"EXA"
+},
+{
+"chave":"oleo de colza",
+"classe":"EXA"
+},
+{
+"chave":"oleo de colza hidrogenado",
+"classe":"EXA"
+},
+{
+"chave":"oleo de cravo",
+"classe":"EXA"
+},
+{
+"chave":"oleo de eucalipto",
+"classe":"EXA"
+},
+{
+"chave":"oleo de gergelim",
+"classe":"EXA"
+},
+{
+"chave":"oleo de girassol",
+"classe":"EXA"
+},
+{
+"chave":"oleo de laranja",
+"classe":"EXA"
+},
+{
+"chave":"oleo de lavanda",
+"classe":"EXA"
+},
+{
+"chave":"oleo de limao",
+"classe":"EXA"
+},
+{
+"chave":"oleo de melaleuca",
+"classe":"EXA"
+},
+{
+"chave":"oleo de menta arvensis",
+"classe":"EXA"
+},
+{
+"chave":"oleo de menta piperita",
+"classe":"EXA"
+},
+{
+"chave":"oleo de milho",
+"classe":"EXA"
+},
+{
+"chave":"oleo de oliva",
+"classe":"EXA"
+},
+{
+"chave":"oleo de palmiste",
+"classe":"EXA"
+},
+{
+"chave":"oleo de ricino etoxilado",
+"classe":"EXA"
+},
+{
+"chave":"oleo de soja",
+"classe":"EXA"
+},
+{
+"chave":"oleo etiodado (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"oleoato palmitato de fosfatidilcolina",
+"classe":"EXA"
+},
+{
+"chave":"oleum animale",
+"classe":"HOM"
+},
+{
+"chave":"oleum morrhuae",
+"classe":"HOM"
+},
+{
+"chave":"oleum ricini",
+"classe":"HOM"
+},
+{
+"chave":"oleum santali",
+"classe":"HOM"
+},
+{
+"chave":"oniscus",
+"classe":"HOM"
+},
+{
+"chave":"ononis spinosa",
+"classe":"HOM"
+},
+{
+"chave":"onosmodium virginianum",
+"classe":"HOM"
+},
+{
+"chave":"oophorinum",
+"classe":"HOM"
+},
+{
+"chave":"operculina hamiltonii (g.don) d.f. austin & staples",
+"classe":"PM"
+},
+{
+"chave":"operculina macrocarpa (l.) urb.",
+"classe":"PM"
+},
+{
+"chave":"opuntia vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"orchitinum",
+"classe":"HOM"
+},
+{
+"chave":"oreodaphne californica",
+"classe":"HOM"
+},
+{
+"chave":"origanum majorana",
+"classe":"HOM"
+},
+{
+"chave":"ornithogalum umbellatum",
+"classe":"HOM"
+},
+{
+"chave":"oroxylum indicum (l.) kurz",
+"classe":"PM"
+},
+{
+"chave":"ortotolilbiguanida",
+"classe":"EXA"
+},
+{
+"chave":"oryza sativa l.",
+"classe":"PM"
+},
+{
+"chave":"osmium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"ostrya",
+"classe":"HOM"
+},
+{
+"chave":"ouro coloidal (198 au)",
+"classe":"RAD"
+},
+{
+"chave":"ova tosta",
+"classe":"HOM"
+},
+{
+"chave":"ovi gallinae pellicula",
+"classe":"HOM"
+},
+{
+"chave":"oxalis acetosella",
+"classe":"HOM"
+},
+{
+"chave":"oxido de ferro amarelo",
+"classe":"EXA"
+},
+{
+"chave":"oxido de ferro hidratado",
+"classe":"EXA"
+},
+{
+"chave":"oxido de ferro preto",
+"classe":"EXA"
+},
+{
+"chave":"oxidronato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"oxiquinolina (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"oxydendrum arboreum",
+"classe":"HOM"
+},
+{
+"chave":"oxytropis lambertii",
+"classe":"HOM"
+},
+{
+"chave":"paeonia officinalis",
+"classe":"HOM"
+},
+{
+"chave":"palladium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"paloondo",
+"classe":"HOM"
+},
+{
+"chave":"panax ginseng c.a. mey.",
+"classe":"PM"
+},
+{
+"chave":"pancreas suis",
+"classe":"HOM"
+},
+{
+"chave":"pancreatinum",
+"classe":"HOM"
+},
+{
+"chave":"pantolactona",
+"classe":"EXA"
+},
+{
+"chave":"papaver rhoeas",
+"classe":"HOM"
+},
+{
+"chave":"papaver somniferum l.",
+"classe":"PM"
+},
+{
+"chave":"paraffinum",
+"classe":"HOM"
+},
+{
+"chave":"parafina",
+"classe":"EXA"
+},
+{
+"chave":"parametilbenzaldeido",
+"classe":"EXA"
+},
+{
+"chave":"paraminobenzoato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"parathormonum",
+"classe":"HOM"
+},
+{
+"chave":"pareira brava",
+"classe":"HOM"
+},
+{
+"chave":"parietaria officinalis",
+"classe":"HOM"
+},
+{
+"chave":"paris quadrifolia",
+"classe":"HOM"
+},
+{
+"chave":"paronichia illecebrum",
+"classe":"HOM"
+},
+{
+"chave":"parthenium",
+"classe":"HOM"
+},
+{
+"chave":"passiflora alata",
+"classe":"HOM"
+},
+{
+"chave":"passiflora alata curtis",
+"classe":"PM"
+},
+{
+"chave":"passiflora edulis sims",
+"classe":"PM"
+},
+{
+"chave":"passiflora incarnata",
+"classe":"HOM"
+},
+{
+"chave":"passiflora incarnata l.",
+"classe":"PM"
+},
+{
+"chave":"pastinaca sativa",
+"classe":"HOM"
+},
+{
+"chave":"paullinia cupana kunth",
+"classe":"PM"
+},
+{
+"chave":"paullinia pinnata",
+"classe":"HOM"
+},
+{
+"chave":"paullinia sorbilis",
+"classe":"HOM"
+},
+{
+"chave":"pecten",
+"classe":"HOM"
+},
+{
+"chave":"pediculus capitis",
+"classe":"HOM"
+},
+{
+"chave":"pelargonium reniforme (andrews) curtis",
+"classe":"PM"
+},
+{
+"chave":"pelargonium sidoides dc.",
+"classe":"PM"
+},
+{
+"chave":"peltodon radicans pohl",
+"classe":"PM"
+},
+{
+"chave":"pentetato de altumomabe (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"pentetato de calcio trissodico (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"pentetato de indio (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"pentetato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"pentetato dissodico (169 yb)",
+"classe":"RAD"
+},
+{
+"chave":"pentetreotida (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"penthorum sedoides",
+"classe":"HOM"
+},
+{
+"chave":"pentilbutirolactona",
+"classe":"EXA"
+},
+{
+"chave":"pentilenoglicol",
+"classe":"EXA"
+},
+{
+"chave":"pepsinum",
+"classe":"HOM"
+},
+{
+"chave":"persea americana",
+"classe":"HOM"
+},
+{
+"chave":"persea americana mill.",
+"classe":"PM"
+},
+{
+"chave":"persicaria hydropiper (l.) delarbre",
+"classe":"PM"
+},
+{
+"chave":"pertecnetato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"pertussinum",
+"classe":"HOM"
+},
+{
+"chave":"petasites hybridus (l.) p. gaertn., b. mey. & scherb.",
+"classe":"PM"
+},
+{
+"chave":"petiveria tetrandra",
+"classe":"HOM"
+},
+{
+"chave":"petroleum",
+"classe":"HOM"
+},
+{
+"chave":"petroselinum sativum",
+"classe":"HOM"
+},
+{
+"chave":"peumus boldus",
+"classe":"HOM"
+},
+{
+"chave":"peumus boldus molina",
+"classe":"PM"
+},
+{
+"chave":"pfaffia glomerata (spreng.) pedersen",
+"classe":"PM"
+},
+{
+"chave":"phallus impudicus",
+"classe":"HOM"
+},
+{
+"chave":"phaseolus",
+"classe":"HOM"
+},
+{
+"chave":"phellandrium aquaticum",
+"classe":"HOM"
+},
+{
+"chave":"phenacetinum",
+"classe":"HOM"
+},
+{
+"chave":"phloridzinum",
+"classe":"HOM"
+},
+{
+"chave":"phosphorus",
+"classe":"HOM"
+},
+{
+"chave":"phyllanthus emblica l.",
+"classe":"PM"
+},
+{
+"chave":"phyllanthus niruri l.",
+"classe":"PM"
+},
+{
+"chave":"phyllanthus niruri subsp. lathyroides (kunth) g.l.webster",
+"classe":"PM"
+},
+{
+"chave":"phyllanthus tenellus roxb.",
+"classe":"PM"
+},
+{
+"chave":"physalis alkekengi",
+"classe":"HOM"
+},
+{
+"chave":"physalis angulata l.",
+"classe":"PM"
+},
+{
+"chave":"physostigma venenosum",
+"classe":"HOM"
+},
+{
+"chave":"phytolacca decandra",
+"classe":"HOM"
+},
+{
+"chave":"pibenzotiazol (11 c)",
+"classe":"RAD"
+},
+{
+"chave":"pichi",
+"classe":"HOM"
+},
+{
+"chave":"picrasma excelsa (sw.) planch.",
+"classe":"PM"
+},
+{
+"chave":"picrotoxinum",
+"classe":"HOM"
+},
+{
+"chave":"pilocarpinum",
+"classe":"HOM"
+},
+{
+"chave":"pilocarpinum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"pilocarpinum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"pilocarpus",
+"classe":"HOM"
+},
+{
+"chave":"pilocarpus microphyllus stapf ex wardlew.",
+"classe":"PM"
+},
+{
+"chave":"pimenta officinalis",
+"classe":"HOM"
+},
+{
+"chave":"pimpinella anisum l.",
+"classe":"PM"
+},
+{
+"chave":"pimpinella saxifraga",
+"classe":"HOM"
+},
+{
+"chave":"pintumomabe (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"pinus lambertiana",
+"classe":"HOM"
+},
+{
+"chave":"pinus pinaster aiton",
+"classe":"PM"
+},
+{
+"chave":"pinus sylvestris",
+"classe":"HOM"
+},
+{
+"chave":"piper methysticum",
+"classe":"HOM"
+},
+{
+"chave":"piper methysticum g. forst.",
+"classe":"PM"
+},
+{
+"chave":"piper nigrum",
+"classe":"HOM"
+},
+{
+"chave":"piperazinum",
+"classe":"HOM"
+},
+{
+"chave":"pirofosfato de sodio (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"pirofosfato tetrassodico decaidratado",
+"classe":"EXA"
+},
+{
+"chave":"piscidia erythrina",
+"classe":"HOM"
+},
+{
+"chave":"pituitarum posterium",
+"classe":"HOM"
+},
+{
+"chave":"pix liquida",
+"classe":"HOM"
+},
+{
+"chave":"placenta suis",
+"classe":"HOM"
+},
+{
+"chave":"plantago lanceolata l.",
+"classe":"PM"
+},
+{
+"chave":"plantago major",
+"classe":"HOM"
+},
+{
+"chave":"plantago major l.",
+"classe":"PM"
+},
+{
+"chave":"plantago ovata forssk.",
+"classe":"PM"
+},
+{
+"chave":"plantago psyllium l.",
+"classe":"PM"
+},
+{
+"chave":"platinum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"platinum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"plectranthus barbatus andrews",
+"classe":"PM"
+},
+{
+"chave":"plectranthus fruticosus",
+"classe":"HOM"
+},
+{
+"chave":"plumbago littoralis",
+"classe":"HOM"
+},
+{
+"chave":"plumbum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"plumbum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"plumbum chromicum",
+"classe":"HOM"
+},
+{
+"chave":"plumbum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"plumbum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"podophyllinum",
+"classe":"HOM"
+},
+{
+"chave":"podophyllum peltatum",
+"classe":"HOM"
+},
+{
+"chave":"polacrilina potassica",
+"classe":"EXA"
+},
+{
+"chave":"poli-isobutileno",
+"classe":"EXA"
+},
+{
+"chave":"poliacrilato de etil-hexila",
+"classe":"EXA"
+},
+{
+"chave":"poliacrilato de metila",
+"classe":"EXA"
+},
+{
+"chave":"poliacrilato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"policaprolactona",
+"classe":"EXA"
+},
+{
+"chave":"polidextrose",
+"classe":"EXA"
+},
+{
+"chave":"polidimetilsiloxano",
+"classe":"EXA"
+},
+{
+"chave":"polietileno",
+"classe":"EXA"
+},
+{
+"chave":"polilactida",
+"classe":"EXA"
+},
+{
+"chave":"polipropileno",
+"classe":"EXA"
+},
+{
+"chave":"polissacarideos de soja",
+"classe":"EXA"
+},
+{
+"chave":"polygala senega l.",
+"classe":"PM"
+},
+{
+"chave":"polygonum punctatum",
+"classe":"HOM"
+},
+{
+"chave":"polygonum punctatum elliot",
+"classe":"PM"
+},
+{
+"chave":"polygonum sagittatum",
+"classe":"HOM"
+},
+{
+"chave":"polypodium aureum l.",
+"classe":"PM"
+},
+{
+"chave":"polypodium leucatomos poir.",
+"classe":"PM"
+},
+{
+"chave":"polyporus officinalis",
+"classe":"HOM"
+},
+{
+"chave":"polyporus pinicola",
+"classe":"HOM"
+},
+{
+"chave":"populus candicans",
+"classe":"HOM"
+},
+{
+"chave":"populus tremuloides",
+"classe":"HOM"
+},
+{
+"chave":"potentilla anserina",
+"classe":"HOM"
+},
+{
+"chave":"pothos foetidus",
+"classe":"HOM"
+},
+{
+"chave":"povidona (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"povidona (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"primula elatior (l.) hill",
+"classe":"PM"
+},
+{
+"chave":"primula obconica",
+"classe":"HOM"
+},
+{
+"chave":"primula veris",
+"classe":"HOM"
+},
+{
+"chave":"primula veris l.",
+"classe":"PM"
+},
+{
+"chave":"primula vulgaris",
+"classe":"HOM"
+},
+{
+"chave":"propionato de amila",
+"classe":"EXA"
+},
+{
+"chave":"propionato de etila",
+"classe":"EXA"
+},
+{
+"chave":"proteus",
+"classe":"HOM"
+},
+{
+"chave":"prunus africana (hook f.) kalkman",
+"classe":"PM"
+},
+{
+"chave":"prunus domestica l.",
+"classe":"PM"
+},
+{
+"chave":"prunus padus",
+"classe":"HOM"
+},
+{
+"chave":"prunus spinosa",
+"classe":"HOM"
+},
+{
+"chave":"prunus virginiana",
+"classe":"HOM"
+},
+{
+"chave":"psidium guajava l.",
+"classe":"PM"
+},
+{
+"chave":"psorinum",
+"classe":"HOM"
+},
+{
+"chave":"psychotria ipecacuanha (brot.) stokes",
+"classe":"PM"
+},
+{
+"chave":"ptelea trifoliata",
+"classe":"HOM"
+},
+{
+"chave":"ptychopetalum olacoides benth.",
+"classe":"PM"
+},
+{
+"chave":"pulex irritans",
+"classe":"HOM"
+},
+{
+"chave":"pulmo histaminum",
+"classe":"HOM"
+},
+{
+"chave":"pulsatilla",
+"classe":"HOM"
+},
+{
+"chave":"pulsatilla nuttalliana",
+"classe":"HOM"
+},
+{
+"chave":"pululano",
+"classe":"EXA"
+},
+{
+"chave":"punica granatum l.",
+"classe":"PM"
+},
+{
+"chave":"pyrethrum parthenium",
+"classe":"HOM"
+},
+{
+"chave":"pyrogenium",
+"classe":"HOM"
+},
+{
+"chave":"pyrus americana",
+"classe":"HOM"
+},
+{
+"chave":"quassia amara",
+"classe":"HOM"
+},
+{
+"chave":"quercus glandium spiritus",
+"classe":"HOM"
+},
+{
+"chave":"quercus robur",
+"classe":"HOM"
+},
+{
+"chave":"quillaja saponaria",
+"classe":"HOM"
+},
+{
+"chave":"quillaja saponaria molina",
+"classe":"PM"
+},
+{
+"chave":"racloprida (11 c)",
+"classe":"RAD"
+},
+{
+"chave":"radium bromatum",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus acris",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus bulbosus",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus ficaria",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus glacialus",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus repens",
+"classe":"HOM"
+},
+{
+"chave":"ranunculus sceleratus",
+"classe":"HOM"
+},
+{
+"chave":"raphanus sativus",
+"classe":"HOM"
+},
+{
+"chave":"ratanhia",
+"classe":"HOM"
+},
+{
+"chave":"rauvolfia serpentina (l.) benth. ex kurz",
+"classe":"PM"
+},
+{
+"chave":"rauwolfia serpentina",
+"classe":"HOM"
+},
+{
+"chave":"remijia ferruginea (a.st.-hil.) dc.",
+"classe":"PM"
+},
+{
+"chave":"resina laricis",
+"classe":"HOM"
+},
+{
+"chave":"resorcinum",
+"classe":"HOM"
+},
+{
+"chave":"rhammus frangula",
+"classe":"HOM"
+},
+{
+"chave":"rhamnus californica",
+"classe":"HOM"
+},
+{
+"chave":"rhamnus catharticus",
+"classe":"HOM"
+},
+{
+"chave":"rhamnus purshiana",
+"classe":"HOM"
+},
+{
+"chave":"rheum officinale",
+"classe":"HOM"
+},
+{
+"chave":"rheum officinale baill.",
+"classe":"PM"
+},
+{
+"chave":"rheum palmatum",
+"classe":"HOM"
+},
+{
+"chave":"rheum palmatum l.",
+"classe":"PM"
+},
+{
+"chave":"rhodiola rosea l.",
+"classe":"PM"
+},
+{
+"chave":"rhodium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"rhododendron chrysanthum",
+"classe":"HOM"
+},
+{
+"chave":"rhus aromatica",
+"classe":"HOM"
+},
+{
+"chave":"rhus diversiloba",
+"classe":"HOM"
+},
+{
+"chave":"rhus glabra",
+"classe":"HOM"
+},
+{
+"chave":"rhus toxicodendron",
+"classe":"HOM"
+},
+{
+"chave":"rhus venenata",
+"classe":"HOM"
+},
+{
+"chave":"ricinus communis",
+"classe":"HOM"
+},
+{
+"chave":"robinia pseudoacacia",
+"classe":"HOM"
+},
+{
+"chave":"rorippa nasturtium-aquaticum (l.) hayek",
+"classe":"PM"
+},
+{
+"chave":"rosa bengala dissodica (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"rosa bengala sodica (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"rosa canina",
+"classe":"HOM"
+},
+{
+"chave":"rosa damascena",
+"classe":"HOM"
+},
+{
+"chave":"rosmarinus officinalis",
+"classe":"HOM"
+},
+{
+"chave":"rosmarinus officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"rubia tinctorum",
+"classe":"HOM"
+},
+{
+"chave":"rumex acetosa",
+"classe":"HOM"
+},
+{
+"chave":"rumex acetosa l.",
+"classe":"PM"
+},
+{
+"chave":"rumex crispus",
+"classe":"HOM"
+},
+{
+"chave":"rumex crispus l.",
+"classe":"PM"
+},
+{
+"chave":"rumex obtusifolius",
+"classe":"HOM"
+},
+{
+"chave":"ruscus aculeatus l.",
+"classe":"PM"
+},
+{
+"chave":"russula foetens",
+"classe":"HOM"
+},
+{
+"chave":"ruta graveolens",
+"classe":"HOM"
+},
+{
+"chave":"ruta graveolens l.",
+"classe":"PM"
+},
+{
+"chave":"sabadilla",
+"classe":"HOM"
+},
+{
+"chave":"sabal serrulata",
+"classe":"HOM"
+},
+{
+"chave":"sabina",
+"classe":"HOM"
+},
+{
+"chave":"saccharinum",
+"classe":"HOM"
+},
+{
+"chave":"saccharium officinale",
+"classe":"HOM"
+},
+{
+"chave":"saccharum lactis",
+"classe":"HOM"
+},
+{
+"chave":"salcaprozato de sodio",
+"classe":"EXA"
+},
+{
+"chave":"salicinum",
+"classe":"HOM"
+},
+{
+"chave":"salix alba",
+"classe":"HOM"
+},
+{
+"chave":"salix alba l.",
+"classe":"PM"
+},
+{
+"chave":"salix daphnoides vill.",
+"classe":"PM"
+},
+{
+"chave":"salix fragilis l.",
+"classe":"PM"
+},
+{
+"chave":"salix nigra",
+"classe":"HOM"
+},
+{
+"chave":"salix purpurea",
+"classe":"HOM"
+},
+{
+"chave":"salix purpurea l.",
+"classe":"PM"
+},
+{
+"chave":"salol",
+"classe":"HOM"
+},
+{
+"chave":"salvia officinalis",
+"classe":"HOM"
+},
+{
+"chave":"salvia officinalis l",
+"classe":"PM"
+},
+{
+"chave":"sambucus australis cham. & schltdl.",
+"classe":"PM"
+},
+{
+"chave":"sambucus canadensis",
+"classe":"HOM"
+},
+{
+"chave":"sambucus nigra",
+"classe":"HOM"
+},
+{
+"chave":"sambucus nigra l.",
+"classe":"PM"
+},
+{
+"chave":"sanguinaria canadensis",
+"classe":"HOM"
+},
+{
+"chave":"sanguinarinum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"sanicula aqua",
+"classe":"HOM"
+},
+{
+"chave":"santoninum",
+"classe":"HOM"
+},
+{
+"chave":"saponaria officinalis",
+"classe":"HOM"
+},
+{
+"chave":"saponina 21 da quillaja saponaria molina",
+"classe":"EXA"
+},
+{
+"chave":"saponinum",
+"classe":"HOM"
+},
+{
+"chave":"sarracenia purpurea",
+"classe":"HOM"
+},
+{
+"chave":"sarsaparilla",
+"classe":"HOM"
+},
+{
+"chave":"sassafras officinale",
+"classe":"HOM"
+},
+{
+"chave":"satumomabe pendetida (111 in)",
+"classe":"RAD"
+},
+{
+"chave":"scammonium",
+"classe":"HOM"
+},
+{
+"chave":"schinus molle",
+"classe":"HOM"
+},
+{
+"chave":"schinus terebinthifolia raddi",
+"classe":"PM"
+},
+{
+"chave":"scilla maritima",
+"classe":"HOM"
+},
+{
+"chave":"scolopendra",
+"classe":"HOM"
+},
+{
+"chave":"scolopendrium vulgare",
+"classe":"HOM"
+},
+{
+"chave":"scopolaminum hydrobromidum",
+"classe":"HOM"
+},
+{
+"chave":"scrophularia nodosa",
+"classe":"HOM"
+},
+{
+"chave":"scutellaria lateriflora",
+"classe":"HOM"
+},
+{
+"chave":"sebacato de dibutila",
+"classe":"EXA"
+},
+{
+"chave":"secale cornutum",
+"classe":"HOM"
+},
+{
+"chave":"sedum acre",
+"classe":"HOM"
+},
+{
+"chave":"selenium",
+"classe":"HOM"
+},
+{
+"chave":"selenometionina (75 se)",
+"classe":"RAD"
+},
+{
+"chave":"sempervivum tectorum",
+"classe":"HOM"
+},
+{
+"chave":"senecio aureus",
+"classe":"HOM"
+},
+{
+"chave":"senecio jacobaea",
+"classe":"HOM"
+},
+{
+"chave":"senega officinalis",
+"classe":"HOM"
+},
+{
+"chave":"senna",
+"classe":"HOM"
+},
+{
+"chave":"senna alexandrina mill.",
+"classe":"PM"
+},
+{
+"chave":"sepia succus",
+"classe":"HOM"
+},
+{
+"chave":"serenoa repens (w. bartram) small",
+"classe":"PM"
+},
+{
+"chave":"serum anguillae",
+"classe":"HOM"
+},
+{
+"chave":"sestamibi (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"siboroxima (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"silica coloidal hidratada",
+"classe":"EXA"
+},
+{
+"chave":"silica coloidal hidrofobica",
+"classe":"EXA"
+},
+{
+"chave":"silica marina",
+"classe":"HOM"
+},
+{
+"chave":"silica metilada trimetilada",
+"classe":"EXA"
+},
+{
+"chave":"silicato de aluminio e potassio",
+"classe":"EXA"
+},
+{
+"chave":"silicato de tetrapropila",
+"classe":"EXA"
+},
+{
+"chave":"silicea",
+"classe":"HOM"
+},
+{
+"chave":"silphium laciniatum",
+"classe":"HOM"
+},
+{
+"chave":"silybum marianum (l.) gaertn.",
+"classe":"PM"
+},
+{
+"chave":"simarouba amara aubl.",
+"classe":"PM"
+},
+{
+"chave":"sinapis alba",
+"classe":"HOM"
+},
+{
+"chave":"sinapis nigra",
+"classe":"HOM"
+},
+{
+"chave":"sisymbrium officinale (l.) scop.",
+"classe":"PM"
+},
+{
+"chave":"sium latifolium",
+"classe":"HOM"
+},
+{
+"chave":"skatolum",
+"classe":"HOM"
+},
+{
+"chave":"skookum chuck",
+"classe":"HOM"
+},
+{
+"chave":"slag",
+"classe":"HOM"
+},
+{
+"chave":"solaninum",
+"classe":"HOM"
+},
+{
+"chave":"solanum arrebenta",
+"classe":"HOM"
+},
+{
+"chave":"solanum carolinense",
+"classe":"HOM"
+},
+{
+"chave":"solanum mammosum",
+"classe":"HOM"
+},
+{
+"chave":"solanum nigrum",
+"classe":"HOM"
+},
+{
+"chave":"solanum oleraceum",
+"classe":"HOM"
+},
+{
+"chave":"solanum paniculatum l.",
+"classe":"PM"
+},
+{
+"chave":"solanum tuberosum",
+"classe":"HOM"
+},
+{
+"chave":"solidago chilensis meyen",
+"classe":"PM"
+},
+{
+"chave":"solidago microglossa dc.",
+"classe":"PM"
+},
+{
+"chave":"solidago virgaurea",
+"classe":"HOM"
+},
+{
+"chave":"sorbitana anidra",
+"classe":"EXA"
+},
+{
+"chave":"sparteinum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"spigelia anthelmia",
+"classe":"HOM"
+},
+{
+"chave":"spigelia marilandica",
+"classe":"HOM"
+},
+{
+"chave":"spilanthes oleracea",
+"classe":"HOM"
+},
+{
+"chave":"spiraea ulmaria",
+"classe":"HOM"
+},
+{
+"chave":"spiranthes autumnali",
+"classe":"HOM"
+},
+{
+"chave":"spiritus glandium quercus",
+"classe":"HOM"
+},
+{
+"chave":"spongia tosta",
+"classe":"HOM"
+},
+{
+"chave":"stachys betonica",
+"classe":"HOM"
+},
+{
+"chave":"stachytarpheta cayennensis (rich.) vahl",
+"classe":"PM"
+},
+{
+"chave":"stannum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"stannum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"staphysagria",
+"classe":"HOM"
+},
+{
+"chave":"stellaria media",
+"classe":"HOM"
+},
+{
+"chave":"sterculia acuminata",
+"classe":"HOM"
+},
+{
+"chave":"stevia rebaudiana (bertoni) bertoni",
+"classe":"PM"
+},
+{
+"chave":"stibium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"sticta pulmonaria",
+"classe":"HOM"
+},
+{
+"chave":"stigmata maydis",
+"classe":"HOM"
+},
+{
+"chave":"stillingia sylvatica",
+"classe":"HOM"
+},
+{
+"chave":"stramonium",
+"classe":"HOM"
+},
+{
+"chave":"strontium bromatum",
+"classe":"HOM"
+},
+{
+"chave":"strontium carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"strontium nitricum",
+"classe":"HOM"
+},
+{
+"chave":"strophanthus hispidus",
+"classe":"HOM"
+},
+{
+"chave":"strophanthus sarmentosus",
+"classe":"HOM"
+},
+{
+"chave":"strychininum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"strychninum",
+"classe":"HOM"
+},
+{
+"chave":"strychninum arsenicicum",
+"classe":"HOM"
+},
+{
+"chave":"strychninum nitricum",
+"classe":"HOM"
+},
+{
+"chave":"strychninum phosphoricum",
+"classe":"HOM"
+},
+{
+"chave":"strychnos nux-vomica l.",
+"classe":"PM"
+},
+{
+"chave":"stryphnodendron adstringens (mart.) coville",
+"classe":"PM"
+},
+{
+"chave":"styrax benzoin dryand.",
+"classe":"PM"
+},
+{
+"chave":"styrax paralleloneuron perkins",
+"classe":"PM"
+},
+{
+"chave":"succimer (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"succinato dissodico hexaidratado",
+"classe":"EXA"
+},
+{
+"chave":"succinum",
+"classe":"HOM"
+},
+{
+"chave":"sucrosofato de potassio",
+"classe":"EXA"
+},
+{
+"chave":"sulesomabe (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"sulfanilamidum",
+"classe":"HOM"
+},
+{
+"chave":"sulfato de iobenguano (123 i)",
+"classe":"RAD"
+},
+{
+"chave":"sulfato de iobenguano (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"sulfato de sodio (35 s)",
+"classe":"RAD"
+},
+{
+"chave":"sulfato ferroso (59 fe)",
+"classe":"RAD"
+},
+{
+"chave":"sulphur",
+"classe":"HOM"
+},
+{
+"chave":"sulphur iodatum",
+"classe":"HOM"
+},
+{
+"chave":"sumbul",
+"classe":"HOM"
+},
+{
+"chave":"symphoricarpus racemosus",
+"classe":"HOM"
+},
+{
+"chave":"symphytum officinale",
+"classe":"HOM"
+},
+{
+"chave":"symphytum officinale l.",
+"classe":"PM"
+},
+{
+"chave":"symphytum x uplandicum nyman",
+"classe":"PM"
+},
+{
+"chave":"syzygium aromaticum (l.) merr. & l.m. perry",
+"classe":"PM"
+},
+{
+"chave":"syzygium jambolanum",
+"classe":"HOM"
+},
+{
+"chave":"tabacum",
+"classe":"HOM"
+},
+{
+"chave":"tacatuzumabe (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"tacatuzumabe tetraxetana (90 y)",
+"classe":"RAD"
+},
+{
+"chave":"tamarindus indica l.",
+"classe":"PM"
+},
+{
+"chave":"tamus communis",
+"classe":"HOM"
+},
+{
+"chave":"tanacetum parthenium (l.) sch.bip.",
+"classe":"PM"
+},
+{
+"chave":"tanacetum vulgare",
+"classe":"HOM"
+},
+{
+"chave":"tanghinia venenifera",
+"classe":"HOM"
+},
+{
+"chave":"taraxacum officinale",
+"classe":"HOM"
+},
+{
+"chave":"taraxacum officinale f.h. wigg.",
+"classe":"PM"
+},
+{
+"chave":"tarentula cubensis",
+"classe":"HOM"
+},
+{
+"chave":"tarentula hispanica",
+"classe":"HOM"
+},
+{
+"chave":"taumatina",
+"classe":"EXA"
+},
+{
+"chave":"taxus baccata",
+"classe":"HOM"
+},
+{
+"chave":"teboroxima (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"tellurium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"terebinthina",
+"classe":"HOM"
+},
+{
+"chave":"tetradymite",
+"classe":"HOM"
+},
+{
+"chave":"tetrafluoropropeno",
+"classe":"EXA"
+},
+{
+"chave":"tetraisopalmitato de ascorbila",
+"classe":"EXA"
+},
+{
+"chave":"tetrofosmina (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"teucrium marum",
+"classe":"HOM"
+},
+{
+"chave":"teucrium scorodonia",
+"classe":"HOM"
+},
+{
+"chave":"thallium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"thaspium aureum",
+"classe":"HOM"
+},
+{
+"chave":"thea sinensis",
+"classe":"HOM"
+},
+{
+"chave":"theobroma cacao l.",
+"classe":"PM"
+},
+{
+"chave":"theridion",
+"classe":"HOM"
+},
+{
+"chave":"thiosinaminum",
+"classe":"HOM"
+},
+{
+"chave":"thlaspi bursa-pastoris",
+"classe":"HOM"
+},
+{
+"chave":"thuya lobbi",
+"classe":"HOM"
+},
+{
+"chave":"thuya occidentalis",
+"classe":"HOM"
+},
+{
+"chave":"thymolum",
+"classe":"HOM"
+},
+{
+"chave":"thymus serpyllum",
+"classe":"HOM"
+},
+{
+"chave":"thymus vulgaris l.",
+"classe":"PM"
+},
+{
+"chave":"thymus zygis l.",
+"classe":"PM"
+},
+{
+"chave":"thyroidinum",
+"classe":"HOM"
+},
+{
+"chave":"tiatida (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"tilia europaea",
+"classe":"HOM"
+},
+{
+"chave":"tinospora cordifolia (willd.) hook.f. & thomson",
+"classe":"PM"
+},
+{
+"chave":"tinospora sinensis (lour.) merr.",
+"classe":"PM"
+},
+{
+"chave":"tioglicerol",
+"classe":"EXA"
+},
+{
+"chave":"tiroctreotida hinic (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"tiroxina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"tiroxina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"titanium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"tolpovidona (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"tongo",
+"classe":"HOM"
+},
+{
+"chave":"tormentilla",
+"classe":"HOM"
+},
+{
+"chave":"torula cerevisiae",
+"classe":"HOM"
+},
+{
+"chave":"tositumomabe (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"toxicophis pugnax",
+"classe":"HOM"
+},
+{
+"chave":"tradescantia diuretica",
+"classe":"HOM"
+},
+{
+"chave":"trans-2-hexenal",
+"classe":"EXA"
+},
+{
+"chave":"transbetadamascenona",
+"classe":"EXA"
+},
+{
+"chave":"transbetadamascona",
+"classe":"EXA"
+},
+{
+"chave":"trema micranthum (l.) blume",
+"classe":"PM"
+},
+{
+"chave":"tribulus terrestris",
+"classe":"HOM"
+},
+{
+"chave":"tribulus terrestris l.",
+"classe":"PM"
+},
+{
+"chave":"tricaprilato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"trichilia catigua a. juss.",
+"classe":"PM"
+},
+{
+"chave":"trichilia emarginata (turcz.) c.dc.",
+"classe":"PM"
+},
+{
+"chave":"tricina",
+"classe":"EXA"
+},
+{
+"chave":"tricloreto de galio (68 ga)",
+"classe":"RAD"
+},
+{
+"chave":"tricloreto de lutecio (177 lu)",
+"classe":"RAD"
+},
+{
+"chave":"tricloridrato de tropantiol",
+"classe":"RAD"
+},
+{
+"chave":"triestearato de glicerila",
+"classe":"EXA"
+},
+{
+"chave":"triestearato de sacarose",
+"classe":"EXA"
+},
+{
+"chave":"trifluoracetato de gozetotida",
+"classe":"RAD"
+},
+{
+"chave":"trifolium pratense",
+"classe":"HOM"
+},
+{
+"chave":"trifolium pratense l.",
+"classe":"PM"
+},
+{
+"chave":"trifolium repens",
+"classe":"HOM"
+},
+{
+"chave":"triglicerideos de cadeia media",
+"classe":"EXA"
+},
+{
+"chave":"trilaurato de sacarose",
+"classe":"EXA"
+},
+{
+"chave":"trillium pendulum",
+"classe":"HOM"
+},
+{
+"chave":"trimethylaminum",
+"classe":"HOM"
+},
+{
+"chave":"trimetilisopropilbutanamida",
+"classe":"EXA"
+},
+{
+"chave":"trimetilsiloxissilicato",
+"classe":"EXA"
+},
+{
+"chave":"trioleina (125 i)",
+"classe":"RAD"
+},
+{
+"chave":"trioleina (131 i)",
+"classe":"RAD"
+},
+{
+"chave":"triosteum perfoliatum",
+"classe":"HOM"
+},
+{
+"chave":"trioxido de molibdenio",
+"classe":"EXA"
+},
+{
+"chave":"trissulfeto de antimonio coloidal (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"triticum aestivum l.",
+"classe":"PM"
+},
+{
+"chave":"triticum repens",
+"classe":"HOM"
+},
+{
+"chave":"tropaeolum majus",
+"classe":"HOM"
+},
+{
+"chave":"tropantiol (99m tc)",
+"classe":"RAD"
+},
+{
+"chave":"tuberculinum",
+"classe":"HOM"
+},
+{
+"chave":"tussilago fragrans",
+"classe":"HOM"
+},
+{
+"chave":"tussilago petasites",
+"classe":"HOM"
+},
+{
+"chave":"uncaria tomentosa (willd. ex roem. & schult.) dc.",
+"classe":"PM"
+},
+{
+"chave":"upas tieute",
+"classe":"HOM"
+},
+{
+"chave":"uranium nitricum",
+"classe":"HOM"
+},
+{
+"chave":"urea",
+"classe":"HOM"
+},
+{
+"chave":"urtica crenulata",
+"classe":"HOM"
+},
+{
+"chave":"urtica dioica",
+"classe":"HOM"
+},
+{
+"chave":"urtica urens",
+"classe":"HOM"
+},
+{
+"chave":"usnea barbata",
+"classe":"HOM"
+},
+{
+"chave":"ustilago maydis",
+"classe":"HOM"
+},
+{
+"chave":"uva ursi",
+"classe":"HOM"
+},
+{
+"chave":"vaccinium macrocarpon aiton",
+"classe":"PM"
+},
+{
+"chave":"vaccinium myrtillus",
+"classe":"HOM"
+},
+{
+"chave":"vaccinium myrtillus l.",
+"classe":"PM"
+},
+{
+"chave":"valeriana officinalis",
+"classe":"HOM"
+},
+{
+"chave":"valeriana officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"vanadium metallicum",
+"classe":"HOM"
+},
+{
+"chave":"vanilla planifolia jacks. ex andrews",
+"classe":"PM"
+},
+{
+"chave":"venus mercenaria",
+"classe":"HOM"
+},
+{
+"chave":"veratrum album",
+"classe":"HOM"
+},
+{
+"chave":"veratrum nigrum",
+"classe":"HOM"
+},
+{
+"chave":"veratrum viride",
+"classe":"HOM"
+},
+{
+"chave":"verbascum thapsus",
+"classe":"HOM"
+},
+{
+"chave":"verbena hastata",
+"classe":"HOM"
+},
+{
+"chave":"verbena officinalis",
+"classe":"HOM"
+},
+{
+"chave":"verbena officinalis l.",
+"classe":"PM"
+},
+{
+"chave":"verde de clorofilina",
+"classe":"EXA"
+},
+{
+"chave":"verde rapido 143",
+"classe":"EXA"
+},
+{
+"chave":"vermelho 27",
+"classe":"EXA"
+},
+{
+"chave":"vermelho 27 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho 30",
+"classe":"EXA"
+},
+{
+"chave":"vermelho 33",
+"classe":"EXA"
+},
+{
+"chave":"vermelho 7 laca de calcio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho allura 129",
+"classe":"EXA"
+},
+{
+"chave":"vermelho allura 129 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho amaranto",
+"classe":"EXA"
+},
+{
+"chave":"vermelho amaranto laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho carmina e120",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de azorrubina",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de azorrubina 122 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de eritrosina",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de eritrosina dissodica",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de eritrosina laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de ponceau",
+"classe":"EXA"
+},
+{
+"chave":"vermelho de ponceau 124 laca de aluminio",
+"classe":"EXA"
+},
+{
+"chave":"vermelho escarlate 125",
+"classe":"EXA"
+},
+{
+"chave":"vernonia condensata baker",
+"classe":"PM"
+},
+{
+"chave":"vernonia polyanthes (spreng.) less.",
+"classe":"PM"
+},
+{
+"chave":"veronica beccabunga",
+"classe":"HOM"
+},
+{
+"chave":"veronica officinalis",
+"classe":"HOM"
+},
+{
+"chave":"vesicaria",
+"classe":"HOM"
+},
+{
+"chave":"vespa crabo",
+"classe":"HOM"
+},
+{
+"chave":"viburnum opulus",
+"classe":"HOM"
+},
+{
+"chave":"viburnum prunifolium",
+"classe":"HOM"
+},
+{
+"chave":"viburnum prunifolium l.",
+"classe":"PM"
+},
+{
+"chave":"vinca minor",
+"classe":"HOM"
+},
+{
+"chave":"viola odorata",
+"classe":"HOM"
+},
+{
+"chave":"viola tricolor",
+"classe":"HOM"
+},
+{
+"chave":"vipera berus",
+"classe":"HOM"
+},
+{
+"chave":"vipera torva",
+"classe":"HOM"
+},
+{
+"chave":"vipivotida tetraxetana (177 lu)",
+"classe":"RAD"
+},
+{
+"chave":"viscum album",
+"classe":"HOM"
+},
+{
+"chave":"vitex agnus-castus l.",
+"classe":"PM"
+},
+{
+"chave":"vitis vinifera",
+"classe":"HOM"
+},
+{
+"chave":"vitis vinifera l.",
+"classe":"PM"
+},
+{
+"chave":"withania somnifera (l.) dunal",
+"classe":"PM"
+},
+{
+"chave":"wyethia helenioides",
+"classe":"HOM"
+},
+{
+"chave":"xanthoxylon fraxineum",
+"classe":"HOM"
+},
+{
+"chave":"xenonio (133 xe)",
+"classe":"RAD"
+},
+{
+"chave":"yucca filamentosa",
+"classe":"HOM"
+},
+{
+"chave":"zadavotida guraxetana (177 lu)",
+"classe":"RAD"
+},
+{
+"chave":"zea mays l.",
+"classe":"PM"
+},
+{
+"chave":"zilascorbe (2 h)",
+"classe":"RAD"
+},
+{
+"chave":"zincum aceticum",
+"classe":"HOM"
+},
+{
+"chave":"zincum bromatum",
+"classe":"HOM"
+},
+{
+"chave":"zincum carbonicum",
+"classe":"HOM"
+},
+{
+"chave":"zincum cyanatum",
+"classe":"HOM"
+},
+{
+"chave":"zincum gluconicum",
+"classe":"HOM"
+},
+{
+"chave":"zincum iodatum",
+"classe":"HOM"
+},
+{
+"chave":"zincum metallicum",
+"classe":"HOM"
+},
+{
+"chave":"zincum muriaticum",
+"classe":"HOM"
+},
+{
+"chave":"zincum oxydatum",
+"classe":"HOM"
+},
+{
+"chave":"zincum phosphoratum",
+"classe":"HOM"
+},
+{
+"chave":"zincum picricum",
+"classe":"HOM"
+},
+{
+"chave":"zincum sulfuricum",
+"classe":"HOM"
+},
+{
+"chave":"zincum valerianicum",
+"classe":"HOM"
+},
+{
+"chave":"zingiber officinale",
+"classe":"HOM"
+},
+{
+"chave":"zingiber officinale roscoe",
+"classe":"PM"
+}
+]
+}

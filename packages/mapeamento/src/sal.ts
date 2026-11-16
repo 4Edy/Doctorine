@@ -68,7 +68,29 @@ const HIDRATACAO = [
   'tri-hidratada',
   'hemi-hidratado',
   'hemi-hidratada',
+  'hemiidratado',
+  'hemiidratada',
+  'sesqui-hidratado',
+  'sesqui-hidratada',
+  'sesquiidratado',
+  'sesquiidratada',
+  'penta-hidratado',
+  'penta-hidratada',
+  'pentaidratado',
+  'pentaidratada',
+  'hexa-hidratado',
+  'hexa-hidratada',
+  'hexaidratado',
+  'hexaidratada',
 ];
+
+/**
+ * "diclofenaco de sódio" é diclofenaco. Só vale quando o que sobra NÃO parece um ânion
+ * ("cloreto de sódio", "bicarbonato de sódio" e "valproato de sódio" não perdem o "de sódio":
+ * o primeiro é o medicamento e os outros vão para a revisão, com a grafia como sugestão).
+ */
+const CONTRA_IONS_DE = ['de sodio', 'de potassio'];
+const PARECE_ANION = /(ato|eto|ito|ido)$/;
 
 export interface SemSal {
   /** Chave sem os sais e hidratos tirados. */
@@ -88,8 +110,12 @@ function tirar(chave: string, prefixos: readonly string[]): SemSal {
   // hidratação e adjetivo, do fim para o começo
   for (let mudou = true; mudou;) {
     mudou = false;
-    for (const sufixo of [...HIDRATACAO, ...ADJETIVOS]) {
+    for (const sufixo of [...HIDRATACAO, ...ADJETIVOS, ...CONTRA_IONS_DE]) {
       if (atual.endsWith(` ${sufixo}`) && atual.length > sufixo.length + 1) {
+        if (CONTRA_IONS_DE.includes(sufixo)) {
+          const resto = atual.slice(0, -(sufixo.length + 1)).split(' ');
+          if (resto.length !== 1 || PARECE_ANION.test(resto[0] as string)) continue;
+        }
         atual = atual.slice(0, -(sufixo.length + 1));
         fim += sufixo.length + 1;
         regras.push(`sufixo "${sufixo}"`);

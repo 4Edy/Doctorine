@@ -5,7 +5,7 @@ import { nomeSemSal, removerSal, removerSalComoSugestao } from './sal.js';
 import { LIMITE_TRUNCAMENTO, separarComponentes } from './separar.js';
 
 /** Sobe quando uma regra do mapeamento automático muda: entra na versão da base. */
-export const VERSAO_REGRAS = 2;
+export const VERSAO_REGRAS = 3;
 
 export class ErroMapeamento extends Error {
   override name = 'ErroMapeamento';
@@ -23,10 +23,29 @@ export interface FarmacoEntrada {
   id: number;
   nomeEn: string;
 }
+/** Classificação da DCB que tira um nome do universo dos fármacos com interação. */
+export type ClasseDcb = 'EXA' | 'HOM' | 'PM' | 'RAD';
+export const ROTULO_CLASSE_DCB: Record<ClasseDcb, string> = {
+  EXA: 'excipiente',
+  HOM: 'homeopático',
+  PM: 'planta medicinal',
+  RAD: 'radiofármaco',
+};
+export interface ClasseDcbEntrada {
+  /** Nome normalizado (minúsculas, sem acento), igual à chave do componente. */
+  chave: string;
+  classe: ClasseDcb;
+}
+
 export interface EntradaMapeamento {
   medicamentos: readonly MedicamentoEntrada[];
   farmacos: readonly FarmacoEntrada[];
   decisoes: readonly Decisao[];
+  /**
+   * Nomes que a DCB classifica só como excipiente, homeopático, planta medicinal ou radiofármaco.
+   * Sem correspondência exata no DDInter, viram princípio ativo sem fármaco DDInter (automático).
+   */
+  classesDcb?: readonly ClasseDcbEntrada[];
   limiteTruncamento?: number;
   /** Nomes de princípios ativos do conjunto de referência da farmacêutica. */
   referencia?: ReadonlyArray<{ id: string; nome: string }>;
@@ -115,6 +134,8 @@ export interface SaidaMapeamento {
   avisos: string[];
   /** Sais e hidratos tirados no mapeamento automático, por regra (para a farmacêutica conferir). */
   regrasDeSalUsadas: Record<string, number>;
+  /** Componentes resolvidos pela classe da DCB, por classe. */
+  porClasseDcb: Record<string, number>;
   principiosMesclados: number;
 }
 
@@ -139,7 +160,7 @@ type Resolucao =
     }
   | {
       tipo: 'pt';
-      status: 'confirmado';
+      status: 'automatico' | 'confirmado';
       motivo: string;
       nomePt: string;
       moiety: string;
@@ -222,7 +243,10 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
     }
   }
 
+  const classeDcb = new Map<string, ClasseDcb>();
+  for (const c of entrada.classesDcb ?? []) classeDcb.set(c.chave, c.classe);
   const regrasDeSalUsadas: Record<string, number> = {};
+  const porClasseDcb: Record<string, number> = {};
   const nomeExibido = (chave: string, estatistica: Estatistica | undefined): string =>
     estatistica === undefined ? chave : maisFrequente(estatistica.textos);
 
@@ -339,6 +363,17 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
           candidatos: ids
             .slice(0, 3)
             .map((id) => ({ id, nome: farmacoPorId.get(id)?.nomeEn ?? '', similaridade: 1 })),
+        };
+      } else if (classeDcb.has(chave)) {
+        const classe = classeDcb.get(chave) as ClasseDcb;
+        porClasseDcb[classe] = (porClasseDcb[classe] ?? 0) + 1;
+        r = {
+          tipo: 'pt',
+          status: 'automatico',
+          motivo: `automático: a DCB classifica como ${ROTULO_CLASSE_DCB[classe]} (${classe}) e o DDInter não tem esse nome`,
+          nomePt: aposSal,
+          moiety,
+          nomePtDecidido: false,
         };
       } else {
         r = {
@@ -562,17 +597,18 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
   const automaticos: ItemAutomatico[] = chaves
     .filter((c) => {
       const r = resolvidos.get(c);
-      return r?.tipo === 'ddinter' && r.status === 'automatico';
+      return (r?.tipo === 'ddinter' || r?.tipo === 'pt') && r.status === 'automatico';
     })
     .map((c) => {
       const e = estat.get(c) as Estatistica;
-      const r = resolvidos.get(c) as Extract<Resolucao, { tipo: 'ddinter' }>;
+      const r = resolvidos.get(c) as Extract<Resolucao, { tipo: 'ddinter' | 'pt' }>;
+      const ids = r.tipo === 'ddinter' ? r.ids : [];
       return {
         chave: c,
         textoExemplo: maisFrequente(e.textos),
         medicamentosAtivos: e.ativos.size,
-        ddinterIds: r.ids,
-        nomesEn: r.ids.map((id) => farmacoPorId.get(id)?.nomeEn ?? ''),
+        ddinterIds: ids,
+        nomesEn: ids.map((id) => farmacoPorId.get(id)?.nomeEn ?? ''),
         motivo: r.motivo,
       };
     })
@@ -670,6 +706,9 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
     avisos,
     regrasDeSalUsadas: Object.fromEntries(
       Object.entries(regrasDeSalUsadas).sort(([a], [b]) => a.localeCompare(b)),
+    ),
+    porClasseDcb: Object.fromEntries(
+      Object.entries(porClasseDcb).sort(([a], [b]) => a.localeCompare(b)),
     ),
     principiosMesclados,
   };
