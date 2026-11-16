@@ -80,6 +80,8 @@ export interface MedicamentoSaida {
   componentes: number;
   /** Componentes sem princípio ativo confirmado ou automático (inclui o cortado pela ANVISA). */
   pendentes: number;
+  /** Componentes com princípio ativo, mas sem fármaco no DDInter ("sem dados na fonte"). */
+  semFonte: number;
   truncado: boolean;
 }
 export interface ItemFila {
@@ -113,8 +115,18 @@ export interface Cobertura {
     ativosSemPrincipio: number;
     ativosComTexto: number;
   };
-  ativos: { completos: number; parciais: number; nenhumMapeado: number; comTextoCortado: number };
+  ativos: {
+    completos: number;
+    /** Completos em que todo componente tem fármaco no DDInter (há interações para consultar). */
+    completosComFonte: number;
+    /** Completos em que algum componente não tem fármaco no DDInter ("sem dados na fonte"). */
+    completosComLacunaDeFonte: number;
+    parciais: number;
+    nenhumMapeado: number;
+    comTextoCortado: number;
+  };
   percentualCompletos: number;
+  percentualCompletosComFonte: number;
   componentes: { distintos: number; automatico: number; confirmado: number; pendente: number };
   principios: number;
   farmacosLigados: number;
@@ -544,11 +556,13 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
 
   // ---- ligações medicamento × princípio ----
   const ligacoes: LigacaoSaida[] = [];
+  const idsDoPrincipio = new Map(principios.map((p) => [p.slug, p.ddinterIds.length]));
   const porMedicamento: MedicamentoSaida[] = [];
   const pendentesDoAtivo = new Map<number, string[]>();
   for (const m of medicamentos) {
     const comps = componentesDe.get(m.id) ?? [];
     let pendentes = 0;
+    let semFonte = 0;
     let truncado = false;
     const chavesPendentes: string[] = [];
     for (const c of comps) {
@@ -562,9 +576,16 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
         chavesPendentes.push(c.chave);
       } else {
         ligacoes.push({ medicamentoId: m.id, ordem: c.ordem, slug });
+        if ((idsDoPrincipio.get(slug) ?? 0) === 0) semFonte++;
       }
     }
-    porMedicamento.push({ medicamentoId: m.id, componentes: comps.length, pendentes, truncado });
+    porMedicamento.push({
+      medicamentoId: m.id,
+      componentes: comps.length,
+      pendentes,
+      semFonte,
+      truncado,
+    });
     if (m.ativo && pendentes > 0) pendentesDoAtivo.set(m.id, chavesPendentes);
   }
 
@@ -619,6 +640,10 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
   const saidaDe = new Map(porMedicamento.map((m) => [m.medicamentoId, m]));
   const comTexto = ativos.filter((m) => (saidaDe.get(m.id)?.componentes ?? 0) > 0);
   const completos = comTexto.filter((m) => saidaDe.get(m.id)?.pendentes === 0).length;
+  const completosComFonte = comTexto.filter((m) => {
+    const x = saidaDe.get(m.id) as MedicamentoSaida;
+    return x.pendentes === 0 && x.semFonte === 0;
+  }).length;
   const nenhum = comTexto.filter((m) => {
     const s = saidaDe.get(m.id) as MedicamentoSaida;
     return s.pendentes === s.componentes;
@@ -649,11 +674,14 @@ export function mapear(entrada: EntradaMapeamento): SaidaMapeamento {
     },
     ativos: {
       completos,
+      completosComFonte,
+      completosComLacunaDeFonte: completos - completosComFonte,
       parciais: comTexto.length - completos - nenhum,
       nenhumMapeado: nenhum,
       comTextoCortado: cortados,
     },
     percentualCompletos: pct(completos, comTexto.length),
+    percentualCompletosComFonte: pct(completosComFonte, comTexto.length),
     componentes: {
       distintos: chaves.length,
       automatico: status('automatico'),

@@ -666,3 +666,30 @@ describe('data/mapeamento/decisoes.json (o arquivo do repositório)', () => {
     }
   });
 });
+
+describe('mapear: cobertura com e sem fonte', () => {
+  it('separa os completos em "todo componente tem fármaco no DDInter" e "algum sem dados na fonte"', () => {
+    const s = mapear({
+      medicamentos: [
+        { id: 1, nome: 'A', ativo: true, principioAtivoOriginal: 'metformina' },
+        { id: 2, nome: 'B', ativo: true, principioAtivoOriginal: 'metformina, arnica montana' },
+        { id: 3, nome: 'C', ativo: true, principioAtivoOriginal: 'arnica montana' },
+        { id: 4, nome: 'D', ativo: true, principioAtivoOriginal: 'desconhecida' },
+      ],
+      farmacos: [{ id: 1, nomeEn: 'Metformin' }],
+      decisoes: [],
+      classesDcb: [{ chave: 'arnica montana', classe: 'HOM' }],
+    });
+    expect(s.cobertura.ativos).toMatchObject({
+      completos: 3,
+      completosComFonte: 1,
+      completosComLacunaDeFonte: 2,
+    });
+    expect(s.cobertura.percentualCompletos).toBe(75);
+    expect(s.cobertura.percentualCompletosComFonte).toBe(25);
+    expect(s.medicamentos.find((m) => m.medicamentoId === 2)).toMatchObject({
+      pendentes: 0,
+      semFonte: 1,
+    });
+  });
+});

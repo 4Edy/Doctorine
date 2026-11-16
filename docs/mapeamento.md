@@ -29,15 +29,17 @@ Para cada componente do texto da ANVISA ("atorvastatina cálcica, ezetimiba" tem
 Similaridade de grafia nunca aceita nada sozinha. O que sobra continua na fila e é decidido na
 ferramenta de revisão (P9), não pela farmacêutica na carga.
 
-## Decisões iniciais (2026-11-16)
+## Decisões (2026-11-16)
 
-`data/mapeamento/decisoes.json` começa com 236 decisões do topo da fila: 163 `equivale` com o nome
-conferido contra a lista do DDInter, 3 `mesmo-que` e 70 `sem-equivalente`, só para substância
+`data/mapeamento/decisoes.json` tem 476 decisões do topo da fila, em duas levas: 341 `equivale` com o
+nome conferido contra a lista do DDInter, 21 `mesmo-que` e 114 `sem-equivalente`, só para substância
 que o DDInter não tem (busca por nome). Fora ficaram vacinas, imunoglobulinas, fatores de coagulação,
-misturas e qualquer caso duvidoso, que continuam na fila. Para os produtos de uso só local o `equivale`
-lista também a entrada "(topical)" ou "(ophthalmic)" do DDInter. `sem-equivalente` quer dizer "sem
-dados na fonte" (por exemplo bromazepam e domperidona), não "sem interação": o motor (P10) tem de
-mostrar isso.
+plantas com parênteses, misturas e qualquer caso duvidoso, que continuam na fila. Para os produtos de
+uso só local o `equivale` lista também a entrada "(topical)" ou "(ophthalmic)" do DDInter.
+`sem-equivalente` quer dizer "sem dados na fonte" (por exemplo bromazepam e domperidona), não "sem
+interação": o motor (P10) tem de mostrar isso. Por isso o relatório de carga separa os ativos
+completos em "todo componente tem fármaco no DDInter" (há interações para consultar) e "algum
+componente sem fármaco no DDInter".
 
 ## Arquivos de revisão (em `data/processed/base/<versão>/`)
 

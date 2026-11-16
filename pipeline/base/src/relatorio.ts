@@ -54,6 +54,14 @@ export function relatorioEmMarkdown(r: RelatorioCarga): string {
           'Ativos com todos os princípios ativos mapeados',
           `${r.mapeamento.cobertura.ativos.completos} de ${r.mapeamento.cobertura.medicamentos.ativosComTexto} (${r.mapeamento.cobertura.percentualCompletos}%)`,
         ],
+        [
+          '  com fármaco no DDInter em todos os componentes (há interações para consultar)',
+          `${r.mapeamento.cobertura.ativos.completosComFonte} (${r.mapeamento.cobertura.percentualCompletosComFonte}%)`,
+        ],
+        [
+          '  com algum componente sem fármaco no DDInter ("sem dados na fonte")',
+          `${r.mapeamento.cobertura.ativos.completosComLacunaDeFonte}`,
+        ],
         ['Ativos com alguns componentes pendentes', r.mapeamento.cobertura.ativos.parciais],
         ['Ativos sem nenhum componente mapeado', r.mapeamento.cobertura.ativos.nenhumMapeado],
         ['Ativos com texto cortado pela ANVISA', r.mapeamento.cobertura.ativos.comTextoCortado],
