@@ -47,10 +47,25 @@ let raiz: string;
 beforeEach(() => {
   raiz = mkdtempSync(join(tmpdir(), 'doctorine-base-'));
 });
-afterEach(() => rmSync(raiz, { recursive: true, force: true }));
+// No Windows, o arquivo SQLite aberto trava a remoção da pasta: fecha tudo antes de apagar.
+const abertos: DatabaseSync[] = [];
+afterEach(() => {
+  for (const db of abertos.splice(0)) {
+    try {
+      db.close();
+    } catch {
+      // já fechado
+    }
+  }
+  rmSync(raiz, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+});
 
 const sha = (s: string): string => createHash('sha256').update(s).digest('hex');
-const abrir = (caminho: string): DatabaseSync => new DatabaseSync(caminho, { readOnly: true });
+const abrir = (caminho: string): DatabaseSync => {
+  const db = new DatabaseSync(caminho, { readOnly: true });
+  abertos.push(db);
+  return db;
+};
 const todos = (db: DatabaseSync, sql: string) =>
   db.prepare(sql).all() as Array<Record<string, unknown>>;
 
