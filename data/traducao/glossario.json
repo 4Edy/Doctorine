@@ -1,0 +1,751 @@
+{
+  "versao": 1,
+  "termos": [
+    {
+      "en": "QT prolongation",
+      "pt": "prolongamento do intervalo QT",
+      "status": "proposto",
+      "aceitas": ["prolongamento do QT", "prolongamento de QT"]
+    },
+    {
+      "en": "torsades de pointes",
+      "pt": "torsades de pointes",
+      "status": "proposto",
+      "aceitas": ["torsade de pointes"]
+    },
+    {
+      "en": "serotonin syndrome",
+      "pt": "síndrome serotoninérgica",
+      "status": "proposto",
+      "aceitas": ["síndrome da serotonina"]
+    },
+    {
+      "en": "angioedema",
+      "pt": "angioedema",
+      "status": "proposto"
+    },
+    {
+      "en": "hyperkalemia",
+      "pt": "hipercalemia",
+      "status": "proposto",
+      "aceitas": ["hiperpotassemia"]
+    },
+    {
+      "en": "hypokalemia",
+      "pt": "hipocalemia",
+      "status": "proposto",
+      "aceitas": ["hipopotassemia"]
+    },
+    {
+      "en": "hyponatremia",
+      "pt": "hiponatremia",
+      "status": "proposto"
+    },
+    {
+      "en": "hypernatremia",
+      "pt": "hipernatremia",
+      "status": "proposto"
+    },
+    {
+      "en": "hypotension",
+      "pt": "hipotensão",
+      "status": "proposto"
+    },
+    {
+      "en": "hypertension",
+      "pt": "hipertensão",
+      "status": "proposto"
+    },
+    {
+      "en": "bradycardia",
+      "pt": "bradicardia",
+      "status": "proposto"
+    },
+    {
+      "en": "tachycardia",
+      "pt": "taquicardia",
+      "status": "proposto"
+    },
+    {
+      "en": "arrhythmia",
+      "pt": "arritmia",
+      "status": "proposto"
+    },
+    {
+      "en": "ventricular arrhythmia",
+      "pt": "arritmia ventricular",
+      "status": "proposto"
+    },
+    {
+      "en": "hypoglycemia",
+      "pt": "hipoglicemia",
+      "status": "proposto"
+    },
+    {
+      "en": "hyperglycemia",
+      "pt": "hiperglicemia",
+      "status": "proposto"
+    },
+    {
+      "en": "rhabdomyolysis",
+      "pt": "rabdomiólise",
+      "status": "proposto"
+    },
+    {
+      "en": "lactic acidosis",
+      "pt": "acidose láctica",
+      "status": "proposto",
+      "aceitas": ["acidose lática"]
+    },
+    {
+      "en": "myelosuppression",
+      "pt": "mielossupressão",
+      "status": "proposto",
+      "aceitas": ["supressão da medula óssea"]
+    },
+    {
+      "en": "bone marrow suppression",
+      "pt": "supressão da medula óssea",
+      "status": "proposto",
+      "aceitas": ["mielossupressão"]
+    },
+    {
+      "en": "neutropenia",
+      "pt": "neutropenia",
+      "status": "proposto"
+    },
+    {
+      "en": "thrombocytopenia",
+      "pt": "trombocitopenia",
+      "status": "proposto"
+    },
+    {
+      "en": "agranulocytosis",
+      "pt": "agranulocitose",
+      "status": "proposto"
+    },
+    {
+      "en": "nephrotoxicity",
+      "pt": "nefrotoxicidade",
+      "status": "proposto"
+    },
+    {
+      "en": "hepatotoxicity",
+      "pt": "hepatotoxicidade",
+      "status": "proposto"
+    },
+    {
+      "en": "ototoxicity",
+      "pt": "ototoxicidade",
+      "status": "proposto"
+    },
+    {
+      "en": "neurotoxicity",
+      "pt": "neurotoxicidade",
+      "status": "proposto"
+    },
+    {
+      "en": "cardiotoxicity",
+      "pt": "cardiotoxicidade",
+      "status": "proposto"
+    },
+    {
+      "en": "respiratory depression",
+      "pt": "depressão respiratória",
+      "status": "proposto"
+    },
+    {
+      "en": "central nervous system depression",
+      "pt": "depressão do sistema nervoso central",
+      "status": "proposto",
+      "aceitas": ["depressão do SNC"]
+    },
+    {
+      "en": "CNS depressant",
+      "pt": "depressor do sistema nervoso central",
+      "status": "proposto",
+      "aceitas": ["depressor do SNC"]
+    },
+    {
+      "en": "seizure",
+      "pt": "convulsão",
+      "status": "proposto",
+      "aceitas": ["crise convulsiva", "convulsões"]
+    },
+    {
+      "en": "bleeding",
+      "pt": "sangramento",
+      "status": "proposto"
+    },
+    {
+      "en": "hemorrhage",
+      "pt": "hemorragia",
+      "status": "proposto"
+    },
+    {
+      "en": "bleeding risk",
+      "pt": "risco de sangramento",
+      "status": "proposto"
+    },
+    {
+      "en": "hypersensitivity",
+      "pt": "hipersensibilidade",
+      "status": "proposto"
+    },
+    {
+      "en": "anaphylaxis",
+      "pt": "anafilaxia",
+      "status": "proposto"
+    },
+    {
+      "en": "sedation",
+      "pt": "sedação",
+      "status": "proposto"
+    },
+    {
+      "en": "serotonergic",
+      "pt": "serotoninérgico",
+      "status": "proposto",
+      "aceitas": ["serotoninérgica"]
+    },
+    {
+      "en": "anticholinergic",
+      "pt": "anticolinérgico",
+      "status": "proposto",
+      "aceitas": ["anticolinérgica"]
+    },
+    {
+      "en": "renal impairment",
+      "pt": "insuficiência renal",
+      "status": "proposto",
+      "aceitas": ["comprometimento renal", "disfunção renal"]
+    },
+    {
+      "en": "hepatic impairment",
+      "pt": "insuficiência hepática",
+      "status": "proposto",
+      "aceitas": ["comprometimento hepático", "disfunção hepática"]
+    },
+    {
+      "en": "kidney disease",
+      "pt": "doença renal",
+      "status": "proposto"
+    },
+    {
+      "en": "liver disease",
+      "pt": "doença hepática",
+      "status": "proposto"
+    },
+    {
+      "en": "heart failure",
+      "pt": "insuficiência cardíaca",
+      "status": "proposto"
+    },
+    {
+      "en": "pharmacokinetic",
+      "pt": "farmacocinético",
+      "status": "proposto",
+      "aceitas": ["farmacocinética"]
+    },
+    {
+      "en": "pharmacodynamic",
+      "pt": "farmacodinâmico",
+      "status": "proposto",
+      "aceitas": ["farmacodinâmica"]
+    },
+    {
+      "en": "bioavailability",
+      "pt": "biodisponibilidade",
+      "status": "proposto"
+    },
+    {
+      "en": "half-life",
+      "pt": "meia-vida",
+      "status": "proposto",
+      "variantesEn": ["half life"]
+    },
+    {
+      "en": "area under the curve",
+      "pt": "área sob a curva",
+      "status": "proposto",
+      "aceitas": ["ASC"]
+    },
+    {
+      "en": "plasma concentration",
+      "pt": "concentração plasmática",
+      "status": "proposto"
+    },
+    {
+      "en": "serum concentration",
+      "pt": "concentração sérica",
+      "status": "proposto"
+    },
+    {
+      "en": "serum level",
+      "pt": "nível sérico",
+      "status": "proposto",
+      "aceitas": ["concentração sérica"]
+    },
+    {
+      "en": "absorption",
+      "pt": "absorção",
+      "status": "proposto"
+    },
+    {
+      "en": "distribution",
+      "pt": "distribuição",
+      "status": "proposto"
+    },
+    {
+      "en": "metabolism",
+      "pt": "metabolismo",
+      "status": "proposto"
+    },
+    {
+      "en": "excretion",
+      "pt": "excreção",
+      "status": "proposto"
+    },
+    {
+      "en": "renal clearance",
+      "pt": "depuração renal",
+      "status": "proposto",
+      "aceitas": ["clearance renal"]
+    },
+    {
+      "en": "renal excretion",
+      "pt": "excreção renal",
+      "status": "proposto"
+    },
+    {
+      "en": "substrate",
+      "pt": "substrato",
+      "status": "proposto"
+    },
+    {
+      "en": "inhibitor",
+      "pt": "inibidor",
+      "status": "proposto"
+    },
+    {
+      "en": "inducer",
+      "pt": "indutor",
+      "status": "proposto"
+    },
+    {
+      "en": "CYP3A4 inhibitor",
+      "pt": "inibidor da CYP3A4",
+      "status": "proposto",
+      "aceitas": ["inibidor do CYP3A4"]
+    },
+    {
+      "en": "CYP3A4 inducer",
+      "pt": "indutor da CYP3A4",
+      "status": "proposto",
+      "aceitas": ["indutor do CYP3A4"]
+    },
+    {
+      "en": "P-glycoprotein",
+      "pt": "glicoproteína P",
+      "status": "proposto",
+      "variantesEn": ["P-gp"],
+      "aceitas": ["gp-P", "P-gp"]
+    },
+    {
+      "en": "protein binding",
+      "pt": "ligação às proteínas",
+      "status": "proposto",
+      "aceitas": ["ligação a proteínas"]
+    },
+    {
+      "en": "therapeutic effect",
+      "pt": "efeito terapêutico",
+      "status": "proposto"
+    },
+    {
+      "en": "therapeutic efficacy",
+      "pt": "eficácia terapêutica",
+      "status": "proposto"
+    },
+    {
+      "en": "adverse effect",
+      "pt": "efeito adverso",
+      "status": "proposto",
+      "aceitas": ["reação adversa", "evento adverso"]
+    },
+    {
+      "en": "adverse reaction",
+      "pt": "reação adversa",
+      "status": "proposto",
+      "aceitas": ["efeito adverso"]
+    },
+    {
+      "en": "pharmacologic effect",
+      "pt": "efeito farmacológico",
+      "status": "proposto",
+      "aceitas": ["efeito farmacodinâmico"]
+    },
+    {
+      "en": "additive effect",
+      "pt": "efeito aditivo",
+      "status": "proposto"
+    },
+    {
+      "en": "synergistic effect",
+      "pt": "efeito sinérgico",
+      "status": "proposto",
+      "aceitas": ["sinergismo"]
+    },
+    {
+      "en": "antagonism",
+      "pt": "antagonismo",
+      "status": "proposto"
+    },
+    {
+      "en": "synergism",
+      "pt": "sinergismo",
+      "status": "proposto"
+    },
+    {
+      "en": "dose adjustment",
+      "pt": "ajuste de dose",
+      "status": "proposto",
+      "aceitas": ["ajuste da dose"]
+    },
+    {
+      "en": "coadministration",
+      "pt": "coadministração",
+      "status": "proposto",
+      "variantesEn": ["co-administration"],
+      "aceitas": ["administração concomitante", "uso concomitante"]
+    },
+    {
+      "en": "concomitant use",
+      "pt": "uso concomitante",
+      "status": "proposto",
+      "aceitas": ["administração concomitante", "coadministração"]
+    },
+    {
+      "en": "contraindicated",
+      "pt": "contraindicado",
+      "status": "proposto",
+      "variantesEn": ["contra-indicated"],
+      "aceitas": ["contraindicada", "contraindicados", "contraindicadas", "contraindicação"]
+    },
+    {
+      "en": "therapeutic drug monitoring",
+      "pt": "monitoramento terapêutico",
+      "status": "proposto",
+      "aceitas": ["monitorização terapêutica"]
+    },
+    {
+      "en": "therapeutic duplication",
+      "pt": "duplicidade terapêutica",
+      "status": "proposto"
+    },
+    {
+      "en": "narrow therapeutic index",
+      "pt": "índice terapêutico estreito",
+      "status": "proposto",
+      "aceitas": ["margem terapêutica estreita"]
+    },
+    {
+      "en": "anticoagulant",
+      "pt": "anticoagulante",
+      "status": "proposto"
+    },
+    {
+      "en": "antiplatelet",
+      "pt": "antiagregante plaquetário",
+      "status": "proposto",
+      "aceitas": ["antiplaquetário"]
+    },
+    {
+      "en": "antihypertensive",
+      "pt": "anti-hipertensivo",
+      "status": "proposto",
+      "aceitas": ["anti-hipertensiva", "anti-hipertensivos"]
+    },
+    {
+      "en": "diuretic",
+      "pt": "diurético",
+      "status": "proposto"
+    },
+    {
+      "en": "potassium-sparing diuretic",
+      "pt": "diurético poupador de potássio",
+      "status": "proposto"
+    },
+    {
+      "en": "loop diuretic",
+      "pt": "diurético de alça",
+      "status": "proposto"
+    },
+    {
+      "en": "thiazide diuretic",
+      "pt": "diurético tiazídico",
+      "status": "proposto",
+      "aceitas": ["diurético tiazida"]
+    },
+    {
+      "en": "beta-blocker",
+      "pt": "betabloqueador",
+      "status": "proposto",
+      "variantesEn": ["beta blocker", "β-blocker"],
+      "aceitas": ["bloqueador beta-adrenérgico", "antagonista beta-adrenérgico"]
+    },
+    {
+      "en": "ACE inhibitor",
+      "pt": "inibidor da enzima conversora de angiotensina",
+      "status": "proposto",
+      "aceitas": ["inibidor da ECA", "IECA"]
+    },
+    {
+      "en": "angiotensin receptor blocker",
+      "pt": "bloqueador do receptor de angiotensina",
+      "status": "proposto",
+      "variantesEn": ["ARB"],
+      "aceitas": ["bloqueador dos receptores de angiotensina", "BRA"]
+    },
+    {
+      "en": "calcium channel blocker",
+      "pt": "bloqueador dos canais de cálcio",
+      "status": "proposto",
+      "aceitas": ["bloqueador de canais de cálcio", "antagonista dos canais de cálcio"]
+    },
+    {
+      "en": "NSAID",
+      "pt": "anti-inflamatório não esteroidal",
+      "status": "proposto",
+      "variantesEn": ["NSAIDs"],
+      "aceitas": ["anti-inflamatório não esteroide", "AINE", "AINEs"]
+    },
+    {
+      "en": "SSRI",
+      "pt": "inibidor seletivo da recaptação de serotonina",
+      "status": "proposto",
+      "aceitas": ["ISRS"]
+    },
+    {
+      "en": "MAOI",
+      "pt": "inibidor da monoaminoxidase",
+      "status": "proposto",
+      "variantesEn": ["MAO inhibitor"],
+      "aceitas": ["IMAO"]
+    },
+    {
+      "en": "tricyclic antidepressant",
+      "pt": "antidepressivo tricíclico",
+      "status": "proposto"
+    },
+    {
+      "en": "benzodiazepine",
+      "pt": "benzodiazepínico",
+      "status": "proposto",
+      "aceitas": ["benzodiazepina"]
+    },
+    {
+      "en": "opioid",
+      "pt": "opioide",
+      "status": "proposto"
+    },
+    {
+      "en": "anticonvulsant",
+      "pt": "anticonvulsivante",
+      "status": "proposto"
+    },
+    {
+      "en": "antiepileptic",
+      "pt": "antiepiléptico",
+      "status": "proposto",
+      "aceitas": ["antiepilético"]
+    },
+    {
+      "en": "antipsychotic",
+      "pt": "antipsicótico",
+      "status": "proposto"
+    },
+    {
+      "en": "antidepressant",
+      "pt": "antidepressivo",
+      "status": "proposto"
+    },
+    {
+      "en": "antibiotic",
+      "pt": "antibiótico",
+      "status": "proposto"
+    },
+    {
+      "en": "antifungal",
+      "pt": "antifúngico",
+      "status": "proposto"
+    },
+    {
+      "en": "azole antifungal",
+      "pt": "antifúngico azólico",
+      "status": "proposto",
+      "aceitas": ["antifúngico azol"]
+    },
+    {
+      "en": "macrolide",
+      "pt": "macrolídeo",
+      "status": "proposto"
+    },
+    {
+      "en": "fluoroquinolone",
+      "pt": "fluoroquinolona",
+      "status": "proposto"
+    },
+    {
+      "en": "statin",
+      "pt": "estatina",
+      "status": "proposto"
+    },
+    {
+      "en": "immunosuppressant",
+      "pt": "imunossupressor",
+      "status": "proposto",
+      "aceitas": ["imunossupressora"]
+    },
+    {
+      "en": "corticosteroid",
+      "pt": "corticosteroide",
+      "status": "proposto",
+      "aceitas": ["corticoide"]
+    },
+    {
+      "en": "antacid",
+      "pt": "antiácido",
+      "status": "proposto"
+    },
+    {
+      "en": "proton pump inhibitor",
+      "pt": "inibidor da bomba de prótons",
+      "status": "proposto",
+      "aceitas": ["IBP"]
+    },
+    {
+      "en": "oral contraceptive",
+      "pt": "contraceptivo oral",
+      "status": "proposto",
+      "aceitas": ["anticoncepcional oral"]
+    },
+    {
+      "en": "hormonal contraceptive",
+      "pt": "contraceptivo hormonal",
+      "status": "proposto",
+      "aceitas": ["anticoncepcional hormonal"]
+    },
+    {
+      "en": "sulfonylurea",
+      "pt": "sulfonilureia",
+      "status": "proposto"
+    },
+    {
+      "en": "insulin",
+      "pt": "insulina",
+      "status": "proposto"
+    },
+    {
+      "en": "antiarrhythmic",
+      "pt": "antiarrítmico",
+      "status": "proposto"
+    },
+    {
+      "en": "vasodilator",
+      "pt": "vasodilatador",
+      "status": "proposto"
+    },
+    {
+      "en": "vasoconstrictor",
+      "pt": "vasoconstritor",
+      "status": "proposto"
+    },
+    {
+      "en": "neuromuscular blocker",
+      "pt": "bloqueador neuromuscular",
+      "status": "proposto",
+      "aceitas": ["bloqueador neuromuscular"]
+    },
+    {
+      "en": "chemotherapy",
+      "pt": "quimioterapia",
+      "status": "proposto"
+    },
+    {
+      "en": "antiretroviral",
+      "pt": "antirretroviral",
+      "status": "proposto"
+    },
+    {
+      "en": "anticholinesterase",
+      "pt": "anticolinesterásico",
+      "status": "proposto",
+      "aceitas": ["inibidor da colinesterase"]
+    },
+    {
+      "en": "grapefruit juice",
+      "pt": "suco de toranja",
+      "status": "proposto",
+      "aceitas": ["suco de grapefruit", "suco de pomelo"]
+    },
+    {
+      "en": "grapefruit",
+      "pt": "toranja",
+      "status": "proposto",
+      "aceitas": ["grapefruit", "pomelo"]
+    },
+    {
+      "en": "alcohol",
+      "pt": "álcool",
+      "status": "proposto",
+      "aceitas": ["etanol"]
+    },
+    {
+      "en": "St. John's Wort",
+      "pt": "erva-de-são-joão",
+      "status": "proposto",
+      "variantesEn": ["St John's Wort"],
+      "aceitas": ["hipérico", "erva de são joão"]
+    },
+    {
+      "en": "dairy product",
+      "pt": "produto lácteo",
+      "status": "proposto",
+      "aceitas": ["laticínio", "derivado do leite"]
+    },
+    {
+      "en": "high-fat meal",
+      "pt": "refeição rica em gordura",
+      "status": "proposto",
+      "aceitas": ["refeição gordurosa", "refeição com alto teor de gordura"]
+    },
+    {
+      "en": "empty stomach",
+      "pt": "estômago vazio",
+      "status": "proposto",
+      "aceitas": ["jejum"]
+    },
+    {
+      "en": "with food",
+      "pt": "com alimentos",
+      "status": "proposto",
+      "aceitas": ["com alimento", "junto com alimentos", "às refeições"]
+    },
+    {
+      "en": "vitamin K",
+      "pt": "vitamina K",
+      "status": "proposto"
+    },
+    {
+      "en": "tyramine",
+      "pt": "tiramina",
+      "status": "proposto"
+    },
+    {
+      "en": "caffeine",
+      "pt": "cafeína",
+      "status": "proposto"
+    }
+  ]
+}

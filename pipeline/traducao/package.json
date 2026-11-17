@@ -1,0 +1,22 @@
+{
+  "name": "@doctorine/pipeline-traducao",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "traducao": "tsx src/cli.ts",
+    "validar-glossario": "tsx src/cli.ts glossario"
+  },
+  "dependencies": {
+    "@doctorine/pipeline-base": "workspace:*",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "tsx": "^4.20.5",
+    "vitest": "^3.2.4"
+  }
+}
