@@ -20,6 +20,7 @@
     "pipeline:ddinter:site": "pnpm --filter @doctorine/pipeline-ddinter site",
     "pipeline:base": "pnpm --filter @doctorine/pipeline-base carregar",
     "pipeline:decisoes": "pnpm --filter @doctorine/pipeline-base importar-decisoes",
+    "pipeline:traducao": "pnpm --filter @doctorine/pipeline-traducao traducao",
     "pipeline:ddinter:pares": "pnpm --filter @doctorine/pipeline-ddinter coletar-pares",
     "pipeline:ddinter:manejo": "pnpm --filter @doctorine/pipeline-ddinter coletar-manejo",
     "ci": "pnpm format:check && pnpm typecheck && pnpm test && pnpm validate:reference"
