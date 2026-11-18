@@ -37,7 +37,7 @@ A tradução é guardada **com os marcadores**.
 
 ## Glossário
 
-`data/traducao/glossario.json` (versionado): 135 termos propostos (desfechos, farmacocinética,
+`data/traducao/glossario.json` (versionado): 136 termos propostos (desfechos, farmacocinética,
 classes, alimentos). Cada termo tem `en`, `pt`, formas aceitas em português e `status`
 (`proposto` ou `aprovado`). Se o termo aparece no inglês e a tradução não usa nenhuma forma aceita,
 o resultado é **aviso** (proposto) ou **erro** (aprovado). Todos começam `proposto`: aprovar o

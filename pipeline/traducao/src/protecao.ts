@@ -67,16 +67,30 @@ export function criarProtetor(nomes: readonly NomeFarmaco[]): Protetor {
       return { texto: saida, marcas };
     },
     restaurar(traduzido, marcas, nomesPt) {
-      return traduzido.replace(MARCADOR, (m, n: string) => {
+      return traduzido.replace(MARCADOR, (m, n: string, pos: number, todo: string) => {
         const marca = marcas.find((x) => x.n === Number(n));
         if (marca === undefined) return m;
-        const pt = nomesPt?.get(marca.idFarmaco);
-        if (pt === undefined) return marca.superficie;
-        const primeira = marca.superficie.charAt(0);
-        return primeira !== primeira.toLowerCase() ? pt.charAt(0).toUpperCase() + pt.slice(1) : pt;
+        const nome = nomesPt?.get(marca.idFarmaco) ?? marca.superficie;
+        const inicioDeFrase = pos === 0 || /(?:^|[.!?:;]\s+|\n\s*)$/.test(todo.slice(0, pos));
+        return ajustarCaixa(nome, inicioDeFrase);
       });
     },
   };
+}
+
+/**
+ * Caixa do nome conforme a posição na frase em português (não a do inglês): maiúscula no início
+ * da frase; minúscula no meio, a não ser que o nome tenha outra maiúscula (siglas, "St. John's wort").
+ */
+export function ajustarCaixa(nome: string, inicioDeFrase: boolean): string {
+  if (nome === '') return nome;
+  const primeira = nome.charAt(0);
+  if (inicioDeFrase) return primeira.toUpperCase() + nome.slice(1);
+  const resto = nome.slice(1);
+  if (primeira !== primeira.toLowerCase() && resto === resto.toLowerCase()) {
+    return primeira.toLowerCase() + resto;
+  }
+  return nome;
 }
 
 /** Marcadores presentes em um texto, ordenados (com repetição). */

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { criarProtetor, marcadoresDe } from './protecao.js';
+import { ajustarCaixa, criarProtetor, marcadoresDe } from './protecao.js';
 
 const nomes = [
   { id: 'DDInter1', nome: 'Abacavir' },
@@ -31,10 +31,21 @@ describe('protetor de nomes de fármacos', () => {
     ]);
     expect(pr.restaurar('[[F1]] e [[F2]].', p.marcas, pt)).toBe('Sacubitrila e abacavir.');
   });
+  it('a caixa segue a posição na frase em português, não a do inglês', () => {
+    const pr = criarProtetor(nomes);
+    const p = pr.proteger('Sacubitril is eliminated. Intranasal Abacavir is used.');
+    expect(pr.restaurar('O uso de [[F1]] é raro. [[F2]] intranasal é usado.', p.marcas)).toBe(
+      'O uso de sacubitril é raro. Abacavir intranasal é usado.',
+    );
+    expect(ajustarCaixa('SN-38', false)).toBe('SN-38');
+    expect(ajustarCaixa("St. John's wort", false)).toBe("St. John's wort");
+    expect(ajustarCaixa('Warfarin', false)).toBe('warfarin');
+    expect(ajustarCaixa('warfarin', true)).toBe('Warfarin');
+  });
   it('sem mapeamento volta o nome como estava', () => {
     const pr = criarProtetor(nomes);
     const p = pr.proteger('Sacubitril x Abacavir');
-    expect(pr.restaurar('[[F1]] x [[F2]]', p.marcas)).toBe('Sacubitril x Abacavir');
+    expect(pr.restaurar('[[F1]] x [[F2]]', p.marcas)).toBe('Sacubitril x abacavir');
   });
   it('lista de nomes vazia não muda o texto; marcadoresDe conta com repetição', () => {
     expect(criarProtetor([]).proteger('Abacavir').texto).toBe('Abacavir');

@@ -746,6 +746,13 @@
       "en": "caffeine",
       "pt": "cafeína",
       "status": "proposto"
+    },
+    {
+      "en": "washout period",
+      "pt": "período de washout",
+      "status": "proposto",
+      "aceitas": ["período de eliminação", "washout"],
+      "variantesEn": ["washout"]
     }
   ]
 }
