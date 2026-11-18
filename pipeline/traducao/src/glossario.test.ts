@@ -1,7 +1,13 @@
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { criarGlossario, lerGlossario, termosAusentes, termosNoTexto } from './glossario.js';
+import {
+  criarGlossario,
+  lerGlossario,
+  pluralDoTermo,
+  termosAusentes,
+  termosNoTexto,
+} from './glossario.js';
 
 const g = criarGlossario({
   versao: 1,
@@ -31,6 +37,19 @@ describe('glossário', () => {
     expect(termosAusentes('NSAIDs cause bleeding.', 'AINEs causam sangramento.', g)).toHaveLength(
       0,
     );
+  });
+  it('aceita o plural regular do termo em português', () => {
+    expect(pluralDoTermo('concentração plasmática')).toBe('concentrações plasmáticas');
+    expect(pluralDoTermo('efeito adverso')).toBe('efeitos adversos');
+    expect(pluralDoTermo('risco de sangramento')).toBe('riscos de sangramentos');
+    const g2 = criarGlossario({
+      versao: 1,
+      termos: [{ en: 'plasma concentration', pt: 'concentração plasmática', status: 'proposto' }],
+    });
+    expect(
+      termosAusentes('higher plasma concentrations', 'maiores concentrações plasmáticas', g2),
+    ).toHaveLength(0);
+    expect(termosAusentes('plasma concentrations', 'níveis no sangue', g2)).toHaveLength(1);
   });
   it('recusa termo repetido (inclusive por variante) e formato inválido', () => {
     expect(() =>

@@ -76,10 +76,46 @@ export function termosNoTexto(en: string, g: Glossario): EntradaGlossario[] {
   return g.termos.filter((t) => regexTermo(t).test(en));
 }
 
+const PARTICULAS = new Set([
+  'de',
+  'da',
+  'do',
+  'das',
+  'dos',
+  'e',
+  'a',
+  'o',
+  'em',
+  'por',
+  'sob',
+  'com',
+  'para',
+  'ao',
+]);
+
+function pluralDaPalavra(w: string): string {
+  if (/ão$/u.test(w)) return w.replace(/ão$/u, 'ões');
+  if (/[rz]$/u.test(w)) return w + 'es';
+  if (/m$/u.test(w)) return w.slice(0, -1) + 'ns';
+  if (/s$/u.test(w)) return w;
+  return w + 's';
+}
+/** Plural regular de um termo composto: pluraliza cada palavra, menos preposições e artigos. */
+export function pluralDoTermo(termo: string): string {
+  return termo
+    .split(' ')
+    .map((w) => (PARTICULAS.has(w.toLowerCase()) || /[-/()\d]/u.test(w) ? w : pluralDaPalavra(w)))
+    .join(' ');
+}
+
 /** Termos presentes no inglês cuja tradução (nenhuma forma aceita) não aparece no português. */
 export function termosAusentes(en: string, pt: string, g: Glossario): EntradaGlossario[] {
   const baixo = pt.toLowerCase();
   return termosNoTexto(en, g).filter(
-    (t) => ![t.pt, ...t.aceitas].some((f) => baixo.includes(f.toLowerCase())),
+    (t) =>
+      ![t.pt, ...t.aceitas].some((f) => {
+        const forma = f.toLowerCase();
+        return baixo.includes(forma) || baixo.includes(pluralDoTermo(forma));
+      }),
   );
 }
