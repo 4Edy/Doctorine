@@ -311,8 +311,9 @@ export async function traduzirLoteViaApi(lote: Lote, o: OpcoesApi): Promise<stri
     }
     const retentavel = resp.status === 429 || resp.status >= 500;
     if (!retentavel || tentativa === 5) {
+      const corpo = (await resp.text().catch(() => '')).replace(/\s+/g, ' ').slice(0, 300);
       throw new ErroTraducao(
-        `API recusou o pedido (HTTP ${resp.status})${resp.status === 429 ? ': limite de uso atingido; o progresso está salvo, rode de novo mais tarde' : ''}`,
+        `API recusou o pedido (HTTP ${resp.status})${resp.status === 429 ? ': limite de uso atingido; o progresso está salvo, rode de novo mais tarde' : ''}${corpo === '' ? '' : `. Resposta: ${corpo}`}`,
       );
     }
     const ra = Number(resp.headers.get('retry-after'));

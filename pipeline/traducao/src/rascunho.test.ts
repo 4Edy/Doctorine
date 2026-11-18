@@ -130,8 +130,13 @@ describe('traduzirLoteViaApi', () => {
       esperar: async (ms) => void esperas.push(ms),
     });
     expect(esperas).toEqual([7000]);
-    const f401 = (async () => new Response('', { status: 401 })) as unknown as typeof fetch;
-    await expect(traduzirLoteViaApi(lote, { chave: 'k', fetch: f401 })).rejects.toThrow(/HTTP 401/);
+    const f401 = (async () =>
+      new Response('{"error":{"message":"modelo inexistente"}}', {
+        status: 401,
+      })) as unknown as typeof fetch;
+    await expect(traduzirLoteViaApi(lote, { chave: 'k', fetch: f401 })).rejects.toThrow(
+      /HTTP 401.*modelo inexistente/,
+    );
   });
 
   it('Gemini: chave no cabeçalho, instrução de sistema, resposta em candidates', async () => {
