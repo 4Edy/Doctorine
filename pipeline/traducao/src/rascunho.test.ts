@@ -191,6 +191,28 @@ describe('traduzirLoteViaApi', () => {
     });
     expect(visto?.url).toBe('http://x/v1/chat/completions');
   });
+  it('falha de rede ou tempo esgotado é tentada de novo e, persistindo, para com dica', async () => {
+    let n = 0;
+    const f = (async () => {
+      if (++n < 3) throw new TypeError('fetch failed');
+      return ok('[]');
+    }) as unknown as typeof fetch;
+    const esperas: number[] = [];
+    expect(
+      await traduzirLoteViaApi(lote, {
+        chave: 'k',
+        fetch: f,
+        esperar: async (ms) => void esperas.push(ms),
+      }),
+    ).toBe('[]');
+    expect(esperas).toEqual([10000, 20000]);
+    const sempre = (async () => {
+      throw new TypeError('fetch failed');
+    }) as unknown as typeof fetch;
+    await expect(
+      traduzirLoteViaApi(lote, { chave: 'k', fetch: sempre, esperar: async () => undefined }),
+    ).rejects.toThrow(/sem resposta da API.*--lote menor/);
+  });
   it('fora da Anthropic exige --modelo, e 429 persistente para com mensagem útil', async () => {
     await expect(traduzirLoteViaApi(lote, { chave: 'k', provedor: 'gemini' })).rejects.toThrow(
       /--modelo/,

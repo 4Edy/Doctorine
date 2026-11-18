@@ -205,6 +205,8 @@ export interface OpcoesApi {
   fetch?: typeof fetch;
   /** Espera entre tentativas, em ms; injetável nos testes. */
   esperar?: (ms: number) => Promise<void>;
+  /** Tempo máximo de cada pedido, em ms (padrão 180 s). Falha de rede e tempo esgotado são tentados de novo. */
+  tempoLimiteMs?: number;
 }
 const dormir = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
@@ -298,11 +300,25 @@ export async function traduzirLoteViaApi(lote: Lote, o: OpcoesApi): Promise<stri
   const pedido = montarPedido(lote, o);
   let espera = 10_000;
   for (let tentativa = 1; tentativa <= 5; tentativa++) {
-    const resp = await f(pedido.url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', ...pedido.headers },
-      body: JSON.stringify(pedido.corpo),
-    });
+    let resp: Response;
+    try {
+      resp = await f(pedido.url, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...pedido.headers },
+        body: JSON.stringify(pedido.corpo),
+        signal: AbortSignal.timeout(o.tempoLimiteMs ?? 180_000),
+      });
+    } catch (e) {
+      // rede caiu, tempo esgotado ou servidor sem responder: tenta de novo, depois para
+      if (tentativa === 5) {
+        throw new ErroTraducao(
+          `sem resposta da API após 5 tentativas (${(e as Error).name}: ${(e as Error).message}); tente --lote menor (por exemplo, 5) ou outro modelo`,
+        );
+      }
+      await esperar(espera);
+      espera *= 2;
+      continue;
+    }
     if (resp.ok) {
       const texto = pedido.extrair(await resp.json());
       if (texto === undefined || texto.trim() === '')
