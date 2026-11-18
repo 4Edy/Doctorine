@@ -20,7 +20,12 @@ import {
   type ResultadoAplicacao,
 } from './rascunho.js';
 import { resumir, resumoEmMarkdown } from './resumo.js';
-import { extrairUnidades, versaoDasUnidades, type UnidadeTexto } from './textos.js';
+import {
+  extrairUnidades,
+  NOMES_PRIORIDADE,
+  versaoDasUnidades,
+  type UnidadeTexto,
+} from './textos.js';
 import { temErro, validarTraducao } from './validar.js';
 
 const AJUDA = `Uso: pnpm pipeline:traducao <comando> [opções]
@@ -33,6 +38,7 @@ Comandos:
   importar <arquivo>      valida e grava traduções de um lote traduzido ([{id, pt}] ou {itens: [...]})
   rascunhar               traduz por uma API de modelo (Anthropic, Gemini, Groq...); retomável, mais grave primeiro
   validar                 confere toda a memória contra o glossário e os marcadores (sai com 1 se houver erro)
+  comparar                grava data/traducao/comparacao.md com inglês e português lado a lado (--limite n, padrão 20)
   mostrar <id>            mostra um texto com nomes restaurados e o histórico
 
 Opções:
@@ -268,6 +274,37 @@ export async function executar(argv: readonly string[]): Promise<number> {
         `textos: ${unidades.length}; sem tradução: ${sem}; com erro: ${erros}; com aviso: ${avisos}`,
       );
       return erros > 0 ? 1 : 0;
+    }
+    case 'comparar': {
+      const caminhoNomes = join(raiz, 'data', 'traducao', 'nomes-pt.json');
+      const nomesPt = existsSync(caminhoNomes)
+        ? new Map(
+            Object.entries(
+              JSON.parse(readFileSync(caminhoNomes, 'utf8')) as Record<string, string>,
+            ),
+          )
+        : undefined;
+      const porId = new Map(unidades.map((u) => [u.id, u]));
+      const eventos = [...ctx.memoria.todos()]
+        .filter((e) => porId.has(e.id))
+        .slice(-(limite ?? 20));
+      const partes = ['# Comparação inglês × português', ''];
+      for (const e of eventos) {
+        const u = porId.get(e.id) as UnidadeTexto;
+        const prot = protetor.proteger(u.en);
+        partes.push(
+          `## ${e.id} (${NOMES_PRIORIDADE[u.prioridade]}, ${e.status}, ${e.modelo ?? 'revisão'})`,
+          '',
+          `**EN:** ${u.en}`,
+          '',
+          `**PT:** ${protetor.restaurar(e.pt, prot.marcas, nomesPt)}`,
+          '',
+        );
+      }
+      const saidaMd = join(raiz, 'data', 'traducao', 'comparacao.md');
+      writeFileSync(saidaMd, partes.join('\n'));
+      console.log(`${eventos.length} textos → ${saidaMd}`);
+      return 0;
     }
     case 'mostrar': {
       if (arg === undefined) throw new ErroTraducao('mostrar precisa do id do texto');

@@ -141,6 +141,28 @@ describe('CLI do P8', () => {
       process.chdir(antes);
     }
   });
+  it('comparar grava o arquivo com inglês e português lado a lado, com os nomes restaurados', async () => {
+    await rodar('exportar', '--limite', '50');
+    const dir = join(raiz, 'data', 'traducao', 'lotes');
+    const lote = JSON.parse(readFileSync(join(dir, readdirSync(dir)[0] as string), 'utf8')) as {
+      itens: Array<{ id: string; en: string }>;
+    };
+    const alvo = lote.itens.find((i) => i.en.startsWith('[[F1]] may cause bleeding')) as {
+      id: string;
+    };
+    const resp = join(raiz, 'c.json');
+    writeFileSync(
+      resp,
+      JSON.stringify([
+        { id: alvo.id, pt: '[[F1]] pode causar sangramento quando usado com outros medicamentos.' },
+      ]),
+    );
+    await rodar('importar', resp);
+    expect(await rodar('comparar')).toBe(0);
+    const md = readFileSync(join(raiz, 'data', 'traducao', 'comparacao.md'), 'utf8');
+    expect(md).toContain('**EN:** Warfarin may cause bleeding');
+    expect(md).toContain('**PT:** Warfarin pode causar sangramento');
+  });
   it('rascunhar exige a chave da API; comando desconhecido sai com 2', async () => {
     const chave = process.env['ANTHROPIC_API_KEY'];
     delete process.env['ANTHROPIC_API_KEY'];

@@ -12,6 +12,7 @@ export const TAMANHO_LOTE_PADRAO = 20;
 export const REGRAS = [
   'Traduza do inglês para o português do Brasil, em registro técnico de farmácia clínica.',
   'Os marcadores [[F1]], [[F2]]... representam nomes de fármacos. Copie cada um exatamente como está, na mesma quantidade; nunca os traduza, remova, junte ou invente.',
+  'Não coloque artigo (o, a, os, as) nem contração (do, da, no, na, pelo, pela) diretamente antes de um marcador, e evite concordância de gênero com ele (particípio, adjetivo): o gênero do nome em português só se conhece depois. Escreva "o uso de [[F1]]", "a dose de [[F1]]", "[[F1]] é eliminado pelos rins" (sem artigo), reformulando a frase se for preciso.',
   'Use os termos do glossário quando o termo em inglês aparecer.',
   'Não acrescente, omita nem suavize nenhuma informação clínica (gravidade, mecanismo, conduta, doses, números, unidades). Não explique nem comente.',
   'Mantenha siglas (CYP3A4, QT, INR etc.), números e unidades como estão.',

@@ -40,4 +40,21 @@ describe('validarTraducao', () => {
     expect(validarTraducao(longo, 'curto', g).some((x) => x.tipo === 'proporcao')).toBe(true);
     expect(validarTraducao('short', 'curtinho', g)).toEqual([]);
   });
+  it('avisa artigo ou contração diretamente antes do marcador (gênero do nome desconhecido)', () => {
+    const base = '[[F1]] is eliminated by the kidneys.';
+    const p = validarTraducao(base, 'O [[F1]] é eliminado pelos rins.', g);
+    expect(p.find((x) => x.tipo === 'genero')?.gravidade).toBe('aviso');
+    expect(
+      validarTraducao('Use of [[F1]].', 'O uso de [[F1]] pelo [[F1]].', g).some(
+        (x) => x.tipo === 'genero',
+      ),
+    ).toBe(true);
+    expect(validarTraducao(base, '[[F1]] é eliminado pelos rins.', g)).toEqual([]);
+    expect(validarTraducao('Dose of [[F1]].', 'A dose de [[F1]].', g)).toEqual([]);
+    // "a" minúsculo é preposição, não artigo
+    expect(validarTraducao('Exposure to [[F1]].', 'Exposição a [[F1]].', g)).toEqual([]);
+    expect(
+      validarTraducao('[[F1]] is renal.', 'A [[F1]] é renal.', g).some((x) => x.tipo === 'genero'),
+    ).toBe(true);
+  });
 });
