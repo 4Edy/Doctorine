@@ -77,9 +77,34 @@ Dois caminhos para o rascunho, com a mesma validação:
    glossário que aparecem e os itens (`i`, `id`, `en` já com marcadores). Quem traduz (por exemplo,
    um chat) devolve `[{"id": "...", "pt": "..."}]` ou `{"itens": [...]}` e `importar` liga **só pelo
    `id`**.
-2. **API:** `rascunhar` manda lotes (padrão 20 textos) à API de mensagens, grava cada lote ao
-   terminar (pode interromper e retomar) e para sem insistir em erro que não seja 429 ou 5xx.
-   Custa tokens: rode primeiro com `--limite 40` e confira a amostra.
+2. **API:** `rascunhar` manda lotes (padrão 20 textos) a uma API de modelo, grava cada lote ao
+   terminar (pode interromper e retomar) e, em 429 ou 5xx, espera e tenta de novo (10, 20, 40 e 80 s)
+   antes de parar sem insistir. Rode primeiro com `--limite 40` e confira a amostra.
+
+### Sem plano pago
+
+`rascunhar` aceita `--provedor anthropic` (padrão), `gemini` e qualquer API no formato
+"chat/completions": `groq`, `cerebras`, `openrouter`, `github`, `mistral`, `openai` (ou `--url` para
+outra). Fora da Anthropic, `--modelo` é obrigatório (os modelos gratuitos mudam de nome e de limite
+com frequência; veja a lista no painel do provedor). A chave vem de `GEMINI_API_KEY` (Gemini),
+`ANTHROPIC_API_KEY` (Anthropic) ou `LLM_API_KEY` (os demais), ou de outra variável por `--chave-env`.
+
+```powershell
+$env:GEMINI_API_KEY = "sua-chave"
+pnpm pipeline:traducao rascunhar --provedor gemini --modelo <modelo> --limite 40 --pausa 13000
+```
+
+Planos gratuitos limitam pedidos por minuto e por dia: `--pausa` espaça os lotes e, ao bater o limite
+do dia, a execução para com o progresso salvo; é só rodar de novo no dia seguinte. Pelo menos uma
+fonte (OpenRouter, setembro de 2026) lista os limites gratuitos de Google AI Studio, Groq, Cerebras,
+OpenRouter e GitHub Models, mas eles mudam: confira no painel de cada um. O texto enviado é público
+(DDInter), então a política de uso de dados dos planos gratuitos não é um problema aqui.
+
+**Qualidade:** a validação garante nomes de fármacos preservados e glossário, mas **não** garante a
+correção clínica. Modelos gratuitos menores erram mais; teste com `--limite 40`, leia o resultado
+(`mostrar <id>`) e use o modelo mais forte que o plano permitir. Em qualquer caso, tudo continua
+`nao-revisado` até a revisão do P9. Também funciona colar os lotes de `exportar` em um chat gratuito
+(use `--lote 40` para menos idas e vindas) e importar a resposta.
 
 Tradução que falha na validação **não é gravada**; volta a ser pendente e aparece no resumo da
 execução. Avisos (glossário proposto, proporção de tamanho) são gravados.

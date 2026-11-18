@@ -52,16 +52,26 @@ export function montarLote(
 
 /** Extrai a lista de traduções de uma resposta (aceita cerca de código ao redor do JSON). */
 export function lerRespostaJson(texto: string): Array<{ i?: number; id?: string; pt: string }> {
-  const limpo = texto
-    .trim()
-    .replace(/^```(?:json)?\s*/i, '')
-    .replace(/\s*```$/, '');
+  // modelos gratuitos costumam acrescentar bloco de raciocínio, cerca de código ou uma frase antes
+  const limpo = texto.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+  const candidatos = [
+    limpo,
+    limpo.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''),
+    limpo.slice(limpo.indexOf('['), limpo.lastIndexOf(']') + 1),
+    limpo.slice(limpo.indexOf('{'), limpo.lastIndexOf('}') + 1),
+  ];
   let bruto: unknown;
-  try {
-    bruto = JSON.parse(limpo);
-  } catch {
-    throw new ErroTraducao('a resposta não é JSON válido');
+  let lido = false;
+  for (const c of candidatos) {
+    try {
+      bruto = JSON.parse(c);
+      lido = true;
+      break;
+    } catch {
+      /* tenta o próximo */
+    }
   }
+  if (!lido) throw new ErroTraducao('a resposta não é JSON válido');
   const lista = Array.isArray(bruto)
     ? bruto
     : bruto !== null &&
@@ -163,57 +173,147 @@ export function aplicarTraducoes(
 
 // ---------------------------------------------------------------- API (rascunho automático)
 
+export type Provedor =
+  'anthropic' | 'gemini' | 'openai' | 'groq' | 'cerebras' | 'openrouter' | 'github' | 'mistral';
+export const PROVEDORES: readonly Provedor[] = [
+  'anthropic',
+  'gemini',
+  'openai',
+  'groq',
+  'cerebras',
+  'openrouter',
+  'github',
+  'mistral',
+];
+/** Endereço base das APIs compatíveis com o formato "chat/completions" da OpenAI. */
+export const URL_PROVEDOR: Partial<Record<Provedor, string>> = {
+  openai: 'https://api.openai.com/v1',
+  groq: 'https://api.groq.com/openai/v1',
+  cerebras: 'https://api.cerebras.ai/v1',
+  openrouter: 'https://openrouter.ai/api/v1',
+  github: 'https://models.github.ai/inference',
+  mistral: 'https://api.mistral.ai/v1',
+};
+
 export interface OpcoesApi {
   chave: string;
+  provedor?: Provedor;
+  /** Obrigatório fora da Anthropic: os nomes dos modelos gratuitos mudam com frequência. */
   modelo?: string;
+  /** Endereço base (compatíveis com OpenAI) ou endereço completo do pedido (Anthropic). */
+  url?: string;
   fetch?: typeof fetch;
   /** Espera entre tentativas, em ms; injetável nos testes. */
   esperar?: (ms: number) => Promise<void>;
-  url?: string;
 }
 const dormir = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-/** Pede a tradução de um lote à API de mensagens da Anthropic. Tenta de novo em 429 e 5xx. */
+function conteudoDoUsuario(lote: Lote): string {
+  return (
+    'Glossário:\n' +
+    (lote.glossario.length === 0
+      ? '(nenhum termo neste lote)'
+      : lote.glossario.map((t) => `- ${t.en} → ${t.pt}`).join('\n')) +
+    '\n\nItens (JSON):\n' +
+    JSON.stringify(lote.itens.map((it) => ({ i: it.i, en: it.en })))
+  );
+}
+
+interface Pedido {
+  url: string;
+  headers: Record<string, string>;
+  corpo: unknown;
+  extrair: (json: unknown) => string | undefined;
+}
+
+function montarPedido(lote: Lote, o: OpcoesApi): Pedido {
+  const provedor = o.provedor ?? 'anthropic';
+  const usuario = conteudoDoUsuario(lote);
+  if (provedor === 'anthropic') {
+    return {
+      url: o.url ?? 'https://api.anthropic.com/v1/messages',
+      headers: { 'x-api-key': o.chave, 'anthropic-version': '2023-06-01' },
+      corpo: {
+        model: o.modelo ?? MODELO_PADRAO,
+        max_tokens: 8000,
+        system: lote.regras,
+        messages: [{ role: 'user', content: usuario }],
+      },
+      extrair: (j) =>
+        (j as { content?: Array<{ type: string; text?: string }> }).content?.find(
+          (c) => c.type === 'text',
+        )?.text,
+    };
+  }
+  if (o.modelo === undefined || o.modelo === '') {
+    throw new ErroTraducao(
+      `informe --modelo para o provedor ${provedor} (os nomes dos modelos gratuitos mudam; veja a lista no site do provedor)`,
+    );
+  }
+  if (provedor === 'gemini') {
+    const base = o.url ?? 'https://generativelanguage.googleapis.com/v1beta';
+    return {
+      url: `${base}/models/${encodeURIComponent(o.modelo)}:generateContent`,
+      headers: { 'x-goog-api-key': o.chave },
+      corpo: {
+        systemInstruction: { parts: [{ text: lote.regras }] },
+        contents: [{ role: 'user', parts: [{ text: usuario }] }],
+        generationConfig: { temperature: 0, responseMimeType: 'application/json' },
+      },
+      extrair: (j) =>
+        (
+          j as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }> }
+        ).candidates?.[0]?.content?.parts
+          ?.map((p) => p.text ?? '')
+          .join(''),
+    };
+  }
+  const base = o.url ?? URL_PROVEDOR[provedor];
+  if (base === undefined) throw new ErroTraducao(`provedor desconhecido: ${provedor}`);
+  return {
+    url: `${base.replace(/\/$/, '')}/chat/completions`,
+    headers: { authorization: `Bearer ${o.chave}` },
+    corpo: {
+      model: o.modelo,
+      temperature: 0,
+      messages: [
+        { role: 'system', content: lote.regras },
+        { role: 'user', content: usuario },
+      ],
+    },
+    extrair: (j) =>
+      (j as { choices?: Array<{ message?: { content?: string | null } }> }).choices?.[0]?.message
+        ?.content ?? undefined,
+  };
+}
+
+/**
+ * Pede a tradução de um lote a uma API de modelo de linguagem (Anthropic, Gemini ou qualquer
+ * provedor compatível com "chat/completions": Groq, Cerebras, OpenRouter, GitHub Models, Mistral,
+ * OpenAI). Tenta de novo em 429 e 5xx, com espera crescente, e depois para sem insistir.
+ */
 export async function traduzirLoteViaApi(lote: Lote, o: OpcoesApi): Promise<string> {
   const f = o.fetch ?? fetch;
   const esperar = o.esperar ?? dormir;
-  const corpo = {
-    model: o.modelo ?? MODELO_PADRAO,
-    max_tokens: 8000,
-    system: lote.regras,
-    messages: [
-      {
-        role: 'user',
-        content:
-          'Glossário:\n' +
-          (lote.glossario.length === 0
-            ? '(nenhum termo neste lote)'
-            : lote.glossario.map((t) => `- ${t.en} → ${t.pt}`).join('\n')) +
-          '\n\nItens (JSON):\n' +
-          JSON.stringify(lote.itens.map((it) => ({ i: it.i, en: it.en }))),
-      },
-    ],
-  };
-  let espera = 5_000;
-  for (let tentativa = 1; tentativa <= 4; tentativa++) {
-    const resp = await f(o.url ?? 'https://api.anthropic.com/v1/messages', {
+  const pedido = montarPedido(lote, o);
+  let espera = 10_000;
+  for (let tentativa = 1; tentativa <= 5; tentativa++) {
+    const resp = await f(pedido.url, {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': o.chave,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(corpo),
+      headers: { 'content-type': 'application/json', ...pedido.headers },
+      body: JSON.stringify(pedido.corpo),
     });
     if (resp.ok) {
-      const json = (await resp.json()) as { content?: Array<{ type: string; text?: string }> };
-      const texto = json.content?.find((c) => c.type === 'text')?.text;
-      if (texto === undefined) throw new ErroTraducao('a API respondeu sem texto');
+      const texto = pedido.extrair(await resp.json());
+      if (texto === undefined || texto.trim() === '')
+        throw new ErroTraducao('a API respondeu sem texto');
       return texto;
     }
     const retentavel = resp.status === 429 || resp.status >= 500;
-    if (!retentavel || tentativa === 4) {
-      throw new ErroTraducao(`API recusou o pedido (HTTP ${resp.status}); parando sem insistir`);
+    if (!retentavel || tentativa === 5) {
+      throw new ErroTraducao(
+        `API recusou o pedido (HTTP ${resp.status})${resp.status === 429 ? ': limite de uso atingido; o progresso está salvo, rode de novo mais tarde' : ''}`,
+      );
     }
     const ra = Number(resp.headers.get('retry-after'));
     await esperar(Number.isFinite(ra) && ra > 0 ? ra * 1000 : espera);

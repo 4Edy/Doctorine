@@ -146,6 +146,9 @@ describe('CLI do P8', () => {
     delete process.env['ANTHROPIC_API_KEY'];
     await expect(rodar('rascunhar')).rejects.toThrow(/ANTHROPIC_API_KEY/);
     if (chave !== undefined) process.env['ANTHROPIC_API_KEY'] = chave;
+    delete process.env['GEMINI_API_KEY'];
+    await expect(rodar('rascunhar', '--provedor', 'gemini')).rejects.toThrow(/GEMINI_API_KEY/);
+    await expect(rodar('rascunhar', '--provedor', 'xyz')).rejects.toThrow(/--provedor/);
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
     expect(await rodar('xyz')).toBe(2);
   });

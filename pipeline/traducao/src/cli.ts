@@ -12,6 +12,8 @@ import {
   lerRespostaJson,
   MODELO_PADRAO,
   montarLote,
+  PROVEDORES,
+  type Provedor,
   pendentes,
   TAMANHO_LOTE_PADRAO,
   traduzirLoteViaApi,
@@ -29,7 +31,7 @@ Comandos:
   status                  situação por gravidade: sem tradução, não revisado, revisado, corrigido
   exportar                grava lotes em data/traducao/lotes/ para traduzir fora (por exemplo, no chat)
   importar <arquivo>      valida e grava traduções de um lote traduzido ([{id, pt}] ou {itens: [...]})
-  rascunhar               traduz pela API (ANTHROPIC_API_KEY); retomável, mais grave primeiro
+  rascunhar               traduz por uma API de modelo (Anthropic, Gemini, Groq...); retomável, mais grave primeiro
   validar                 confere toda a memória contra o glossário e os marcadores (sai com 1 se houver erro)
   mostrar <id>            mostra um texto com nomes restaurados e o histórico
 
@@ -37,6 +39,10 @@ Opções:
   --raiz <pasta>          raiz do repositório (padrão: pasta atual)
   --lote <n>              textos por lote (padrão ${TAMANHO_LOTE_PADRAO})
   --limite <n>            máximo de textos nesta execução (exportar: padrão 1 lote; rascunhar: padrão todos)
+  --provedor <nome>       rascunhar: anthropic (padrão), gemini, groq, cerebras, openrouter, github, mistral, openai
+  --chave-env <NOME>      rascunhar: variável de ambiente com a chave (padrão por provedor)
+  --pausa <ms>            rascunhar: espera entre lotes (planos gratuitos limitam pedidos por minuto)
+  --url <endereço>        rascunhar: endereço base de outra API compatível com chat/completions
   --modelo <nome>         rascunhar: modelo da API (padrão ${MODELO_PADRAO}); importar: rótulo gravado (padrão "manual")
   --site/--manejo/--pares/--ddinter <versão>   versões das saídas processadas
 `;
@@ -85,6 +91,10 @@ export async function executar(argv: readonly string[]): Promise<number> {
       lote: { type: 'string' },
       limite: { type: 'string' },
       modelo: { type: 'string' },
+      provedor: { type: 'string' },
+      url: { type: 'string' },
+      'chave-env': { type: 'string' },
+      pausa: { type: 'string' },
       site: { type: 'string' },
       manejo: { type: 'string' },
       pares: { type: 'string' },
@@ -185,21 +195,49 @@ export async function executar(argv: readonly string[]): Promise<number> {
       return r.rejeitados.length > 0 || r.desconhecidos.length > 0 ? 1 : 0;
     }
     case 'rascunhar': {
-      const chave = process.env['ANTHROPIC_API_KEY'];
-      if (chave === undefined || chave === '') {
-        throw new ErroTraducao('defina ANTHROPIC_API_KEY (ou use exportar/importar)');
+      const provedor = (values.provedor ?? 'anthropic') as Provedor;
+      if (!PROVEDORES.includes(provedor)) {
+        throw new ErroTraducao(`--provedor deve ser um de: ${PROVEDORES.join(', ')}`);
       }
-      const modelo = values.modelo ?? MODELO_PADRAO;
+      const nomeChave =
+        values['chave-env'] ??
+        (provedor === 'anthropic'
+          ? 'ANTHROPIC_API_KEY'
+          : provedor === 'gemini'
+            ? 'GEMINI_API_KEY'
+            : 'LLM_API_KEY');
+      const chave = process.env[nomeChave];
+      if (chave === undefined || chave === '') {
+        throw new ErroTraducao(`defina ${nomeChave} (ou use exportar/importar)`);
+      }
+      const pausa = values.pausa === undefined ? 0 : Number(values.pausa);
+      if (!Number.isFinite(pausa) || pausa < 0)
+        throw new ErroTraducao('--pausa precisa ser um número de ms');
+      const modelo = values.modelo ?? (provedor === 'anthropic' ? MODELO_PADRAO : undefined);
       const fila = pendentes(unidades, ctx.memoria).slice(0, limite ?? Infinity);
       let gravados = 0;
       let rejeitados = 0;
       for (let k = 0; k < fila.length; k += tamanhoLote) {
+        if (k > 0 && pausa > 0) await new Promise((r) => setTimeout(r, pausa));
         const lote = montarLote(fila.slice(k, k + tamanhoLote), protetor, g);
-        const resposta = await traduzirLoteViaApi(lote, { chave, modelo });
-        const r = aplicarTraducoes(lote, lerRespostaJson(resposta), ctx.memoria, g, {
-          modelo,
-          data: hoje(),
+        const resposta = await traduzirLoteViaApi(lote, {
+          chave,
+          provedor,
+          ...(modelo !== undefined ? { modelo } : {}),
+          ...(values.url !== undefined ? { url: values.url } : {}),
         });
+        let r: ResultadoAplicacao;
+        try {
+          r = aplicarTraducoes(lote, lerRespostaJson(resposta), ctx.memoria, g, {
+            modelo: `${provedor}:${modelo ?? ''}`,
+            data: hoje(),
+          });
+        } catch (e) {
+          if (!(e instanceof ErroTraducao)) throw e;
+          // resposta que não é JSON: o lote volta a ser pendente e a execução continua
+          console.log(`lote ${k / tamanhoLote + 1}: ${e.message}; lote descartado`);
+          continue;
+        }
         ctx.memoria.gravar(); // cada lote é gravado ao terminar: pode interromper e retomar
         gravados += r.gravados;
         rejeitados += r.rejeitados.length;

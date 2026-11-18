@@ -133,4 +133,85 @@ describe('traduzirLoteViaApi', () => {
     const f401 = (async () => new Response('', { status: 401 })) as unknown as typeof fetch;
     await expect(traduzirLoteViaApi(lote, { chave: 'k', fetch: f401 })).rejects.toThrow(/HTTP 401/);
   });
+
+  it('Gemini: chave no cabeçalho, instrução de sistema, resposta em candidates', async () => {
+    let visto: { url: string; headers: Record<string, string>; corpo: any } | undefined;
+    const f = (async (url: string, init: RequestInit) => {
+      visto = {
+        url,
+        headers: init.headers as Record<string, string>,
+        corpo: JSON.parse(init.body as string),
+      };
+      return new Response(
+        JSON.stringify({ candidates: [{ content: { parts: [{ text: '[{"i":1,"pt":"a"}]' }] } }] }),
+        { status: 200 },
+      );
+    }) as unknown as typeof fetch;
+    const r = await traduzirLoteViaApi(lote, {
+      chave: 'k',
+      provedor: 'gemini',
+      modelo: 'gemini-x',
+      fetch: f,
+    });
+    expect(r).toBe('[{"i":1,"pt":"a"}]');
+    expect(visto?.url).toBe(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-x:generateContent',
+    );
+    expect(visto?.headers['x-goog-api-key']).toBe('k');
+    expect(visto?.corpo.systemInstruction.parts[0].text).toContain('marcadores');
+    expect(visto?.corpo.contents[0].parts[0].text).toContain('[[F1]] increases bleeding.');
+  });
+  it('compatível com OpenAI (Groq etc.): Bearer, system e user, resposta em choices', async () => {
+    let visto: { url: string; headers: Record<string, string>; corpo: any } | undefined;
+    const f = (async (url: string, init: RequestInit) => {
+      visto = {
+        url,
+        headers: init.headers as Record<string, string>,
+        corpo: JSON.parse(init.body as string),
+      };
+      return new Response(JSON.stringify({ choices: [{ message: { content: '[]' } }] }), {
+        status: 200,
+      });
+    }) as unknown as typeof fetch;
+    await traduzirLoteViaApi(lote, { chave: 'k', provedor: 'groq', modelo: 'm1', fetch: f });
+    expect(visto?.url).toBe('https://api.groq.com/openai/v1/chat/completions');
+    expect(visto?.headers['authorization']).toBe('Bearer k');
+    expect(visto?.corpo.messages.map((m: { role: string }) => m.role)).toEqual(['system', 'user']);
+    await traduzirLoteViaApi(lote, {
+      chave: 'k',
+      provedor: 'openai',
+      modelo: 'm',
+      url: 'http://x/v1/',
+      fetch: f,
+    });
+    expect(visto?.url).toBe('http://x/v1/chat/completions');
+  });
+  it('fora da Anthropic exige --modelo, e 429 persistente para com mensagem útil', async () => {
+    await expect(traduzirLoteViaApi(lote, { chave: 'k', provedor: 'gemini' })).rejects.toThrow(
+      /--modelo/,
+    );
+    const f = (async () => new Response('', { status: 429 })) as unknown as typeof fetch;
+    const esperas: number[] = [];
+    await expect(
+      traduzirLoteViaApi(lote, {
+        chave: 'k',
+        provedor: 'groq',
+        modelo: 'm',
+        fetch: f,
+        esperar: async (ms) => void esperas.push(ms),
+      }),
+    ).rejects.toThrow(/limite de uso atingido/);
+    expect(esperas).toEqual([10000, 20000, 40000, 80000]);
+  });
+});
+
+describe('lerRespostaJson com modelos gratuitos', () => {
+  it('ignora bloco de raciocínio, frase antes e cerca de código', () => {
+    expect(lerRespostaJson('<think>hmm [1]</think>\n[{"i":1,"pt":"a"}]')).toEqual([
+      { i: 1, pt: 'a' },
+    ]);
+    expect(
+      lerRespostaJson('Aqui está a tradução:\n```json\n[{"i":2,"pt":"b"}]\n```\nPronto.'),
+    ).toEqual([{ i: 2, pt: 'b' }]);
+  });
 });
