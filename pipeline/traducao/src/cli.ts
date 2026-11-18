@@ -161,7 +161,10 @@ export async function executar(argv: readonly string[]): Promise<number> {
     }
     case 'importar': {
       if (arg === undefined) throw new ErroTraducao('importar precisa do caminho do arquivo');
-      const traducoes = lerRespostaJson(readFileSync(resolve(arg), 'utf8'));
+      // caminho relativo vale a partir de onde o comando foi digitado (a raiz), não da pasta do pacote
+      const arquivo = resolve(raiz, arg);
+      if (!existsSync(arquivo)) throw new ErroTraducao(`arquivo não encontrado: ${arquivo}`);
+      const traducoes = lerRespostaJson(readFileSync(arquivo, 'utf8'));
       const porId = new Map(unidades.map((u) => [u.id, u]));
       const usadas = traducoes.flatMap((t) =>
         t.id !== undefined && porId.has(t.id) ? [porId.get(t.id) as UnidadeTexto] : [],

@@ -128,6 +128,19 @@ describe('CLI do P8', () => {
     expect(await rodar('validar')).toBe(1);
     expect(texto()).toMatch(/erro .*marcadores de fármaco diferem/);
   });
+  it('importar resolve caminho relativo a partir da raiz e avisa quando o arquivo não existe', async () => {
+    await expect(rodar('importar', 'nao-existe.json')).rejects.toThrow(
+      /arquivo não encontrado: .*nao-existe\.json/,
+    );
+    writeFileSync(join(raiz, 'vazio.json'), '[]');
+    const antes = process.cwd();
+    process.chdir(tmpdir()); // como o pnpm --filter, que roda numa pasta diferente da raiz
+    try {
+      expect(await rodar('importar', 'vazio.json')).toBe(0);
+    } finally {
+      process.chdir(antes);
+    }
+  });
   it('rascunhar exige a chave da API; comando desconhecido sai com 2', async () => {
     const chave = process.env['ANTHROPIC_API_KEY'];
     delete process.env['ANTHROPIC_API_KEY'];
